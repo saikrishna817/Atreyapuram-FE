@@ -10,7 +10,6 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
 
 
 @NgModule({
@@ -22,8 +21,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     MenuComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent,
-    SignupComponent,
+    LoginComponent
     
   ],
   imports: [

@@ -1,12 +1,11 @@
 .card{
-    
     border: none;
     width: 500px;
     padding: 40px;
     top: 10%;
     position:absolute ;
     left: 50%;
-    transform: translate(-50%,50%);
+    transform: translate(-50%,20%);
     background: hsla(205, 45%, 30%,1 );
     background: linear-gradient(90deg, hsla(205, 45%, 30%,1 )0%, hsla(260, 30%, 25%, 1));
 }

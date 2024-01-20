@@ -1,12 +1,14 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink=""><b>ATREYAPURAM&nbsp;<br>PUTHAREKULU</b></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink=""><b>ATREYAPURAM&nbsp;<br>PUTHAREKULU</b></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
       <div class="input-group">
-        <span class="border-warning input-group-text bg-warning text-white"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <span class="border-warning input-group-text bg-warning text-white"><i
+            class="fa-solid fa-magnifying-glass"></i></span>
         <input type="text" class="form-control border-warning" style="color:#7a7a7a">
         <button class="btn btn-warning text-white">Search</button>
       </div>
@@ -14,15 +16,16 @@
     <div class=" collapse navbar-collapse" id="navbarNavDropdown">
       <div class="ms-auto d-none d-lg-block">
         <div class="input-group">
-          <span class="border-warning input-group-text bg-warning text-white"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <span class="border-warning input-group-text bg-warning text-white"><i
+              class="fa-solid fa-magnifying-glass"></i></span>
           <input type="text" class="form-control border-warning" style="color:#7a7a7a">
           <button class="btn btn-warning text-white">Search</button>
         </div>
       </div>
       <ul class="navbar-nav ms-auto ">
-     
+
         <li class="nav-item">
-          <a class="nav-link active" routerLink="" routerLinkactive="active-link" >Home</a>
+          <a class="nav-link active" routerLink="" routerLinkactive="active-link">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/menu" routerLinkactive="active-link">menu</a>
@@ -36,12 +39,100 @@
       </ul>
       <ul class="navbar-nav ms-auto ">
         <li class="nav-item">
-          <a class="nav-link mx-2 text-uppercase" href="#"><i class="bi bi-cart3"></i>Cart</a>
+          <a class="nav-link mx-2" href="#"><i class="bi bi-cart3"></i>Cart</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-2 text-uppercase" routerLink="/login"><i class="bi bi-person-circle"></i>Account</a>
+          <a class="nav-link mx-2" data-toggle="modal" data-target="#loginModal"><i
+              class="bi bi-person-circle"></i>Account</a>
         </li>
       </ul>
     </div>
   </div>
-  </nav>
+</nav>
+<!-- Login  -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="bg-danger">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel"><b>WELCOME</b></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <p class="text-white subText"></p>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="login">
+            <h4 class="text-center text-danger"><b>USER LOGIN</b></h4>
+            <div class="form-group col-sm-12">
+              <label for="exampleInputEmail1">User Name</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter user name or email">
+            </div>
+            <div class="form-group col-sm-12">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group col-sm-12">
+              <button type="submit" class="btn btn-danger mr-3 cursor-pointer">Login</button>
+              <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal">Cancel</button>
+            </div>
+            <div class="forn-group col-sm-12">
+              <p>Don't have an account?<span class="text-danger" data-dismiss="modal" data-toggle="modal"
+                  data-target="#signupModal"> Sign Up</span> </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Sign up -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="bg-danger">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel"><b>WELCOME</b></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- <p class="text-white subText">Earn extra cashback on top of other discounts on your<br> shopping via
+          CouponDeals.</p> -->
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="login">
+            <h4 class="text-center text-danger"><b>USER SIGNUP</b></h4>
+            <div class="form-group col-sm-12">
+              <label for="exampleInputEmail1">Name:</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter user name">
+            </div>
+            <div class="form-group col-sm-12">
+              <label for="exampleInputEmail1">Email:</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            </div>
+            <div class="form-group col-sm-12">
+              <label for="exampleInputPassword1">Password:</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <!-- <div class="form-group col-sm-12">
+                            <label for="exampleInputPassword1">Mobile:</label>
+                            <input type="number" class="form-control" id="exampleInputPassword1"
+                                placeholder="Password">
+                        </div> -->
+            <div class="form-group col-sm-12">
+              <button type="submit" class="btn btn-danger mr-3 cursor-pointer">Sign Up</button>
+              <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal" data-toggle="modal"
+                data-target="#loginModal">Login</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
