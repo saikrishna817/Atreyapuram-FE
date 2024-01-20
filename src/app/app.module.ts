@@ -10,9 +10,12 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
+<<<<<<< HEAD
 import { SignupComponent } from './pages/signup/signup.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ReactiveFormsModule } from '@angular/forms';
+=======
+>>>>>>> c70eea797accc5162ca9d34001844cd1a2508d10
 
 
 @NgModule({
@@ -24,9 +27,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenuComponent,
     AboutComponent,
     ContactComponent,
+<<<<<<< HEAD
     LoginComponent,
     SignupComponent,
     CartComponent,
+=======
+    LoginComponent
+>>>>>>> c70eea797accc5162ca9d34001844cd1a2508d10
     
   ],
   imports: [
