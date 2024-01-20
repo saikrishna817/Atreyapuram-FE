@@ -30,8 +30,8 @@
 }
 
 .content a:hover{
-    background-color: var(--primary-color);
-    color: green;
+    background-color: orangered;
+    color: black;
 }
 
 .stepbox{

@@ -11,6 +11,8 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,17 +26,20 @@ import { SignupComponent } from './pages/signup/signup.component';
     ContactComponent,
     LoginComponent,
     SignupComponent,
+    CartComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule
     
     
   ],
   providers: [
     provideClientHydration()
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
