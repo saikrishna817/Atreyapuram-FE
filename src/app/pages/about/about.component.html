@@ -1,1 +1,65 @@
-<p>about works!</p>
+<div class="border-0 mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-3 flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="assets/img/view.jpg" alt="Avatar" style="width: 100%; height: 100%;">
+                </div>
+                <div class="flip-card-back">
+                    <img src="assets/img/atp.jpg" alt="Avatar" style="width: 100%; height: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <h2 class="text-success"><b>Atreyapuram</b></h2>
+            <p>Atreyapuram is a small village located in East Godavari district of Andhra Pradesh, India. It's well
+                known for its breadth taking
+                sceneris and green surroundings. Atreyapuram is Particularly famous for its mouth watering Papersweets
+                famous known as <b>Atreyapuram Pootharekulu</b>.</p>
+        </div>
+    </div>
+</div>
+<h2 class="header text-center"><b>Atreyapuram Putharekulu</b></h2>
+<div class="row mt-1">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-7">
+        <img *ngFor="let image of images; let i = index" [src]="image"
+            [style.display]="i === currentIndex ? 'block' : 'none'" height="65%" width="100%">
+    </div>
+    <div class="col-sm-3">
+        <p>
+            Atreyapuram is a small village located in East Godavari district of Andhra Pradesh, India. It's well
+            known for its breadth taking
+            sceneris and green surroundings. Atreyapuram is Particularly famous for its mouth watering Papersweets
+            famous known as <b>Atreyapuram Pootharekulu</b>.<br></p>
+        <div class="custom-para">
+            Over the years, the women of Atreyapuram village have mastered the art of making the most traditional, rich
+            and delicious sweet  “Pootharekulu“, which is now the most sought-after sweet for every occasion in
+            Andhra Pradesh. In Andhra Pradesh, Pootharekulu is more than just a sweet. The fame and history of
+            Pootharekulu signify royalty, pride, heritage and no celebration is complete without a bite of Pootharekulu.
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+<h2 class="header text-center"><b>Preparation</b></h2>
+<div class="row mt-1">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-7">
+        <img *ngFor="let image of images; let i = index" [src]="image"
+            [style.display]="i === currentIndex ? 'block' : 'none'" height="65%" width="100%">
+    </div>
+    <div class="col-sm-3">
+        <p>
+            Atreyapuram is a small village located in East Godavari district of Andhra Pradesh, India. It's well
+            known for its breadth taking
+            sceneris and green surroundings. Atreyapuram is Particularly famous for its mouth watering Papersweets
+            famous known as <b>Atreyapuram Pootharekulu</b>.<br></p>
+        <div class="custom-para">
+            Over the years, the women of Atreyapuram village have mastered the art of making the most traditional, rich
+            and delicious sweet  “Pootharekulu“, which is now the most sought-after sweet for every occasion in
+            Andhra Pradesh. In Andhra Pradesh, Pootharekulu is more than just a sweet. The fame and history of
+            Pootharekulu signify royalty, pride, heritage and no celebration is complete without a bite of Pootharekulu.
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
