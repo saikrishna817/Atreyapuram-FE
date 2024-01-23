@@ -12,6 +12,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TopbarComponent } from './topbar/topbar.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ContactComponent,
     LoginComponent,
     CartComponent,
+    TopbarComponent,
     
   ],
   imports: [
