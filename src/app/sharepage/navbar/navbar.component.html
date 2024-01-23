@@ -1,49 +1,18 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink=""><b>ATREYAPURAM&nbsp;<br>PUTHAREKULU</b></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
-      <div class="input-group">
-        <span class="border-warning input-group-text bg-warning text-white"><i
-            class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" class="form-control border-warning" style="color:#7a7a7a">
-        <button class="btn btn-warning text-white">Search</button>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6>
+    <div class="d-flex search">
+      <input type="text" placeholder="Search..." class="mr-2" style="width: 350px;">
+      <button class="btn btn-light">Search</button>
     </div>
-    <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-      <div class="ms-auto d-none d-lg-block">
-        <div class="input-group">
-          <span class="border-warning input-group-text bg-warning text-white"><i
-              class="fa-solid fa-magnifying-glass"></i></span>
-          <input type="text" class="form-control border-warning" style="color:#7a7a7a">
-          <button class="btn btn-warning text-white">Search</button>
-        </div>
-      </div>
-      <!-- <ul class="navbar-nav ms-auto ">
-
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="" routerLinkactive="active-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/menu" routerLinkactive="active-link">menu</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkactive="active-link">about</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" routerLinkactive="active-link">contact</a>
-        </li>
-      </ul> -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto ">
         <li class="nav-item">
-          <a class="nav-link mx-2" routerLink="/cart"><i class="bi bi-cart3"></i>Cart</a>
+          <a class="nav-link mx-2 btn-primary" routerLink="/cart"><i class="bi bi-cart3"></i>&nbsp;Cart&nbsp;</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-2" data-toggle="modal" data-target="#loginModal"><i
-              class="bi bi-person-circle"></i>Account</a>
+          <a class="nav-link mx-2 btn-primary" data-toggle="modal" data-target="#loginModal"><i
+              class="bi bi-person-circle"></i>&nbsp;Account&nbsp;</a>
         </li>
       </ul>
     </div>
@@ -81,7 +50,8 @@
             </div>
             <div class="forn-group col-sm-12">
               <p>Don't have an account?<span class="text-danger" data-dismiss="modal" data-toggle="modal"
-                  data-target="#signupModal"> <button class="text-primary">Sign Up</button></span> </p>
+                  data-target="#signupModal"> <button class="text-primary signup">&nbsp;&nbsp;Sign Up</button></span>
+              </p>
             </div>
           </div>
         </form>

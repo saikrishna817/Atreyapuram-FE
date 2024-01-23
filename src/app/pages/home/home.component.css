@@ -1,11 +1,15 @@
-
-.content{
-    top: 30%;
-    left: 10%;
+.content {
+    top: 45%;
+    left: 20%;
     position: absolute;
 }
 
-.content a{
+/* .button {
+    background-color: #3498db;
+    border: 1px solid #3498db;
+} */
+
+.content a {
     background-color: white;
     color: black;
     text-decoration: none;
@@ -14,12 +18,12 @@
 
 }
 
-.content a:hover{
-    background-color: orangered;
+.content a:hover {
+    background-color: #3498db;
     color: black;
 }
 
-.stepbox{
+.stepbox {
     background-color: black;
     padding: 20px 20px;
     border-radius: 100px;
@@ -27,15 +31,14 @@
 
 }
 
-.stepbox h1{
+.stepbox h1 {
     color: greenyellow;
     font-size: 40px;
     font-weight: bold;
 }
 
-.stepbox p{
+.stepbox p {
     color: white;
     font-style: italic;
     font-size: 20px;
 }
-

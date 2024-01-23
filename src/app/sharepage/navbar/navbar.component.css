@@ -1,20 +1,21 @@
 .nav-item .nav-link {
-  background-color: green;
-  font-weight: bold;
+  /* background-color: green; */
+  /* font-weight: bold; */
   border-radius: 10px;
   cursor: pointer;
+  color: #FFFFFF;
 }
 
 .navbar-brand {
   font-size: 24px;
   font-weight: bold;
-  color: black;
+  /* color: black; */
 
 }
 
 .navbar-nav .nav-link {
   font-size: 18px;
-  color: black;
+  /* color: black; */
   margin-right: 15px;
 }
 
@@ -51,4 +52,10 @@
 .userbg {
   background: hsla(205, 45%, 30%, 1);
   background: linear-gradient(90deg, hsla(205, 45%, 30%, 1)0%, hsla(260, 30%, 25%, 1));
+}
+.signup{
+  border: none;
+}
+.search{
+  margin-left: 9rem;
 }
