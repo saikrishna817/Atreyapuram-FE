@@ -1,23 +1,8 @@
-/* .banner{
-    background-image: url('../../../assets/image.jpg');
-    height: 800px;
-    background-position: center top;
-    background-size: cover;
-
-} */
-
-.content h1{
-    color: rgb(12, 4, 4);
-  
-    font-size: 60px;
-}
 
 .content{
-
     top: 30%;
-    left: 20%;
+    left: 10%;
     position: absolute;
-
 }
 
 .content a{
