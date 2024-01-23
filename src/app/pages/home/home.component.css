@@ -1,13 +1,13 @@
-.banner{
+/* .banner{
     background-image: url('../../../assets/image.jpg');
     height: 800px;
     background-position: center top;
     background-size: cover;
 
-}
+} */
 
 .content h1{
-    color: white;
+    color: rgb(12, 4, 4);
   
     font-size: 60px;
 }
@@ -53,3 +53,4 @@
     font-style: italic;
     font-size: 20px;
 }
+
