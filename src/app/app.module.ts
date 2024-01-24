@@ -12,6 +12,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TopbarComponent } from './topbar/topbar.component';
+import { FaqsComponent } from './faqs/faqs.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TopbarComponent } from './topbar/topbar.component';
     LoginComponent,
     CartComponent,
     TopbarComponent,
+    FaqsComponent,
     
   ],
   imports: [

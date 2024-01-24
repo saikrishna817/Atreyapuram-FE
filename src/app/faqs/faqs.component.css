@@ -1,0 +1,9 @@
+.faq{
+    cursor: pointer;
+}
+.faqsContainer{
+    background-color: #eeeeee;
+}
+.faqs{
+    padding: 1rem 4rem;
+}

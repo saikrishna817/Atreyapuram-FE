@@ -1,0 +1,22 @@
+<div class="container card-body">
+    <h4 class="text-primary text-center"><b>FREQUENTLY ASKED QUESTIONS</b></h4>
+    <div class="faqsContainer mt-4">
+        <div class="faqs" *ngFor="let item of faqData; let i = index">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="faq" (click)="toggleCollapse(i)">
+                    {{ item.question }}
+                </div>
+                <!-- <button class="btn" (click)="toggleCollapse(i)">
+                                    <img src="assets/images/plus-circle.png" alt=""
+                                         *ngIf="!item.isOpen">
+                                    <img src="assets/images/minus.png" alt=""
+                                         *ngIf="item.isOpen">
+                                </button> -->
+            </div>
+            <div class="mt-1" *ngIf="item.isOpen">
+                <p class="text-muted answer">{{ item.answer }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
