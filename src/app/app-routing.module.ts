@@ -6,15 +6,17 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { FaqsComponent } from './faqs/faqs.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'login', component: LoginComponent},
-  { path: 'cart', component: CartComponent},
-  { path: '', redirectTo:'menu', pathMatch:'full'}
+  { path: 'login', component: LoginComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'faqs', component: FaqsComponent },
+  { path: '', redirectTo: 'menu', pathMatch: 'full' }
 ];
 
 @NgModule({
