@@ -18,6 +18,8 @@
 
 .navbar-nav .nav-link:not(.active-link):hover {
   border-bottom: none; /* Remove the border for inactive links on hover */
+  color: cornflowerblue;
+  
 }
 
 .userbg {

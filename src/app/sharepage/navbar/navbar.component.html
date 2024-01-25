@@ -5,19 +5,23 @@
       <input type="text" placeholder="Search..." class="mr-2" style="width: 350px;">
       <button class="btn btn-light">Search</button>
     </div>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto ">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/cart"><i class="bi bi-cart3"></i>&nbsp;Cart</a>
+    <div class="collapse navbar-collapse ml-auto d-flex" id="navbarNavDropdown">
+      <ul class="navbar-nav" style="margin-left: auto;">
+        <li class="nav-item ml-3">
+          <a class="nav-link" routerLink="/cart"><i class="bi bi-cart3"></i></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-5">
           <a class="nav-link" data-toggle="modal" data-target="#loginModal"><i
-              class="bi bi-person-circle"></i>&nbsp;Account</a>
+              class="bi bi-person-circle"></i></a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+
+
+
 <!-- Login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
   aria-hidden="true">
