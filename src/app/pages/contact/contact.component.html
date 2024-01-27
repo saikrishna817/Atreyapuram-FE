@@ -1,37 +1,79 @@
-<div class="carousel-inner">
-  <div class="carousel-item active">
-      <img src="assets/contact_slider.jpg" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
-  </div>
-  </div>
 
-  <div class="container">
-    <form class="details">
-      <div>
-        <label class="label">Name</label>
-        <input type="text" name="name" class="input">
+   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/contact_slider.jpg" class="d-block w-100" style="object-fit: cover; max-height: 400px;" alt="...">
       </div>
-      <div>
-        <label class="label">E-mail</label>
-        <input type="email" name="email" class="input">
-      </div>
-      <div>
-        <label class="label">phone number</label>
-        <input type="tel" name="phonenumber" class="input">
-      </div>
-      
-      <div>
-        <label class="label">Your message</label>
-        <textarea name="textarea" class="textarea"></textarea>
-      </div>
-      <div class="checkbox-container">
-        <input type="checkbox" name="notRobot" id="notRobotCheckbox">
-        <label for="notRobotCheckbox" class="checkbox-label">I am not a robot</label>
-      </div>
-      <div class="text-center mb-4"> 
-        <button type="submit" class="submit-btn">Submit</button>
     </div>
-    </form>
   </div>
-
-
+  
+  <!-- <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <form class="details">
+          <div class="form-group">
+            <label for="name" class="label">Name</label>
+            <input type="text" name="name" class="form-control input">
+          </div>
+          <div class="form-group">
+            <label for="email" class="label">E-mail</label>
+            <input type="email" name="email" class="form-control input">
+          </div>
+          <div class="form-group">
+            <label for="phonenumber" class="label">Phone number</label>
+            <input type="tel" name="phonenumber" class="form-control input">
+          </div>
+  
+          <div class="form-group">
+            <label for="textarea" class="label">Your message</label>
+            <textarea name="textarea" class="form-control textarea"></textarea>
+          </div>
+  
+          <div class="form-check">
+            <input type="checkbox" name="notRobot" id="notRobotCheckbox" class="form-check-input">
+            <label for="notRobotCheckbox" class="checkbox-label form-check-label">I am not a robot</label>
+          </div>
+  
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> -->
+  
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="contact-form">
+          <form>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" placeholder="First Name">
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" placeholder="Last Name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <input type="email" class="form-control" placeholder="E-mail">
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" placeholder="Phone">
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea rows="5" placeholder="Message" class="form-control"></textarea>
+            </div>
+            <div class="text-center">
+              <input type="submit" class="btn btn-primary send-btn" value="Send Message">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 

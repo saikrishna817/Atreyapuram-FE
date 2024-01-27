@@ -1,4 +1,4 @@
-.nav-item .nav-link {
+/* .nav-item .nav-link {
   font-weight: bold;
   border-radius: 10px;
   cursor: pointer;
@@ -8,16 +8,16 @@
   font-size: 18px;
   color: black;
   margin-right: 15px;
-  text-decoration: none; /* Remove default underline */
+  text-decoration: none; 
 }
 
 .navbar-nav .nav-link.active-link {
-  color:rgb(60, 60, 188); /* Set the color for the active link */
-  border-bottom: 2px solid blue; /* Set the line color and thickness */
+  color:rgb(60, 60, 188);
+  border-bottom: 2px solid blue; 
 }
 
 .navbar-nav .nav-link:not(.active-link):hover {
-  border-bottom: none; /* Remove the border for inactive links on hover */
+  border-bottom: none; 
   color: cornflowerblue;
   
 }
@@ -29,4 +29,163 @@
 
 .gap {
   margin-left: 35%;
+} */
+
+
+
+/* .navbar-nav .active-link {
+  color: #ca1313; 
+} */
+
+
+/* .navbar {
+  background-color: #2ecc71; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.navbar-toggler-icon {
+  border-color: #cd1a1a; 
+}
+
+.navbar-nav .nav-link {
+  font-size: 16px;
+  color: rgb(9, 1, 1); 
+  margin-right: 15px;
+  text-decoration: none;
+  position: relative; 
+  transition: color 0.3s ease-in-out; 
+}
+
+.navbar-nav .nav-link:hover {
+  color: #3498db; 
+}
+
+.navbar-nav .nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px; 
+  background-color: #3498db; 
+  transform: scaleX(0); 
+  transition: transform 0.3s ease-in-out; 
+}
+
+.navbar-nav .nav-link:hover::before {
+  transform: scaleX(1); 
+}
+
+
+.navbar-nav .nav-item.active {
+  background-color: #3498db;
+  border-radius: 5px;
+}
+
+
+@media (max-width: 767px) {
+  .navbar-nav {
+    text-align: center; 
+  }
+
+  .navbar-nav .nav-link {
+    margin: 10px 0; 
+  }
+} */
+
+
+/* .navbar {
+  background-color: #2ecc71;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggler-icon {
+  border-color: #cd1a1a;
+}
+
+.navbar-nav .nav-link {
+  font-size: 16px;
+  color: rgb(9, 1, 1);
+  margin-right: 15px;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #3498db;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #3498db;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::before {
+  transform: scaleX(1);
+}
+
+
+.navbar-nav .active-link .nav-link {
+  color: #fff !important;
+} */
+
+
+.navbar {
+  background-color: #2ecc71;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggler-icon {
+  border-color: #cd1a1a;
+}
+
+.navbar-nav .nav-link {
+  font-size: 16px;
+  color: rgb(9, 1, 1);
+  margin-right: 15px;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active-link {
+  color: #3498db;
+}
+
+.navbar-nav .nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #3498db;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::before,
+.navbar-nav .nav-link.active-link::before {
+  transform: scaleX(1);
+}
+
+.navbar-nav .active-link {
+  background-color: #3498db !important;
+  color: #100404 !important;
+  border-radius: 5px;
+}
+
+/* Set the text color for the Home link */
+.navbar-nav .active-link .nav-link,
+.navbar-nav .nav-item:first-child .nav-link {
+  color: #050101 !important;
 }
