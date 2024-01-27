@@ -13,6 +13,9 @@ import { CartComponent } from './pages/cart/cart.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TopbarComponent } from './topbar/topbar.component';
 import { FaqsComponent } from './faqs/faqs.component';
+import { CartService } from './pages/cart/cart.service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -34,12 +37,12 @@ import { FaqsComponent } from './faqs/faqs.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    
-    
-    
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    CartService
   ],
   
   bootstrap: [AppComponent]

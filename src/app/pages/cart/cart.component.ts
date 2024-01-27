@@ -11,7 +11,11 @@ export class CartComponent {
 
   constructor(private cartService: CartService) {
     this.cartItems = this.cartService.getCartItems();
+    console.log(this.cartItems, 'ccccc ittttemsss')
   }
-  
+
+  removeFromCart(index: number) {
+    this.cartService.removeFromCart(index);
+  }
 
 }

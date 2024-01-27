@@ -169,3 +169,25 @@
         flex-basis: calc(25% - 18px);
     }
 }
+
+.cart-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    display: inline-block;
+    animation: slideIn 0.5s ease-out forwards;
+  
+    @keyframes slideIn {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+  }
+  
