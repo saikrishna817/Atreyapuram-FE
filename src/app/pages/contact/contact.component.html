@@ -1,5 +1,4 @@
-
-   <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="assets/contact_slider.jpg" class="d-block w-100" style="object-fit: cover; max-height: 400px;" alt="...">
@@ -46,7 +45,8 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="assets/contact_slider.jpg" class="d-block w-100" style="object-fit: cover; max-height: 400px;" alt="...">
+      <img src="assets/contact_slider.jpg" class="d-block w-100" style="object-fit: cover; max-height: 400px;"
+        alt="...">
     </div>
   </div>
 </div>
@@ -56,28 +56,56 @@
     <div class="row">
       <div class="col-lg-6 col-md-10 mx-auto">
         <div class="contact-form">
-          <form>
+          <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()">
+            <h1 class="title text-center mb-4">Talk to Us</h1>
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <input type="text" class="form-control" placeholder="First Name">
+                <input type="text" formControlName="fname" id="formName" class="form-control form-control-lg thick" placeholder="First Name">
+                <div *ngIf="contactUsForm.get('fname')?.hasError('required') && contactUsForm.get('fname')?.touched"
+                  class="text-danger">
+                  First Name is required
+                </div>
               </div>
               <div class="col-md-6 mb-3">
-                <input type="text" class="form-control" placeholder="Last Name">
+                <input type="text" formControlName="lname" id="formlName" class="form-control form-control-lg thick" placeholder="Last Name">
+                <div *ngIf="contactUsForm.get('lname')?.hasError('required') && contactUsForm.get('lname')?.touched"
+                class="text-danger">
+                Last Name is required
+              </div>
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <input type="email" class="form-control" placeholder="E-mail">
+                <input type="email" formControlName="email" id="formEmail" class="form-control form-control-lg thick" placeholder="E-mail">
+                <div *ngIf="contactUsForm.get('email')?.hasError('required') && contactUsForm.get('email')?.touched"
+                  class="text-danger">
+                  Email is required
+                </div>
+                <div *ngIf="contactUsForm.get('email')?.hasError('email') && contactUsForm.get('email')?.touched"
+                  class="text-danger ms-4">
+                  Invalid email address
+                </div>
               </div>
               <div class="col-md-6 mb-3">
-                <input type="text" class="form-control" placeholder="Phone">
+                <input type="text" formControlName="phone" id="phone" class="form-control form-control-lg thick" placeholder="Phone">
+                <div *ngIf="contactUsForm.get('phone')?.hasError('required') && contactUsForm.get('phone')?.touched"
+                  class="text-danger">
+                  Mobile number is required
+                </div>
               </div>
             </div>
             <div class="form-group">
-              <textarea rows="5" placeholder="Message" class="form-control"></textarea>
+              <textarea id="formMessage" formControlName="message" class="form-control form-control-lg" rows="5" placeholder="Message" class="form-control"></textarea>
+              <div *ngIf="contactUsForm.get('message')?.hasError('required') && contactUsForm.get('message')?.touched"
+                class="text-danger">
+                Message is required
+              </div>
             </div>
             <div class="text-center">
               <input type="submit" class="btn btn-primary send-btn" value="Send Message">
+            </div>
+            <div *ngIf="showMessage" class="text-success mt-3 ms-4">
+              Thanks for contacting us We will get back to you soon.
             </div>
           </form>
         </div>
@@ -85,5 +113,3 @@
     </div>
   </div>
 </section>
-
-
