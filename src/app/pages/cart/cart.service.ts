@@ -49,11 +49,7 @@ export class CartService {
   private updateCartCount() {
     this.cartCountSubject.next(this.getCartItemCount());
   }
-  private saveCartItems() {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-    }
-  }
+ 
   private loadCartItems() {
     if (typeof localStorage !== 'undefined') {
       const storedItems = localStorage.getItem('cartItems');
@@ -61,6 +57,11 @@ export class CartService {
     }
   }
 
+  saveCartItems(items: any[] = this.cartItems) {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('cartItems', JSON.stringify(items));
+    }
+  }
   //Check if item in cart
   isItemInCart(item: any): boolean {
     return this.cartItems.some(cartItem => cartItem.name === item.name);
