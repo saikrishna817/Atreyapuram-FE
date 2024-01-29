@@ -10,7 +10,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CartComponent } from './pages/cart/cart.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TopbarComponent } from './topbar/topbar.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { CartService } from './pages/cart/cart.service';
@@ -38,7 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration(),
