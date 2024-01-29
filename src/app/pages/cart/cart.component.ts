@@ -11,14 +11,12 @@ export class CartComponent {
 
   constructor(private cartService: CartService) {
     this.cartItems = this.cartService.getCartItems();
-  
-    // Set the initial quantity and total for each item
-    this.cartItems.forEach(item => {
+    this.cartItems.forEach(item => {  // Set the initial quantity and total for each item
       item.quantity = 1;
       item.total = item.quantity * item.price; // Set the initial total
     });
   }
-  
+
 
   removeFromCart(index: number) {
     this.cartService.removeFromCart(index);
@@ -26,15 +24,13 @@ export class CartComponent {
 
   incrementQuantity(item: any) {
     item.quantity++;
-    this.updateTotal(item);
-    // Update total or perform other necessary logic
+    this.updateTotal(item);// Update total or perform other necessary logic
   }
 
   decrementQuantity(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
-      this.updateTotal(item);
-      // Update total or perform other necessary logic
+      this.updateTotal(item);// Update total or perform other necessary logic
     }
   }
 
