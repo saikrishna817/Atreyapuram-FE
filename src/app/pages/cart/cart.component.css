@@ -1,0 +1,8 @@
+.btn-danger {
+    background-color: #dc3545; /* Bootstrap red color */
+    color: #fff; /* White text */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Darker red color on hover */
+}
