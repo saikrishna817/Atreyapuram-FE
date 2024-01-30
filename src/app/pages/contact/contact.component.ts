@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup , FormBuilder,Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,16 +20,18 @@ export class ContactComponent {
     private http: HttpClient
   ) { }
 
-   // Contact Us Form
-   contactUsForm = this.formBuilder.group({
-    fname: ['', [Validators.required]],
-    lname: ['', [Validators.required]],
+  // Contact Us Form
+  contactUsForm = this.formBuilder.group({
+    fname: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
+    lname: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
     email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required]],
-    message: ['', Validators.required],
+    phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+    message: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  
+
+
+
   onSubmit() {
     console.log('invalid')
     this.contactUsForm.markAllAsTouched();
@@ -68,7 +70,7 @@ export class ContactComponent {
     const apiUrl = environment.apiUrl;
     console.log('ramyaaaa')
     return this.http.post(apiUrl, data);
-  } 
   }
+}
 
 
