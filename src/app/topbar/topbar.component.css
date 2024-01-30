@@ -1,5 +1,5 @@
 
-.navbar {
+ .navbar {
   background-color: #2ecc71;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -46,15 +46,28 @@
   border-radius: 5px;
 }
 
-/* Set the text color for the Home link */
+/* St the text color for the Home link  */
 .navbar-nav .active-link .nav-link,
 .navbar-nav .nav-item:first-child .nav-link {
   color: #050101 !important;
-}
+} 
 
 .nav-link-spacing{
   margin-bottom: 10px;
+} 
+
+.active-link {
+  font-weight: bold; 
 }
+
+
+.nav-link, .nav-link.active-link {
+  transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+}
+
+
+
+
 
 
 

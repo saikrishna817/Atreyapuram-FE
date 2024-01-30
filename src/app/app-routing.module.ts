@@ -9,7 +9,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { FaqsComponent } from './faqs/faqs.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
