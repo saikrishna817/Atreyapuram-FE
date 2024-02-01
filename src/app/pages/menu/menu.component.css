@@ -91,7 +91,7 @@
 
 /* RESPONSIVE QUERIES */
 
-  @media (min-width: 320px) {
+@media (min-width: 320px) {
     .title-flex {
         display: flex;
         flex-direction: column;
@@ -189,7 +189,5 @@
         transform: translateY(0);
       }
     }
-  }  
-  
-
+  }
   
