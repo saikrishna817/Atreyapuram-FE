@@ -49,9 +49,10 @@
 }
 
 div.gallery img {
-  width: 80%;
+  width: 70%;
   height: auto;
   border-radius: 50%;
+  margin-left: 20%;
 }
 
 
@@ -59,6 +60,7 @@ div.desc {
   padding: 15px;
   text-align: center;
   padding-right: 90px;
+  margin-left: 30%;
 }
 
 .gallery:hover img {
