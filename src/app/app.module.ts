@@ -17,6 +17,7 @@ import { CartService } from './pages/cart/cart.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     CartComponent,
     TopbarComponent,
     FaqsComponent,
+    CheckoutComponent,
     
   ],
   imports: [
