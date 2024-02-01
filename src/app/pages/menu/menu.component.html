@@ -1,4 +1,4 @@
-<h3 class="mt-5 text-center"><b>Our Varieties of Putharekulu</b></h3>
+<!-- <h3 class="mt-5 text-center"><b>Our Varieties of Putharekulu</b></h3>
 <div class="wrap mt-5">
     <div *ngFor="let item of items" class="card box">
         <img class="box-image" [src]="item.imageSrc" alt="{{item.name}}">
@@ -13,4 +13,24 @@
 </div>
 <div *ngIf="showMessage" class="cart-message">
     {{ message }}
+  </div> -->
+
+
+  <h3 class="mt-5 text-center"><b>Our Varieties of Putharekulu</b></h3>
+  <div class="container mt-5">
+    <div class="row">
+      <div *ngFor="let item of items" class="col-sm-3 mb-4">
+        <div class="card box h-100">
+          <img class="box-image" [src]="item.imageSrc" alt="{{item.name}}">
+          <h6 class="box-title mt-3"><b>{{item.name}}</b></h6>
+          <p class="user-follow-info">(1 box of 10 pieces)</p>
+          <p class="money">&#x20B9; {{item.price.toFixed(2)}}</p>
+          <div class="gap">
+            <a class="button" (click)="addToCart(item)">Add to Cart</a>
+            <a class="button">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  
