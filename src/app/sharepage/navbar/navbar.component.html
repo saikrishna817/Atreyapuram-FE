@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%">
-  <div class="container d-flex justify-content-between align-items-center"> 
+  <div class="container d-flex justify-content-between align-items-center">
     <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
-     <div class="d-flex search">
+    <div class="d-flex search">
       <input type="text" placeholder="Search..." class="mr-2" style="width: 350px;">
       <button class="btn btn-light">Search</button>
     </div>
@@ -10,7 +10,7 @@
       <ul class="navbar-nav">
         <li class="nav-item ml-3">
           <a class="nav-link" routerLink="/cart">
-            <i class="bi bi-cart3"><span  class="cart-count">{{ cartService.getCartItemCount()
+            <i class="bi bi-cart3"><span class="cart-count">{{ cartService.getCartItemCount()
                 }}</span></i>
           </a>
         </li>
@@ -26,7 +26,7 @@
       </div> -->
     </div>
   </div>
-</nav> 
+</nav>
 
 
 
@@ -49,26 +49,41 @@
         <p class="text-white subText"></p>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="login">
-            <h4 class="text-center text-danger"><b>USER LOGIN</b></h4>
-            <div class="form-group col-sm-12">
-              <label for="exampleInputEmail1">User Name</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter user name or email">
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+          <h4 class="text-center text-danger"><b>USER LOGIN</b></h4>
+          <div class="col-md-12 mb-3">
+            <label for="exampleInputEmail1">User Name</label>
+            <input type="text" formControlName="name" id="formName" class="form-control form-control-lg thick"
+              placeholder="Enter Name"
+              [ngClass]="{'is-invalid': loginForm.get('name')?.invalid && loginForm.get('name')?.touched}">
+            <div *ngIf="loginForm.get('name')?.hasError('required') && loginForm.get('name')?.touched"
+              class="text-danger ms-1">
+              Name is required
             </div>
-            <div class="form-group col-sm-12">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <div *ngIf="loginForm.get('name')?.hasError('pattern') && loginForm.get('name')?.touched"
+              class="text-danger ms-1">
+              Invalid name.
             </div>
-            <div class="form-group col-sm-12">
-              <button type="submit" class="btn btn-danger mr-3 cursor-pointer">Login</button>
-              <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal">Cancel</button>
+          </div>
+          <div class="col-sm-12 mb-3">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" formControlName="password" id="formpassword" class="form-control form-control-lg thick"
+              placeholder="Password" [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+            <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="text-danger">
+              Password is required
             </div>
-            <div class="forn-group col-sm-12">
-              <p>Don't have an account?<span class="text-danger" data-dismiss="modal" data-toggle="modal"
-                  data-target="#signupModal"> <button class="text-primary signup">&nbsp;&nbsp;Sign Up</button></span>
-              </p>
+            <div *ngIf="loginForm.get('password')?.hasError('pattern') && loginForm.get('password')?.touched" class="text-danger">
+              Invalid Password. Password must have at least 8 characters, including one alphabetical character, one special character and one digit.
             </div>
+          </div>          
+          <div class="form-group col-sm-12">
+            <button type="submit" class="btn btn-danger mr-3 cursor-pointer">Login</button>
+            <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal">Cancel</button>
+          </div>
+          <div class="forn-group col-sm-12">
+            <p>Don't have an account?<span class="text-danger" data-dismiss="modal" data-toggle="modal"
+                data-target="#signupModal"> <button class="text-primary signup">&nbsp;&nbsp;Sign Up</button></span>
+            </p>
           </div>
         </form>
       </div>
@@ -91,22 +106,46 @@
           CouponDeals.</p> -->
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="registerForm" (ngSubmit)="onSignupSubmit()">
           <div class="login">
             <h4 class="text-center text-danger"><b>USER SIGNUP</b></h4>
-            <div class="form-group col-sm-12">
-              <label for="exampleInputEmail1">Name:</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter user name">
+            <div class="col-md-12 mb-3">
+              <label for="exampleInputEmail1">User Name</label>
+              <input type="text" formControlName="name" id="formName" class="form-control form-control-lg thick"
+                placeholder="Enter Name"
+                [ngClass]="{'is-invalid': registerForm.get('name')?.invalid && registerForm.get('name')?.touched}">
+              <div *ngIf="registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched"
+                class="text-danger ms-1">
+                Name is required
+              </div>
+              <div *ngIf="registerForm.get('name')?.hasError('pattern') && registerForm.get('name')?.touched"
+                class="text-danger ms-1">
+                Invalid name.
+              </div>
             </div>
             <div class="form-group col-sm-12">
               <label for="exampleInputEmail1">Email:</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+              <input type="email" formControlName="email" id="formEmail" class="form-control form-control-lg thick" placeholder="Enter email"   [ngClass]="{'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}">
+              <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched"
+                class="text-danger">
+                Email is required
+              </div>
+              <div *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched"
+                class="text-danger">
+                Invalid email address
+              </div>
             </div>
-            <div class="form-group col-sm-12">
-              <label for="exampleInputPassword1">Password:</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <div class="col-sm-12 mb-3">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" formControlName="password" id="formpassword" class="form-control form-control-lg thick"
+                placeholder="Password" [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}">
+              <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched" class="text-danger">
+                Password is required
+              </div>
+              <div *ngIf="registerForm.get('password')?.hasError('pattern') && registerForm.get('password')?.touched" class="text-danger">
+                Invalid Password. Password must have at least 8 characters, including one alphabetical character, one special character and one digit.
+              </div>
             </div>
-         
             <div class="form-group col-sm-12">
               <button type="submit" class="btn btn-danger mr-3 cursor-pointer">Sign Up</button>
               <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal" data-toggle="modal"
