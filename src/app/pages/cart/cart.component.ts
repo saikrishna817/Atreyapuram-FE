@@ -10,18 +10,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class CartComponent implements OnInit {
   cartItems: any[];
   checkoutForm: FormGroup;
+  showCouponField = false;
 
   constructor(private cartService: CartService,
     private formBuilder: FormBuilder,) {
     this.checkoutForm = this.formBuilder.group({
-      // Example fields, replace with your actual form controls
       name: ['', Validators.required],
-      password: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
-      // Add more form controls as needed
     });
     this.cartItems = this.cartService.getCartItems();
   }
+
   ngOnInit() {
     this.cartItems.forEach(item => {
       if (!item.quantity || !item.total) {
@@ -30,8 +30,19 @@ export class CartComponent implements OnInit {
       }
     });
   }
-
-
+ 
+  toggleCouponField() {
+      this.showCouponField = !this.showCouponField;
+      const couponLabel = document.querySelector('label[for="showCoupon"]') as HTMLElement;
+      
+      if (couponLabel) {
+          if (this.showCouponField) {
+              couponLabel.style.display = 'none';
+          } else {
+              couponLabel.style.display = 'block';
+          }
+      }
+  }
   removeFromCart(index: number) {
     this.cartService.removeFromCart(index);
   }

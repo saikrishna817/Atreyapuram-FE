@@ -58,21 +58,56 @@
                         <div class="col-md-6">
                             <!-- Contact Number Field -->
                             <div class="col-md-12 mb-3">
-                                <label for="exampleInputContactNumber">Contact Details</label>
-                                <input type="text" formControlName="contactNumber" id="formContactNumber"
-                                    class="form-control form-control-lg thick" placeholder="Enter Contact Number">
+                                <div class="form-group col-sm-12">
+                                    <label for="exampleInputEmail1">Contact Number:</label>
+                                    <input type="text" formControlName="phone" id="phone"
+                                        class="form-control form-control-lg thick" placeholder="Phone"
+                                        [ngClass]="{'is-invalid': checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched}">
+                                    <div *ngIf="checkoutForm.get('phone')?.hasError('required') && checkoutForm.get('phone')?.touched"
+                                        class="text-danger">
+                                        Mobile number is required
+                                    </div>
+                                    <div *ngIf="checkoutForm.get('phone')?.hasError('pattern') && checkoutForm.get('phone')?.touched"
+                                        class="text-danger">
+                                        Phone number should contain exactly 10 numeric characters
+                                    </div>
+                                </div>
+
                             </div>
 
                             <!-- Email Field -->
                             <div class="col-md-12 mb-3">
-                                <label for="exampleInputEmail">Email</label>
-                                <input type="email" formControlName="email" id="formEmail"
-                                    class="form-control form-control-lg thick" placeholder="Enter Email Address">
+                                <div class="form-group col-sm-12">
+                                    <label for="exampleInputEmail1">Email:</label>
+                                    <input type="email" formControlName="email" id="formEmail"
+                                        class="form-control form-control-lg thick mb-2" placeholder="Enter email"
+                                        [ngClass]="{'is-invalid': checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched}">
+                                    <label>
+                                        <input type="checkbox" name="remember" class="mr-2" checked>Notify me with
+                                        offers and updates
+                                    </label>
+                                    <div *ngIf="checkoutForm.get('email')?.hasError('required') && checkoutForm.get('email')?.touched"
+                                        class="text-danger">
+                                        Email is required
+                                    </div>
+                                    <div *ngIf="checkoutForm.get('email')?.hasError('email') && checkoutForm.get('email')?.touched"
+                                        class="text-danger">
+                                        Invalid email address
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="form-group col-sm-12" *ngIf="showCouponField">
+                                    <label for="couponCode">Coupon Code</label>
+                                    <input type="text" formControlName="couponCode" id="couponCode"
+                                        class="form-control form-control-lg thick" placeholder="Enter coupon code">
+                                </div>
+                                <label for="showCoupon" (click)="toggleCouponField()" class="coupon ms-3">Have a coupon?</label>
+                                <input type="checkbox" id="showCoupon" style="display: none;">
                             </div>
 
                         </div>
 
-                        <!-- Add a border between the columns -->
                         <div class="col-md-6 border-left">
                             <!-- Other fields in the second column can be added here -->
                         </div>

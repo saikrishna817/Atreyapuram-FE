@@ -6,3 +6,8 @@
 .btn-danger:hover {
     background-color: #c82333; /* Darker red color on hover */
 }
+
+.coupon{
+    cursor: pointer;
+}
+
