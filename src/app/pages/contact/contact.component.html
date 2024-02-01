@@ -58,8 +58,8 @@
         <div class="contact-form">
           <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()">
             <h1 class="title text-center mb-4">Talk to Us</h1>
-            <div class="form-row">
-              <div class="col-md-6 mb-3">
+            <div class="row mb-2">
+              <div class="col-md-6">
                 <input type="text" formControlName="fname" id="formName" class="form-control form-control-lg thick"
                   placeholder="First Name"
                   [ngClass]="{'is-invalid': contactUsForm.get('fname')?.invalid && contactUsForm.get('fname')?.touched}">
@@ -72,7 +72,7 @@
                   <small>It should contain at least 3 alphabets and no numbers or symbols</small>
                 </div>
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-6">
                 <input type="text" formControlName="lname" id="formlName" class="form-control form-control-lg thick"
                   placeholder="Last Name"
                   [ngClass]="{'is-invalid': contactUsForm.get('lname')?.invalid && contactUsForm.get('lname')?.touched}">
@@ -86,8 +86,8 @@
                 </div>
               </div>
             </div>
-            <div class="form-row">
-              <div class="col-md-6 mb-3">
+            <div class="row">
+              <div class="col-md-6">
                 <input type="email" formControlName="email" id="formEmail" class="form-control form-control-lg thick"
                   placeholder="E-mail"
                   [ngClass]="{'is-invalid': contactUsForm.get('email')?.invalid && contactUsForm.get('email')?.touched}">
