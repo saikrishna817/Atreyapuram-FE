@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './cart.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { environment } from '../../../environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -9,19 +12,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
   cartItems: any[];
-  checkoutForm: FormGroup;
 
-  constructor(private cartService: CartService,
-    private formBuilder: FormBuilder,) {
-    this.checkoutForm = this.formBuilder.group({
-      // Example fields, replace with your actual form controls
-      name: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      // Add more form controls as needed
-    });
+  constructor(private cartService: CartService, private formBuilder: FormBuilder, private http: HttpClient) {
     this.cartItems = this.cartService.getCartItems();
   }
+
   ngOnInit() {
     this.cartItems.forEach(item => {
       if (!item.quantity || !item.total) {
@@ -29,11 +24,6 @@ export class CartComponent implements OnInit {
         item.total = item.quantity * item.price;
       }
     });
-  }
-
-
-  removeFromCart(index: number) {
-    this.cartService.removeFromCart(index);
   }
 
   incrementQuantity(item: any) {
@@ -52,12 +42,13 @@ export class CartComponent implements OnInit {
   updateTotal(item: any) {
     item.total = item.quantity * item.price;
   }
-  // saveCartItems() {
-  //   this.cartService.saveCartItems(this.cartItems);
-  // }
 
+  removeFromCart(index: number) {
+    this.cartService.removeFromCart(index);
+  }
 
-  //CheckOut
-
+  openModal() {
+    this.cartService.openModal();
+  }
 
 }

@@ -36,50 +36,5 @@
             </tr>
         </tbody>
     </table>
-    <button class="btn buttonColor mt-3" data-toggle="modal" data-target=".bd-example-modal-lg">Checkout</button>
-</div>
-
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="buttonColor">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel"><b>ATREYAPURAM PUTHAREKULU</b></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="checkoutForm">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <!-- Contact Number Field -->
-                            <div class="col-md-12 mb-3">
-                                <label for="exampleInputContactNumber">Contact Details</label>
-                                <input type="text" formControlName="contactNumber" id="formContactNumber"
-                                    class="form-control form-control-lg thick" placeholder="Enter Contact Number">
-                            </div>
-
-                            <!-- Email Field -->
-                            <div class="col-md-12 mb-3">
-                                <label for="exampleInputEmail">Email</label>
-                                <input type="email" formControlName="email" id="formEmail"
-                                    class="form-control form-control-lg thick" placeholder="Enter Email Address">
-                            </div>
-
-                        </div>
-
-                        <!-- Add a border between the columns -->
-                        <div class="col-md-6 border-left">
-                            <!-- Other fields in the second column can be added here -->
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
+    <button class="btn buttonColor mt-3" (click)="openModal()">Checkout</button>
 </div>
