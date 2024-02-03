@@ -22,15 +22,23 @@ export class NavbarComponent {
     private http: HttpClient
   ) {
     this.loginForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
+      // name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}(?: [a-zA-Z]+)*$/)]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
 
+    // this.registerForm = this.formBuilder.group({
+    //   name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
+    //   email: ['', [Validators.required, Validators.email]],
+    //   password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
+    // });
+
     this.registerForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}(?: [a-zA-Z]+)*$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
+    
 
     this.cartService.cartCount$.subscribe((count: number) => {
       if (count > 0) {
