@@ -46,9 +46,6 @@ export class CartComponent implements OnInit {
   removeFromCart(index: number) {
     this.cartService.removeFromCart(index);
   }
-
-  openModal() {
-    this.cartService.openModal();
-  }
+  
 
 }
