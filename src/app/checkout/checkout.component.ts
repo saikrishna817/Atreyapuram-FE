@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CartService } from '../pages/cart/cart.service';
 import { HttpClient } from '@angular/common/http';
@@ -11,22 +11,17 @@ import { environment } from '../../environments/environment.prod';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent {
-  @ViewChild('myModal') myModal: any;
+
   checkoutForm: FormGroup;
   showCouponField = false;
   cartItems: any[];
+  showContactFields: boolean = true;
+  showAddressFields: boolean = false;
+  showPaymentFields: boolean = false;
 
-  ngAfterViewInit(): void {
-    this.openModal(); // Trigger modal opening on component initialization
-  }
 
-  openModal() {
-    if (this.myModal) {
-      this.myModal.show();
-    }
-  }
+
   constructor(private cartService: CartService, private formBuilder: FormBuilder, private http: HttpClient) {
-    console.log('CheckoutComponent constructor called');
     this.checkoutForm = this.formBuilder.group({
       name: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
@@ -81,4 +76,29 @@ export class CheckoutComponent {
     return this.http.post(apiUrl, data);
   }
 
+  // Add this method in your component
+  showAdditionalFieldsOnClick() {
+    this.showAddressFields = true;
+    this.showContactFields = false;
+    this.showPaymentFields= false;
+  }
+
+  
+  // Add this method in your component
+  showPaymentFieldsOnClick() {
+    this.showAddressFields = false;
+    this.showContactFields = false;
+    this.showPaymentFields= true;
+  }
+
+  goToContactFields(){
+    this.showAddressFields = false;
+    this.showContactFields = true;
+    this.showPaymentFields= false;
+  }
+  goToAddressFields(){
+    this.showAddressFields = true;
+    this.showContactFields = false;
+    this.showPaymentFields= false;
+  }
 }

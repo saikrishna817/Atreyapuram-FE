@@ -1,6 +1,6 @@
-<p>HIIII RAMYA</p>
+<button class="btn buttonColor mt-3" data-toggle="modal" data-target=".bd-example-modal-lg">Checkout</button>
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-  aria-hidden="true" #myModal>
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="buttonColor">
@@ -14,10 +14,10 @@
             <div class="modal-body">
                 <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
                     <div class="row">
-                        <div class="col-md-6">
-                            <!-- Contact Number Field -->
-                            <div class="col-md-12 mb-3">
-                                <div class="form-group col-sm-12">
+                        <div class="col-md-6" *ngIf="!showPaymentFields">
+                            <div class="col-md-12" *ngIf="showContactFields">
+                                <h5 class="mt-3 mb-4"><b><i>Contact Details</i></b></h5>
+                                <div class="form-group">
                                     <label for="exampleInputEmail1">Contact Number:</label>
                                     <input type="text" formControlName="phone" id="phone"
                                         class="form-control form-control-lg thick" placeholder="Phone"
@@ -31,12 +31,7 @@
                                         Phone number should contain exactly 10 numeric characters
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <!-- Email Field -->
-                            <div class="col-md-12 mb-3">
-                                <div class="form-group col-sm-12">
+                                <div class="form-group">
                                     <label for="exampleInputEmail1">Email:</label>
                                     <input type="email" formControlName="email" id="formEmail"
                                         class="form-control form-control-lg thick mb-2" placeholder="Enter email"
@@ -54,29 +49,347 @@
                                         Invalid email address
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-group col-sm-12" *ngIf="showCouponField">
+                                <div class="form-group" *ngIf="showCouponField">
                                     <label for="couponCode">Coupon Code</label>
                                     <input type="text" formControlName="couponCode" id="couponCode"
                                         class="form-control form-control-lg thick" placeholder="Enter coupon code">
                                 </div>
-                                <label for="showCoupon" (click)="toggleCouponField()" class="coupon ms-3">Have a coupon?</label>
+                                <label for="showCoupon" (click)="toggleCouponField()" class="coupon ms-3">Have a
+                                    coupon?</label>
                                 <input type="checkbox" id="showCoupon" style="display: none;">
+                                <div class="gap">
+                                    <a class="ms-4 mt-4">&#x20B9;499</a>
+                                    <button class="continue" (click)="showAdditionalFieldsOnClick()">Continue</button>
+                                </div>
                             </div>
-                            <div class="gap">
-                                <a class="ms-4 mt-4">&#x20B9;499</a>
-                                <button class="continue">Continue</button>
+                            <div class="col-md-12" *ngIf="showAddressFields">
+                                <span class="back-arrow" (click)="goToContactFields()"><img
+                                        src="assets/img/backarrow.png" alt="HTML tutorial" width="20px"
+                                        height="20px">&nbsp;&nbsp;</span><b>Back</b>
+                                <h5 class="mt-3 mb-4"><b><i>Delivery Address</i></b></h5>
+                                <div class="form-group">
+                                    <label for="newField1">Full Name</label>
+                                    <input type="text" formControlName="newField1" id="newField1"
+                                        class="form-control form-control-lg thick" placeholder="Enter Full Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Contact Number:</label>
+                                    <input type="text" formControlName="phone" id="phone"
+                                        class="form-control form-control-lg thick" placeholder="Phone"
+                                        [ngClass]="{'is-invalid': checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched}">
+                                    <div *ngIf="checkoutForm.get('phone')?.hasError('required') && checkoutForm.get('phone')?.touched"
+                                        class="text-danger">
+                                        Mobile number is required
+                                    </div>
+                                    <div *ngIf="checkoutForm.get('phone')?.hasError('pattern') && checkoutForm.get('phone')?.touched"
+                                        class="text-danger">
+                                        Phone number should contain exactly 10 numeric characters
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newField2">Pincode</label>
+                                    <input type="text" formControlName="newField2" id="newField2"
+                                        class="form-control form-control-lg thick" placeholder="Enter Pincode">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="newField2">State</label>
+                                            <input type="text" formControlName="newField2" id="newField2"
+                                                class="form-control form-control-lg thick" placeholder="State">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="newField2">City</label>
+                                            <input type="text" formControlName="newField2" id="newField2"
+                                                class="form-control form-control-lg thick" placeholder="city">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newField2">House Number,Apartment</label>
+                                    <input type="text" formControlName="newField2" id="newField2"
+                                        class="form-control form-control-lg thick" placeholder="House Number,Apartment">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newField2">Area, Colony, street, Sector</label>
+                                    <input type="text" formControlName="newField2" id="newField2"
+                                        class="form-control form-control-lg thick"
+                                        placeholder="Area, Colony, street, Sector">
+                                </div>
+                                <label>
+                                    <input type="checkbox" name="remember" class="mr-2" checked>Billing address same as
+                                    delivery address
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="remember" class="mr-2" checked>Save Address
+                                </label>
+                                <div class="gap">
+                                    <a class="ms-4 mt-4">&#x20B9;499</a>
+                                    <button class="continue" (click)="showPaymentFieldsOnClick()">Continue</button>
+                                </div>
                             </div>
-
                         </div>
+                        <div class="col-md-12" *ngIf="showPaymentFields">
+                            <span class="back-arrow ms-3" (click)="goToAddressFields()"><img
+                                    src="assets/img/backarrow.png" alt="HTML tutorial" width="20px"
+                                    height="20px">&nbsp;&nbsp;</span><b>Back</b>
+                            <h5 class="text-center mt-3 mb-4"><b><i>Payments</i></b></h5>
+                            <div class="col-md-12">
+                                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+                                    rel="stylesheet">
+                                <div class="container">
+                                    <div class="wrapper wrapper-content animated fadeInRight">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <h6><b>Pay with UPI QR</b></h6>
+                                                <div class="payment-card">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <img src="assets/img/qrcode.webp" height="90%" width="100%">
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <small>
+                                                                Scan the QR using any UPI app on your phone.
+                                                            </small>
+                                                            <div class="payment-icons">
+                                                                <img src="assets/img/phonepay.webp" alt="PhonePe"
+                                                                    class="payment-icon" height="25%" width="20%">
+                                                                <img src="assets/img/gpay.avif" alt="GPay"
+                                                                    class="payment-icon" height="40%" width="50%">
+                                                                <img src="assets/img/paytm.webp" alt="Paytm"
+                                                                    class="payment-icon" height="40%" width="30%">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="ibox mt-2">
+                                                    <h6><b>Payment Method</b></h6>
+                                                    <div class="ibox-content">
+                                                        <div class="panel-group payments-method" id="accordion">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <div class="pull-right">
+                                                                        <i class="fa fa-cc-paypal text-success"></i>
+                                                                    </div>
+                                                                    <h5 class="panel-title">
+                                                                        <a data-toggle="collapse"
+                                                                            data-parent="#accordion"
+                                                                            href="#collapseOne">PayPal</a>
+                                                                    </h5>
+                                                                </div>
+                                                                <div id="collapseOne" class="panel-collapse collapse">
+                                                                    <div class="panel-body ms-3">
 
-                        <div class="col-md-6 border-left">
-                            <!-- Other fields in the second column can be added here -->
+                                                                        <div class="row">
+                                                                            <div class="col-md-10">
+                                                                                <h5>Summary</h5>
+                                                                                <strong>Product:</strong>: Name of
+                                                                                product <br>
+                                                                                <strong>Price:</strong>: <span
+                                                                                    class="text-navy">$452.90</span>
+
+                                                                                <p class="m-t">
+                                                                                    Lorem ipsum dolor sit amet,
+                                                                                    consectetur adipisicing elit.
+                                                                                </p>
+                                                                                <a class="btn btn-success">
+                                                                                    <i class="fa fa-cc-paypal">
+                                                                                        Purchase via PayPal
+                                                                                    </i>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <div class="pull-right">
+                                                                        <i class="fa fa-cc-amex text-success"></i>
+                                                                        <i class="fa fa-cc-mastercard text-warning"></i>
+                                                                        <i class="fa fa-cc-discover text-danger"></i>
+                                                                    </div>
+                                                                    <h5 class="panel-title">
+                                                                        <a data-toggle="collapse"
+                                                                            data-parent="#accordion"
+                                                                            href="#collapseTwo">Credit Card</a>
+                                                                    </h5>
+                                                                </div>
+                                                                <div id="collapseTwo"
+                                                                    class="panel-collapse collapse in">
+                                                                    <div class="panel-body ms-3">
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <h5>Summary</h5>
+                                                                                <strong>Product:</strong>: Name <br>
+                                                                                <strong>Price:</strong>: <span
+                                                                                    class="text-navy">$452.90</span>
+
+                                                                                <p class="m-t">
+                                                                                    Lorem ipsum dolor sit amet,
+                                                                                    consectetur adipisicing elit, sed do
+                                                                                    eiusmod tempor incididunt ut labore
+                                                                                    et dolore magna aliqua.
+
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <form role="form" id="payment-form">
+                                                                                    <div class="row">
+                                                                                        <div class="col-xs-12">
+                                                                                            <div class="form-group">
+                                                                                                <label>CARD
+                                                                                                    NUMBER</label>
+                                                                                                <div
+                                                                                                    class="input-group">
+                                                                                                    <input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="Number"
+                                                                                                        placeholder="Valid Card Number"
+                                                                                                        required="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-xs-7 col-md-7">
+                                                                                            <div class="form-group">
+                                                                                                <label>EXPIRATION
+                                                                                                    DATE</label>
+                                                                                                <input type="text"
+                                                                                                    class="form-control"
+                                                                                                    name="Expiry"
+                                                                                                    placeholder="MM / YY"
+                                                                                                    required="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-xs-5 col-md-5 pull-right">
+                                                                                            <div class="form-group">
+                                                                                                <label>CV CODE</label>
+                                                                                                <input type="text"
+                                                                                                    class="form-control"
+                                                                                                    name="CVC"
+                                                                                                    placeholder="CVC"
+                                                                                                    required="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-xs-12">
+                                                                                            <div class="form-group">
+                                                                                                <label>NAME OF
+                                                                                                    CARD</label>
+                                                                                                <input type="text"
+                                                                                                    class="form-control"
+                                                                                                    name="nameCard"
+                                                                                                    placeholder="NAME AND SURNAME">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-xs-12">
+                                                                                            <button
+                                                                                                class="btn btn-primary"
+                                                                                                type="submit">Make a
+                                                                                                payment!</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <h5 class="panel-title">
+                                                                        <a data-toggle="collapse"
+                                                                            data-parent="#accordion"
+                                                                            href="#collapsethree">Cash On Delivery</a>
+                                                                    </h5>
+                                                                </div>
+                                                                <div id="collapsethree" class="panel-collapse collapse">
+                                                                    <div class="panel-body ms-3">
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-10">
+                                                                                <h5>Summary</h5>
+                                                                                <strong>Product:</strong>: Name of
+                                                                                product <br>
+                                                                                <strong>Price:</strong>: <span
+                                                                                    class="text-navy">$452.90</span>
+
+                                                                                <p class="m-t">
+                                                                                    Lorem ipsum dolor sit amet,
+                                                                                    consectetur adipisicing elit.
+                                                                                </p>
+                                                                                <div class="form-check">
+                                                                                    <input type="radio"
+                                                                                        id="cashOnDelivery"
+                                                                                        name="paymentMethod"
+                                                                                        class="form-check-input">
+                                                                                    <label for="cashOnDelivery"
+                                                                                        class="form-check-label">Cash on
+                                                                                        Delivery</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <button class="paynow" (click)="showAdditionalFieldsOnClick()">Pay
+                                                    Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 border-left" *ngIf="!showPaymentFields">
+                            <h5 class="text-center mt-3 mb-3"><b><i>Order Summary</i></b></h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>Product:</strong>: Name of
+                                    product <br>
+                                    <strong>Price:</strong>: <span class="text-navy">$452.90</span>
+
+                                    <p class="m-t">
+                                        Lorem ipsum dolor sit amet,
+                                        consectetur adipisicing elit.
+                                    </p>
+                                    <div class="borderTopBottom">
+                                        <div class="total-amount  text-muted">
+                                            <span class="label">TPrice (incl. taxes)</span>
+                                            <a class="amount">&#x20B9;499</a>
+                                        </div>
+
+                                        <div class="total-amount text-muted mt-2">
+                                            <span class="label">Delivery Charges</span>
+                                            <a class="amount">Free</a>
+                                        </div>
+                                    </div>
+                                    <div class="total-amount mt-3">
+                                        <span class="label">Total Amount</span>
+                                        <a class="amount">&#x20B9;499</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

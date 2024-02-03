@@ -13,6 +13,7 @@ export class CartService {
   cartCount$ = this.cartCountSubject.asObservable();
 
   constructor() {
+    // Load cart items from localStorage when the service is instantiated
     this.loadCartItems();
   }
 
@@ -63,15 +64,5 @@ export class CartService {
   //Check if item in cart
   isItemInCart(item: any): boolean {
     return this.cartItems.some(cartItem => cartItem.name === item.name);
-  }
-
-
-  //checkout
-  private openModalSource = new Subject<void>();
-
-  openModal$ = this.openModalSource.asObservable();
-
-  openModal() {
-    this.openModalSource.next();
   }
 }
