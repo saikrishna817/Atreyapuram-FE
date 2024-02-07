@@ -3,8 +3,8 @@
   <div class="container d-flex justify-content-between align-items-center">
     <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
     <div class="d-flex search">
-      <input type="text" placeholder="Search..." class="mr-2" style="width: 350px;">
-      <button class="btn btn-light">Search</button>
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="mr-2" style="width: 350px;">
+      <button class="btn btn-light" (click)="search()">Search</button>
     </div>
     <div class="d-flex" style="margin-left: auto;">
       <ul class="navbar-nav">
@@ -24,6 +24,15 @@
   </div>
   <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
 </nav>
+
+<div class="container">
+  <div *ngIf="searchResults.length > 0">
+    <h3>Search Results:</h3>
+    <ul>
+      <li *ngFor="let result of searchResults">{{ result }}</li>
+    </ul>
+  </div>
+</div>
 
 
 

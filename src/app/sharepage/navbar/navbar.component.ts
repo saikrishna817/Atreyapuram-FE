@@ -17,7 +17,25 @@ export class NavbarComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
-  constructor(public cartService: CartService,
+  searchTerm: string = '';
+  items: any[] = [];
+  filteredItems: any[] = [];
+  searchResults: string[] = [];
+
+  // items = [
+  //   { name: 'Item 1' },
+  //   { name: 'Item 2' },
+  //   { name: 'Another Item' },
+    // Add more items as needed
+  // ];
+
+  // searchTerm: string = '';
+
+
+
+
+  constructor(
+    public cartService: CartService,
     private formBuilder: FormBuilder,
     private http: HttpClient
   ) {
@@ -27,11 +45,18 @@ export class NavbarComponent {
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
 
-    // this.registerForm = this.formBuilder.group({
-    //   name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
-    //   email: ['', [Validators.required, Validators.email]],
-    //   password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
-    // });
+
+    this.items = [
+      { name: 'Item 1', imageSrc: 'path_to_image1', price: 10 },
+      { name: 'Item 2', imageSrc: 'path_to_image2', price: 20 },
+      // Add more items here...
+    ];
+    this.filteredItems = this.items.slice();
+
+  
+    
+    
+    
 
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}(?: [a-zA-Z]+)*$/)]],
@@ -47,6 +72,18 @@ export class NavbarComponent {
         console.log('Item added to cart. Notification shown.');
       }
     });
+  }
+
+  search(): void {
+    if (this.searchTerm.trim() !== '') {
+      // Filter items based on the search term
+      this.filteredItems = this.items.filter(item =>
+        item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      // If search term is empty, show all items
+      this.filteredItems = this.items.slice();
+    }
   }
 
   onLoginSubmit() {
@@ -98,4 +135,10 @@ export class NavbarComponent {
     const apiUrl = environment.apiUrl;
     return this.http.post(apiUrl, data);
   }
+
+  // filterItems() {
+  //   return this.items.filter(item =>
+  //     item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+  //   );
+  // }
 }
