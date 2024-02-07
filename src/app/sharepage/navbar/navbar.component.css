@@ -1,15 +1,7 @@
 .nav-item .nav-link {
-
   border-radius: 10px;
   cursor: pointer;
   color: #FFFFFF;
-  
-}
-
-.navbar-brand {
-  font-size: 24px;
-  font-weight: bold;
- 
 
 }
 
@@ -45,11 +37,15 @@
   background: hsla(205, 45%, 30%, 1);
   background: linear-gradient(90deg, hsla(205, 45%, 30%, 1)0%, hsla(260, 30%, 25%, 1));
 }
-.signup{
+
+.signup {
   border: none;
 }
-.search{
-  margin-left: 9rem;
+
+
+.logo {
+  width: 25%;
+  height: 60%;
 }
 
 .cart-count {
@@ -60,28 +56,21 @@
   font-size: 12px;
   position: absolute;
 }
+.cartAccount{
+  display: flex;
+  margin-left: auto;
+}
+.cart{
+  margin-right: 1.5rem;
+}
 
-
-
- @media (max-width: 600px) {
-  .search {
-    margin-left: 0;
-    max-width: none;
+@media (max-width: 768px) {
+  /* Update styles for smaller screens here */
+  .logo {
+    width: 100%;
+    height: 100%;
   }
-
-  .modal-header {
-    background-color: #dc3545; /* Adjusted background color for modal header on small screens */
-   }
- } 
-
- @media (min-width: 800px) {
-  .search {
-    margin-left: 1rem;
+  .cartAccount{
+    margin-left: 7rem; 
   }
-} 
- 
-@media (min-width: 1000px) {
-  .search {
-    max-width: 450px; 
-  }
-}  
+}
