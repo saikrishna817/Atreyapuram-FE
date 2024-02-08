@@ -1,19 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <img  class="logo" src="assets/img/logoATP.jpg" alt="">
+  <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%">
   <div class="container d-flex justify-content-between align-items-center">
-    <!-- <div class="d-flex search">
-      <input type="text" placeholder="Search..." class="mr-2" style="width: 350px;">
-      <button class="btn btn-light">Search</button>
-    </div> -->
-    <div class="cartAccount">
+    <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
+    <div class="d-flex search">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="mr-2" style="width: 350px;">
+      <button class="btn btn-light" (click)="search()">Search</button>
+    </div>
+    <div class="d-flex" style="margin-left: auto;">
       <ul class="navbar-nav">
-        <li class="nav-item cart">
+        <li class="nav-item ml-3">
           <a class="nav-link" routerLink="/cart">
             <i class="bi bi-cart3"><span class="cart-count">{{ cartService.getCartItemCount()
                 }}</span></i>
           </a>
         </li>
-        <li class="nav-item account">
+        <li class="nav-item ml-5">
           <a class="nav-link" data-toggle="modal" data-target="#loginModal">
             <i class="bi bi-person-circle"></i>
           </a>
@@ -23,6 +24,15 @@
   </div>
   <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
 </nav>
+
+<div class="container">
+  <div *ngIf="searchResults.length > 0">
+    <h3>Search Results:</h3>
+    <ul>
+      <li *ngFor="let result of searchResults">{{ result }}</li>
+    </ul>
+  </div>
+</div>
 
 
 
