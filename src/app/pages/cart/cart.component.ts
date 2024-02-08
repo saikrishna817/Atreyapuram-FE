@@ -133,18 +133,6 @@ export class CartComponent implements OnInit {
         }
       };
       this.showPaymentFieldsOnClick()
-      // this.submitContactForm(postData)
-      //   .subscribe(
-      //     (res: any) => {
-      //       console.log(res);
-      //     },
-      //     (err: any) => {
-      //       console.error(err);
-      //     }
-      //   );
-      // setTimeout(() => {
-      //   this.showMessage = false;
-      // }, 3000);
     }
   }
   private submitContactForm(data: any): Observable<any> {
