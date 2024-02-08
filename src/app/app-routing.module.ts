@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'faqs', component: FaqsComponent },
-  { path: 'check-out', component: CheckoutComponent },
+  // { path: 'check-out', component: CheckoutComponent },
   { path: '', redirectTo: 'menu', pathMatch: 'full' }
 ];
 
