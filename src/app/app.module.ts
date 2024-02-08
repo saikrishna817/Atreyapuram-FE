@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     TopbarComponent,
     FaqsComponent,
     CheckoutComponent,
+    GalleryComponent,
     
   ],
   imports: [
