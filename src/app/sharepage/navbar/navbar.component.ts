@@ -74,6 +74,7 @@ export class NavbarComponent {
     });
   }
 
+  
   search(): void {
     if (this.searchTerm.trim() !== '') {
       // Filter items based on the search term
