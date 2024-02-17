@@ -1,21 +1,20 @@
-<marquee class="marq">Atreyapuram Putharekulu</marquee>
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%">
+<!-- <marquee class="marq">Atreyapuram Putharekulu</marquee> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark mt-0">
+  <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%" class="logo">
   <div class="container d-flex justify-content-between align-items-center">
     <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
-    <div class="d-flex search">
+    <!-- <div class="d-flex search">
       <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="mr-2" style="width: 350px;">
       <button class="btn btn-light" (click)="search()">Search</button>
-    </div>
-    <div class="d-flex" style="margin-left: auto;">
+    </div> -->
+    <div class="d-flex cartItems">
       <ul class="navbar-nav">
-        <li class="nav-item ml-3">
+        <li class="nav-item ml-3 cartCount">
           <a class="nav-link" routerLink="/cart">
-            <i class="bi bi-cart3"><span class="cart-count">{{ cartService.getCartItemCount()
-                }}</span></i>
+            <i class="bi bi-cart3"><span class="cart-count">{{ cartService.getCartItemCount()}}</span></i>
           </a>
         </li>
-        <li class="nav-item ml-5">
+        <li class="nav-item ml-5 account">
           <a class="nav-link" data-toggle="modal" data-target="#loginModal">
             <i class="bi bi-person-circle"></i>
           </a>

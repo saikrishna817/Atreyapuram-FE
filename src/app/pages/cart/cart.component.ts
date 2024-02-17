@@ -24,21 +24,21 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService,
     private formBuilder: FormBuilder,
     private http: HttpClient) {
-      this.addressForm = this.formBuilder.group({
-        name: ['',  [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
-        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-        pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
-        state: ['', Validators.required],
-        city: ['', Validators.required],
-        apmt: ['', Validators.required],
-        area: ['', Validators.required],
-      });
-  
-      this.contactForm = this.formBuilder.group({
-        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-        email: ['', [Validators.required, Validators.email]],
-        couponCode: ['']
-      });
+    this.addressForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      apmt: ['', Validators.required],
+      area: ['', Validators.required],
+    });
+
+    this.contactForm = this.formBuilder.group({
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      couponCode: ['']
+    });
     this.cartItems = this.cartService.getCartItems();
   }
 
@@ -75,7 +75,7 @@ export class CartComponent implements OnInit {
 
   // checkout component code
 
-  
+
   onContactFieldsSubmit() {
     this.contactForm.markAllAsTouched();
     if (this.contactForm.valid) {

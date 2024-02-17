@@ -56,22 +56,46 @@
   font-size: 12px;
   position: absolute;
 }
-.cartAccount{
+
+.cartAccount {
   display: flex;
   margin-left: auto;
 }
-.cart{
+
+.cart {
   margin-right: 1.5rem;
 }
 
-@media (max-width: 768px) {
-  /* Update styles for smaller screens here */
-  .logo {
-    width: 100%;
-    height: 100%;
-  }
-  .cartAccount{
-    margin-left: 7rem; 
-  }
+.marq {
+  background-color: #136f6e;
 }
 
+.cartItems {
+  margin-left: auto;
+}
+
+@media (max-width: 767px) {
+
+  /* Update styles for smaller screens here */
+  .logo {
+    width: 90%;
+    height: 80%;
+  }
+
+  .cartItems {
+    margin-left: 0;
+  }
+
+  .cartCount {
+    margin-left: auto;
+  }
+  .account{
+    margin-left: auto;
+  }
+
+  /* 
+  z.cartAccount{
+    margin-left: 7rem; 
+  } */
+
+}
