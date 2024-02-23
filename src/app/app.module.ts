@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { PsdchangeComponent } from './psdchange/psdchange.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { GalleryComponent } from './gallery/gallery.component';
     FaqsComponent,
     CheckoutComponent,
     GalleryComponent,
+    PsdchangeComponent,
     
   ],
   imports: [

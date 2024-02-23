@@ -16,23 +16,13 @@ export class NavbarComponent {
 
   loginForm: FormGroup;
   registerForm: FormGroup;
+  forgotPsdForm: FormGroup;
 
   searchTerm: string = '';
   items: any[] = [];
   filteredItems: any[] = [];
   searchResults: string[] = [];
-
-  // items = [
-  //   { name: 'Item 1' },
-  //   { name: 'Item 2' },
-  //   { name: 'Another Item' },
-    // Add more items as needed
-  // ];
-
-  // searchTerm: string = '';
-
-
-
+  
 
   constructor(
     public cartService: CartService,
@@ -40,11 +30,13 @@ export class NavbarComponent {
     private http: HttpClient
   ) {
     this.loginForm = this.formBuilder.group({
-      // name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]],
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}(?: [a-zA-Z]+)*$/)]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
-
+    this.forgotPsdForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
 
     this.items = [
       { name: 'Item 1', imageSrc: 'path_to_image1', price: 10 },
@@ -52,18 +44,12 @@ export class NavbarComponent {
       // Add more items here...
     ];
     this.filteredItems = this.items.slice();
-
-  
-    
-    
-    
-
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}(?: [a-zA-Z]+)*$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
-    
+
 
     this.cartService.cartCount$.subscribe((count: number) => {
       if (count > 0) {
@@ -74,7 +60,7 @@ export class NavbarComponent {
     });
   }
 
-  
+
   search(): void {
     if (this.searchTerm.trim() !== '') {
       // Filter items based on the search term
@@ -131,6 +117,36 @@ export class NavbarComponent {
       }, 3000);
     }
   }
+
+  onEmailSubmit() {
+    this.forgotPsdForm.markAllAsTouched();
+    if (this.forgotPsdForm.valid) {
+      const postData = {
+        document: {
+          email: this.forgotPsdForm.get('email')!.value,
+        }
+      };
+
+      this.submitContactForm(postData)
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+          },
+          (err: any) => {
+            // Handle error response
+            console.error(err);
+          }
+        );
+
+      this.showMessage = true;
+      this.forgotPsdForm.reset();
+
+      setTimeout(() => {
+        this.showMessage = false;
+      }, 3000);
+    }
+  }
+
 
   private submitContactForm(data: any): Observable<any> {
     const apiUrl = environment.apiUrl;
