@@ -1,4 +1,4 @@
-<marquee class="marq">Atreyapuram Putharekulu</marquee>
+<!-- <marquee class="marq">Atreyapuram Putharekulu</marquee> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%">
   <div class="container d-flex justify-content-between align-items-center">
@@ -36,63 +36,59 @@
 </div>
 
 
-
-
-
-
-
 <!-- Login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="buttonColor">
-        <div class="modal-header">
-          <h5 class="text-center"><b>WELCOME</b></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <div class="modal-header navbar-expand-lg navbar-light bg-dark">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="assets/img/logoATP.jpg" alt="" width="50%">
         </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
         <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-          <h4 class="text-center text-dark"><b>USER LOGIN</b></h4>
+          <h4 class="text-center text-dark"><b><i>LOGIN</i></b></h4>
           <div class="col-md-12 mb-3">
-            <label for="exampleInputEmail1">User Name</label>
-            <input type="text" formControlName="name" id="formName" class="form-control form-control-lg thick"
-              placeholder="Enter Name"
-              [ngClass]="{'is-invalid': loginForm.get('name')?.invalid && loginForm.get('name')?.touched}">
-            <div *ngIf="loginForm.get('name')?.hasError('required') && loginForm.get('name')?.touched"
+            <label for="exampleInputEmail1">Enter Email</label>
+            <input type="text" formControlName="email" id="formemail" class="form-control thick "
+              placeholder="Enter email"
+              [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+            <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
               class="text-danger ms-1">
-              Name is required
+              Email is required
             </div>
-            <div *ngIf="loginForm.get('name')?.hasError('pattern') && loginForm.get('name')?.touched"
+            <div *ngIf="loginForm.get('email')?.hasError('pattern') && loginForm.get('email')?.touched"
               class="text-danger ms-1">
-              Invalid name.
+              Invalid email.
             </div>
           </div>
           <div class="col-sm-12 mb-3">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" formControlName="password" id="formpassword"
-              class="form-control form-control-lg thick" placeholder="Password"
+              class="form-control  thick" placeholder="Password"
               [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
             <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
               class="text-danger">
-              Password is required
+              password is required
             </div>
             <div *ngIf="loginForm.get('password')?.hasError('pattern') && loginForm.get('password')?.touched"
               class="text-danger">
-              Invalid Password. Password must have at least 8 characters, including one alphabetical character, one
-              special character and one digit.
+              wrong Password
             </div>
           </div>
-          <div class="form-group col-sm-12">
-            <button type="submit" class="btn buttonColor mr-3 cursor-pointer">Login</button>
-            <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal">Cancel</button>
+          <div class="forgot-password">
+            <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3">Forgot Password?</a>
+            <button class="btn float-end text-white bg-dark me-3" type="submit">
+              Login
+            </button>
           </div>
-          <div class="form-group col-sm-12">
-            <p>Don't have an account?<span class="text-danger" data-dismiss="modal" data-toggle="modal"
-                data-target="#signupModal"> <button class="text-primary signup">&nbsp;&nbsp;Sign Up</button></span>
+          <div class="form-group col-sm-12 mt-4">
+            <p>Don't have an account?<span data-dismiss="modal" data-toggle="modal" data-target="#signupModal"> <a
+                  class="text-link">&nbsp;&nbsp;<b>Sign Up</b></a></span>
             </p>
           </div>
         </form>
@@ -100,28 +96,30 @@
     </div>
   </div>
 </div>
+
+
 <!-- Sign up -->
 <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="buttonColor">
-        <div class="modal-header">
-          <h5 class="modal-title" id="loginModalLabel"><b>WELCOME</b></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <div class="modal-header bg-dark">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="assets/img/logoATP.jpg" alt="" width="50%">
         </div>
-        <!-- <p class="text-white subText">Earn extra cashback on top of other discounts on your<br> shopping via
-          CouponDeals.</p> -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <!-- <p class="text-white subText">Earn extra cashback on top of other discounts on your<br> shopping via
+          CouponDeals.</p> -->
       <div class="modal-body">
         <form [formGroup]="registerForm" (ngSubmit)="onSignupSubmit()">
           <div class="login">
-            <h4 class="text-center text-dark"><b>USER SIGNUP</b></h4>
+            <h4 class="text-center text-dark"><b><i>SIGNUP</i></b></h4>
             <div class="col-md-12 mb-3">
               <label for="exampleInputEmail1">User Name</label>
-              <input type="text" formControlName="name" id="formName" class="form-control form-control-lg thick"
+              <input type="text" formControlName="name" id="formName" class="form-control  thick"
                 placeholder="Enter Name"
                 [ngClass]="{'is-invalid': registerForm.get('name')?.invalid && registerForm.get('name')?.touched}">
               <div *ngIf="registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched"
@@ -135,7 +133,7 @@
             </div>
             <div class="form-group col-sm-12">
               <label for="exampleInputEmail1">Email:</label>
-              <input type="email" formControlName="email" id="formEmail" class="form-control form-control-lg thick"
+              <input type="email" formControlName="email" id="formEmail" class="form-control  thick"
                 placeholder="Enter email"
                 [ngClass]="{'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}">
               <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched"
@@ -150,7 +148,7 @@
             <div class="col-sm-12 mb-3">
               <label for="exampleInputPassword1">Password</label>
               <input type="password" formControlName="password" id="formpassword"
-                class="form-control form-control-lg thick" placeholder="Password"
+                class="form-control  thick" placeholder="Password"
                 [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}">
               <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
                 class="text-danger">
@@ -163,10 +161,53 @@
               </div>
             </div>
             <div class="form-group col-sm-12">
-              <button type="submit" class="btn buttonColor mr-3 cursor-pointer">Sign Up</button>
+              <button type="submit" class="btn bg-dark text-white mr-3 cursor-pointer">Sign Up</button>
               <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal" data-toggle="modal"
                 data-target="#loginModal">Login</button>
             </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot password page -->
+<div class="modal fade" id="forgotPsdModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header navbar-expand-lg navbar-light bg-dark">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="assets/img/logoATP.jpg" alt="" width="50%">
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="forgotPsdForm" (ngSubmit)="onEmailSubmit()">
+          <div class="col-md-12 mb-3">
+            <label for="exampleInputEmail1">Enter Email</label>
+            <input type="text" formControlName="email" id="formemail" class="form-control  thick"
+              placeholder="Enter email"
+              [ngClass]="{'is-invalid': forgotPsdForm.get('email')?.invalid && forgotPsdForm.get('email')?.touched}">
+            <div *ngIf="forgotPsdForm.get('email')?.hasError('required') && forgotPsdForm.get('email')?.touched"
+              class="text-danger ms-1">
+              Email is required
+            </div>
+            <div *ngIf="forgotPsdForm.get('email')?.hasError('pattern') && forgotPsdForm.get('email')?.touched"
+              class="text-danger ms-1">
+              Invalid email.
+            </div>
+          </div>
+          <div *ngIf="showMessage" class="text-success mt-3 ms-4">
+            We've sent you an email with a link to update your password.
+          </div>
+          <div class="d-flex align-items-center justify-content-center"> <!-- Center the content within the row -->
+            <button class="btn text-white bg-dark" type="submit">
+              SUBMIT
+            </button>
           </div>
         </form>
       </div>
