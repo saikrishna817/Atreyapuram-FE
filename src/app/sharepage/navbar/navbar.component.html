@@ -59,7 +59,7 @@
           <h4 class="text-center text-dark"><b><i>LOGIN</i></b></h4>
           <div class="col-md-12 mb-3">
             <label for="exampleInputEmail1">Enter Email</label>
-            <input type="text" formControlName="email" id="formemail" class="form-control thick "
+            <input type="email" formControlName="email" id="formemail" class="form-control thick "
               placeholder="Enter email"
               [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
             <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
@@ -73,8 +73,8 @@
           </div>
           <div class="col-sm-12 mb-3">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" formControlName="password" id="formpassword"
-              class="form-control  thick" placeholder="Password"
+            <input type="password" formControlName="password" id="formpassword" class="form-control  thick"
+              placeholder="Password"
               [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
             <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
               class="text-danger">
@@ -85,6 +85,9 @@
               wrong Password
             </div>
           </div>
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>          
           <div class="forgot-password">
             <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3">Forgot Password?</a>
             <button class="btn float-end text-white bg-dark me-3" type="submit">
@@ -152,8 +155,8 @@
             </div>
             <div class="col-sm-12 mb-3">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" formControlName="password" id="formpassword"
-                class="form-control  thick" placeholder="Password"
+              <input type="password" formControlName="password" id="formpassword" class="form-control  thick"
+                placeholder="Password"
                 [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}">
               <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
                 class="text-danger">

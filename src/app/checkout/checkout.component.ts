@@ -56,25 +56,25 @@ export class CheckoutComponent {
         }
       };
 
-      this.submitContactForm(postData)
-        .subscribe(
-          (res: any) => {
-            console.log('Validdd 2');
-            console.log(res);
-          },
-          (err: any) => {
-            // Handle error response
-            console.error(err);
-          }
-        );
+      // this.submitContactForm(postData)
+      //   .subscribe(
+      //     (res: any) => {
+      //       console.log('Validdd 2');
+      //       console.log(res);
+      //     },
+      //     (err: any) => {
+      //       // Handle error response
+      //       console.error(err);
+      //     }
+      //   );
 
     }
   }
-  private submitContactForm(data: any): Observable<any> {
-    const apiUrl = environment.apiUrl;
-    console.log('ramyaaaa')
-    return this.http.post(apiUrl, data);
-  }
+  // private submitContactForm(data: any): Observable<any> {
+  //   const apiUrl = environment.apiUrl;
+  //   console.log('ramyaaaa')
+  //   return this.http.post(apiUrl, data);
+  // }
 
   // Add this method in your component
   showAdditionalFieldsOnClick() {

@@ -13,6 +13,8 @@ import { Observable } from 'rxjs';
 export class NavbarComponent {
   showMessage = false;
   cartItemCount: number = 0;
+  errorMessage: string | undefined;
+  errorTimeout: any;
 
   loginForm: FormGroup;
   registerForm: FormGroup;
@@ -22,7 +24,7 @@ export class NavbarComponent {
   items: any[] = [];
   filteredItems: any[] = [];
   searchResults: string[] = [];
-  
+
 
   constructor(
     public cartService: CartService,
@@ -30,7 +32,6 @@ export class NavbarComponent {
     private http: HttpClient
   ) {
     this.loginForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}(?: [a-zA-Z]+)*$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
@@ -73,48 +74,79 @@ export class NavbarComponent {
     }
   }
 
+
   onLoginSubmit() {
     this.loginForm.markAllAsTouched();
-
     if (this.loginForm.valid) {
+      const email = this.loginForm.get('email')!.value;
+      const password = this.loginForm.get('password')!.value;
       const postData = {
-        document: {
-          name: this.loginForm.get('name')!.value,
-          password: this.loginForm.get('password')!.value,
-        }
+        email: email,
+        password: password
       };
-
-      this.submitContactForm(postData)
-        .subscribe(
-          (res: any) => {
-            console.log(res);
-          },
-          (err: any) => {
-            // Handle error response
-            console.error(err);
+      const apiUrl = environment.login;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.showMessage = true;
+          this.loginForm.reset();
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+          if (err && err.error && err.error.error) {
+            this.errorMessage = err.error.error;
+            // Show error message for 5 seconds
+            this.errorTimeout = setTimeout(() => {
+              this.errorMessage = undefined;
+            }, 3000);
+          } else {
+            this.errorMessage = 'An unexpected error occurred.';
           }
-        );
-
-      this.showMessage = true;
-      this.loginForm.reset();
-
-      setTimeout(() => {
-        this.showMessage = false;
-      }, 3000);
+        }
+      );
     }
   }
 
+  // private submitContactForm(data: any): Observable<any> {
+  //   const apiUrl = environment.register;
+  //   console.log(apiUrl,'urllll')
+  //   console.log('ramyaaaa')
+  //   return this.http.post(apiUrl, data);
+  // }
+
+
   onSignupSubmit() {
     this.registerForm.markAllAsTouched();
-
     if (this.registerForm.valid) {
-      // Add your signup form submission logic here
-      this.showMessage = true;
-      this.registerForm.reset();
+      const name = this.registerForm.get('name')!.value;
+      const email = this.registerForm.get('email')!.value;
+      const password = this.registerForm.get('password')!.value;
+      const postData = {
+        name: name,
+        email: email,
+        password: password,
+      };
 
-      setTimeout(() => {
-        this.showMessage = false;
-      }, 3000);
+      const apiUrl = environment.register;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.showMessage = true;
+          this.registerForm.reset();
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+          if (err && err.error && err.error.error) {
+            this.errorMessage = err.error.error;
+            // Show error message for 5 seconds
+            this.errorTimeout = setTimeout(() => {
+              this.errorMessage = undefined;
+            }, 3000);
+          } else {
+            this.errorMessage = 'An unexpected error occurred.';
+          }
+        }
+      );
     }
   }
 
@@ -126,36 +158,23 @@ export class NavbarComponent {
           email: this.forgotPsdForm.get('email')!.value,
         }
       };
+      const apiUrl = environment.register;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.showMessage = true;
+          this.registerForm.reset();
 
-      this.submitContactForm(postData)
-        .subscribe(
-          (res: any) => {
-            console.log(res);
-          },
-          (err: any) => {
-            // Handle error response
-            console.error(err);
-          }
-        );
+          setTimeout(() => {
+            this.showMessage = false;
+          }, 3000);
+        },
+        (err: any) => {
+          console.error(err);
+        }
+      );
 
-      this.showMessage = true;
-      this.forgotPsdForm.reset();
-
-      setTimeout(() => {
-        this.showMessage = false;
-      }, 3000);
     }
   }
 
-
-  private submitContactForm(data: any): Observable<any> {
-    const apiUrl = environment.apiUrl;
-    return this.http.post(apiUrl, data);
-  }
-
-  // filterItems() {
-  //   return this.items.filter(item =>
-  //     item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-  //   );
-  // }
 }
