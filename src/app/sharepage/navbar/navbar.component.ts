@@ -22,7 +22,7 @@ export class NavbarComponent {
   items: any[] = [];
   filteredItems: any[] = [];
   searchResults: string[] = [];
-  
+
 
   constructor(
     public cartService: CartService,
