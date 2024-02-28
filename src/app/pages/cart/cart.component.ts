@@ -136,7 +136,7 @@ export class CartComponent implements OnInit {
     }
   }
   private submitContactForm(data: any): Observable<any> {
-    const apiUrl = environment.apiUrl;
+    const apiUrl = environment.contact;
     console.log('ramyaaaa')
     return this.http.post(apiUrl, data);
   }
