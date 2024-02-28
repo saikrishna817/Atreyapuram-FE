@@ -26,11 +26,6 @@
   <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
 </nav>
 
-
-
-
-
-
 <div class="container">
   <div *ngIf="searchResults.length > 0">
     <h3>Search Results:</h3>
@@ -87,7 +82,7 @@
           </div>
           <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
-          </div>          
+          </div>
           <div class="forgot-password">
             <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3">Forgot Password?</a>
             <button class="btn float-end text-white bg-dark me-3" type="submit">
