@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PsdchangeComponent } from './psdchange/psdchange.component';
+import { AccountComponent } from './account/account.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { PsdchangeComponent } from './psdchange/psdchange.component';
     CheckoutComponent,
     GalleryComponent,
     PsdchangeComponent,
+    AccountComponent,
     
   ],
   imports: [

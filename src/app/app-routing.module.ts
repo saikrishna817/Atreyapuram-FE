@@ -10,6 +10,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PsdchangeComponent } from './psdchange/psdchange.component';
+import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -21,8 +22,9 @@ const routes: Routes = [
   { path: 'faqs', component: FaqsComponent },
   { path: 'check-out', component: CheckoutComponent },
   { path: '', redirectTo: 'menu', pathMatch: 'full' },
-  { path: 'gallery', component: GalleryComponent},
-  {path:'reset-psd', component:PsdchangeComponent}
+  { path: 'gallery', component: GalleryComponent },
+  { path: 'reset-psd', component: PsdchangeComponent },
+  {path: 'account', component: AccountComponent}
 ];
 
 @NgModule({
