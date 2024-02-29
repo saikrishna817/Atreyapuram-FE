@@ -55,6 +55,14 @@
   padding: 2px 6px;
   font-size: 12px;
   position: absolute;
+  /* position: absolute; 
+  top: -8px; 
+  right: -8px; 
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px; */
 }
 .cartAccount{
   display: flex;
@@ -62,6 +70,7 @@
 }
 .cart{
   margin-right: 1.5rem;
+  /* position: relative; */
 }
 
 marquee, nav {
@@ -69,8 +78,7 @@ marquee, nav {
   
 }
 
-@media (max-width: 768px) {
-  /* Update styles for smaller screens here */
+/* @media (max-width: 768px) {
   .logo {
     width: 100%;
     height: 100%;
@@ -96,8 +104,136 @@ marquee, nav {
 .text-link{
   color: #5D66FF;
   cursor: pointer;
-}
-/* .custom-input {
-  height: 2.5rem;
 } */
+
+
+
+/* .forgot-password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot-password a {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.text-link {
+  color: #5D66FF;
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .navbar img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .d-flex, .search, .navbar-nav {
+    margin-left: 0 !important;
+    width: 100%;
+    text-align: center;
+  }
+  .navbar-nav {
+    margin-top: 1rem;
+  }
+  .search input[type="text"] {
+    width: 100% !important;
+  }
+  .search {
+    flex-direction: column;
+    align-items: center;
+  }
+  .search button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .cart-count {
+    display: block;
+    position: absolute;
+    top: -8px; 
+    right: -8px; 
+    background-color: red;
+    color: white;
+    width: 20px; 
+    height: 20px; 
+    border-radius: 50%;
+    font-size: 12px; 
+    line-height: 20px;
+    text-align: center;
+  }
+} */
+
+
+
+@media (max-width: 768px) {
+  .navbar img {
+    width: 80% !important; /* Adjusted to not be 100%, allowing some space for icons */
+    height: auto !important;
+    margin-right: auto; /* Ensures logo is left-aligned */
+  }
+
+  .d-flex, .search, .navbar-nav {
+    margin-left: 0 !important;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-nav {
+    flex-direction: row !important; /* Ensures icons are side by side */
+    justify-content: flex-end; /* Aligns icons to the right */
+    padding-right: 15px; /* Adds some padding on the right */
+    margin-top: 0; /* Adjusts margin to align icons better */
+    width: auto; /* Allows navbar-nav to size according to its content */
+  }
+
+  .search input[type="text"] {
+    width: 100% !important;
+  }
+
+  .search {
+    order: -1; /* Makes search bar come first above the icons on small screens */
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensures search bar takes full width */
+  }
+
+  .search button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .cart-count {
+    display: block;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  /* Ensuring cart and account icons are aligned to the left */
+  .navbar .d-flex {
+    justify-content: flex-start !important; /* Overrides previous alignment for small screens */
+    flex-wrap: wrap;
+  }
+
+  /* Adjust navbar padding or margins as needed for small screens */
+  .navbar {
+    padding: 10px 15px; /* Example padding adjustment for smaller screens */
+  }
+}
+
+
+
 
