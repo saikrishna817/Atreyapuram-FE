@@ -3,10 +3,10 @@
   <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%">
   <div class="container d-flex justify-content-between align-items-center">
     <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
-    <div class="d-flex search">
+    <!-- <div class="d-flex search">
       <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="mr-2" style="width: 350px;">
       <button class="btn btn-light" (click)="search()">Search</button>
-    </div>
+    </div> -->
     <div class="d-flex" style="margin-left: auto;">
       <ul class="navbar-nav">
         <li class="nav-item ml-3">
@@ -15,9 +15,15 @@
                 }}</span></i>
           </a>
         </li>
-        <li class="nav-item ml-5">
+        <li class="nav-item ml-5" *ngIf="!userName">
           <a class="nav-link" data-toggle="modal" data-target="#loginModal">
             <i class="bi bi-person-circle"></i>
+          </a>
+        </li>
+        <li class="nav-item ml-5" *ngIf="userName">
+          <a class="nav-link" routerLink="/account">
+            <i class="bi bi-person-circle"></i>
+            <span class="ms-1">{{ userName }}</span>
           </a>
         </li>
       </ul>
@@ -34,7 +40,6 @@
     </ul>
   </div>
 </div>
-
 
 <!-- Login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -100,7 +105,6 @@
   </div>
 </div>
 
-
 <!-- Sign up -->
 <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
   aria-hidden="true">
@@ -163,6 +167,12 @@
                 special character and one digit.
               </div>
             </div>
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{ errorMessage }}
+            </div>
+            <div *ngIf="showSignupMessage" class="alert alert-success ms-2" role="alert">
+              User signed up successfully!
+            </div>
             <div class="form-group col-sm-12">
               <button type="submit" class="btn bg-dark text-white mr-3 cursor-pointer">Sign Up</button>
               <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal" data-toggle="modal"
@@ -204,7 +214,11 @@
               Invalid email.
             </div>
           </div>
-          <div *ngIf="showMessage" class="text-success mt-3 ms-4">
+          <div *ngIf="errorMessage" class="text-danger mt-3 ms-4">
+            {{ errorMessage }}
+          </div>
+
+          <div *ngIf="showForgotMessage" class="text-success mt-3 ms-4">
             We've sent you an email with a link to update your password.
           </div>
           <div class="d-flex align-items-center justify-content-center"> <!-- Center the content within the row -->
