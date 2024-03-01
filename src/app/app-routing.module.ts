@@ -13,6 +13,7 @@ import { PsdchangeComponent } from './psdchange/psdchange.component';
 import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'about', component: AboutComponent },
