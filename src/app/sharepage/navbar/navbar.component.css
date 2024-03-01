@@ -234,6 +234,14 @@ marquee, nav {
   }
 }
 
+.signup{
+  cursor: pointer;
+}
+
+.forgetPsd{
+  cursor:pointer;
+}
+
 
 
 

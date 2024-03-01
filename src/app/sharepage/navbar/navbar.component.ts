@@ -96,8 +96,8 @@ export class NavbarComponent {
           this.showLoginMessage = true;
           this.userName = res.user.name;
           this.userEmail = res.user.email;
-          this.userService.userName= this.userName
-          this.userService.userEmail=this.userEmail // Assuming the response contains the user's email
+          this.userService.userName = this.userName
+          this.userService.userEmail = this.userEmail // Assuming the response contains the user's email
           this.loginForm.reset();
         },
         (err: any) => {
@@ -157,7 +157,6 @@ export class NavbarComponent {
     }
   }
 
-
   onEmailSubmit() {
     this.forgotPsdForm.markAllAsTouched();
     if (this.forgotPsdForm.valid) {
@@ -174,12 +173,15 @@ export class NavbarComponent {
 
           setTimeout(() => {
             this.showForgotMessage = false;
-          }, 3000);
+          }, 5000); 
         },
         (err: any) => {
           console.error(err);
           if (err.error && err.error.error === "User not found.") {
-            this.errorMessage = "User doesn't exist.";
+            this.errorMessage = "User doesn't exist with this email";
+            this.errorTimeout = setTimeout(() => {
+              this.errorMessage = undefined;
+            }, 5000);
           } else {
             this.errorMessage = "An error occurred. Please try again later.";
           }

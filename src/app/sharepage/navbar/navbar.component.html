@@ -89,14 +89,15 @@
             {{ errorMessage }}
           </div>
           <div class="forgot-password">
-            <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3">Forgot Password?</a>
+            <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3 forgetPsd">Forgot
+              Password?</a>
             <button class="btn float-end text-white bg-dark me-3" type="submit">
               Login
             </button>
           </div>
           <div class="form-group col-sm-12 mt-4">
             <p>Don't have an account?<span data-dismiss="modal" data-toggle="modal" data-target="#signupModal"> <a
-                  class="text-link">&nbsp;&nbsp;<b>Sign Up</b></a></span>
+                  class="text-link">&nbsp;&nbsp;<b><span class="signup">Sign Up</span></b></a></span>
             </p>
           </div>
         </form>
@@ -214,11 +215,10 @@
               Invalid email.
             </div>
           </div>
-          <div *ngIf="errorMessage" class="text-danger mt-3 ms-4">
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>
-
-          <div *ngIf="showForgotMessage" class="text-success mt-3 ms-4">
+          <div *ngIf="showForgotMessage" class="alert alert-success ms-2" role="alert">
             We've sent you an email with a link to update your password.
           </div>
           <div class="d-flex align-items-center justify-content-center"> <!-- Center the content within the row -->
