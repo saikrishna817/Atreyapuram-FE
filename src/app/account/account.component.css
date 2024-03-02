@@ -1,99 +1,109 @@
-/* 
- .container {
+
+.account {
   display: flex;
-  flex-direction: row; 
-  align-items: start; 
-  width: 100%; 
+  justify-content: flex-start; /* Align items to the start of the container */
+  align-items: flex-start;
+  gap: 5px;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
-.menu-container, .content-container {
-  flex: 1;
-  padding: 10px; 
+
+
+.menu-container, .account-details {
+  flex: 1; /* Each takes up equal space, but now with reduced maximum width */
+  max-width: calc(40% - 20px); /* Adjusts max-width to account for gap, ensuring they don't get too wide */
 }
 
+.menu-container {
+  padding-left: 30%; /* Reduced from 20% to bring elements closer */
+  padding-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 3px;
+}
+
+.menu-item {
+  margin-bottom: 20px; /* Increase this value to adjust the gap between menu items */
+}
 
 ul {
   list-style-type: none;
-  padding: 0;
-}
-
-ul ul {
-  padding-left: 20px;
+  margin: 0; /* Ensures there's no default margin */
+  padding: 0; /* Ensures there's no default padding */
 }
 
 li {
-  margin-bottom: 5px;
+  margin-bottom: 10px; /* Adjusted for consistent spacing */
 }
 
-.field {
-  margin-bottom: 10px; 
+.field, .address button {
+  margin-bottom: 10px; /* Ensures consistent bottom margin */
 }
-
-.address{
-      border: 80px;
-}
-
-
 
 .address button {
   background-color: royalblue;
-  font-size: 20px;
-  padding: 10px 20px;
   color: white;
+  padding: 10px 20px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; 
-  display: inline-block; 
-  overflow: hidden; 
-  border-radius: 4%;
+  border-radius: 10px;
 }
 
 .address button:hover {
   background-color: black;
-  transform: translateY(-5px); 
-} */
-
-
-
-
-
-.account {
-  display: flex;
-  justify-content: space-between; /* Ensures even space distribution between the two divs */
-  align-items: flex-start; /* Aligns items to the start of the container */
+  transform: translateY(-2px); /* Reduced movement for a subtler effect */
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.menu-container, .account-details {
+
+
+.greeting p {
+  font-size: 24px;
+}
+
+#user-name {
+  color: #007bff;
+}
+
+#user-name-alt {
+  color: #6c757d;
+}
+
+.main{
+  text-align: center;
+}
+
+.order-message {
+  display: inline-block; /* Ensure the div takes only the width of its contents */
+  background-color: rgb(137, 189, 152); /* Set the background color */
+  height: 40px;
+  /* width: 30px; */
+  padding-top: 10px;
+}
+
+.order-message p {
+  margin: 0;
+}
+
+.menu-item a {
+  color: black;
+}
+
+.vertical-line {
+  border-left: 1px solid black; 
+  height: 460px;
+}
+
+.account-details {
   flex: 1; /* Each takes up equal space */
-  padding: 10px; /* Adds some spacing around the content */
+  max-width: calc(40% - 20px); /* Adjusts max-width to account for gap */
+  margin-left: 50px; /* Adjust this value as needed to increase or decrease the gap */
 }
 
-/* Additional styling */
-ul {
-  list-style-type: none;
-  padding: 0;
-}
 
-li {
-  margin-bottom: 5px;
-}
 
-.field, .address button {
-  margin-bottom: 10px; /* Adds bottom margin for spacing */
-}
 
-.address button {
-  background-color: royalblue;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-}
 
-.address button:hover {
-  background-color: black; /* Hover effect */
-  transform: translateY(-5px); /* Button moves up slightly on hover */
-  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for color and movement */
-}
+
 
 
