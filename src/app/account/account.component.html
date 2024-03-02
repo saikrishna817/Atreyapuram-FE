@@ -29,16 +29,14 @@
 </ul> -->
 
 
-<div class="menu-container">
+<!-- <div class="menu-container">
     <ul>
         <li>
             <a href="#dashboard">Dashboard</a>
         </li>
         <li>
             <a href="#addresses">Addresses</a>
-            <ul>
-                <li><a href="#view-addresses">View Addresses (1)</a></li>
-            </ul>
+            
         </li>
         <li>
             <a href="#wishlist">Wishlist</a>
@@ -46,28 +44,71 @@
         <li>
             <a href="#logout">Log Out</a>
         </li>
-    </ul>
-    <nav>
-        <ul class="menu">
-            <li class="user-greeting">
-                <span>Hello sai krishna (<a href="#logout">not sai krishna ?</a>)</span>
+    </ul> 
+</div> -->
+
+
+
+
+<!-- <div class="account">
+    <div class="menu-container">
+        <ul>
+            <li>
+                <a href="#dashboard">Dashboard</a>
             </li>
             <li>
-                <a href="#order-history">Order History</a>
+                <a href="#addresses">Addresses</a>
+                
             </li>
             <li>
-                <a href="#make-order">Make your first order. You haven't placed any orders yet.</a>
+                <a href="#wishlist">Wishlist</a>
             </li>
             <li>
-                <a href="#account-details">Account Details</a>
-                <ul class="submenu">
-                    <li><a href="#name">Name</a></li>
-                    <li><a href="#email">Email</a></li>
-                </ul>
+                <a href="#logout">Log Out</a>
             </li>
-        </ul>
-    </nav>
+        </ul> 
+    </div>   
+<div class="field">Hello sai krishna (not sai krishna? Log Out)</div>
+<div class="field"><h3>Order History</h3></div>
+<div class="field">✓ Make your first order. You haven't placed any orders yet.</div>
+<div class="field">Account Details</div>
+<div class="field">Name</div>
+<div class="field">sai krishna</div>
+<div class="field">Email</div>
+<div class="address"><button>View Addresses</button></div>
+</div> -->
+
+<div class="main">
+    <h2>My Account</h2>
 </div>
+
+
+<div class="account">
+        <div class="menu-container">
+        <div class="menu-item"><a routerLink="/account">Dashboard</a></div>
+        <div class="menu-item"><a >Addresses</a></div>
+        <div class="menu-item"><a>Log Out</a></div>
+    </div>
+    
+    <div class="vertical-line"></div>
+
+
+    <div class="account-details">
+        <!-- <div class="field">Hello <b>sai krishna</b>(not <b>sai krishna</b>? Log Out)</div> -->
+        <div class="greeting"><p>Hello <span id="user-name">sai krishna</span> (not <span id="user-name-alt">sai krishna</span>?<span style="text-decoration: underline;">Log Out</span> )</p></div>
+        <div class="field"><h3>Order History</h3></div><hr><hr>
+        <!-- <div class="order">c &nbsp;<span style="text-decoration: underline;">Make your first order.</span>&nbsp; You haven't placed any orders yet.</div><hr><hr> -->
+        <div class="order-message">
+            <p>Make your first order. <span id="order-info">You haven't placed any orders yet.</span></p>
+        </div><hr><hr>
+        <div class="field"><h3><b>Account Details</b></h3></div>
+        <div class="field">Name</div>
+        <div class="field">sai krishna</div><hr>
+        <div class="field">Email</div><hr>
+        <div class="address"><button>View Addresses</button></div>
+    </div>
+</div>
+
 
 
     
