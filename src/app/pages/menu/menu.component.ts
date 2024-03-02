@@ -35,7 +35,7 @@ export class MenuComponent {
     private formBuilder: FormBuilder,
     private http: HttpClient) {
     this.addressForm = this.formBuilder.group({
-      name: ['',  [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
       state: ['', Validators.required],
@@ -166,6 +166,21 @@ export class MenuComponent {
       // }, 3000);
     }
   }
+
+  // Inside your component
+  getStars(rating: number): number[] {
+    const stars = Math.round(rating); // Round the rating to nearest integer
+    return Array(stars).fill(0).map((_, index) => index); // Create an array of size 'stars'
+  }
+  // Inside your component
+  toggleRating(item: any, rating: number) {
+    if (item.selectedRating === rating + 1) {
+      item.selectedRating = rating;
+    } else {
+      item.selectedRating = rating + 1;
+    }
+  }
+
 
   // private submitContactForm(data: any): Observable<any> {
   //   const apiUrl = environment.apiUrl;

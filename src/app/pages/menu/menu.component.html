@@ -7,6 +7,9 @@
         <h6 class="box-title mt-3"><b>{{item.name}}</b></h6>
         <p class="user-follow-info">(1 box of 10 pieces)</p>
         <p class="money">&#x20B9; {{item.price.toFixed(2)}}</p>
+        <div class="star-rating">
+          <span class="fa fa-star" [class.checked]="i < item.selectedRating" (click)="toggleRating(item, i)" *ngFor="let i of [1, 2, 3, 4, 5]"></span>
+        </div>
         <div class="gap">
           <a class="button" (click)="addToCart(item)">Add to Cart</a>
           <a class="button" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="addToOrder(item)">Buy
