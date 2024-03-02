@@ -5,6 +5,8 @@ import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserService } from './navbar.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-navbar',
@@ -15,12 +17,14 @@ export class NavbarComponent {
   showLoginMessage = false;
   showSignupMessage = false;
   showForgotMessage = false;
+  close = false;
   showAccount = false;
   cartItemCount: number = 0;
   errorMessage: string | undefined;
   errorTimeout: any;
   userName: string | undefined;
   userEmail: string | undefined;
+  modalVisible: boolean = true; 
 
 
   loginForm: FormGroup;
@@ -37,7 +41,8 @@ export class NavbarComponent {
     public cartService: CartService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private userService: UserService
+    private userService: UserService,
+    private modalService: NgbModal
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -80,6 +85,11 @@ export class NavbarComponent {
     }
   }
 
+  closeModal() {
+    // Close the modal using NgbModal service
+    this.modalService.dismissAll();
+  }
+  
   onLoginSubmit() {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
@@ -98,7 +108,8 @@ export class NavbarComponent {
           this.userEmail = res.user.email;
           this.userService.userName = this.userName
           this.userService.userEmail = this.userEmail // Assuming the response contains the user's email
-          this.loginForm.reset();
+          // this.loginForm.reset();
+          this.close = true;
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -191,5 +202,6 @@ export class NavbarComponent {
     }
   }
 
+  
 
 }
