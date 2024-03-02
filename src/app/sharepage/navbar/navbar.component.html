@@ -91,7 +91,8 @@
           <div class="forgot-password">
             <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3 forgetPsd">Forgot
               Password?</a>
-            <button class="btn float-end text-white bg-dark me-3" type="submit">
+            <button class="btn float-end text-white bg-dark me-3" type="submit" id="loginButton"
+              [attr.data-dismiss]="close ? 'modal' : null" [attr.aria-label]="close ? 'Close' : null">
               Login
             </button>
           </div>
