@@ -29,17 +29,7 @@
       </ul>
     </div>
   </div>
-  <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
 </nav>
-
-<div class="container">
-  <div *ngIf="searchResults.length > 0">
-    <h3>Search Results:</h3>
-    <ul>
-      <li *ngFor="let result of searchResults">{{ result }}</li>
-    </ul>
-  </div>
-</div>
 
 <!-- Login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -91,8 +81,7 @@
           <div class="forgot-password">
             <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3 forgetPsd">Forgot
               Password?</a>
-            <button class="btn float-end text-white bg-dark me-3" type="submit" id="loginButton"
-              [attr.data-dismiss]="close ? 'modal' : null" [attr.aria-label]="close ? 'Close' : null">
+            <button class="btn float-end text-white bg-dark me-3" type="submit" id="loginButton">
               Login
             </button>
           </div>

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PsdchangeComponent } from './psdchange/psdchange.component';
 import { AccountComponent } from './account/account.component';
+import { RegisterComponent } from './register/register.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 
 
 @NgModule({
@@ -40,6 +44,7 @@ import { AccountComponent } from './account/account.component';
     GalleryComponent,
     PsdchangeComponent,
     AccountComponent,
+    RegisterComponent,
     
     
   ],
@@ -50,11 +55,13 @@ import { AccountComponent } from './account/account.component';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     provideClientHydration(),
-    CartService
+    CartService,
+    provideAnimationsAsync()
   ],
   
   bootstrap: [AppComponent]

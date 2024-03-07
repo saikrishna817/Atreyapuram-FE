@@ -4,6 +4,8 @@ export const environment = {
     login: 'http://localhost:8008/user/login',
     register: 'http://localhost:8008/user/register',
     forgot: 'http://localhost:8008/user/forgot',
-    contact:'http://localhost:8008/user/contact'
+    contactAddress: 'http://localhost:8008/user/contact',
+    DeliveryAddress: 'http://localhost:8008/user/address',
+    contact:'http://localhost:8008/user/getcontacts'
   };
   
