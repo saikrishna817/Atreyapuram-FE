@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild,ElementRef } from '@angular/core';
 import { CartService } from '../../pages/cart/cart.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
@@ -14,29 +14,23 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  // @ViewChild('loginModal', {static: false}) modal !: ElementRef;
   showLoginMessage = false;
   showSignupMessage = false;
   showForgotMessage = false;
-  close = false;
   showAccount = false;
   cartItemCount: number = 0;
   errorMessage: string | undefined;
   errorTimeout: any;
   userName: string | undefined;
   userEmail: string | undefined;
-  modalVisible: boolean = true; 
-
-
+  loggedInUserId: number | undefined;
+  modalVisible: boolean = true;
   loginForm: FormGroup;
   registerForm: FormGroup;
   forgotPsdForm: FormGroup;
-
-  searchTerm: string = '';
   items: any[] = [];
-  filteredItems: any[] = [];
-  searchResults: string[] = [];
-
-
+ 
   constructor(
     public cartService: CartService,
     private formBuilder: FormBuilder,
@@ -52,19 +46,11 @@ export class NavbarComponent {
       email: ['', [Validators.required, Validators.email]],
     });
 
-    this.items = [
-      { name: 'Item 1', imageSrc: 'path_to_image1', price: 10 },
-      { name: 'Item 2', imageSrc: 'path_to_image2', price: 20 },
-      // Add more items here...
-    ];
-    this.filteredItems = this.items.slice();
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}(?: [a-zA-Z]+)*$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
-
-
     this.cartService.cartCount$.subscribe((count: number) => {
       if (count > 0) {
         this.cartItemCount = count;
@@ -72,24 +58,16 @@ export class NavbarComponent {
     });
   }
 
-
-  search(): void {
-    if (this.searchTerm.trim() !== '') {
-      // Filter items based on the search term
-      this.filteredItems = this.items.filter(item =>
-        item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    } else {
-      // If search term is empty, show all items
-      this.filteredItems = this.items.slice();
-    }
-  }
-
-  closeModal() {
-    // Close the modal using NgbModal service
-    this.modalService.dismissAll();
-  }
+  // open() {
+  //   this.modalService.open(this.modal);
+  // }
   
+  // close() {
+  //   this.modalService.dismissAll();
+  // }
+  // hi
+  
+
   onLoginSubmit() {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
@@ -106,10 +84,9 @@ export class NavbarComponent {
           this.showLoginMessage = true;
           this.userName = res.user.name;
           this.userEmail = res.user.email;
+          this.userService.setLoggedInUserId(res.user.id);
           this.userService.userName = this.userName
-          this.userService.userEmail = this.userEmail // Assuming the response contains the user's email
-          // this.loginForm.reset();
-          this.close = true;
+          this.userService.userEmail = this.userEmail
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -127,6 +104,7 @@ export class NavbarComponent {
     }
   }
 
+  //REGISTER
   onSignupSubmit() {
     this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
@@ -157,7 +135,6 @@ export class NavbarComponent {
         },
         (err: any) => {
           console.error(err, 'errorrr');
-          // Handle HTTP error
           this.errorMessage = 'An unexpected error occurred.';
           setTimeout(() => {
             this.errorMessage = undefined;
@@ -168,6 +145,7 @@ export class NavbarComponent {
     }
   }
 
+  //FORGET PSD 
   onEmailSubmit() {
     this.forgotPsdForm.markAllAsTouched();
     if (this.forgotPsdForm.valid) {
@@ -181,10 +159,9 @@ export class NavbarComponent {
           console.log(res);
           this.showForgotMessage = true;
           this.forgotPsdForm.reset();
-
           setTimeout(() => {
             this.showForgotMessage = false;
-          }, 5000); 
+          }, 5000);
         },
         (err: any) => {
           console.error(err);
@@ -201,7 +178,5 @@ export class NavbarComponent {
 
     }
   }
-
-  
 
 }
