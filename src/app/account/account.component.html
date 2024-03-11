@@ -87,31 +87,7 @@
 
 
 <div class="account">
-        <!-- <div class="menu-container"> -->
-        <!-- <div class="menu-item"><a routerLink="/account">Dashboard</a></div> -->
-        <!-- <div class="menu-item"><a >Addresses</a></div>
-        <div class="menu-item"><a>Log Out</a></div> -->
-    <!-- </div> -->
-    
-    <!-- <div class="vertical-line"></div> -->
-
-
     <!-- <div class="account-details">
-        <div class="greeting"><p>Hello <span id="user-name">sai krishna</span> (not <span id="user-name-alt">sai krishna</span>?<span style="text-decoration: underline;">Log Out</span> )</p></div>
-        <div class="field"><h3>Order History</h3></div><hr><hr>
-        <div class="order-message">
-            <p>Make your first order. <span id="order-info">You haven't placed any orders yet.</span></p>
-        </div><hr><hr>
-        <div class="field"><h3><b>Account Details</b></h3></div>
-        <div class="field">Name:</div>
-        <div class="field">sai krishna</div><hr>
-        <div class="horizontal-line"></div>
-        <div class="field">Email</div><hr>
-        <div class="address"><button>Log Out</button></div>
-    </div> -->
-
-
-    <div class="account-details">
         <div class="greeting">
             <p>Hello <span id="user-name">{{name || 'NA'}}</span> (not <span id="user-name-alt">{{name || 'NA'}}</span>?<span style="text-decoration: underline;">Log Out</span> )</p>
         </div>
@@ -121,18 +97,24 @@
         <hr>
         <hr>
         <div class="order-message">
-            <p>Make your first order. <span id="order-info">You haven't placed any orders yet.</span></p>
+            <p class="first">
+                <a href="/home" class="interactive-text">Make your first order.</a>
+               &nbsp; <span id="order-info">You haven't placed any orders yet.</span>
+            </p>
         </div>
+        
         <hr>
         <hr>
         <div class="field">
             <h3><b>Account Details</b></h3>
         </div>
+      
         <div class="field">
             <div class="label">Name</div>
             <div class="value">{{name || 'NA'}}</div>
         </div>
         <hr class="horizontal-line">
+        >
         <div class="field">
             <div class="label">Email</div>
             <div class="value">{{email || 'NA'}}</div>
@@ -140,7 +122,82 @@
         <hr class="horizontal-line">
         <div class="address"><button>Log Out</button></div>
         <hr>
+    </div> -->
+
+
+
+
+    <!-- <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="greeting mb-3">
+                    <p>Hello <span class="text-primary" id="user-name">sai krishna</span> (not <span class="text-secondary" id="user-name-alt">sai krishna</span>? <a href="#" class="text-decoration-underline">Log Out</a>)</p>
+                </div>
+                <div class="order-history mb-3">
+                    <h3>Order History</h3>
+                    <hr>
+                    <div class="order-message bg-success text-white p-2 rounded">
+                        <p class="mb-0"><a href="/menu" class="interactive-text text-white text-decoration-underline">Make your first order.</a> You haven't placed any orders yet.</p>
+                    </div>
+                    <hr>
+                </div>
+                <div class="account-details">
+                    <h3><b>Account Details</b></h3>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="label"><strong>Name:</strong></div>
+                        <div class="value">sai krishna</div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="label"><strong>Email:</strong></div>
+                        <div class="value">sai&#64;gmail.com</div>
+                    </div>
+                    <hr>
+                    <div class="logout text-center mt-3">
+                        <button class="btn btn-primary">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+    <div class="account">
+        <div class="container py-3">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="greeting mb-3">
+                        <p>Hello <span class="text-primary" id="user-name">sai krishna</span> (not <span class="text-secondary" id="user-name-alt">sai krishna</span>)? <a href="#" class="text-decoration-underline">Log Out</a></p>
+                    </div>
+                    <div class="order-history mb-3">
+                        <h3>Order History</h3>
+                        <hr>
+                        <div class="order-message bg-success text-white p-2 rounded">
+                            <p class="mb-0"><a href="/menu" class="interactive-text text-white text-decoration-underline">Make your first order.</a> You haven't placed any orders yet.</p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="account-details">
+                        <h3><b>Account Details</b></h3>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div class="label"><strong>Name:</strong></div>
+                            <div class="value">sai krishna</div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="label"><strong>Email:</strong></div>
+                            <div class="value">sai&#64;gmail.com</div>
+                        </div>
+                        <hr>
+                        <div class="logout text-center mt-3">
+                            <button class="btn btn-primary">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
     </div>
+    
+    
     
 </div>
 
