@@ -1,34 +1,51 @@
 
-<app-home></app-home>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">WELCOME</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="text-center">
-                    <h2>USER LOGIN</h2>
-                    <h6>Please enter the email & password</h6>
-                </div>
-                <form>
-                    <form>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                      </form>
-                </form>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+  aria-hidden="true">
+   <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+          <h4 class="text-center text-dark"><b><i>LOGIN</i></b></h4>
+          <div class="col-md-12 mb-3">
+            <label for="exampleInputEmail1">Enter Email</label>
+            <input type="email" formControlName="email" id="formemail" class="form-control thick "
+              placeholder="Enter email"
+              [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+            <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
+              class="text-danger ms-1">
+              Email is required
             </div>
-        </div>
-    </div>
+            <div *ngIf="loginForm.get('email')?.hasError('pattern') && loginForm.get('email')?.touched"
+              class="text-danger ms-1">
+              Invalid email.
+            </div>
+          </div>
+          <div class="col-sm-12 mb-3">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" formControlName="password" id="formpassword" class="form-control  thick"
+              placeholder="Password"
+              [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+            <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
+              class="text-danger">
+              password is required
+            </div>
+            <div *ngIf="loginForm.get('password')?.hasError('pattern') && loginForm.get('password')?.touched"
+              class="text-danger">
+              wrong Password
+            </div>
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+          <div class="forgot-password">
+            <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3 forgetPsd">Forgot
+              Password?</a>
+            <button class="btn float-end text-white bg-dark me-3" type="submit" id="loginButton">
+              Login
+            </button>
+          </div>
+          <div class="form-group col-sm-12 mt-4">
+            <p>Don't have an account?<span data-dismiss="modal" data-toggle="modal" data-target="#signupModal"> <a
+                  class="text-link">&nbsp;&nbsp;<b><span class="signup">Sign Up</span></b></a></span>
+            </p>
+          </div>
+        </form>
 </div>

@@ -5,9 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-
+import { UserService } from '../../sharepage/navbar/navbar.service';
 
 @Component({
   selector: 'app-menu',
@@ -19,11 +17,11 @@ export class MenuComponent {
   showMessage: boolean = false;
   message: string = '';
   cartItems: any[];
-  //checkout component fields
   addressForm: FormGroup;
   contactForm: FormGroup;
   showCouponField = false;
   showContactFields: boolean = true;
+  loggedInUserId: any;
   showAddressFields: boolean = false;
   showPaymentFields: boolean = false;
   selectedProduct: any = null;
@@ -33,9 +31,10 @@ export class MenuComponent {
     private cartService: CartService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
+    private userService: UserService,
     private http: HttpClient) {
     this.addressForm = this.formBuilder.group({
-      name: ['',  [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
       state: ['', Validators.required],
@@ -51,7 +50,6 @@ export class MenuComponent {
     });
     this.cartItems = this.cartService.getCartItems();
   }
-
 
   items: any[] = [
     { name: 'Jaggery', price: 199.00, imageSrc: 'assets/img/jaggerry.jpg' },
@@ -88,90 +86,63 @@ export class MenuComponent {
     }
   }
 
-  // checkout component code
+  addToOrder(item: any) {
+    this.selectedProduct = item;
+    this.loggedInUserId = this.userService.getLoggedInUserId();
+    console.log(this.loggedInUserId,'userrrridddddddddddddddd');
+    console.log(this.selectedProduct, 'buy nowww')
+  }
 
   onContactFieldsSubmit() {
     this.contactForm.markAllAsTouched();
     if (this.contactForm.valid) {
+      const userId = this.loggedInUserId
       const postData = {
-        document: {
-          phone: this.contactForm.get('phone')!.value,
-          email: this.contactForm.get('email')!.value,
-        }
+        mobile: this.contactForm.get('phone')!.value,
+        email: this.contactForm.get('email')!.value,
+        user_id: userId
       };
       this.showAdditionalFieldsOnClick()
-      // this.submitContactForm(postData)
-      //   .subscribe(
-      //     (res: any) => {
-      //       console.log(res);
-      //     },
-      //     (err: any) => {
-      //       console.error(err);
-      //     }
-      //   );
-      // setTimeout(() => {
-      //   this.showMessage = false;
-      // }, 3000);
+      const apiUrl = environment.contactAddress;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+        }
+      );
     }
   }
-
-  addToOrder(item: any) {
-    this.selectedProduct = item; // Update selected product
-    console.log(this.selectedProduct, 'buy nowww')
-  }
-
-  //coupon field
-  toggleCouponField() {
-    this.showCouponField = !this.showCouponField;
-    const couponLabel = document.querySelector('label[for="showCoupon"]') as HTMLElement;
-
-    if (couponLabel) {
-      if (this.showCouponField) {
-        couponLabel.style.display = 'none';
-      } else {
-        couponLabel.style.display = 'block';
-      }
-    }
-  }
-
+ 
   onAddressFieldsSubmit() {
     this.addressForm.markAllAsTouched();
     console.log('invalidd')
     if (this.addressForm.valid) {
       console.log('validddd')
-      this.showPaymentFieldsOnClick()
+      const userId = this.loggedInUserId
       const postData = {
-        document: {
           name: this.addressForm.get('name')!.value,
-          phone: this.addressForm.get('phone')!.value,
+          mobile: this.addressForm.get('phone')!.value,
           pincode: this.addressForm.get('pincode')!.value,
           state: this.addressForm.get('state')!.value,
-          apmt: this.addressForm.get('apmt')!.value,
           city: this.addressForm.get('city')!.value,
           area: this.addressForm.get('area')!.value,
-        }
+          user_id: userId
       };
       this.showPaymentFieldsOnClick()
-      // this.submitContactForm(postData)
-      //   .subscribe(
-      //     (res: any) => {
-      //       console.log(res);
-      //     },
-      //     (err: any) => {
-      //       console.error(err);
-      //     }
-      //   );
-      // setTimeout(() => {
-      //   this.showMessage = false;
-      // }, 3000);
+      this.showAdditionalFieldsOnClick()
+      const apiUrl = environment.DeliveryAddress;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+        }
+      );
     }
   }
-
-  // private submitContactForm(data: any): Observable<any> {
-  //   const apiUrl = environment.apiUrl;
-  //   console.log('ramyaaaa')
-  //   return this.http.post(apiUrl, data);
-  // }
 
   showAdditionalFieldsOnClick() {
     this.showAddressFields = true;
@@ -183,7 +154,6 @@ export class MenuComponent {
     this.showContactFields = false;
     this.showPaymentFields = true;
   }
-
   goToContactFields() {
     this.showAddressFields = false;
     this.showContactFields = true;
@@ -193,6 +163,19 @@ export class MenuComponent {
     this.showAddressFields = true;
     this.showContactFields = false;
     this.showPaymentFields = false;
+  }
+   //coupon field
+   toggleCouponField() {
+    this.showCouponField = !this.showCouponField;
+    const couponLabel = document.querySelector('label[for="showCoupon"]') as HTMLElement;
+
+    if (couponLabel) {
+      if (this.showCouponField) {
+        couponLabel.style.display = 'none';
+      } else {
+        couponLabel.style.display = 'block';
+      }
+    }
   }
 
 }
