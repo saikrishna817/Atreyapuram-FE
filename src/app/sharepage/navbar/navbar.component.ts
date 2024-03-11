@@ -65,6 +65,7 @@ export class NavbarComponent {
   // close() {
   //   this.modalService.dismissAll();
   // }
+  // hi
   
 
   onLoginSubmit() {
