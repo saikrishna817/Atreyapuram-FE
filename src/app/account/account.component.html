@@ -113,7 +113,7 @@
 
     <div class="account-details">
         <div class="greeting">
-            <p>Hello <span id="user-name">sai krishna</span> (not <span id="user-name-alt">sai krishna</span>?<span style="text-decoration: underline;">Log Out</span> )</p>
+            <p>Hello <span id="user-name">{{name || 'NA'}}</span> (not <span id="user-name-alt">{{name || 'NA'}}</span>?<span style="text-decoration: underline;">Log Out</span> )</p>
         </div>
         <div class="field">
             <h3>Order History</h3>
@@ -128,17 +128,14 @@
         <div class="field">
             <h3><b>Account Details</b></h3>
         </div>
-        <!-- <div class="field">Name:</div>
-        <div class="field">sai krishna</div> -->
         <div class="field">
             <div class="label">Name</div>
-            <div class="value">sai krishna</div>
+            <div class="value">{{name || 'NA'}}</div>
         </div>
         <hr class="horizontal-line">
-        <!-- <div class="field">Email</div>-->
         <div class="field">
             <div class="label">Email</div>
-            <div class="value">sai&#64;gmail.com</div>
+            <div class="value">{{email || 'NA'}}</div>
         </div>
         <hr class="horizontal-line">
         <div class="address"><button>Log Out</button></div>
