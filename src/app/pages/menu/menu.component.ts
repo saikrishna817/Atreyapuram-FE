@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component,Output,EventEmitter } from '@angular/core';
 import { CartService } from '../cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../sharepage/navbar/navbar.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
@@ -14,6 +15,7 @@ import { UserService } from '../../sharepage/navbar/navbar.service';
 })
 export class MenuComponent {
 
+  @Output() openLoginModalEvent = new EventEmitter<void>();
   showMessage: boolean = false;
   message: string = '';
   cartItems: any[];
@@ -25,6 +27,19 @@ export class MenuComponent {
   showAddressFields: boolean = false;
   showPaymentFields: boolean = false;
   selectedProduct: any = null;
+  //login,signup,fp
+  showLoginMessage = false;
+  showSignupMessage = false;
+  showForgotMessage = false;
+  loginForm: FormGroup;
+  registerForm: FormGroup;
+  forgotPsdForm: FormGroup;
+  errorMessage: string | undefined;
+  errorTimeout: any;
+  userName: string = '';
+  userEmail: string = '';
+  userId: any;
+  checkedOut = false;
 
   constructor(
     private router: Router,
@@ -48,6 +63,20 @@ export class MenuComponent {
       email: ['', [Validators.required, Validators.email]],
       couponCode: ['']
     });
+
+    //login,signup,fp
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
+    });
+    this.forgotPsdForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
+    this.registerForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}(?: [a-zA-Z]+)*$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
+    });
     this.cartItems = this.cartService.getCartItems();
   }
 
@@ -67,6 +96,11 @@ export class MenuComponent {
   ];
 
 
+  // openLoginModal() {
+  //   console.log('No userr ID')
+  //   this.openLoginModalEvent.emit();
+  // }
+
   addToCart(item: any) {
     if (this.cartService.isItemInCart(item)) {
       this.message = `Product is already in the cart`;
@@ -85,11 +119,15 @@ export class MenuComponent {
       }, 2000);
     }
   }
+  openCheckoutModal(){
+    this.checkedOut= true
+  }
 
   addToOrder(item: any) {
     this.selectedProduct = item;
     this.loggedInUserId = this.userService.getLoggedInUserId();
-    console.log(this.loggedInUserId,'userrrridddddddddddddddd');
+    this.userId= this.loggedInUserId
+    console.log(this.userId,'userrrridddddddddddddddd');
     console.log(this.selectedProduct, 'buy nowww')
   }
 
@@ -178,4 +216,157 @@ export class MenuComponent {
     }
   }
 
+
+
+
+  //LOGIN,SIGNUP,FORGOT
+
+   ngOnInit(): void {
+    // Subscribe to router events to detect navigation end
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+        // Fetch logged-in user details when navigation ends
+        this.userName = this.userService.getLoggedInUserName();
+      });
+
+    // Fetch logged-in user details when component initializes
+    this.userName = this.userService.getLoggedInUserName();
+  }
+
+   onLoginSubmit() {
+    this.loginForm.markAllAsTouched();
+    if (this.loginForm.valid) {
+      const email = this.loginForm.get('email')!.value;
+      const password = this.loginForm.get('password')!.value;
+      const postData = {
+        email: email,
+        password: password
+      };
+      const apiUrl = environment.login;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.showLoginMessage = true;
+          this.userName = res.user.name;
+          this.userEmail = res.user.email;
+          this.userId = res.user.id;
+          this.userService.setLoggedInUserDetails(this.userName, this.userEmail,this.userId);
+          this.loginForm.reset();
+          this.hideModal('loginModal');
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+          if (err && err.error && err.error.error) {
+            this.errorMessage = err.error.error;
+            // Show error message for 5 seconds
+            this.errorTimeout = setTimeout(() => {
+              this.errorMessage = undefined;
+            }, 5000);
+          } else {
+            this.errorMessage = 'An unexpected error occurred.';
+          }
+        }
+      );
+    }
+  }
+  //REGISTER
+  onSignupSubmit() {
+    this.registerForm.markAllAsTouched();
+    if (this.registerForm.valid) {
+      const name = this.registerForm.get('name')!.value;
+      const email = this.registerForm.get('email')!.value;
+      const password = this.registerForm.get('password')!.value;
+      const postData = {
+        name: name,
+        email: email,
+        password: password,
+      };
+      const apiUrl = environment.register;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res, 'resultuuuu');
+          if (res.user && res.user.success) {
+            this.showSignupMessage = true;
+            setTimeout(() => {
+              this.showSignupMessage = false;
+              const modal = document.getElementById('signupModal');
+              if (modal) {
+                modal.classList.remove('show');
+                modal.setAttribute('aria-modal', 'false');
+                modal.setAttribute('style', 'display: none');
+                const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+                if (modalBackdrop) {
+                  modalBackdrop.parentNode?.removeChild(modalBackdrop);
+                }
+              }
+            }, 2000);
+            this.registerForm.reset();
+          } else {
+            this.errorMessage = 'User already exists with this email';
+            setTimeout(() => {
+              this.errorMessage = undefined;
+            }, 5000);
+          }
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+          this.errorMessage = 'An unexpected error occurred.';
+          setTimeout(() => {
+            this.errorMessage = undefined;
+          }, 3000);
+        }
+      );
+
+    }
+  }
+  //FORGET PSD 
+  onEmailSubmit() {
+    this.forgotPsdForm.markAllAsTouched();
+    if (this.forgotPsdForm.valid) {
+      const email = this.forgotPsdForm.get('email')!.value;
+      const postData = {
+        email: email,
+      };
+      const apiUrl = environment.forgot;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.showForgotMessage = true;
+          this.forgotPsdForm.reset();
+          setTimeout(() => {
+            this.showForgotMessage = false;
+          }, 5000);
+        },
+        (err: any) => {
+          console.error(err);
+          if (err.error && err.error.error === "User not found.") {
+            this.errorMessage = "User doesn't exist with this email";
+            this.errorTimeout = setTimeout(() => {
+              this.errorMessage = undefined;
+            }, 5000);
+          } else {
+            this.errorMessage = "An error occurred. Please try again later.";
+          }
+        }
+      );
+
+    }
+  }
+
+   // Helper method to hide modal
+   hideModal(modalId: string) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-modal', 'false');
+      modal.setAttribute('style', 'display: none');
+      const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+      if (modalBackdrop) {
+        modalBackdrop.parentNode?.removeChild(modalBackdrop);
+      }
+    }
+  }
 }

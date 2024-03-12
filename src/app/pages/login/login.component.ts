@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit{
           this.showLoginMessage = true;
           this.userName = res.user.name;
           this.userEmail = res.user.email;
-          this.userService.setLoggedInUserId(res.user.id);
+          // this.userService.setLoggedInUserId(res.user.id);
           this.userService.userName = this.userName
           this.userService.userEmail = this.userEmail
         },

@@ -9,8 +9,10 @@
         <p class="money">&#x20B9; {{item.price.toFixed(2)}}</p>
         <div class="gap">
           <a class="button" (click)="addToCart(item)">Add to Cart</a>
-          <a class="button" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="addToOrder(item)">Buy
-            Now</a>
+          <a class="button" *ngIf="userId" data-toggle="modal" data-target="#checkOutModal"
+            (click)="addToOrder(item)">Buy Now</a>
+          <a class="button" *ngIf="!userId" data-toggle="modal" data-target="#loginModal" 
+          (click)="addToOrder(item)">Buy Now</a>
         </div>
       </div>
     </div>
@@ -21,8 +23,8 @@
 </div>
 
 <!-- checkout component code -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-  aria-hidden="true" *ngIf="loggedInUserId">
+<div class="modal fade" id="checkOutModal" tabindex="-1" role="dialog" aria-labelledby="checkOuteModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="buttonColor">
@@ -441,6 +443,197 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login  -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header navbar-expand-lg navbar-light bg-dark">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="assets/img/logoATP.jpg" alt="" width="50%">
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+          <h4 class="text-center text-dark"><b><i>LOGIN</i></b></h4>
+          <div class="col-md-12 mb-3">
+            <label for="exampleInputEmail1">Enter Email</label>
+            <input type="email" formControlName="email" id="formemail" class="form-control thick "
+              placeholder="Enter email"
+              [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+            <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
+              class="text-danger ms-1">
+              Email is required
+            </div>
+            <div *ngIf="loginForm.get('email')?.hasError('pattern') && loginForm.get('email')?.touched"
+              class="text-danger ms-1">
+              Invalid email.
+            </div>
+          </div>
+          <div class="col-sm-12 mb-3">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" formControlName="password" id="formpassword" class="form-control  thick"
+              placeholder="Password"
+              [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+            <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
+              class="text-danger">
+              password is required
+            </div>
+            <div *ngIf="loginForm.get('password')?.hasError('pattern') && loginForm.get('password')?.touched"
+              class="text-danger">
+              wrong Password
+            </div>
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+          <div class="forgot-password">
+            <a data-dismiss="modal" data-toggle="modal" data-target="#forgotPsdModal" class="ms-3 forgetPsd">Forgot
+              Password?</a>
+            <button class="btn float-end text-white bg-dark me-3" type="submit" id="loginButton">
+              Login
+            </button>
+          </div>
+          <div class="form-group col-sm-12 mt-4">
+            <p>Don't have an account?<span data-dismiss="modal" data-toggle="modal" data-target="#signupModal"> <a
+                  class="text-link">&nbsp;&nbsp;<b><span class="signup">Sign Up</span></b></a></span>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sign up -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="assets/img/logoATP.jpg" alt="" width="50%">
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <p class="text-white subText">Earn extra cashback on top of other discounts on your<br> shopping via
+          CouponDeals.</p> -->
+      <div class="modal-body">
+        <form [formGroup]="registerForm" (ngSubmit)="onSignupSubmit()">
+          <div class="login">
+            <h4 class="text-center text-dark"><b><i>SIGNUP</i></b></h4>
+            <div class="col-md-12 mb-3">
+              <label for="exampleInputEmail1">User Name</label>
+              <input type="text" formControlName="name" id="formName" class="form-control  thick"
+                placeholder="Enter Name"
+                [ngClass]="{'is-invalid': registerForm.get('name')?.invalid && registerForm.get('name')?.touched}">
+              <div *ngIf="registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched"
+                class="text-danger ms-1">
+                Name is required
+              </div>
+              <div *ngIf="registerForm.get('name')?.hasError('pattern') && registerForm.get('name')?.touched"
+                class="text-danger ms-1">
+                Invalid name.
+              </div>
+            </div>
+            <div class="form-group col-sm-12">
+              <label for="exampleInputEmail1">Email:</label>
+              <input type="email" formControlName="email" id="formEmail" class="form-control  thick"
+                placeholder="Enter email"
+                [ngClass]="{'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched}">
+              <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched"
+                class="text-danger">
+                Email is required
+              </div>
+              <div *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched"
+                class="text-danger">
+                Invalid email address
+              </div>
+            </div>
+            <div class="col-sm-12 mb-3">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" formControlName="password" id="formpassword" class="form-control  thick"
+                placeholder="Password"
+                [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}">
+              <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
+                class="text-danger">
+                Password is required
+              </div>
+              <div *ngIf="registerForm.get('password')?.hasError('pattern') && registerForm.get('password')?.touched"
+                class="text-danger">
+                Invalid Password. Password must have at least 8 characters, including one alphabetical character, one
+                special character and one digit.
+              </div>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{ errorMessage }}
+            </div>
+            <div *ngIf="showSignupMessage" class="alert alert-success ms-2" role="alert">
+              User signed up successfully!
+            </div>
+            <div class="form-group col-sm-12">
+              <button type="submit" class="btn bg-dark text-white mr-3 cursor-pointer">Sign Up</button>
+              <button type="button" class="btn btn-light cursor-pointer" data-dismiss="modal" data-toggle="modal"
+                data-target="#loginModal">Login</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot password page -->
+<div class="modal fade" id="forgotPsdModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header navbar-expand-lg navbar-light bg-dark">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="assets/img/logoATP.jpg" alt="" width="50%">
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="forgotPsdForm" (ngSubmit)="onEmailSubmit()">
+          <div class="col-md-12 mb-3">
+            <label for="exampleInputEmail1">Enter Email</label>
+            <input type="text" formControlName="email" id="formemail" class="form-control  thick"
+              placeholder="Enter email"
+              [ngClass]="{'is-invalid': forgotPsdForm.get('email')?.invalid && forgotPsdForm.get('email')?.touched}">
+            <div *ngIf="forgotPsdForm.get('email')?.hasError('required') && forgotPsdForm.get('email')?.touched"
+              class="text-danger ms-1">
+              Email is required
+            </div>
+            <div *ngIf="forgotPsdForm.get('email')?.hasError('pattern') && forgotPsdForm.get('email')?.touched"
+              class="text-danger ms-1">
+              Invalid email.
+            </div>
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="showForgotMessage" class="alert alert-success ms-2" role="alert">
+            We've sent you an email with a link to update your password.
+          </div>
+          <div class="d-flex align-items-center justify-content-center"> <!-- Center the content within the row -->
+            <button class="btn text-white bg-dark" type="submit">
+              SUBMIT
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
