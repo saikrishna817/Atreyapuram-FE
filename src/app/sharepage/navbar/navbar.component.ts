@@ -1,4 +1,6 @@
-import { Component,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { CartService } from '../../pages/cart/cart.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
@@ -6,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserService } from './navbar.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LocalstorageService } from '../localstorage.service';
+import $ from 'jquery';
+
 
 
 @Component({
@@ -13,8 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
-  // @ViewChild('loginModal', {static: false}) modal !: ElementRef;
+export class NavbarComponent implements OnInit {
   showLoginMessage = false;
   showSignupMessage = false;
   showForgotMessage = false;
@@ -22,21 +26,24 @@ export class NavbarComponent {
   cartItemCount: number = 0;
   errorMessage: string | undefined;
   errorTimeout: any;
-  userName: string | undefined;
-  userEmail: string | undefined;
+  userName: string = '';
+  userId: any
+  userEmail: any;
   loggedInUserId: number | undefined;
   modalVisible: boolean = true;
   loginForm: FormGroup;
   registerForm: FormGroup;
   forgotPsdForm: FormGroup;
   items: any[] = [];
- 
+
   constructor(
     public cartService: CartService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private userService: UserService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private localStorage: LocalstorageService,
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -56,18 +63,23 @@ export class NavbarComponent {
         this.cartItemCount = count;
       }
     });
+
   }
+  ngOnInit(): void {
+    // Subscribe to router events to detect navigation end
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+        // Fetch logged-in user details when navigation ends
+        this.userName = this.userService.getLoggedInUserName();
+      });
 
-  // open() {
-  //   this.modalService.open(this.modal);
-  // }
-  
-  // close() {
-  //   this.modalService.dismissAll();
-  // }
-  // hi
-  
-
+    // Fetch logged-in user details when component initializes
+    this.userName = this.userService.getLoggedInUserName();
+  }
+  //LOGIN
   onLoginSubmit() {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
@@ -84,9 +96,10 @@ export class NavbarComponent {
           this.showLoginMessage = true;
           this.userName = res.user.name;
           this.userEmail = res.user.email;
-          this.userService.setLoggedInUserId(res.user.id);
-          this.userService.userName = this.userName
-          this.userService.userEmail = this.userEmail
+          this.userId = res.user.id;
+          this.userService.setLoggedInUserDetails(this.userName, this.userEmail,this.userId);
+          this.loginForm.reset();
+          this.hideModal('loginModal');
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -95,7 +108,7 @@ export class NavbarComponent {
             // Show error message for 5 seconds
             this.errorTimeout = setTimeout(() => {
               this.errorMessage = undefined;
-            }, 3000);
+            }, 5000);
           } else {
             this.errorMessage = 'An unexpected error occurred.';
           }
@@ -103,7 +116,6 @@ export class NavbarComponent {
       );
     }
   }
-
   //REGISTER
   onSignupSubmit() {
     this.registerForm.markAllAsTouched();
@@ -124,7 +136,17 @@ export class NavbarComponent {
             this.showSignupMessage = true;
             setTimeout(() => {
               this.showSignupMessage = false;
-            }, 3000);
+              const modal = document.getElementById('signupModal');
+              if (modal) {
+                modal.classList.remove('show');
+                modal.setAttribute('aria-modal', 'false');
+                modal.setAttribute('style', 'display: none');
+                const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+                if (modalBackdrop) {
+                  modalBackdrop.parentNode?.removeChild(modalBackdrop);
+                }
+              }
+            }, 2000);
             this.registerForm.reset();
           } else {
             this.errorMessage = 'User already exists with this email';
@@ -144,7 +166,6 @@ export class NavbarComponent {
 
     }
   }
-
   //FORGET PSD 
   onEmailSubmit() {
     this.forgotPsdForm.markAllAsTouched();
@@ -179,4 +200,17 @@ export class NavbarComponent {
     }
   }
 
+   // Helper method to hide modal
+   hideModal(modalId: string) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-modal', 'false');
+      modal.setAttribute('style', 'display: none');
+      const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+      if (modalBackdrop) {
+        modalBackdrop.parentNode?.removeChild(modalBackdrop);
+      }
+    }
+  }
 }

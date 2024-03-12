@@ -1,6 +1,6 @@
 <!-- <marquee class="marq">Atreyapuram Putharekulu</marquee> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%">
+  <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%" routerLink="/home" style="cursor: pointer;">
   <div class="container d-flex justify-content-between align-items-center">
     <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
     <!-- <div class="d-flex search">
@@ -8,24 +8,32 @@
       <button class="btn btn-light" (click)="search()">Search</button>
     </div> -->
     <div class="d-flex" style="margin-left: auto;">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" *ngIf="!userName">
+        <li class="nav-item ml-3">
+          <a class="nav-link"  data-toggle="modal" data-target="#loginModal">
+            <i class="bi bi-cart3"></i>
+          </a>
+        </li>
+        <li class="nav-item ml-5">
+          <a class="nav-link" data-toggle="modal" data-target="#loginModal">
+            <i class="bi bi-person-circle">&nbsp;Account</i>
+          </a>
+        </li> 
+      </ul>
+      <ul class="navbar-nav" *ngIf="userName">
         <li class="nav-item ml-3">
           <a class="nav-link" routerLink="/cart">
             <i class="bi bi-cart3"><span class="cart-count">{{ cartService.getCartItemCount()
                 }}</span></i>
           </a>
         </li>
-        <li class="nav-item ml-5" *ngIf="!userName">
-          <a class="nav-link" data-toggle="modal" data-target="#loginModal">
-            <i class="bi bi-person-circle"></i>
-          </a>
-        </li>
-        <li class="nav-item ml-5" *ngIf="userName">
+        <li class="nav-item ml-5">
           <a class="nav-link" routerLink="/account">
             <i class="bi bi-person-circle"></i>
             <span class="ms-1">{{ userName }}</span>
           </a>
         </li>
+
       </ul>
     </div>
   </div>

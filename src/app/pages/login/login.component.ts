@@ -140,7 +140,7 @@ export class LoginComponent implements OnInit{
       const apiUrl = environment.login;
       this.http.post(apiUrl, this.loginForm.value).subscribe({
         next: (res: any) => {
-          this.userService.setLoggedInUserId(res.user.id);
+          // this.userService.setLoggedInUserId(res.user.id);
           this.userService.userName = res.user.name;
           this.userService.userEmail = res.user.email;
 
