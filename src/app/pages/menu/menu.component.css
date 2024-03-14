@@ -1,6 +1,6 @@
 .wrap {
   display: flex;
-  justify: space-between;
+  justify-content: space-between;
   align-items: stretch;
   width: 100%;
   gap: 24px;
@@ -203,11 +203,15 @@
   cursor: pointer;
 }
 
+
 .continue {
-  display: inline-block;
+  background-color: #343a40;
+  border: 1px solid #343a40;
+  color: #fff;
+  border-radius: 0.6rem;
+  /* display: inline-block;
   padding: 10px 10px;
   margin-top: 20px;
-  /* text-align: center; */
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
@@ -215,7 +219,7 @@
   background-color: #3498db;
   border: 1px solid #3498db;
   border-radius: 1rem;
-  transition: background-color 0.4s ease;
+  transition: background-color 0.4s ease; */
 }
 
 .paynow {
@@ -227,6 +231,14 @@
   transition: background-color 0.4s ease;
   display: inline-block;
   /* Ensures the button doesn't take the full width */
+}
+
+.track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+
 }
 
 .text-center {
@@ -262,9 +274,6 @@
   margin-left: 1rem;
   /* Adjust the margin-left value as needed */
 }
-
-
-
 
 
 .gap {
@@ -305,44 +314,6 @@ body {
   }
 }
 
-/* Payments */
-.payment-card {
-  background: #ffffff;
-  padding: 20px;
-  margin-bottom: 25px;
-  border: 1px solid #e7eaec;
-}
-
-.payment-icon-big {
-  font-size: 60px;
-  color: #d1dade;
-}
-
-.payments-method.panel-group .panel+.panel {
-  margin-top: -1px;
-}
-
-.payments-method .panel-heading {
-  padding: 15px;
-}
-
-.payments-method .panel {
-  border-radius: 0;
-}
-
-.payments-method .panel-heading h5 {
-  margin-bottom: 5px;
-}
-
-.payments-method .panel-heading i {
-  font-size: 26px;
-}
-
-.payment-icon-big {
-  font-size: 60px !important;
-  color: #d1dade;
-}
-
 .form-control,
 .single-line {
   background-color: #FFFFFF;
@@ -368,65 +339,6 @@ body {
 .text-warning {
   color: #f8ac59;
 }
-
-.ibox {
-  clear: both;
-  margin-bottom: 25px;
-  margin-top: 0;
-  padding: 0;
-}
-
-.ibox.collapsed .ibox-content {
-  display: none;
-}
-
-.ibox.collapsed .fa.fa-chevron-up:before {
-  content: "\f078";
-}
-
-.ibox.collapsed .fa.fa-chevron-down:before {
-  content: "\f077";
-}
-
-.ibox:after,
-.ibox:before {
-  display: table;
-}
-
-.ibox-title {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  background-color: #ffffff;
-  border-color: #e7eaec;
-  border-image: none;
-  border-style: solid solid none;
-  border-width: 3px 0 0;
-  color: inherit;
-  margin-bottom: 0;
-  padding: 14px 15px 7px;
-  min-height: 48px;
-}
-
-.ibox-content {
-  background-color: #ffffff;
-  color: inherit;
-  padding: 15px 20px 20px 20px;
-  border-color: #e7eaec;
-  border-image: none;
-  border-style: solid solid none;
-  border-width: 1px 0;
-}
-
-.ibox-footer {
-  color: inherit;
-  border-top: 1px solid #e7eaec;
-  font-size: 90%;
-  background: #ffffff;
-  padding: 10px 15px;
-}
-
 .text-danger {
   color: #ed5565;
 }
@@ -438,7 +350,14 @@ body {
   background-color: #096aab;
 }
 
-.paused {
-  animation-play-state: paused;
+.success-icon {
+  color: #155724; /* Dark green text color */
 }
+
+
+.success-message span {
+  font-weight: bold; /* Bold text */
+  font-size: 16px; /* Font size of the message */
+}
+
 

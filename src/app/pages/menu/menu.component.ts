@@ -1,4 +1,4 @@
-import { Component,Output,EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CartService } from '../cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -27,6 +27,8 @@ export class MenuComponent {
   showAddressFields: boolean = false;
   showPaymentFields: boolean = false;
   selectedProduct: any = null;
+  paymentSuccess: boolean = false;
+  radioButtonSelected: boolean = false;
   //login,signup,fp
   showLoginMessage = false;
   showSignupMessage = false;
@@ -96,39 +98,53 @@ export class MenuComponent {
   ];
 
 
-  // openLoginModal() {
-  //   console.log('No userr ID')
-  //   this.openLoginModalEvent.emit();
-  // }
-
   addToCart(item: any) {
-    if (this.cartService.isItemInCart(item)) {
-      this.message = `Product is already in the cart`;
-      this.showMessage = true;
-      setTimeout(() => {
-        this.showMessage = false;
-      }, 2000);
-    } else {
-      this.cartService.addToCart(item);
-      this.selectedProduct = item;
-      console.log(this.selectedProduct, 'cart produccttttt')
-      this.message = `Product added to cart successfully`;
-      this.showMessage = true;
-      setTimeout(() => {
-        this.showMessage = false;
-      }, 2000);
+    this.userName = this.userService.getLoggedInUserName();
+    this.userId = this.userService.getLoggedInUserId();
+    console.log('userrnameee', this.userName)
+    if (this.userName) {
+      const userId = this.userId
+      console.log(this.userId,'jjjjjjjjjjjjj')
+      const postData = {
+        mobile: this.contactForm.get('phone')!.value,
+        email: this.contactForm.get('email')!.value,
+        user_id: userId
+      };
+      const apiUrl = environment.contactAddress;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+        }
+      );
+      // if (this.cartService.isItemInCart(item)) {
+      //   this.message = `Product is already in the cart`;
+      //   this.showMessage = true;
+      //   setTimeout(() => {
+      //     this.showMessage = false;
+      //   }, 2000);
+      // } else {
+      //   this.cartService.addToCart(item);
+      //   this.selectedProduct = item;
+      //   console.log(this.selectedProduct, 'cart produccttttt')
+      //   this.message = `Product added to cart successfully`;
+      //   this.showMessage = true;
+      //   setTimeout(() => {
+      //     this.showMessage = false;
+      //   }, 2000);
+      // }
     }
-  }
-  openCheckoutModal(){
-    this.checkedOut= true
+
+
   }
 
   addToOrder(item: any) {
     this.selectedProduct = item;
     this.loggedInUserId = this.userService.getLoggedInUserId();
-    this.userId= this.loggedInUserId
-    console.log(this.userId,'userrrridddddddddddddddd');
-    console.log(this.selectedProduct, 'buy nowww')
+    this.userId = this.loggedInUserId
+    this.userName = this.userService.getLoggedInUserName();
   }
 
   onContactFieldsSubmit() {
@@ -152,27 +168,25 @@ export class MenuComponent {
       );
     }
   }
- 
+
   onAddressFieldsSubmit() {
     this.addressForm.markAllAsTouched();
-    console.log('invalidd')
     if (this.addressForm.valid) {
       console.log('validddd')
       const userId = this.loggedInUserId
       const postData = {
-          name: this.addressForm.get('name')!.value,
-          mobile: this.addressForm.get('phone')!.value,
-          pincode: this.addressForm.get('pincode')!.value,
-          state: this.addressForm.get('state')!.value,
-          city: this.addressForm.get('city')!.value,
-          area: this.addressForm.get('area')!.value,
-          user_id: userId
+        name: this.addressForm.get('name')!.value,
+        mobile: this.addressForm.get('phone')!.value,
+        pincode: this.addressForm.get('pincode')!.value,
+        state: this.addressForm.get('state')!.value,
+        city: this.addressForm.get('city')!.value,
+        area: this.addressForm.get('area')!.value,
+        user_id: userId
       };
-      this.showPaymentFieldsOnClick()
-      this.showAdditionalFieldsOnClick()
       const apiUrl = environment.DeliveryAddress;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
+          this.showPaymentFieldsOnClick()
           console.log(res);
         },
         (err: any) => {
@@ -180,6 +194,21 @@ export class MenuComponent {
         }
       );
     }
+  }
+  onPaymentFieldsSubmit() {
+    if (this.radioButtonSelected) {
+      this.paymentSuccess = true;
+      setTimeout(() => {
+        this.paymentSuccess = false;
+      }, 5000);
+      this.showAddressFields = false;
+      this.showContactFields = false;
+      this.showPaymentFields = false;
+    }
+  }
+  selectRadioButton() {
+    this.radioButtonSelected = true;
+    console.log('Radio Button', this.radioButtonSelected)
   }
 
   showAdditionalFieldsOnClick() {
@@ -202,8 +231,8 @@ export class MenuComponent {
     this.showContactFields = false;
     this.showPaymentFields = false;
   }
-   //coupon field
-   toggleCouponField() {
+  //coupon field
+  toggleCouponField() {
     this.showCouponField = !this.showCouponField;
     const couponLabel = document.querySelector('label[for="showCoupon"]') as HTMLElement;
 
@@ -221,7 +250,7 @@ export class MenuComponent {
 
   //LOGIN,SIGNUP,FORGOT
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     // Subscribe to router events to detect navigation end
     this.router.events
       .pipe(
@@ -236,7 +265,7 @@ export class MenuComponent {
     this.userName = this.userService.getLoggedInUserName();
   }
 
-   onLoginSubmit() {
+  onLoginSubmit() {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')!.value;
@@ -253,7 +282,7 @@ export class MenuComponent {
           this.userName = res.user.name;
           this.userEmail = res.user.email;
           this.userId = res.user.id;
-          this.userService.setLoggedInUserDetails(this.userName, this.userEmail,this.userId);
+          this.userService.setLoggedInUserDetails(this.userName, this.userEmail, this.userId);
           this.loginForm.reset();
           this.hideModal('loginModal');
         },
@@ -356,8 +385,8 @@ export class MenuComponent {
     }
   }
 
-   // Helper method to hide modal
-   hideModal(modalId: string) {
+  // Helper method to hide modal
+  hideModal(modalId: string) {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.classList.remove('show');
