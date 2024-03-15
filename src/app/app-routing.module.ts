@@ -12,6 +12,10 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { PsdchangeComponent } from './psdchange/psdchange.component';
 import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
+import { SugarmadeComponent } from './sugarmade/sugarmade.component';
+import { JaggerymadeComponent } from './jaggerymade/jaggerymade.component';
+import { DryfruitsComponent } from './dryfruits/dryfruits.component';
+import { CombosavingComponent } from './combosaving/combosaving.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +31,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'menu', pathMatch: 'full' },
   { path: 'gallery', component: GalleryComponent },
   { path: 'reset-psd', component: PsdchangeComponent },
-  {path: 'account', component: AccountComponent}
+  {path: 'account', component: AccountComponent},
+  {path: 'sugarmade', component: SugarmadeComponent},
+  {path:'jaggerymade', component: JaggerymadeComponent},
+  {path: 'dryfruits', component: DryfruitsComponent},
+  {path: 'combosaving', component: CombosavingComponent}
 ];
 
 @NgModule({
