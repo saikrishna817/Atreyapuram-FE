@@ -8,11 +8,13 @@
         <p class="user-follow-info">(1 box of 10 pieces)</p>
         <p class="money">&#x20B9; {{item.price.toFixed(2)}}</p>
         <div class="gap">
-          <a class="button" (click)="addToCart(item)">Add to Cart</a>
-          <a class="button" *ngIf="userId" data-toggle="modal" data-target="#checkOutModal"
+          <a class="button" *ngIf="userName" (click)="addToCart(item)">Add to Cart</a>
+        <a class="button" *ngIf="!userName" data-toggle="modal" data-target="#loginModal"
+          >Add to Cart</a>
+          <a class="button" *ngIf="userName" data-toggle="modal" data-target="#checkOutModal"
             (click)="addToOrder(item)">Buy Now</a>
-          <a class="button" *ngIf="!userId" data-toggle="modal" data-target="#loginModal" 
-          (click)="addToOrder(item)">Buy Now</a>
+          <a class="button" *ngIf="!userName" data-toggle="modal" data-target="#loginModal"
+            (click)="addToOrder(item)">Buy Now</a>
         </div>
       </div>
     </div>
@@ -27,13 +29,13 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="buttonColor">
-        <div class="modal-header">
-          <h5 class="modal-title" id="loginModalLabel"><b>ATREYAPURAM PUTHAREKULU</b></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <div class="modal-header navbar-expand-lg navbar-light bg-dark">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="assets/img/logoATP2.jpg" alt="" width="25%">
         </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -88,7 +90,7 @@
                 <input type="checkbox" id="showCoupon" style="display: none;"> -->
                 <div class="gap">
                   <a class="mt-4">&#x20B9; {{ selectedProduct.price.toFixed(2) }}</a>
-                  <button class="continue" type="submit">Continue</button>
+                  <button class="btn float-end text-white bg-dark" type="submit">Continue</button>
                 </div>
               </form>
             </div>
@@ -114,35 +116,41 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Contact Number<span class="text-danger">&nbsp;*</span></label>
-                  <input type="text" formControlName="phone" id="phone" class="form-control form-control-lg thick"
-                    placeholder="Phone" [ngClass]="{
-                      'is-invalid': addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched,
-                      'border-red': addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched
-                    }" maxlength="10">
-                  <div *ngIf="addressForm.get('phone')?.hasError('required') && addressForm.get('phone')?.touched"
-                    class="text-danger">
-                    Mobile number is required
-                  </div>
-                  <div *ngIf="addressForm.get('phone')?.hasError('pattern') && addressForm.get('phone')?.touched"
-                    class="text-danger">
-                    Phone number should contain exactly 10 numeric characters
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="pincode">Pincode<span class="text-danger">&nbsp;*</span></label>
-                  <input type="text" formControlName="pincode" id="pincode" class="form-control form-control-lg thick"
-                    placeholder="Enter Pincode" [ngClass]="{
-                      'is-invalid': addressForm.get('pincode')?.invalid && addressForm.get('pincode')?.touched,
-                      'border-red': addressForm.get('pincode')?.invalid && addressForm.get('pincode')?.touched
-                    }" maxlength="6">
-                  <div *ngIf="addressForm.get('pincode')?.hasError('required') && addressForm.get('pincode')?.touched"
-                    class="text-danger">
-                    Pincode is required
-                  </div>
-                  <div *ngIf="addressForm.get('pincode')?.hasError('pattern') && addressForm.get('pincode')?.touched"
-                    class="text-danger">
-                    pincode should contain exactly 6 numeric characters
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="exampleInputEmail1">Contact Number<span class="text-danger">&nbsp;*</span></label>
+                      <input type="text" formControlName="phone" id="phone" class="form-control form-control-lg thick"
+                        placeholder="Phone" [ngClass]="{
+                            'is-invalid': addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched,
+                            'border-red': addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched
+                          }" maxlength="10">
+                      <div *ngIf="addressForm.get('phone')?.hasError('required') && addressForm.get('phone')?.touched"
+                        class="text-danger">
+                        Mobile number is required
+                      </div>
+                      <div *ngIf="addressForm.get('phone')?.hasError('pattern') && addressForm.get('phone')?.touched"
+                        class="text-danger">
+                        Phone number should contain exactly 10 numeric characters
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="pincode">Pincode<span class="text-danger">&nbsp;*</span></label>
+                      <input type="text" formControlName="pincode" id="pincode"
+                        class="form-control form-control-lg thick" placeholder="Enter Pincode" [ngClass]="{
+                            'is-invalid': addressForm.get('pincode')?.invalid && addressForm.get('pincode')?.touched,
+                            'border-red': addressForm.get('pincode')?.invalid && addressForm.get('pincode')?.touched
+                          }" maxlength="6">
+                      <div
+                        *ngIf="addressForm.get('pincode')?.hasError('required') && addressForm.get('pincode')?.touched"
+                        class="text-danger">
+                        Pincode is required
+                      </div>
+                      <div
+                        *ngIf="addressForm.get('pincode')?.hasError('pattern') && addressForm.get('pincode')?.touched"
+                        class="text-danger">
+                        pincode should contain exactly 6 numeric characters
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -206,213 +214,12 @@
                 </label>
                 <div class="gap">
                   <a class="mt-4">&#x20B9;{{ selectedProduct.price.toFixed(2) }}</a>
-                  <button class="continue" type="submit">Continue</button>
+                  <button class="btn text-white bg-dark mt-3" type="submit">Continue</button>
                 </div>
               </form>
             </div>
           </div>
-          <div class="col-md-12" *ngIf="showPaymentFields">
-            <span class="back-arrow ms-3" (click)="goToAddressFields()"><img src="assets/img/backarrow.png"
-                alt="HTML tutorial" width="20px" height="20px">&nbsp;&nbsp;</span><b>Back</b>
-            <h5 class="text-center mt-3 mb-4"><b><i>Payments</i></b></h5>
-            <div class="col-md-12">
-              <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-              <div class="container">
-                <div class="wrapper wrapper-content animated fadeInRight">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <h6><b>Pay with UPI QR</b></h6>
-                      <div class="payment-card">
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <img src="assets/img/qrcode.webp" height="90%" width="100%">
-                          </div>
-                          <div class="col-sm-6">
-                            <small>
-                              Scan the QR using any UPI app on your phone.
-                            </small>
-                            <div class="payment-icons">
-                              <img src="assets/img/phonepay.webp" alt="PhonePe" class="payment-icon" height="25%"
-                                width="20%">
-                              <img src="assets/img/gpay.avif" alt="GPay" class="payment-icon" height="40%" width="50%">
-                              <img src="assets/img/paytm.webp" alt="Paytm" class="payment-icon" height="40%"
-                                width="30%">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="ibox mt-2">
-                        <h6><b>Payment Method</b></h6>
-                        <div class="ibox-content">
-                          <div class="panel-group payments-method" id="accordion">
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <div class="pull-right">
-                                  <i class="fa fa-cc-paypal text-success"></i>
-                                </div>
-                                <h5 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">PayPal</a>
-                                </h5>
-                              </div>
-                              <div id="collapseOne" class="panel-collapse collapse">
-                                <div class="panel-body ms-3">
-
-                                  <div class="row">
-                                    <div class="col-md-10">
-                                      <h5>Summary</h5>
-                                      <strong>Product:</strong>{{ selectedProduct.name }} <br>
-                                      <strong>Price:</strong>: <span class="text-navy">{{
-                                        selectedProduct.price.toFixed(2) }}</span>
-
-                                      <p class="m-t">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipisicing elit.
-                                      </p>
-                                      <a class="btn btn-success">
-                                        <i class="fa fa-cc-paypal">
-                                          Purchase via PayPal
-                                        </i>
-                                      </a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <div class="pull-right">
-                                  <i class="fa fa-cc-amex text-success"></i>
-                                  <i class="fa fa-cc-mastercard text-warning"></i>
-                                  <i class="fa fa-cc-discover text-danger"></i>
-                                </div>
-                                <h5 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Credit
-                                    Card</a>
-                                </h5>
-                              </div>
-                              <div id="collapseTwo" class="panel-collapse collapse in">
-                                <div class="panel-body ms-3">
-
-                                  <div class="row">
-                                    <div class="col-md-4">
-                                      <h5>Summary</h5>
-                                      <strong>Product:</strong>{{ selectedProduct.name }} <br>
-                                      <strong>Price:</strong>: <span class="text-navy">{{
-                                        selectedProduct.price.toFixed(2) }}</span>
-
-                                      <p class="m-t">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipisicing elit, sed do
-                                        eiusmod tempor incididunt ut labore
-                                        et dolore magna aliqua.
-
-                                      </p>
-                                    </div>
-                                    <div class="col-md-8">
-                                      <form role="form" id="payment-form">
-                                        <div class="row">
-                                          <div class="col-xs-12">
-                                            <div class="form-group">
-                                              <label>CARD
-                                                NUMBER</label>
-                                              <div class="input-group">
-                                                <input type="text" class="form-control" name="Number"
-                                                  placeholder="Valid Card Number" required="">
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-xs-7 col-md-7">
-                                            <div class="form-group">
-                                              <label>EXPIRATION
-                                                DATE</label>
-                                              <input type="text" class="form-control" name="Expiry"
-                                                placeholder="MM / YY" required="">
-                                            </div>
-                                          </div>
-                                          <div class="col-xs-5 col-md-5 pull-right">
-                                            <div class="form-group">
-                                              <label>CV CODE</label>
-                                              <input type="text" class="form-control" name="CVC" placeholder="CVC"
-                                                required="">
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-xs-12">
-                                            <div class="form-group">
-                                              <label>NAME OF
-                                                CARD</label>
-                                              <input type="text" class="form-control" name="nameCard"
-                                                placeholder="NAME AND SURNAME">
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-xs-12">
-                                            <button class="btn btn-primary" type="submit">Make a
-                                              payment!</button>
-                                          </div>
-                                        </div>
-                                      </form>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <h5 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsethree">Cash On
-                                    Delivery</a>
-                                </h5>
-                              </div>
-                              <div id="collapsethree" class="panel-collapse collapse">
-                                <div class="panel-body ms-3">
-
-                                  <div class="row">
-                                    <div class="col-md-10">
-                                      <h5>Summary</h5>
-                                      <strong>Product:</strong>{{ selectedProduct}}<br>
-                                      <strong>Price:</strong>: <span class="text-navy">{{
-                                        selectedProduct.price.toFixed(2) }}</span>
-
-                                      <p class="m-t">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipisicing elit.
-                                      </p>
-                                      <div class="form-check">
-                                        <input type="radio" id="cashOnDelivery" name="paymentMethod"
-                                          class="form-check-input">
-                                        <label for="cashOnDelivery" class="form-check-label">Cash on
-                                          Delivery</label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 text-center">
-                      <button class="paynow" (click)="showAdditionalFieldsOnClick()">Pay
-                        Now</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 border-left" *ngIf="selectedProduct && !showPaymentFields">
+          <div class="col-md-6 border-left" *ngIf="selectedProduct && !showPaymentFields && !paymentSuccess">
             <h5 class="text-center mt-3 mb-3"><b><i>Order Summary</i></b></h5>
             <div class="row">
               <div class="col-md-12">
@@ -442,6 +249,56 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="col-md-12" *ngIf="showPaymentFields">
+          <span class="back-arrow ms-3" (click)="goToAddressFields()"><img src="assets/img/backarrow.png"
+              alt="HTML tutorial" width="20px" height="20px">&nbsp;&nbsp;</span><b>Back</b>
+          <h5 class="text-center"><b><i>Payment</i></b></h5>
+          <div class="col-md-12">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+            <div class="container">
+              <div class="wrapper wrapper-content animated fadeInRight">
+                <h5 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsethree">Cash On
+                    Delivery</a>
+                </h5>
+                <div class="row">
+                  <div class="col-md-10">
+                    <h5>Summary</h5>
+                    <strong>Product:</strong>{{ selectedProduct.name }}<br>
+                    <strong>Price:</strong>: <span class="text-navy">{{
+                      selectedProduct.price.toFixed(2) }}</span>
+
+                    <p class="m-t">
+                      Lorem ipsum dolor sit amet,
+                      consectetur adipisicing elit.
+                    </p>
+                    <div class="form-check">
+                      <input type="radio" id="cashOnDelivery" name="paymentMethod" class="form-check-input"
+                        (change)="selectRadioButton()">
+                      <label for="cashOnDelivery" class="form-check-label">Cash on
+                        Delivery</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 text-center mt-3">
+                    <button class="btn text-white bg-dark text-center mt-3" (click)="onPaymentFieldsSubmit()" [disabled]="!radioButtonSelected">Place
+                      Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12" *ngIf="paymentSuccess" class="text-center">
+          <div class="success-icon">
+            <i class="fas fa-check-circle fa-5x mt-3 mb-4"></i>
+          </div>
+          <h6>Hey {{userName}}</h6>
+          <h5><b>Order has been placed successfully!</b></h5>
+          <h6>We'll send you a shipping confirmation email<br> as soon as your order ships.</h6>
+          <button class="btn text-white bg-dark text-center mt-3">Track your order</button>
         </div>
       </div>
     </div>
