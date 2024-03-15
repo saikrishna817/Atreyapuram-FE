@@ -24,6 +24,10 @@ import { PsdchangeComponent } from './psdchange/psdchange.component';
 import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { JaggerymadeComponent } from './jaggerymade/jaggerymade.component';
+import { SugarmadeComponent } from './sugarmade/sugarmade.component';
+import { DryfruitsComponent } from './dryfruits/dryfruits.component';
+import { CombosavingComponent } from './combosaving/combosaving.component';
 
 
 
@@ -45,6 +49,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     PsdchangeComponent,
     AccountComponent,
     RegisterComponent,
+    JaggerymadeComponent,
+    SugarmadeComponent,
+    DryfruitsComponent,
+    CombosavingComponent,
     
     
   ],
