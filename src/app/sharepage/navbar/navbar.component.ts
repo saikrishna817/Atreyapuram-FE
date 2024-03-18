@@ -200,17 +200,52 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // Helper method to hide modal
+ 
+  //  hideModal(modalId: string) {
+  //   const modal = document.getElementById(modalId);
+  //   if (modal) {
+  //     modal.classList.remove('show');
+  //     modal.setAttribute('aria-modal', 'false');
+  //     modal.setAttribute('style', 'display: none');
+  //     const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+  //     if (modalBackdrop) {
+  //       modalBackdrop.parentNode?.removeChild(modalBackdrop);
+  //     }
+  //   }
+  // }
+
+
+
   hideModal(modalId: string) {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.classList.remove('show');
       modal.setAttribute('aria-modal', 'false');
       modal.setAttribute('style', 'display: none');
-      const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
-      if (modalBackdrop) {
-        modalBackdrop.parentNode?.removeChild(modalBackdrop);
-      }
     }
+  
+    // Remove the modal-open class from body
+    document.body.classList.remove('modal-open');
+  
+    // Remove the modal backdrop if exists
+    const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+    if (modalBackdrop) {
+      modalBackdrop.classList.remove('show');
+      setTimeout(() => {
+        modalBackdrop.parentNode?.removeChild(modalBackdrop);
+      }, 300); // Adjust the delay as needed to match your modal transition
+    }
+  
+    // Reset body padding-right
+    document.body.style.paddingRight = '0';
+  
+    // Restore body scroll behavior
+    document.body.style.overflow = 'auto';
   }
+  
+
 }
+
+
+
+  // Helper method to hide modal
