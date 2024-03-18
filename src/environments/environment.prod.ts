@@ -9,6 +9,7 @@ export const environment = {
     products: 'http://localhost:8008/user/products',
     addCart:'http://localhost:8008/user/cart',
     getCart:'http://localhost:8008/user/getcart',
+    deleteCartItem:'http://localhost:8008/user/cart',
 
 
     contactAddress: 'http://localhost:8008/user/contact',

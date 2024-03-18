@@ -1,6 +1,9 @@
 // cart.service.ts
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from '../../../environments/environment.prod';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserService } from '../../sharepage/navbar/navbar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,21 +11,26 @@ import { Subject } from 'rxjs';
 export class CartService {
 
   private cartItems: any[] = [];
+  productId: any;
+  userId: any;
   items: any[] = [];
   private cartCountSubject = new Subject<number>();
   cartCount$ = this.cartCountSubject.asObservable();
 
-  constructor() {
+  constructor(private http: HttpClient,
+    private userService: UserService,) {
     // Load cart items from localStorage when the service is instantiated
     this.loadCartItems();
   }
 
   getCartItems() {
+    console.log(this.cartItems,'itttttttttttttttttttt')
     return this.cartItems;
   }
 
   //Products count
   getCartItemCount(): number {
+    console.log(this.cartItems.length,'llllllllllllllllllllllll')
     return this.cartItems.length;
   }
 
@@ -38,17 +46,47 @@ export class CartService {
   }
 
   //Delete from cart
-  removeFromCart(index: number) {
-    this.cartItems.splice(index, 1);
-    this.saveCartItems();
-    this.updateCartCount();
+  // removeFromCart(index: number) {
+  //   this.cartItems.splice(index, 1);
+  //   this.saveCartItems();
+  //   this.updateCartCount();
+  // }
+  removeFromCart(item: any) {
+    console.log(item, 'itemmmmmm');
+    const productId = item.ProductID;
+    const userId = this.userService.getLoggedInUserId();
+    console.log(productId, userId, 'pu iddddsss')
+    const postData = {
+      filter: {
+        userid: userId,
+        product: productId
+      }
+    };
+    const apiUrl = environment.deleteCartItem;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: postData // Include payload as the body
+    };
+    this.http.request('delete', apiUrl, httpOptions).subscribe(
+      (res: any) => {
+        console.log(res);
+      },
+      (err: any) => {
+        console.error(err, 'errorrr');
+      }
+    );
+    
   }
+
+
 
   //update count
   private updateCartCount() {
     this.cartCountSubject.next(this.getCartItemCount());
   }
- 
+
   private loadCartItems() {
     if (typeof localStorage !== 'undefined') {
       const storedItems = localStorage.getItem('cartItems');
@@ -63,6 +101,6 @@ export class CartService {
   }
   //Check if item in cart
   isItemInCart(item: any): boolean {
-    return this.cartItems.some(cartItem => cartItem.name === item.name);
+    return this.cartItems.some(cartItem => cartItem.ProductName === item.ProductName);
   }
 }
