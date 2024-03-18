@@ -14,8 +14,8 @@
         <tbody>
             <tr *ngFor="let item of cartItems; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ item.name }}</td>
-                <td>&#x20B9;{{ item.price }}</td>
+                <td>{{ item.ProductName }}</td>
+                <td>&#x20B9;{{ item.Price }}</td>
                 <td style="position: relative;">
                     <div class="quantity-control d-flex align-items-center">
                         <button class="btn btn-secondary" (click)="decrementQuantity(item)">

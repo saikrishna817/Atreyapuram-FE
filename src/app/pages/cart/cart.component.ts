@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserService } from '../../sharepage/navbar/navbar.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs';
 export class CartComponent implements OnInit {
 
   cartItems: any[];
+  userId: any;
   //checkout component fields
   addressForm: FormGroup;
   contactForm: FormGroup;
@@ -23,32 +25,59 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService,
     private formBuilder: FormBuilder,
-    private http: HttpClient) {
-      this.addressForm = this.formBuilder.group({
-        name: ['',  [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
-        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-        pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
-        state: ['', Validators.required],
-        city: ['', Validators.required],
-        apmt: ['', Validators.required],
-        area: ['', Validators.required],
-      });
-  
-      this.contactForm = this.formBuilder.group({
-        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-        email: ['', [Validators.required, Validators.email]],
-        couponCode: ['']
-      });
+    private http: HttpClient,
+    private userService: UserService,) {
+    this.addressForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      apmt: ['', Validators.required],
+      area: ['', Validators.required],
+    });
+
+    this.contactForm = this.formBuilder.group({
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      couponCode: ['']
+    });
     this.cartItems = this.cartService.getCartItems();
   }
 
   ngOnInit() {
+    this.getCartItems()
     this.cartItems.forEach(item => {
       if (!item.quantity || !item.total) {
         item.quantity = 1;
         item.total = item.quantity * item.price;
       }
     });
+  }
+
+  //Get Call for cart items
+  getCartItems() {
+    this.userId = this.userService.getLoggedInUserId();
+    console.log('userrnameee', this.userId)
+    if (this.userId) {
+      const userId = this.userId
+      console.log(this.userId, 'jjjjjjjjjjjjj')
+      const postData = {
+        userId: userId,
+      };
+      const apiUrl = environment.getCart;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          this.cartItems = res.products
+          console.log(this.cartItems, 'carttttuuhhhh');
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+        }
+      );
+    }
+
+
   }
 
   incrementQuantity(item: any) {
@@ -75,7 +104,7 @@ export class CartComponent implements OnInit {
 
   // checkout component code
 
-  
+
   onContactFieldsSubmit() {
     this.contactForm.markAllAsTouched();
     if (this.contactForm.valid) {
