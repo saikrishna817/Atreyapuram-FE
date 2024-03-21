@@ -1,16 +1,15 @@
 <h3 class="mt-5 text-center"><b>Our Varieties of Putharekulu</b></h3>
 <div class="container mt-5">
   <div class="row">
-    <div *ngFor="let item of items" class="col-sm-3 mb-4">
+    <div *ngFor="let item of products" class="col-sm-3 mb-4">
       <div class="card box h-100">
-        <img class="box-image" [src]="item.imageSrc" alt="{{item.name}}">
-        <h6 class="box-title mt-3"><b>{{item.name}}</b></h6>
+        <img class="box-image" [src]="item.Image" alt="{{item.name}}">
+        <h6 class="box-title mt-3"><b>{{item.ProductName}}</b></h6>
         <p class="user-follow-info">(1 box of 10 pieces)</p>
-        <p class="money">&#x20B9; {{item.price.toFixed(2)}}</p>
+        <p class="money">&#x20B9; {{item.Price}}</p>
         <div class="gap">
           <a class="button" *ngIf="userName" (click)="addToCart(item)">Add to Cart</a>
-        <a class="button" *ngIf="!userName" data-toggle="modal" data-target="#loginModal"
-          >Add to Cart</a>
+          <a class="button" *ngIf="!userName" data-toggle="modal" data-target="#loginModal">Add to Cart</a>
           <a class="button" *ngIf="userName" data-toggle="modal" data-target="#checkOutModal"
             (click)="addToOrder(item)">Buy Now</a>
           <a class="button" *ngIf="!userName" data-toggle="modal" data-target="#loginModal"
@@ -89,7 +88,7 @@
                   coupon?</label>
                 <input type="checkbox" id="showCoupon" style="display: none;"> -->
                 <div class="gap">
-                  <a class="mt-4">&#x20B9; {{ selectedProduct.price.toFixed(2) }}</a>
+                  <a class="mt-4">&#x20B9; {{ selectedProduct.Price }}</a>
                   <button class="btn float-end text-white bg-dark" type="submit">Continue</button>
                 </div>
               </form>
@@ -213,7 +212,7 @@
                   <input type="checkbox" name="remember" class="mr-2" checked>Save Address
                 </label>
                 <div class="gap">
-                  <a class="mt-4">&#x20B9;{{ selectedProduct.price.toFixed(2) }}</a>
+                  <a class="mt-4">&#x20B9;{{ selectedProduct.Price }}</a>
                   <button class="btn text-white bg-dark mt-3" type="submit">Continue</button>
                 </div>
               </form>
@@ -223,10 +222,8 @@
             <h5 class="text-center mt-3 mb-3"><b><i>Order Summary</i></b></h5>
             <div class="row">
               <div class="col-md-12">
-                <strong>Product:</strong>: {{ selectedProduct.name }} <br>
-                <strong>Price:</strong>: <span class="text-navy">&#x20B9; {{ selectedProduct.price.toFixed(2)
-                  }}</span>
-
+                <strong>Product:</strong>: {{ selectedProduct.ProductName }} <br>
+                <strong>Price:</strong>: <span class="text-navy">&#x20B9; {{ selectedProduct.Price}}</span>
                 <p class="m-t">
                   Lorem ipsum dolor sit amet,
                   consectetur adipisicing elit.
@@ -234,7 +231,7 @@
                 <div class="borderTopBottom">
                   <div class="total-amount  text-muted">
                     <span class="label">Total Price (incl. taxes)</span>
-                    <a class="amount">&#x20B9; {{ selectedProduct.price.toFixed(2) }}</a>
+                    <a class="amount">&#x20B9; {{ selectedProduct.Price }}</a>
                   </div>
 
                   <div class="total-amount text-muted mt-2">
@@ -244,14 +241,14 @@
                 </div>
                 <div class="total-amount mt-3">
                   <span class="label">Total Amount</span>
-                  <a class="amount">&#x20B9; {{ selectedProduct.price.toFixed(2) }}</a>
+                  <a class="amount">&#x20B9; {{ selectedProduct.Price }}</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-12" *ngIf="showPaymentFields">
-          <span class="back-arrow ms-3" (click)="goToAddressFields()"><img src="assets/img/backarrow.png"
+          <span class="back-arrow ms-3" (click)="showAdditionalFieldsOnClick()"><img src="assets/img/backarrow.png"
               alt="HTML tutorial" width="20px" height="20px">&nbsp;&nbsp;</span><b>Back</b>
           <h5 class="text-center"><b><i>Payment</i></b></h5>
           <div class="col-md-12">
@@ -265,9 +262,9 @@
                 <div class="row">
                   <div class="col-md-10">
                     <h5>Summary</h5>
-                    <strong>Product:</strong>{{ selectedProduct.name }}<br>
+                    <strong>Product:</strong>{{ selectedProduct.ProductName }}<br>
                     <strong>Price:</strong>: <span class="text-navy">{{
-                      selectedProduct.price.toFixed(2) }}</span>
+                      selectedProduct.Price }}</span>
 
                     <p class="m-t">
                       Lorem ipsum dolor sit amet,
@@ -283,7 +280,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 text-center mt-3">
-                    <button class="btn text-white bg-dark text-center mt-3" (click)="onPaymentFieldsSubmit()" [disabled]="!radioButtonSelected">Place
+                    <button class="btn text-white bg-dark text-center mt-3" (click)="placeOrder()"
+                      [disabled]="!radioButtonSelected">Place
                       Order</button>
                   </div>
                 </div>

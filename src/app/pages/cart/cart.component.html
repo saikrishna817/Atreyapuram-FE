@@ -1,5 +1,5 @@
 <h2 class="text-center mt-5"><b>Shopping Cart</b></h2>
-<div class="mt-5 mb-5" style="display: flex; flex-direction: column;">
+<div class="mt-5 mb-5" style="display: flex; flex-direction: column;" *ngIf="cartProducts && cartProducts.length > 0">
     <table class="table table-responsive" style="margin-left: 2rem;">
         <thead>
             <tr>
@@ -12,10 +12,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of cartItems; let i = index">
+            <tr *ngFor="let item of cartProducts; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ item.name }}</td>
-                <td>&#x20B9;{{ item.price }}</td>
+                <td>{{ item.ProductName }}</td>
+                <td>&#x20B9;{{ item.Price }}</td>
                 <td style="position: relative;">
                     <div class="quantity-control d-flex align-items-center">
                         <button class="btn btn-secondary" (click)="decrementQuantity(item)">
@@ -29,7 +29,7 @@
                 </td>
                 <td>&#x20B9;{{ item.total }}</td>
                 <td>
-                    <button class="btn btn-danger" (click)="removeFromCart(i)">
+                    <button class="btn btn-danger" (click)="removeFromCart(item)">
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>
@@ -37,6 +37,9 @@
         </tbody>
     </table>
     <button class="btn buttonColor mt-3 me-5 align-self-end" data-toggle="modal" data-target=".bd-example-modal-lg">CHECK OUT</button>
+</div>
+<div *ngIf="!cartProducts || cartProducts.length === 0" class="empty-cart-message">
+  <h4>Your Cart is empty</h4>
 </div>
 
 

@@ -19,6 +19,7 @@ export class MenuComponent {
   showMessage: boolean = false;
   message: string = '';
   cartItems: any[];
+  products: any;
   addressForm: FormGroup;
   contactForm: FormGroup;
   showCouponField = false;
@@ -41,6 +42,7 @@ export class MenuComponent {
   userName: string = '';
   userEmail: string = '';
   userId: any;
+  productId: any;
   checkedOut = false;
 
   constructor(
@@ -82,66 +84,65 @@ export class MenuComponent {
     this.cartItems = this.cartService.getCartItems();
   }
 
-  items: any[] = [
-    { name: 'Jaggery', price: 199.00, imageSrc: 'assets/img/jaggerry.jpg' },
-    { name: 'Sugar', price: 99.00, imageSrc: 'assets/img/sugar.webp' },
-    { name: 'Jaggery Dry Fruit', price: 249.00, imageSrc: 'assets/img/dryfruit.webp' },
-    { name: 'Jaggery Kaju Badam', price: 399.00, imageSrc: 'assets/img/jagkajubadam.webp' },
-    { name: 'Sugar Kaju Badam', price: 299.00, imageSrc: 'assets/img/kajubadam.webp' },
-    { name: 'Sugar Free Ghee', price: 149.00, imageSrc: 'assets/img/sugarfree.webp' },
-    { name: 'Jaggery Dry Fruit Ghee', price: 279.00, imageSrc: 'assets/img/jaggerydryghee.jpg' },
-    { name: 'Sugar Dry Fruit', price: 189.00, imageSrc: 'assets/img/sugardry.webp' },
-    { name: 'Sugar Kaju Badam Pista', price: 449.00, imageSrc: 'assets/img/kajupista.webp' },
-    { name: 'Sugar Free Dry Fruits', price: 249.00, imageSrc: 'assets/img/sugarfreedry.avif' },
-    { name: 'Kova Dry Fruit', price: 499.00, imageSrc: 'assets/img/kovadry.webp' },
-    { name: 'Jaggery Kaju Badam Pista', price: 599.00, imageSrc: 'assets/img/bellamkajupista.jpg' },
-  ];
+  ngOnInit(): void {
+    this.getProducts()
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+        this.userName = this.userService.getLoggedInUserName();
+      });
+    this.userName = this.userService.getLoggedInUserName();
+  }
 
 
+  //Get Call for products
+  getProducts() {
+    const apiUrl = environment.products;
+    this.http.get(apiUrl).subscribe(
+      (res: any) => {
+        this.products = res.products
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    );
+  }
+
+  //Add to Cart
   addToCart(item: any) {
+    this.productId = item.ProductID
     this.userName = this.userService.getLoggedInUserName();
     this.userId = this.userService.getLoggedInUserId();
-    console.log('userrnameee', this.userName)
     if (this.userName) {
       const userId = this.userId
-      console.log(this.userId,'jjjjjjjjjjjjj')
       const postData = {
-        mobile: this.contactForm.get('phone')!.value,
-        email: this.contactForm.get('email')!.value,
-        user_id: userId
+        userid: userId,
+        product: this.productId
       };
-      const apiUrl = environment.contactAddress;
+      const apiUrl = environment.addCart;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           console.log(res);
+          this.showMessage = true;
+          this.message = "Product added to cart successfully";
+          setTimeout(() => {
+            this.showMessage = false;
+          }, 3000);
         },
         (err: any) => {
           console.error(err, 'errorrr');
         }
-      );
-      // if (this.cartService.isItemInCart(item)) {
-      //   this.message = `Product is already in the cart`;
-      //   this.showMessage = true;
-      //   setTimeout(() => {
-      //     this.showMessage = false;
-      //   }, 2000);
-      // } else {
-      //   this.cartService.addToCart(item);
-      //   this.selectedProduct = item;
-      //   console.log(this.selectedProduct, 'cart produccttttt')
-      //   this.message = `Product added to cart successfully`;
-      //   this.showMessage = true;
-      //   setTimeout(() => {
-      //     this.showMessage = false;
-      //   }, 2000);
-      // }
+      )
     }
-
 
   }
 
   addToOrder(item: any) {
     this.selectedProduct = item;
+    this.productId =item.ProductID
+    console.log(this.productId,'selected product id')
     this.loggedInUserId = this.userService.getLoggedInUserId();
     this.userId = this.loggedInUserId
     this.userName = this.userService.getLoggedInUserName();
@@ -150,61 +151,57 @@ export class MenuComponent {
   onContactFieldsSubmit() {
     this.contactForm.markAllAsTouched();
     if (this.contactForm.valid) {
-      const userId = this.loggedInUserId
-      const postData = {
-        mobile: this.contactForm.get('phone')!.value,
-        email: this.contactForm.get('email')!.value,
-        user_id: userId
-      };
-      this.showAdditionalFieldsOnClick()
-      const apiUrl = environment.contactAddress;
-      this.http.post(apiUrl, postData).subscribe(
-        (res: any) => {
-          console.log(res);
-        },
-        (err: any) => {
-          console.error(err, 'errorrr');
-        }
-      );
+     this.showAdditionalFieldsOnClick()
     }
   }
 
   onAddressFieldsSubmit() {
     this.addressForm.markAllAsTouched();
     if (this.addressForm.valid) {
-      console.log('validddd')
+      this.showPaymentFieldsOnClick()
+    }
+  }
+  placeOrder() {
+    if (this.radioButtonSelected) {
       const userId = this.loggedInUserId
+      const productID = this.productId
+      console.log(userId,'User Idddddd')
+      console.log(productID,'Product Idddddd')
       const postData = {
-        name: this.addressForm.get('name')!.value,
-        mobile: this.addressForm.get('phone')!.value,
-        pincode: this.addressForm.get('pincode')!.value,
-        state: this.addressForm.get('state')!.value,
-        city: this.addressForm.get('city')!.value,
-        area: this.addressForm.get('area')!.value,
-        user_id: userId
+        contact: {
+          mobile: this.contactForm.get('phone')!.value,
+          email: this.contactForm.get('email')!.value,
+        },
+        address:{
+          name: this.addressForm.get('name')!.value,
+          mobile: this.addressForm.get('phone')!.value,
+          pincode: this.addressForm.get('pincode')!.value,
+          state: this.addressForm.get('state')!.value,
+          city: this.addressForm.get('city')!.value,
+          area: this.addressForm.get('area')!.value,
+          user_id: userId,
+          product_id:productID
+        }
       };
-      const apiUrl = environment.DeliveryAddress;
+      const apiUrl = environment.placeOrder;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          this.showPaymentFieldsOnClick()
           console.log(res);
+          this.paymentSuccess = true;
+          setTimeout(() => {
+            this.paymentSuccess = false;
+          }, 5000);
+          this.hideModal('checkOutModal');
         },
         (err: any) => {
           console.error(err, 'errorrr');
         }
       );
+      // this.showAddressFields = false;
+      // this.showContactFields = false;
+      // this.showPaymentFields = false;
     }
-  }
-  onPaymentFieldsSubmit() {
-    if (this.radioButtonSelected) {
-      this.paymentSuccess = true;
-      setTimeout(() => {
-        this.paymentSuccess = false;
-      }, 5000);
-      this.showAddressFields = false;
-      this.showContactFields = false;
-      this.showPaymentFields = false;
-    }
+   
   }
   selectRadioButton() {
     this.radioButtonSelected = true;
@@ -226,11 +223,7 @@ export class MenuComponent {
     this.showContactFields = true;
     this.showPaymentFields = false;
   }
-  goToAddressFields() {
-    this.showAddressFields = true;
-    this.showContactFields = false;
-    this.showPaymentFields = false;
-  }
+  
   //coupon field
   toggleCouponField() {
     this.showCouponField = !this.showCouponField;
@@ -250,20 +243,6 @@ export class MenuComponent {
 
   //LOGIN,SIGNUP,FORGOT
 
-  ngOnInit(): void {
-    // Subscribe to router events to detect navigation end
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd)
-      )
-      .subscribe(() => {
-        // Fetch logged-in user details when navigation ends
-        this.userName = this.userService.getLoggedInUserName();
-      });
-
-    // Fetch logged-in user details when component initializes
-    this.userName = this.userService.getLoggedInUserName();
-  }
 
   onLoginSubmit() {
     this.loginForm.markAllAsTouched();

@@ -97,7 +97,7 @@ export class NavbarComponent implements OnInit {
           this.userName = res.user.name;
           this.userEmail = res.user.email;
           this.userId = res.user.id;
-          this.userService.setLoggedInUserDetails(this.userName, this.userEmail,this.userId);
+          this.userService.setLoggedInUserDetails(this.userName, this.userEmail, this.userId);
           this.loginForm.reset();
           this.hideModal('loginModal');
         },

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserService } from '../../sharepage/navbar/navbar.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +14,9 @@ import { Observable } from 'rxjs';
 export class CartComponent implements OnInit {
 
   cartItems: any[];
+  cartProducts: any[] = [];
+  duplicateItemIds:any
+  userId: any;
   //checkout component fields
   addressForm: FormGroup;
   contactForm: FormGroup;
@@ -23,59 +27,95 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService,
     private formBuilder: FormBuilder,
-    private http: HttpClient) {
-      this.addressForm = this.formBuilder.group({
-        name: ['',  [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
-        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-        pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
-        state: ['', Validators.required],
-        city: ['', Validators.required],
-        apmt: ['', Validators.required],
-        area: ['', Validators.required],
-      });
-  
-      this.contactForm = this.formBuilder.group({
-        phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-        email: ['', [Validators.required, Validators.email]],
-        couponCode: ['']
-      });
+    private http: HttpClient,
+    private userService: UserService,) {
+    this.addressForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      pincode: ['', [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      apmt: ['', Validators.required],
+      area: ['', Validators.required],
+    });
+
+    this.contactForm = this.formBuilder.group({
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      couponCode: ['']
+    });
     this.cartItems = this.cartService.getCartItems();
   }
 
   ngOnInit() {
-    this.cartItems.forEach(item => {
-      if (!item.quantity || !item.total) {
-        item.quantity = 1;
-        item.total = item.quantity * item.price;
-      }
-    });
+    this.getCartItems()
+    // this.cartItems.forEach(item => {
+    //   if (!item.quantity || !item.total) {
+    //     item.quantity = 1;
+    //     item.total = item.quantity * item.price;
+    //   }
+    // });
+  }
+
+  //Get Call for cart items
+  getCartItems() {
+    this.userId = this.userService.getLoggedInUserId();
+    if (this.userId) {
+      const userId = this.userId
+      const postData = {
+        userId: userId,
+      };
+      const apiUrl = environment.getCart;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          this.cartItems = res.products;
+          this.duplicateItemIds = res.items;
+          // Calculate total for each item
+          for (let product of this.cartItems) {
+            let obj: any = { ...product };
+            let duplicates = this.duplicateItemIds.filter((x: any) => x === product.ProductID);
+            obj.quantity = duplicates.length;
+            obj.total = parseFloat(product.Price) * obj.quantity; // Calculate total price
+            this.cartProducts.push(obj);
+          }
+          console.log(this.cartProducts,'carttt productss')
+
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+        }
+      );
+    }
+
+
   }
 
   incrementQuantity(item: any) {
     item.quantity++;
     this.updateTotal(item);
-    this.cartService.saveCartItems(this.cartItems); // Pass the cart items to saveCartItems
+    this.cartService.saveCartItems(item); // Pass the cart items to saveCartItems
+    console.log(item,'incrementtttt')
   }
 
   decrementQuantity(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
       this.updateTotal(item);
-      this.cartService.saveCartItems(this.cartItems); // Pass the cart items to saveCartItems
+      this.cartService.saveCartItems(item); // Pass the cart items to saveCartItems
     }
   }
   updateTotal(item: any) {
-    item.total = item.quantity * item.price;
+    item.total = item.quantity * item.Price;
   }
 
-  removeFromCart(index: number) {
-    this.cartService.removeFromCart(index);
+  removeFromCart(item: number) {
+    this.cartService.removeFromCart(item);
+    console.log(item,'indexxxhhh')
   }
 
 
   // checkout component code
 
-  
   onContactFieldsSubmit() {
     this.contactForm.markAllAsTouched();
     if (this.contactForm.valid) {
@@ -117,9 +157,7 @@ export class CartComponent implements OnInit {
   //on form submit(email,phone number)
   onAddressFieldsSubmit() {
     this.addressForm.markAllAsTouched();
-    console.log('invalidd')
     if (this.addressForm.valid) {
-      console.log('validddd')
       this.showPaymentFieldsOnClick()
       const postData = {
         document: {
@@ -142,12 +180,12 @@ export class CartComponent implements OnInit {
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return this.cartProducts.reduce((total, item) => total + item.price * item.quantity, 0);
   }
 
 
   getItemNames(): string {
-    return this.cartItems.map(item => item.name).join(', ');
+    return this.cartProducts.map(item => item.name).join(', ');
   }
 
   // Add this method in your component
