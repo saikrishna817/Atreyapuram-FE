@@ -14,6 +14,8 @@ import { UserService } from '../../sharepage/navbar/navbar.service';
 export class CartComponent implements OnInit {
 
   cartItems: any[];
+  cartProducts: any[] = [];
+  duplicateItemIds:any
   userId: any;
   //checkout component fields
   addressForm: FormGroup;
@@ -68,8 +70,22 @@ export class CartComponent implements OnInit {
       const apiUrl = environment.getCart;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          this.cartItems = res.products
-          console.log(this.cartItems, 'carttttuuhhhh');
+          console.log(res, 'iteemmmmmmsss');
+          this.cartItems = res.products;
+          this.duplicateItemIds = res.items;
+          console.log(this.cartItems, 'Product itemmmmmmmm');
+          console.log(this.duplicateItemIds, 'countuuuuuu');
+
+          // Calculate total for each item
+          for (let product of this.cartItems) {
+            let obj: any = { ...product };
+            let duplicates = this.duplicateItemIds.filter((x: any) => x === product.ProductID);
+            obj.quantity = duplicates.length;
+            obj.total = parseFloat(product.Price) * obj.quantity; // Calculate total price
+            this.cartProducts.push(obj);
+          }
+          console.log(this.cartProducts,'product carttt')
+
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -83,14 +99,14 @@ export class CartComponent implements OnInit {
   incrementQuantity(item: any) {
     item.quantity++;
     this.updateTotal(item);
-    this.cartService.saveCartItems(this.cartItems); // Pass the cart items to saveCartItems
+    // this.cartService.saveCartItems(this.cartItems); // Pass the cart items to saveCartItems
   }
 
   decrementQuantity(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
       this.updateTotal(item);
-      this.cartService.saveCartItems(this.cartItems); // Pass the cart items to saveCartItems
+      // this.cartService.saveCartItems(this.cartItems); // Pass the cart items to saveCartItems
     }
   }
   updateTotal(item: any) {
@@ -98,7 +114,7 @@ export class CartComponent implements OnInit {
   }
 
   removeFromCart(index: number) {
-    this.cartService.removeFromCart(index);
+    // this.cartService.removeFromCart(index);
   }
 
 

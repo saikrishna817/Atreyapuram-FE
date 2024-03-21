@@ -126,6 +126,11 @@ export class MenuComponent {
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           console.log(res);
+          this.showMessage = true;
+          this.message = "Product added to cart successfully";
+          setTimeout(() => {
+            this.showMessage = false;
+          }, 3000);
         },
         (err: any) => {
           console.error(err, 'errorrr');
