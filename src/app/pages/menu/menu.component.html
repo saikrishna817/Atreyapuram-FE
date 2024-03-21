@@ -248,7 +248,7 @@
           </div>
         </div>
         <div class="col-md-12" *ngIf="showPaymentFields">
-          <span class="back-arrow ms-3" (click)="goToAddressFields()"><img src="assets/img/backarrow.png"
+          <span class="back-arrow ms-3" (click)="showAdditionalFieldsOnClick()"><img src="assets/img/backarrow.png"
               alt="HTML tutorial" width="20px" height="20px">&nbsp;&nbsp;</span><b>Back</b>
           <h5 class="text-center"><b><i>Payment</i></b></h5>
           <div class="col-md-12">
@@ -280,7 +280,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 text-center mt-3">
-                    <button class="btn text-white bg-dark text-center mt-3" (click)="onPaymentFieldsSubmit()"
+                    <button class="btn text-white bg-dark text-center mt-3" (click)="placeOrder()"
                       [disabled]="!radioButtonSelected">Place
                       Order</button>
                   </div>

@@ -241,3 +241,15 @@
     border: 1px solid red;
   }
   
+  .empty-cart-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust the height as needed */
+  }
+  
+  .empty-cart-message h4 {
+    text-align: center;
+    font-size: 1.5rem; /* Adjust the font size as needed */
+    color: #333; /* Adjust the color as needed */
+  }
