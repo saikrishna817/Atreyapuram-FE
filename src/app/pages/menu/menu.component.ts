@@ -103,10 +103,9 @@ export class MenuComponent {
     this.http.get(apiUrl).subscribe(
       (res: any) => {
         this.products = res.products
-        console.log(this.products, 'productsss getttt');
       },
       (err: any) => {
-        console.log(err, 'errorrrrrr get call')
+        console.log(err)
       }
     );
   }
@@ -126,6 +125,11 @@ export class MenuComponent {
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           console.log(res);
+          this.showMessage = true;
+          this.message = "Product added to cart successfully";
+          setTimeout(() => {
+            this.showMessage = false;
+          }, 3000);
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -137,7 +141,8 @@ export class MenuComponent {
 
   addToOrder(item: any) {
     this.selectedProduct = item;
-    console.log(this.selectedProduct, 'sssss')
+    this.productId =item.ProductID
+    console.log(this.productId,'selected product id')
     this.loggedInUserId = this.userService.getLoggedInUserId();
     this.userId = this.loggedInUserId
     this.userName = this.userService.getLoggedInUserName();
@@ -146,61 +151,57 @@ export class MenuComponent {
   onContactFieldsSubmit() {
     this.contactForm.markAllAsTouched();
     if (this.contactForm.valid) {
-      const userId = this.loggedInUserId
-      const postData = {
-        mobile: this.contactForm.get('phone')!.value,
-        email: this.contactForm.get('email')!.value,
-        user_id: userId
-      };
-      this.showAdditionalFieldsOnClick()
-      const apiUrl = environment.contactAddress;
-      this.http.post(apiUrl, postData).subscribe(
-        (res: any) => {
-          console.log(res);
-        },
-        (err: any) => {
-          console.error(err, 'errorrr');
-        }
-      );
+     this.showAdditionalFieldsOnClick()
     }
   }
 
   onAddressFieldsSubmit() {
     this.addressForm.markAllAsTouched();
     if (this.addressForm.valid) {
-      console.log('validddd')
+      this.showPaymentFieldsOnClick()
+    }
+  }
+  placeOrder() {
+    if (this.radioButtonSelected) {
       const userId = this.loggedInUserId
+      const productID = this.productId
+      console.log(userId,'User Idddddd')
+      console.log(productID,'Product Idddddd')
       const postData = {
-        name: this.addressForm.get('name')!.value,
-        mobile: this.addressForm.get('phone')!.value,
-        pincode: this.addressForm.get('pincode')!.value,
-        state: this.addressForm.get('state')!.value,
-        city: this.addressForm.get('city')!.value,
-        area: this.addressForm.get('area')!.value,
-        user_id: userId
+        contact: {
+          mobile: this.contactForm.get('phone')!.value,
+          email: this.contactForm.get('email')!.value,
+        },
+        address:{
+          name: this.addressForm.get('name')!.value,
+          mobile: this.addressForm.get('phone')!.value,
+          pincode: this.addressForm.get('pincode')!.value,
+          state: this.addressForm.get('state')!.value,
+          city: this.addressForm.get('city')!.value,
+          area: this.addressForm.get('area')!.value,
+          user_id: userId,
+          product_id:productID
+        }
       };
-      const apiUrl = environment.DeliveryAddress;
+      const apiUrl = environment.placeOrder;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          this.showPaymentFieldsOnClick()
           console.log(res);
+          this.paymentSuccess = true;
+          setTimeout(() => {
+            this.paymentSuccess = false;
+          }, 5000);
+          this.hideModal('checkOutModal');
         },
         (err: any) => {
           console.error(err, 'errorrr');
         }
       );
+      // this.showAddressFields = false;
+      // this.showContactFields = false;
+      // this.showPaymentFields = false;
     }
-  }
-  onPaymentFieldsSubmit() {
-    if (this.radioButtonSelected) {
-      this.paymentSuccess = true;
-      setTimeout(() => {
-        this.paymentSuccess = false;
-      }, 5000);
-      this.showAddressFields = false;
-      this.showContactFields = false;
-      this.showPaymentFields = false;
-    }
+   
   }
   selectRadioButton() {
     this.radioButtonSelected = true;
@@ -222,11 +223,7 @@ export class MenuComponent {
     this.showContactFields = true;
     this.showPaymentFields = false;
   }
-  goToAddressFields() {
-    this.showAddressFields = true;
-    this.showContactFields = false;
-    this.showPaymentFields = false;
-  }
+  
   //coupon field
   toggleCouponField() {
     this.showCouponField = !this.showCouponField;
