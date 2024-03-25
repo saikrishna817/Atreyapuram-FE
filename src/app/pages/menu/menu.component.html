@@ -88,7 +88,7 @@
                   coupon?</label>
                 <input type="checkbox" id="showCoupon" style="display: none;"> -->
                 <div class="gap">
-                  <a class="mt-4">&#x20B9; {{ selectedProduct.Price }}</a>
+                  <a class="mt-4">&#x20B9; {{ productPrice }}</a>
                   <button class="btn float-end text-white bg-dark" type="submit">Continue</button>
                 </div>
               </form>
@@ -212,28 +212,36 @@
                   <input type="checkbox" name="remember" class="mr-2" checked>Save Address
                 </label>
                 <div class="gap">
-                  <a class="mt-4">&#x20B9;{{ selectedProduct.Price }}</a>
+                  <a class="mt-4">&#x20B9;{{ productPrice }}</a>
                   <button class="btn text-white bg-dark mt-3" type="submit">Continue</button>
                 </div>
               </form>
             </div>
           </div>
-          <div class="col-md-6 border-left" *ngIf="selectedProduct && !showPaymentFields && !paymentSuccess">
+          <div class="col-md-6 border-left" *ngIf="showOrderHistory">
             <h5 class="text-center mt-3 mb-3"><b><i>Order Summary</i></b></h5>
             <div class="row">
               <div class="col-md-12">
-                <strong>Product:</strong>: {{ selectedProduct.ProductName }} <br>
-                <strong>Price:</strong>: <span class="text-navy">&#x20B9; {{ selectedProduct.Price}}</span>
+                <strong>Product:</strong>: {{ productName }} <br>
+                <strong>Price:</strong>: <span class="text-navy">&#x20B9; {{ productPrice}}</span>
                 <p class="m-t">
                   Lorem ipsum dolor sit amet,
                   consectetur adipisicing elit.
                 </p>
+                <div class="form-group mt-3">
+                  <label for="quantity">Quantity:</label>
+                  <div class="input-group">
+                    <div class="input-group-addon" (click)="decrementQuantity()">-</div>
+                    <input type="number" class="form-control text-center" id="quantity" [(ngModel)]="quantity" (input)="updateTotal()" style="width: 30%;">
+                    <div class="input-group-addon" (click)="incrementQuantity()">+</div>
+                  </div>
+                </div>
                 <div class="borderTopBottom">
                   <div class="total-amount  text-muted">
                     <span class="label">Total Price (incl. taxes)</span>
-                    <a class="amount">&#x20B9; {{ selectedProduct.Price }}</a>
+                    <a class="amount">&#x20B9; {{ productPrice }}</a>
                   </div>
-
+          
                   <div class="total-amount text-muted mt-2">
                     <span class="label">Delivery Charges</span>
                     <a class="amount">Free</a>
@@ -241,11 +249,11 @@
                 </div>
                 <div class="total-amount mt-3">
                   <span class="label">Total Amount</span>
-                  <a class="amount">&#x20B9; {{ selectedProduct.Price }}</a>
+                  <a class="amount">&#x20B9; {{ productPrice}}</a>
                 </div>
               </div>
             </div>
-          </div>
+          </div>          
         </div>
         <div class="col-md-12" *ngIf="showPaymentFields">
           <span class="back-arrow ms-3" (click)="showAdditionalFieldsOnClick()"><img src="assets/img/backarrow.png"
@@ -262,9 +270,10 @@
                 <div class="row">
                   <div class="col-md-10">
                     <h5>Summary</h5>
-                    <strong>Product:</strong>{{ selectedProduct.ProductName }}<br>
+                    <strong>Product:</strong>{{ productName || '----'}}<br>
+                    <strong>Quantity:</strong>{{ quantity || '----' }}<br>
                     <strong>Price:</strong>: <span class="text-navy">{{
-                      selectedProduct.Price }}</span>
+                      productPrice || '----' }}</span>
 
                     <p class="m-t">
                       Lorem ipsum dolor sit amet,

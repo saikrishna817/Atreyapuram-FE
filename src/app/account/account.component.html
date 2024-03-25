@@ -1,25 +1,24 @@
-<div class="main">
-    <h4>Your Account</h4>
-</div>
-
+<h3 class="text-center mt-5"><b>Your Account</b></h3>
 
 <div class="account">
     <div class="account-details">
         <div class="greeting">
-            <p>Hello <span id="user-name">{{name || '----'}}</span> (not <span id="user-name-alt">{{name || '---'}}</span>?<span style="text-decoration: underline;cursor: pointer;" (click)="logout()">Log Out</span> )</p>
+            <p>Hello <span id="user-name"><b><i>{{name || '----'}}</i></b></span> (not <span id="user-name-alt">{{name
+                    || '---'}}</span>? <span style="text-decoration: underline;cursor: pointer;" (click)="logout()">Log
+                    Out</span> )</p>
         </div>
-        <div class="field">
+        <!-- <div *ngIf="!ordersLength || ordersLength === 0" class="field">
             <h3>Order History</h3>
-        </div>
-        <hr>
-        <hr>
-        <div class="order-message">
             <p>Make your first order. <span id="order-info">You haven't placed any orders yet.</span></p>
         </div>
-        <hr>
-        <hr>
-        <div class="field">
-            <h3><b>Account Details</b></h3>
+        <hr> -->
+        <div class="field mb-5 mt-5 gap-5">
+            <h5><b>Order History</b> ====>></h5>
+            <h6 class="text-white bg-dark cursor" routerLink="/orders">Show orders</h6>
+            <!-- <button class="btn text-white bg-dark" routerLink="/orders">Show orders</button> -->
+        </div>
+        <div class="field mb-3">
+            <h5><b>Account Details</b></h5>
         </div>
         <div class="field">
             <div class="label">Name</div>
@@ -31,16 +30,8 @@
             <div class="value">{{email || '----'}}</div>
         </div>
         <hr class="horizontal-line">
-        <div class="address"><button (click)="logout()">Log Out</button></div>
+        <button class="btn text-white bg-dark mt-3" (click)="logout()">Log Out</button>
         <hr>
     </div>
-    
+
 </div>
-
-
-
-
-
-
-
-    
