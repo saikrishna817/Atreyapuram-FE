@@ -1,98 +1,3 @@
-/* 
-.account {
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  gap: 5px;
-  padding-top: 5%;
-  padding-bottom: 5%;
-}
-
-
-
-.menu-container, .account-details {
-  flex: 1; 
-  max-width: calc(40% - 20px); 
-}
-
-.menu-container {
-  padding-left: 30%; 
-  padding-top: 5px;
-  margin-bottom: 10px;
-  margin-right: 3px;
-}
-
-.menu-item {
-  margin-bottom: 20px; 
-}
-
-.field, .address button {
-  margin-bottom: 10px; 
-}
-
-.address button {
-  background-color: royalblue;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-.address button:hover {
-  background-color: black;
-  transform: translateY(-2px); 
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-
-
-.greeting p {
-  font-size: 24px;
-}
-
-#user-name {
-  color: #007bff;
-}
-
-#user-name-alt {
-  color: #6c757d;
-}
-
-.main{
-  text-align: center;
-}
-
-.order-message {
-  display: inline-block; 
-  background-color: rgb(137, 189, 152); 
-  height: 40px;
-  padding-top: 10px;
-}
-
-.order-message p {
-  margin: 0;
-}
-
-.menu-item a {
-  color: black;
-}
-
-.horizontal-line{
-  border-left: 1px solid black; 
-  width: 260px;
-}
-
-.account-details {
-  flex: 1; 
-  max-width: calc(40% - 20px);
-  margin-left: 50px; 
-}  */
-
-
-
-
-
 .account {
   display: flex;
   justify-content: center;
@@ -104,26 +9,6 @@
   overflow-y: auto;
 }
 
-.menu-container, .account-details {
-  flex: 1;
-  max-width: calc(40% - 20px);
-}
-
-.menu-container {
-  padding-left: 30%;
-  padding-top: 5px;
-  margin-bottom: 10px;
-  margin-right: 3px;
-}
-
-.menu-item {
-  margin-bottom: 20px;
-}
-
-/* .field, .address button {
-  margin-bottom: 10px;
-} */
-
 .field {
   display: flex;
   align-items: center;
@@ -133,77 +18,54 @@
   margin-right: 40%; 
 }
 
-.address button {
-  background-color: royalblue;
+.btn {
+  border: none;
   color: white;
   padding: 10px 20px;
-  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 1rem;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
-.address button:hover {
-  background-color: black;
-  transform: translateY(-2px);
-  transition: background-color 0.3s, transform 0.3s;
-}
 
 .greeting p {
   font-size: 24px;
 }
 
-#user-name {
+/* #user-name {
   color: #007bff;
-}
+} */
 
 #user-name-alt {
   color: #6c757d;
 }
 
-.main {
-  text-align: center;
-  padding-top: 40px;
-}
 
-
-.order-message {
-  display: block; /* Changed to 'block' to take full width */
+/* .order-message {
+  display: block;
   background-color: rgb(137, 189, 152);
   height: 40px;
   padding-top: 10px;
-  width: 130%; /* Takes full width of its parent */
+  width: 130%;
 }
 
 
 .order-message p {
   margin: 0;
-}
-
-.menu-item a {
-  color: black;
-}
+} */
 
 .horizontal-line {
   border-top: 1px solid black;
   width: 100%;
   margin: 10px 0;
 }
-
-.first{
-  padding-left: 20px;
+.cursor{
+  cursor: pointer;
 }
-.interactive-text {
-  text-decoration: underline;
-  cursor: pointer; /* Changes cursor to indicate it's clickable */
-  color: black;
-}
-
-/* Optional: Add a hover effect to further indicate interactivity */
-.interactive-text:hover {
-  color: rgb(2, 2, 11); /* Change color on hover, adjust as needed */
-}
-
-
 
 
 

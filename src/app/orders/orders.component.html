@@ -1,0 +1,33 @@
+<h2 class="text-center mt-5 mb-3"><b>My Orders</b></h2>
+<div class="row" *ngIf="orderedProducts && orderedProducts.length > 0">
+    <div class="col-md-4" *ngFor="let order of orderedProducts; let i = index">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-success py-3">
+                <h5 class="card-title text-white m-0">Order ID: {{ order.orderId }}</h5>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let product of order.products; let j = index">
+                    <p class="card-text">
+                        <strong>Product Name:</strong> {{ product.name }} <br>
+                        <strong>Price:</strong> &#x20B9;{{ product.price }} <br>
+                        <strong>Quantity:</strong> {{ product.quantity }}
+                    </p>
+                </div>
+                <div *ngFor="let address of deliveryAddress[i]">
+                    <p class="card-text">
+                        <strong>Name:</strong> {{ address.name || '----'}} <br>
+                        <strong>Mobile:</strong> {{ address.mobile || '----'}} <br>
+                        <strong>Address:</strong> {{ address.houseNumber }}, {{ address.area }}, {{ address.city }},
+                        {{ address.state }} - {{ address.pincode }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!orderedProducts || orderedProducts.length === 0" >
+    <h4 class="empty-cart-message">You haven't placed any orders yet.</h4>
+    <div class="button-wrapper">
+        <button class="btn text-white bg-dark" routerLink="/menu">Make Your first order</button>
+    </div>
+</div>

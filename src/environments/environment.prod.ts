@@ -10,7 +10,11 @@ export const environment = {
     addCart:'http://localhost:8008/user/cart',
     getCart:'http://localhost:8008/user/getcart',
     deleteCartItem:'http://localhost:8008/user/cart',
-    placeOrder:'http://localhost:8008/user/cart',
+    placeOrder:'http://localhost:8008/user/createorder',
+
+    //Order Details
+    getOrder:'http://localhost:8008/user/getorder',
+    getAddress:'http://localhost:8008/user/getaddress',
 
 
     contactAddress: 'http://localhost:8008/user/contact',

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { LocalstorageService } from '../sharepage/localstorage.service';
+import { OrderService } from '../orders/orders.service';
 
 @Component({
   selector: 'app-account',
@@ -14,21 +15,25 @@ import { LocalstorageService } from '../sharepage/localstorage.service';
 export class AccountComponent {
   name: string | undefined;
   email: string | undefined;
-  userName:string | undefined;
-  userEmail: string | undefined
+  userName: string | undefined;
+  userEmail: string | undefined;
+  ordersLength: any;
   constructor(
     public cartService: CartService,
     private userService: UserService,
     private router: Router,
     private http: HttpClient,
-    private localStorage: LocalstorageService
+    private localStorage: LocalstorageService,
+    private orderservice: OrderService
   ) {
-
+    console.log(this.orderservice.orderedProducts.length, 'heyyy ramyaaaa')
   }
   ngOnInit(): void {
+    // this.ordersLength = this.orderservice.orderedProducts.length
     this.name = this.userService.getLoggedInUserName();
     this.email = this.userService.getLoggedInUserEmail();
-  } 
+  }
+
 
   logout() {
     // this.userService.setLoggedInUserDetails('', '');
@@ -37,7 +42,7 @@ export class AccountComponent {
     this.userName = '';
     this.router.navigate(['/home']);
   }
-  
+
 }
 
 

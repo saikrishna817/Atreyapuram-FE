@@ -28,6 +28,8 @@ import { JaggerymadeComponent } from './jaggerymade/jaggerymade.component';
 import { SugarmadeComponent } from './sugarmade/sugarmade.component';
 import { DryfruitsComponent } from './dryfruits/dryfruits.component';
 import { CombosavingComponent } from './combosaving/combosaving.component';
+import { AdminComponent } from './admin/admin.component';
+import { OrdersComponent } from './orders/orders.component';
 
 
 
@@ -53,6 +55,8 @@ import { CombosavingComponent } from './combosaving/combosaving.component';
     SugarmadeComponent,
     DryfruitsComponent,
     CombosavingComponent,
+    AdminComponent,
+    OrdersComponent,
     
     
   ],
