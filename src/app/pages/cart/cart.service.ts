@@ -20,18 +20,18 @@ export class CartService {
   constructor(private userService: UserService,
     private http: HttpClient,) {
     // Load cart items from localStorage when the service is instantiated
-    this.loadCartItems();
+    this.loadCartItemsFromServer();
   }
 
-  getCartItems() {
-    console.log(this.cartProducts, 'cppp')
-    return this.cartProducts;
-  }
+  // getCartItems() {
+  //   console.log(this.cartProducts, 'cppp')
+  //   return this.cartProducts;
+  // }
 
-  //Products count
-  getCartItemCount(): number {
-    return this.cartItems.length;
-  }
+  // //Products count
+  // getCartItemCount(): number {
+  //   return this.cartItems.length;
+  // }
 
   //Added to cart
   // addToCart(item: any) {
@@ -72,7 +72,7 @@ export class CartService {
         console.error(err, 'errorrr');
       }
     );
-
+    this.saveCartItems();
   }
 
   //update count
@@ -80,21 +80,59 @@ export class CartService {
     this.cartCountSubject.next(this.getCartItemCount());
   }
 
-  private loadCartItems() {
+  private loadCartItemsFromServer() {
+    const userId = this.userService.getLoggedInUserId();
+    if (userId) {
+      const postData = {
+        userId: userId,
+      };
+      const apiUrl = environment.getCart;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          this.cartItems = res.products.map((product: any) => ({
+            ...product,
+            quantity: res.items.filter((x: any) => x === product.ProductID).length,
+            total: parseFloat(product.Price) * res.items.filter((x: any) => x === product.ProductID).length
+          }));
+          this.saveCartItems(); // Save cart items locally
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+        }
+      );
+    }
+  }
+  private saveCartItems() {
     if (typeof localStorage !== 'undefined') {
-      const storedItems = localStorage.getItem('cartItems');
-      this.cartItems = storedItems ? JSON.parse(storedItems) : [];
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+    }
+    // Update cart count subject
+    this.cartCountSubject.next(this.getCartItemCount());
+  }
+  // Get cart items
+  getCartItems(): any[] {
+    return this.cartItems;
+  }
+
+  // Get cart item count
+  getCartItemCount(): number {
+    return this.cartItems.length;
+  }
+  // Increment quantity
+  incrementQuantity(item: any) {
+    item.quantity++;
+    console.log(item.quantity,'item qauntityyyyy')
+    item.total = parseFloat(item.Price) * item.quantity;
+    this.saveCartItems(); // Save cart items locally
+  }
+
+  // Decrement quantity
+  decrementQuantity(item: any) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      item.total = parseFloat(item.Price) * item.quantity;
+      this.saveCartItems(); // Save cart items locally
     }
   }
 
-  saveCartItems(items: any[] = this.cartProducts) {
-    console.log(items, 'save itemsssss')
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('cartItems', JSON.stringify(items));
-    }
-  }
-  //Check if item in cart
-  // isItemInCart(item: any): boolean {
-  //   return this.cartItems.some(cartItem => cartItem.name === item.name);
-  // }
 }
