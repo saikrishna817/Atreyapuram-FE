@@ -16,6 +16,8 @@ import { SugarmadeComponent } from './sugarmade/sugarmade.component';
 import { JaggerymadeComponent } from './jaggerymade/jaggerymade.component';
 import { DryfruitsComponent } from './dryfruits/dryfruits.component';
 import { CombosavingComponent } from './combosaving/combosaving.component';
+import { AdminComponent } from './admin/admin.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,18 +26,20 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
-  {path: 'register', component:RegisterComponent},
+  { path: 'register', component: RegisterComponent },
   { path: 'cart', component: CartComponent },
   { path: 'faqs', component: FaqsComponent },
   { path: 'check-out', component: CheckoutComponent },
   { path: '', redirectTo: 'menu', pathMatch: 'full' },
   { path: 'gallery', component: GalleryComponent },
   { path: 'reset-psd', component: PsdchangeComponent },
-  {path: 'account', component: AccountComponent},
-  {path: 'sugarmade', component: SugarmadeComponent},
-  {path:'jaggerymade', component: JaggerymadeComponent},
-  {path: 'dryfruits', component: DryfruitsComponent},
-  {path: 'combosaving', component: CombosavingComponent}
+  { path: 'account', component: AccountComponent },
+  { path: 'sugarmade', component: SugarmadeComponent },
+  { path: 'jaggerymade', component: JaggerymadeComponent },
+  { path: 'dryfruits', component: DryfruitsComponent },
+  { path: 'combosaving', component: CombosavingComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'orders', component: OrdersComponent }
 ];
 
 @NgModule({

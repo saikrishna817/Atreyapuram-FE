@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../sharepage/navbar/navbar.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { OrderService } from '../../orders/orders.service';
 
 @Component({
   selector: 'app-menu',
@@ -14,19 +15,21 @@ import { filter } from 'rxjs/operators';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
-
-  @Output() openLoginModalEvent = new EventEmitter<void>();
   showMessage: boolean = false;
   message: string = '';
   cartItems: any[];
   products: any;
   addressForm: FormGroup;
   contactForm: FormGroup;
+  loginForm: FormGroup;
+  registerForm: FormGroup;
+  forgotPsdForm: FormGroup;
   showCouponField = false;
-  showContactFields: boolean = true;
   loggedInUserId: any;
+  showContactFields: boolean = true;
   showAddressFields: boolean = false;
   showPaymentFields: boolean = false;
+  showOrderHistory: boolean = true;
   selectedProduct: any = null;
   paymentSuccess: boolean = false;
   radioButtonSelected: boolean = false;
@@ -34,16 +37,18 @@ export class MenuComponent {
   showLoginMessage = false;
   showSignupMessage = false;
   showForgotMessage = false;
-  loginForm: FormGroup;
-  registerForm: FormGroup;
-  forgotPsdForm: FormGroup;
   errorMessage: string | undefined;
   errorTimeout: any;
   userName: string = '';
   userEmail: string = '';
   userId: any;
+  orderId:any;
   productId: any;
+  productName: any;
+  // productQuantity: any;
+  productPrice: any
   checkedOut = false;
+  quantity: number = 1;
 
   constructor(
     private router: Router,
@@ -51,7 +56,8 @@ export class MenuComponent {
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private orderService: OrderService) {
     this.addressForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/^(?!.*  )[a-zA-Z ]{3,}$/)]],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
@@ -138,20 +144,36 @@ export class MenuComponent {
     }
 
   }
-
   addToOrder(item: any) {
     this.selectedProduct = item;
-    this.productId =item.ProductID
-    console.log(this.productId,'selected product id')
+    console.log(this.selectedProduct, 'selected product')
+    this.productPrice = item.Price
+    this.productName = item.ProductName
+    this.productId = item.ProductID,
     this.loggedInUserId = this.userService.getLoggedInUserId();
     this.userId = this.loggedInUserId
     this.userName = this.userService.getLoggedInUserName();
+  }
+  incrementQuantity() {
+    this.quantity++;
+    this.updateTotal();
+  }
+
+  // Function to decrement the quantity
+  decrementQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+      this.updateTotal();
+    }
+  }
+  updateTotal() {
+    this.productPrice = this.selectedProduct.Price * this.quantity;
   }
 
   onContactFieldsSubmit() {
     this.contactForm.markAllAsTouched();
     if (this.contactForm.valid) {
-     this.showAdditionalFieldsOnClick()
+      this.showAdditionalFieldsOnClick()
     }
   }
 
@@ -165,33 +187,47 @@ export class MenuComponent {
     if (this.radioButtonSelected) {
       const userId = this.loggedInUserId
       const productID = this.productId
-      console.log(userId,'User Idddddd')
-      console.log(productID,'Product Idddddd')
       const postData = {
-        contact: {
+        product: [{
+          product_id: productID,
+          name: this.productName,
+          quantity: this.quantity,
+          price: this.productPrice
+        }],
+        contactdetails: {
           mobile: this.contactForm.get('phone')!.value,
           email: this.contactForm.get('email')!.value,
+          user_id: userId,
         },
-        address:{
+        deliveryAddress: {
           name: this.addressForm.get('name')!.value,
-          mobile: this.addressForm.get('phone')!.value,
+          // mobile: this.addressForm.get('phone')!.value,
           pincode: this.addressForm.get('pincode')!.value,
+          houseNumber: this.addressForm.get('apmt')!.value,
           state: this.addressForm.get('state')!.value,
           city: this.addressForm.get('city')!.value,
           area: this.addressForm.get('area')!.value,
           user_id: userId,
-          product_id:productID
         }
       };
       const apiUrl = environment.placeOrder;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           console.log(res);
+          this.orderId = res.orderid
+          this.orderService.setOrderId(this.orderId)
+          this.showPaymentFields = false;
           this.paymentSuccess = true;
           setTimeout(() => {
             this.paymentSuccess = false;
-          }, 5000);
-          this.hideModal('checkOutModal');
+            this.hideModal('checkOutModal');
+            this.showContactFields = true;
+            this.showAddressFields = false;
+            this.showPaymentFields = false;
+            this.showOrderHistory = true;
+            this.radioButtonSelected = false;
+            this.quantity = 1;
+          }, 7000);
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -201,15 +237,15 @@ export class MenuComponent {
       // this.showContactFields = false;
       // this.showPaymentFields = false;
     }
-   
+
   }
   selectRadioButton() {
     this.radioButtonSelected = true;
-    console.log('Radio Button', this.radioButtonSelected)
   }
 
   showAdditionalFieldsOnClick() {
     this.showAddressFields = true;
+    this.showOrderHistory = true;
     this.showContactFields = false;
     this.showPaymentFields = false;
   }
@@ -217,13 +253,15 @@ export class MenuComponent {
     this.showAddressFields = false;
     this.showContactFields = false;
     this.showPaymentFields = true;
+    this.showOrderHistory = false;
   }
   goToContactFields() {
     this.showAddressFields = false;
     this.showContactFields = true;
     this.showPaymentFields = false;
+    this.showOrderHistory = true;
   }
-  
+
   //coupon field
   toggleCouponField() {
     this.showCouponField = !this.showCouponField;
@@ -242,7 +280,6 @@ export class MenuComponent {
 
 
   //LOGIN,SIGNUP,FORGOT
-
 
   onLoginSubmit() {
     this.loginForm.markAllAsTouched();
@@ -295,7 +332,7 @@ export class MenuComponent {
       const apiUrl = environment.register;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          console.log(res, 'resultuuuu');
+          console.log(res);
           if (res.user && res.user.success) {
             this.showSignupMessage = true;
             setTimeout(() => {

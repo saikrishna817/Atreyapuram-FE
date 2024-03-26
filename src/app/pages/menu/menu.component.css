@@ -361,3 +361,18 @@ body {
 }
 
 
+.input-group-addon {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 10px;
+  background-color: #f8f9fa;
+}
+
+.input-group-addon:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+
+.form-control {
+  border-radius: 4px;
+}
