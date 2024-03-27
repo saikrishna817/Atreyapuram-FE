@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -28,7 +29,6 @@ export class OrderService {
 
     setOrderId(id: any) {
         this.productOrderId = id;
-        // Add the new order ID to the array
         this.orderIds.push(id);
         this.saveOrderIds();
     }
