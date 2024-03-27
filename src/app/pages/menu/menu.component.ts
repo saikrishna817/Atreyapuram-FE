@@ -127,6 +127,7 @@ export class MenuComponent {
         userid: userId,
         product: this.productId
       };
+      this.cartService.addToCart(item)
       const apiUrl = environment.addCart;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from './cart.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../../sharepage/navbar/navbar.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -16,30 +15,29 @@ import { OrderService } from '../../orders/orders.service';
 })
 export class CartComponent implements OnInit {
 
-  cartItems: any[];
+  cartItems: any[] = [];
   cartProducts: any[] = [];
   duplicateItemIds: any
   userId: any;
   loggedInUserId: any;
-  selectedProduct: any = null;
-  radioButtonSelected: boolean = false;
-  paymentSuccess: boolean = false;
-  showOrderHistory: boolean = true;
   productId: any;
   productName: any;
   orderId: any;
   totalPrice = 0;
-  checkedOut = false;
   quantity: number = 1;
   userName: string = '';
   addressForm: FormGroup;
   contactForm: FormGroup;
   showCouponField = false;
+  radioButtonSelected: boolean = false;
+  paymentSuccess: boolean = false;
+  showOrderHistory: boolean = true;
   showContactFields: boolean = true;
   showAddressFields: boolean = false;
   showPaymentFields: boolean = false;
 
-  constructor(private cartService: CartService,
+  constructor(
+    private cartService: CartService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private userService: UserService,
@@ -54,13 +52,12 @@ export class CartComponent implements OnInit {
       apmt: ['', Validators.required],
       area: ['', Validators.required],
     });
-
     this.contactForm = this.formBuilder.group({
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       couponCode: ['']
     });
-    this.cartItems = this.cartService.getCartItems();
+    // this.cartItems = this.cartService.getCartItems();
   }
 
   ngOnInit() {
@@ -75,7 +72,7 @@ export class CartComponent implements OnInit {
     this.userName = this.userService.getLoggedInUserName();
   }
 
-  //Get Call for cart items
+  //Get API Call for cart items
   getCartItems() {
     this.userId = this.userService.getLoggedInUserId();
     if (this.userId) {
@@ -106,16 +103,114 @@ export class CartComponent implements OnInit {
       );
     }
   }
+
+  //Increase product quantity
+  incrementQuantity(item: any) {
+    item.quantity++;
+    this.updateTotal(item);
+    this.cartService.saveCartItems(this.cartItems);
+  }
+
+  //Decrease product quantityy
+  decrementQuantity(item: any) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.updateTotal(item);
+      this.cartService.saveCartItems(this.cartItems);
+
+    }
+  }
+
+  //Update Total Price
+  updateTotal(item: any) {
+    item.total = item.quantity * item.Price;
+  }
+
+  // Delete API Call to delete single item from cart
+  removeFromCart(item: any) {
+    const productId = item.ProductID;
+    const userId = this.userService.getLoggedInUserId();
+    const postData = {
+      filter: {
+        userid: userId,
+        product: productId
+      }
+    };
+    const apiUrl = environment.deleteCartItem;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: postData // Include payload as the body
+    };
+    // Make the HTTP request to delete the item
+    this.http.request('delete', apiUrl, httpOptions).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.cartProducts = []
+        this.getCartItems()
+      },
+      (err: any) => {
+        console.error(err);
+      }
+    );
+  }
+
+  //After submitting contact fields show address fields UI
+  onContactFieldsSubmit() {
+    this.contactForm.markAllAsTouched();
+    if (this.contactForm.valid) {
+      this.showAdditionalFieldsOnClick()
+    }
+  }
+
+  //Adress Fields
+  showAdditionalFieldsOnClick() {
+    this.showAddressFields = true;
+    this.showOrderHistory = true;
+    this.showContactFields = false;
+    this.showPaymentFields = false;
+  }
+
+  //After submitting address fields show payment UI
+  onAddressFieldsSubmit() {
+    this.addressForm.markAllAsTouched();
+    if (this.addressForm.valid) {
+      this.showPaymentFieldsOnClick()
+    }
+  }
+
+  //Payment UI
+  showPaymentFieldsOnClick() {
+    this.showAddressFields = false;
+    this.showContactFields = false;
+    this.showPaymentFields = true;
+    this.showOrderHistory = false;
+  }
+
+  //Back 
+  goToContactFields() {
+    this.showAddressFields = false;
+    this.showContactFields = true;
+    this.showPaymentFields = false;
+    this.showOrderHistory = true;
+  }
+
+  //Select Radio button to place an order
+  selectRadioButton() {
+    this.radioButtonSelected = true;
+  }
+
+  //Place and order API Call
   placeOrder() {
     if (this.radioButtonSelected && this.cartProducts.length > 0) {
-      console.log(this.userId, 'user id');
       let productsArray = [];
       for (let product of this.cartProducts) {
         productsArray.push({
           product_id: product.ProductID,
           name: product.ProductName,
           quantity: product.quantity,
-          price: product.total
+          price: product.totalPrice
         });
       }
       const postData = {
@@ -143,7 +238,30 @@ export class CartComponent implements OnInit {
           this.orderservice.setOrderId(this.orderId);
           this.showPaymentFields = false;
           this.paymentSuccess = true;
-          this.cartProducts = [];
+          //For deleting all cart items after placing an order
+          const userId = this.userService.getLoggedInUserId();
+          const postData = {
+            filter: {
+              userid: userId,
+            }
+          };
+          const apiUrl = environment.deleteAllCartItems;
+          const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json'
+            }),
+            body: postData // Include payload as the body
+          };
+          this.http.request('delete', apiUrl, httpOptions).subscribe(
+            (res: any) => {
+              console.log(res);
+              this.cartProducts = []
+              this.getCartItems()
+            },
+            (err: any) => {
+              console.error(err, 'error');
+            }
+          );
           setTimeout(() => {
             this.paymentSuccess = false;
             this.hideModal('checkOutModal');
@@ -162,65 +280,6 @@ export class CartComponent implements OnInit {
     }
   }
 
-
-
-  selectRadioButton() {
-    this.radioButtonSelected = true;
-  }
-  incrementQuantity(item: any) {
-    this.cartService.incrementQuantity(item);
-    console.log(item, 'iiiii')
-    // item.quantity++;
-    // this.cartService.saveCartItems(); 
-    // this.updateTotal(item);
-    // console.log(item,'incrementtttt')
-  }
-  decrementQuantity(item: any) {
-    this.cartService.decrementQuantity(item);
-    // if (item.quantity > 1) {
-    //   item.quantity--;
-    //   this.updateTotal(item);
-    //   this.cartService.saveCartItems(); 
-    // }
-  }
-  updateTotal(item: any) {
-    item.total = item.quantity * item.Price;
-  }
-  removeFromCart(item: number) {
-   
-    console.log(item, 'indexxxhhh')
-  }
-
-  onContactFieldsSubmit() {
-    this.contactForm.markAllAsTouched();
-    if (this.contactForm.valid) {
-      this.showAdditionalFieldsOnClick()
-    }
-  }
-  onAddressFieldsSubmit() {
-    this.addressForm.markAllAsTouched();
-    if (this.addressForm.valid) {
-      this.showPaymentFieldsOnClick()
-    }
-  }
-  showAdditionalFieldsOnClick() {
-    this.showAddressFields = true;
-    this.showOrderHistory = true;
-    this.showContactFields = false;
-    this.showPaymentFields = false;
-  }
-  showPaymentFieldsOnClick() {
-    this.showAddressFields = false;
-    this.showContactFields = false;
-    this.showPaymentFields = true;
-    this.showOrderHistory = false;
-  }
-  goToContactFields() {
-    this.showAddressFields = false;
-    this.showContactFields = true;
-    this.showPaymentFields = false;
-    this.showOrderHistory = true;
-  }
   //coupon field
   toggleCouponField() {
     this.showCouponField = !this.showCouponField;
@@ -234,6 +293,7 @@ export class CartComponent implements OnInit {
       }
     }
   }
+  
   // Helper method to hide modal
   hideModal(modalId: string) {
     const modal = document.getElementById(modalId);
