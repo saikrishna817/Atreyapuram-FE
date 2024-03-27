@@ -33,6 +33,7 @@ import { OrdersComponent } from './orders/orders.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +74,7 @@ import { OrdersComponent } from './orders/orders.component';
   providers: [
     provideClientHydration(),
     CartService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ],
   
   bootstrap: [AppComponent]

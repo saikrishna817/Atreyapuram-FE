@@ -15,6 +15,7 @@ export class OrdersComponent implements OnInit {
   orderIds: any;
   orderedProducts: any;
   deliveryAddress: any[] = [];
+  imageUrl: any;
 
   constructor(
     private userService: UserService,
@@ -32,7 +33,9 @@ export class OrdersComponent implements OnInit {
   //Get order data for a particular user[logged-in user]
   getOrderDetails() {
     this.userId = this.userService.getLoggedInUserId();
-    if (this.userId && this.orderIds.length > 0) {
+    console.log('hii  orderss',this.userId)
+    console.log('hii  length',this.orderIds.length)
+    if (this.userId) {
       const userId = this.userId;
       const postData = {
         userid: userId,
@@ -82,3 +85,9 @@ export class OrdersComponent implements OnInit {
   }
 
 }
+
+
+
+
+
+

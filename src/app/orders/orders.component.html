@@ -1,8 +1,8 @@
-<h2 class="text-center mt-5 mb-3"><b>My Orders</b></h2>
+<!-- <h2 class="text-center mt-5 mb-3"><b>My Orders</b></h2>
 <div class="row" *ngIf="orderedProducts && orderedProducts.length > 0">
     <div class="col-md-4" *ngFor="let order of orderedProducts; let i = index">
         <div class="card shadow mb-4">
-            <div class="card-header bg-success py-3">
+            <div class="card-header bg-dark py-3">
                 <h5 class="card-title text-white m-0">Order ID: {{ order.orderId }}</h5>
             </div>
             <div class="card-body">
@@ -30,4 +30,212 @@
     <div class="button-wrapper">
         <button class="btn text-white bg-dark" routerLink="/menu">Make Your first order</button>
     </div>
+</div>  -->
+
+
+
+<!-- <div class="container-fluid">
+  <h2 class="text-center mt-5 mb-3"><b>My Orders</b></h2>
+  <div class="row justify-content-center">
+    <div class="col-md-12" *ngIf="orderedProducts && orderedProducts.length > 0">
+      <div class="order" *ngFor="let order of orderedProducts; let i = index">
+        <div class="col-md-8 mx-auto"> 
+          <div class="card shadow mb-4">
+            <div class="order-header bg-dark py-3">
+              <h5 class="order-header text-white m-0">Order ID: {{ order.orderId }}</h5>
+            </div>
+            <div class="card-body">
+              <div *ngFor="let product of order.products; let j = index">
+                <p class="order-item">
+                  <strong>Product Name:</strong> {{ product.name }} <br>
+                  <strong>Price:</strong> &#x20B9;{{ product.price }} <br>
+                  <strong>Quantity:</strong> {{ product.quantity }}
+                </p>
+              </div>
+              <div *ngFor="let address of deliveryAddress[i]">
+                <p class="card-text">
+                  <strong>Name:</strong> {{ address.name || '----'}} <br>
+                  <strong>Mobile:</strong> {{ address.mobile || '----'}} <br>
+                  <strong>Address:</strong> {{ address.houseNumber }}, {{ address.area }}, {{ address.city }},
+                  {{ address.state }} - {{ address.pincode }}
+                </p>
+                <button>CANCEL ORDER</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="!(orderedProducts && orderedProducts.length > 0)">
+      <div class="empty-cart-message">
+        <h4>No orders found!</h4>
+      </div>
+      <div class="button-wrapper">
+        <button class="btn" type="button">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- 
+<div class="container-fluid">
+  <h2 class="text-center mt-5 mb-3"><b>My Orders</b></h2>
+  <div class="row justify-content-center">
+    <div class="col-md-12" *ngIf="orderedProducts && orderedProducts.length > 0">
+      <div class="order" *ngFor="let order of orderedProducts; let i = index">
+        <div class="col-md-8 mx-auto"> 
+          <div class="card shadow mb-4">
+            <div class="order-header bg-dark py-3">
+              <h5 class="order-header text-white m-0">Order ID: {{ order.orderId }}</h5>
+            </div>
+            <div class="card-body">
+              <div *ngFor="let product of order.products; let j = index">
+                <p class="order-item">
+                  <strong>Product Name:</strong> {{ product.name }} <br>
+                  <strong>Price:</strong> &#x20B9;{{ product.price }} <br>
+                  <strong>Quantity:</strong> {{ product.quantity }}
+                </p>
+              </div>
+              <div *ngFor="let address of deliveryAddress[i]">
+                <p class="card-text">
+                  <strong>Name:</strong> {{ address.name || '----'}} <br>
+                  <strong>Mobile:</strong> {{ address.mobile || '----'}} <br>
+                  <strong>Address:</strong> {{ address.houseNumber }}, {{ address.area }}, {{ address.city }},
+                  {{ address.state }} - {{ address.pincode }}
+                </p>
+              </div>
+              <button>CANCEL ORDER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<!-- <div class="container-fluid">
+  <h2 class="text-center mt-5 mb-3"><b>My Orders</b></h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8" *ngIf="orderedProducts && orderedProducts.length > 0">
+      <div class="order" *ngFor="let order of orderedProducts; let i = index">
+        <div class="card shadow mb-4 custom-card">
+          <div class="order-header bg-dark py-3">
+            <h5 class="order-header text-white m-0">Order ID: {{ order.orderId }}</h5>
+          </div>
+          <div class="card-body custom-card-body">
+            <div class="custom-product-details">
+              <div class="row align-items-center" *ngFor="let product of order.products; let j = index">
+                <div class="col-md-2">
+                  <img class="img-fluid" [src]="'assets/AT-gallery10.jpg'" alt="product-{{ j }}-image">
+                </div>
+                <div class="col-md-8">
+                  <h3 style="text-decoration:underline;">Product Details</h3>
+                  <p class="order-item">                  
+                    <strong>Product Name:</strong> {{ product.name }} <br>
+                    <strong>Price:</strong> ₹{{ product.price }} <br>
+                    <strong>Quantity:</strong> {{ product.quantity }}
+                  </p>
+                </div>
+                <div class="col-md-2">
+                  <p class="card-text text-right">
+                    <strong>Status:</strong> In Transit <br>
+                    <strong>Payment:</strong> Credit Card (**** 7343)
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="custom-address-details">
+              <div *ngFor="let address of deliveryAddress[i]">
+                <p class="card-text">
+                  <strong>Name:</strong> {{ address.name || '----'}} <br>
+                  <strong>Mobile:</strong> {{ address.mobile || '----'}} <br>
+                  <strong>Address:</strong> {{ address.houseNumber }}, {{ address.area }}, {{ address.city }},
+                  {{ address.state }} - {{ address.pincode }}
+                </p>
+              </div>
+            </div>
+            <div class="custom-button-group">
+              <button class="btn btn-danger custom-button">CANCEL ORDER</button>
+              <button class="btn btn-primary custom-button">TRACK ORDER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<div class="container-fluid">
+  <h2 class="text-center mt-5 mb-3"><b>My Orders</b></h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8" *ngIf="orderedProducts && orderedProducts.length > 0">
+      <div class="order" *ngFor="let order of orderedProducts; let i = index">
+        <div class="card shadow mb-4 custom-card">
+          <div class="order-header bg-dark py-3">
+            <h5 class="order-header text-white m-0">Order ID: {{ order.orderId }}</h5>
+          </div>
+          <div class="card-body custom-card-body">
+            <div class="custom-product-details">
+              <div class="row align-items-center" *ngFor="let product of order.products; let j = index">
+                <div class="col-md-2">
+                  <img class="img-fluid" [src]="'assets/AT-gallery10.jpg'" alt="product-{{ j }}-image">
+                </div>
+                <div class="col-md-8">
+                  <h3 style="text-decoration:underline;">Product Details</h3>
+                  <p class="order-item">                  
+                    <strong>Product Name:</strong> {{ product.name }} <br>
+                    <strong>Price:</strong> ₹{{ product.price }} <br>
+                    <strong>Quantity:</strong> {{ product.quantity }}
+                  </p>
+                </div>
+                <div class="col-md-2">
+                  <p class="card-text text-right">
+                    <strong>Status:</strong> In Transit <br>
+                    <strong>Payment:</strong> Credit Card (**** 7343)
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card custom-address-card">
+              <div class="card-body">
+                <div *ngFor="let address of deliveryAddress[i]">
+                  <p class="card-text">
+                    <strong>Name:</strong> {{ address.name || '----'}} <br>
+                    <strong>Mobile:</strong> {{ address.mobile || '----'}} <br>
+                    <strong>Address:</strong> {{ address.houseNumber }}, {{ address.area }}, {{ address.city }},
+                    {{ address.state }} - {{ address.pincode }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="custom-button-group">
+              <button class="btn btn-danger custom-button">CANCEL ORDER</button>
+              <button class="btn btn-primary custom-button">TRACK ORDER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+

@@ -1,14 +1,9 @@
-.empty-cart-message {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px; /* Adjust the height as needed */
-  }
+
   
   .empty-cart-message h4 {
     text-align: center;
-    font-size: 1.5rem; /* Adjust the font size as needed */
-    color: #333; /* Adjust the color as needed */
+    font-size: 1.5rem; 
+    color: #333; 
   }
   .btn {
     background-color: #007bff;
@@ -17,7 +12,7 @@
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 16px;
     margin-bottom: 1rem;
     cursor: pointer;
@@ -28,3 +23,101 @@
     justify-content: center;
     align-items: center;
 }
+
+.container-fluid {
+  padding: 0;
+  max-width: 100%;
+}
+
+.order-header {
+  text-align: center;
+  background-color: #343a40; 
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: white;
+}
+
+.custom-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-card-body {
+  flex-grow: 1;
+}
+
+.custom-product-details {
+  margin-bottom: auto; 
+}
+
+.custom-address-details {
+  text-align: right; 
+}
+
+.custom-button-group {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.custom-button {
+  width: 48%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .order {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.order-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.order-details {
+  margin-bottom: 10px;
+}
+
+.order-col {
+  margin-right: 10px;
+}
+
+.order-items {
+  margin-left: 20px;
+}
+
+.order-item {
+  margin-bottom: 5px;
+}
+
+button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c82333;
+} */
+
+
+
+
