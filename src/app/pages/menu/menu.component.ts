@@ -15,6 +15,7 @@ import { OrderService } from '../../orders/orders.service';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
+
   showMessage: boolean = false;
   message: string = '';
   cartItems: any[];
@@ -42,7 +43,7 @@ export class MenuComponent {
   userName: string = '';
   userEmail: string = '';
   userId: any;
-  orderId:any;
+  orderId: any;
   productId: any;
   productName: any;
   // productQuantity: any;
@@ -102,7 +103,6 @@ export class MenuComponent {
     this.userName = this.userService.getLoggedInUserName();
   }
 
-
   //Get Call for products
   getProducts() {
     const apiUrl = environment.products;
@@ -144,45 +144,20 @@ export class MenuComponent {
     }
 
   }
+
+  //Add to order
   addToOrder(item: any) {
     this.selectedProduct = item;
     console.log(this.selectedProduct, 'selected product')
     this.productPrice = item.Price
     this.productName = item.ProductName
     this.productId = item.ProductID,
-    this.loggedInUserId = this.userService.getLoggedInUserId();
+      this.loggedInUserId = this.userService.getLoggedInUserId();
     this.userId = this.loggedInUserId
     this.userName = this.userService.getLoggedInUserName();
   }
-  incrementQuantity() {
-    this.quantity++;
-    this.updateTotal();
-  }
 
-  // Function to decrement the quantity
-  decrementQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
-      this.updateTotal();
-    }
-  }
-  updateTotal() {
-    this.productPrice = this.selectedProduct.Price * this.quantity;
-  }
-
-  onContactFieldsSubmit() {
-    this.contactForm.markAllAsTouched();
-    if (this.contactForm.valid) {
-      this.showAdditionalFieldsOnClick()
-    }
-  }
-
-  onAddressFieldsSubmit() {
-    this.addressForm.markAllAsTouched();
-    if (this.addressForm.valid) {
-      this.showPaymentFieldsOnClick()
-    }
-  }
+  //Place Order
   placeOrder() {
     if (this.radioButtonSelected) {
       const userId = this.loggedInUserId
@@ -233,16 +208,40 @@ export class MenuComponent {
           console.error(err, 'errorrr');
         }
       );
-      // this.showAddressFields = false;
-      // this.showContactFields = false;
-      // this.showPaymentFields = false;
     }
-
   }
+
+
+  incrementQuantity() {
+    this.quantity++;
+    this.updateTotal();
+  }
+  decrementQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+      this.updateTotal();
+    }
+  }
+  updateTotal() {
+    this.productPrice = this.selectedProduct.Price * this.quantity;
+  }
+
+
   selectRadioButton() {
     this.radioButtonSelected = true;
   }
-
+  onContactFieldsSubmit() {
+    this.contactForm.markAllAsTouched();
+    if (this.contactForm.valid) {
+      this.showAdditionalFieldsOnClick()
+    }
+  }
+  onAddressFieldsSubmit() {
+    this.addressForm.markAllAsTouched();
+    if (this.addressForm.valid) {
+      this.showPaymentFieldsOnClick()
+    }
+  }
   showAdditionalFieldsOnClick() {
     this.showAddressFields = true;
     this.showOrderHistory = true;
@@ -261,7 +260,6 @@ export class MenuComponent {
     this.showPaymentFields = false;
     this.showOrderHistory = true;
   }
-
   //coupon field
   toggleCouponField() {
     this.showCouponField = !this.showCouponField;
@@ -275,10 +273,6 @@ export class MenuComponent {
       }
     }
   }
-
-
-
-
   //LOGIN,SIGNUP,FORGOT
 
   onLoginSubmit() {
@@ -400,7 +394,6 @@ export class MenuComponent {
 
     }
   }
-
   // Helper method to hide modal
   hideModal(modalId: string) {
     const modal = document.getElementById(modalId);

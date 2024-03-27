@@ -1,42 +1,43 @@
 <h2 class="text-center mt-5"><b>Shopping Cart</b></h2>
 <div class="mt-5 mb-5" style="display: flex; flex-direction: column;" *ngIf="cartProducts && cartProducts.length > 0">
-    <table class="table table-responsive" style="margin-left: 2rem;">
-        <thead>
-            <tr>
-                <th style="width: 10%;">s.no</th>
-                <th style="width: 20%;">Product Name</th>
-                <th style="width: 20%;">Price</th>
-                <th style="width: 20%;">Quantity</th>
-                <th style="width: 20%;">Total</th>
-                <th style="width: 10%;">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of cartProducts; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ item.ProductName }}</td>
-                <td>&#x20B9;{{ item.Price }}</td>
-                <td style="position: relative;">
-                    <div class="quantity-control d-flex align-items-center">
-                        <button class="btn btn-secondary" (click)="decrementQuantity(item)">
-                            <i class="bi bi-dash"></i>
-                        </button>
-                        <input type="number" [(ngModel)]="item.quantity" class="form-control text-center" min="1" />
-                        <button class="btn btn-secondary" (click)="incrementQuantity(item)">
-                            <i class="bi bi-plus"></i>
-                        </button>
-                    </div>
-                </td>
-                <td>&#x20B9;{{ item.total }}</td>
-                <td>
-                    <button class="btn btn-danger" (click)="removeFromCart(item)">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <button class="btn buttonColor mt-3 me-5 align-self-end" data-toggle="modal" data-target=".bd-example-modal-lg">CHECK OUT</button>
+  <table class="table table-responsive" style="margin-left: 2rem;">
+    <thead>
+      <tr>
+        <th style="width: 10%;">s.no</th>
+        <th style="width: 20%;">Product Name</th>
+        <th style="width: 20%;">Price</th>
+        <th style="width: 20%;">Quantity</th>
+        <th style="width: 20%;">Total</th>
+        <th style="width: 10%;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartProducts; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.ProductName }}</td>
+        <td>&#x20B9;{{ item.Price }}</td>
+        <td style="position: relative;">
+          <div class="quantity-control d-flex align-items-center">
+            <button class="btn btn-secondary" (click)="decrementQuantity(item)">
+              <i class="bi bi-dash"></i>
+            </button>
+            <input type="number" [(ngModel)]="item.quantity" class="form-control text-center" min="1" />
+            <button class="btn btn-secondary" (click)="incrementQuantity(item)">
+              <i class="bi bi-plus"></i>
+            </button>
+          </div>
+        </td>
+        <td>&#x20B9;{{ item.total }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="removeFromCart(item)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn float-end text-white bg-dark align-self-end me-4" data-toggle="modal" data-target="#checkOutModal">CHECK
+    OUT</button>
 </div>
 <div *ngIf="!cartProducts || cartProducts.length === 0" class="empty-cart-message">
   <h4>Your Cart is empty</h4>
@@ -44,18 +45,17 @@
 
 
 <!-- Checkout component code -->
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade" id="checkOutModal" tabindex="-1" role="dialog" aria-labelledby="checkOuteModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="buttonColor">
-        <div class="modal-header">
-          <h5 class="modal-title" id="loginModalLabel"><b>ATREYAPURAM PUTHAREKULU</b></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <div class="modal-header navbar-expand-lg navbar-light bg-dark">
+        <div class="d-flex align-items-center justify-content-center">
+          <img src="assets/img/logoATP2.jpg" alt="" width="25%">
         </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -105,12 +105,12 @@
                   <input type="text" formControlName="couponCode" id="couponCode"
                     class="form-control form-control-lg thick" placeholder="Enter coupon code">
                 </div>
-                <label for="showCoupon" (click)="toggleCouponField()" class="coupon ms-3">Have a
+                <!-- <label for="showCoupon" (click)="toggleCouponField()" class="coupon ms-3">Have a
                   coupon?</label>
-                <input type="checkbox" id="showCoupon" style="display: none;">
+                <input type="checkbox" id="showCoupon" style="display: none;"> -->
                 <div class="gap">
-                  <a class="mt-4">&#x20B9; {{ getTotalPrice().toFixed(2) }}</a>
-                  <button class="continue" type="submit">Continue</button>
+                  <a class="mt-4">&#x20B9; {{ totalPrice }}</a>
+                  <button class="btn float-end text-white bg-dark" type="submit">Continue</button>
                 </div>
               </form>
             </div>
@@ -136,35 +136,41 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Contact Number<span class="text-danger">&nbsp;*</span></label>
-                  <input type="text" formControlName="phone" id="phone" class="form-control form-control-lg thick"
-                    placeholder="Phone" [ngClass]="{
-                      'is-invalid': addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched,
-                      'border-red': addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched
-                    }" maxlength="10">
-                  <div *ngIf="addressForm.get('phone')?.hasError('required') && addressForm.get('phone')?.touched"
-                    class="text-danger">
-                    Mobile number is required
-                  </div>
-                  <div *ngIf="addressForm.get('phone')?.hasError('pattern') && addressForm.get('phone')?.touched"
-                    class="text-danger">
-                    Phone number should contain exactly 10 numeric characters
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="pincode">Pincode<span class="text-danger">&nbsp;*</span></label>
-                  <input type="text" formControlName="pincode" id="pincode" class="form-control form-control-lg thick"
-                    placeholder="Enter Pincode" [ngClass]="{
-                      'is-invalid': addressForm.get('pincode')?.invalid && addressForm.get('pincode')?.touched,
-                      'border-red': addressForm.get('pincode')?.invalid && addressForm.get('pincode')?.touched
-                    }" maxlength="6">
-                  <div *ngIf="addressForm.get('pincode')?.hasError('required') && addressForm.get('pincode')?.touched"
-                    class="text-danger">
-                    Pincode is required
-                  </div>
-                  <div *ngIf="addressForm.get('pincode')?.hasError('pattern') && addressForm.get('pincode')?.touched"
-                    class="text-danger">
-                    pincode should contain exactly 6 numeric characters
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="exampleInputEmail1">Contact Number<span class="text-danger">&nbsp;*</span></label>
+                      <input type="text" formControlName="phone" id="phone" class="form-control form-control-lg thick"
+                        placeholder="Phone" [ngClass]="{
+                            'is-invalid': addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched,
+                            'border-red': addressForm.get('phone')?.invalid && addressForm.get('phone')?.touched
+                          }" maxlength="10">
+                      <div *ngIf="addressForm.get('phone')?.hasError('required') && addressForm.get('phone')?.touched"
+                        class="text-danger">
+                        Mobile number is required
+                      </div>
+                      <div *ngIf="addressForm.get('phone')?.hasError('pattern') && addressForm.get('phone')?.touched"
+                        class="text-danger">
+                        Phone number should contain exactly 10 numeric characters
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="pincode">Pincode<span class="text-danger">&nbsp;*</span></label>
+                      <input type="text" formControlName="pincode" id="pincode"
+                        class="form-control form-control-lg thick" placeholder="Enter Pincode" [ngClass]="{
+                            'is-invalid': addressForm.get('pincode')?.invalid && addressForm.get('pincode')?.touched,
+                            'border-red': addressForm.get('pincode')?.invalid && addressForm.get('pincode')?.touched
+                          }" maxlength="6">
+                      <div
+                        *ngIf="addressForm.get('pincode')?.hasError('required') && addressForm.get('pincode')?.touched"
+                        class="text-danger">
+                        Pincode is required
+                      </div>
+                      <div
+                        *ngIf="addressForm.get('pincode')?.hasError('pattern') && addressForm.get('pincode')?.touched"
+                        class="text-danger">
+                        pincode should contain exactly 6 numeric characters
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -204,7 +210,7 @@
                     }" minlength="5">
                   <div *ngIf="addressForm.get('area')?.hasError('required') && addressForm.get('area')?.touched"
                     class="text-danger">
-                    House Number is required
+                    Area is required
                   </div>
                 </div>
                 <div class="form-group">
@@ -227,217 +233,18 @@
                   <input type="checkbox" name="remember" class="mr-2" checked>Save Address
                 </label>
                 <div class="gap">
-                  <a class="mt-4">&#x20B9;{{ getTotalPrice().toFixed(2) }}</a>
-                  <button class="continue" type="submit">Continue</button>
+                  <a class="mt-4">&#x20B9;{{ totalPrice }}</a>
+                  <button class="btn text-white bg-dark mt-3" type="submit">Continue</button>
                 </div>
               </form>
             </div>
           </div>
-          <div class="col-md-12" *ngIf="showPaymentFields">
-            <span class="back-arrow ms-3" (click)="goToAddressFields()"><img src="assets/img/backarrow.png"
-                alt="HTML tutorial" width="20px" height="20px">&nbsp;&nbsp;</span><b>Back</b>
-            <h5 class="text-center mt-3 mb-4"><b><i>Payments</i></b></h5>
-            <div class="col-md-12">
-              <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-              <div class="container">
-                <div class="wrapper wrapper-content animated fadeInRight">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <h6><b>Pay with UPI QR</b></h6>
-                      <div class="payment-card">
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <img src="assets/img/qrcode.webp" height="90%" width="100%">
-                          </div>
-                          <div class="col-sm-6">
-                            <small>
-                              Scan the QR using any UPI app on your phone.
-                            </small>
-                            <div class="payment-icons">
-                              <img src="assets/img/phonepay.webp" alt="PhonePe" class="payment-icon" height="25%"
-                                width="20%">
-                              <img src="assets/img/gpay.avif" alt="GPay" class="payment-icon" height="40%" width="50%">
-                              <img src="assets/img/paytm.webp" alt="Paytm" class="payment-icon" height="40%"
-                                width="30%">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="ibox mt-2">
-                        <h6><b>Payment Method</b></h6>
-                        <div class="ibox-content">
-                          <div class="panel-group payments-method" id="accordion">
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <div class="pull-right">
-                                  <i class="fa fa-cc-paypal text-success"></i>
-                                </div>
-                                <h5 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">PayPal</a>
-                                </h5>
-                              </div>
-                              <div id="collapseOne" class="panel-collapse collapse">
-                                <div class="panel-body ms-3">
-
-                                  <div class="row">
-                                    <div class="col-md-10">
-                                      <h5>Summary</h5>
-                                      <strong>Product:</strong>{{ getItemNames() }} <br>
-                                      <strong>Price:</strong>: <span class="text-navy">{{ getTotalPrice().toFixed(2) }}</span>
-
-                                      <p class="m-t">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipisicing elit.
-                                      </p>
-                                      <a class="btn btn-success">
-                                        <i class="fa fa-cc-paypal">
-                                          Purchase via PayPal
-                                        </i>
-                                      </a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <div class="pull-right">
-                                  <i class="fa fa-cc-amex text-success"></i>
-                                  <i class="fa fa-cc-mastercard text-warning"></i>
-                                  <i class="fa fa-cc-discover text-danger"></i>
-                                </div>
-                                <h5 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Credit
-                                    Card</a>
-                                </h5>
-                              </div>
-                              <div id="collapseTwo" class="panel-collapse collapse in">
-                                <div class="panel-body ms-3">
-
-                                  <div class="row">
-                                    <div class="col-md-4">
-                                      <h5>Summary</h5>
-                                      <strong>Product:</strong>{{ getItemNames() }}<br>
-                                      <strong>Price:</strong>: <span class="text-navy">{{ getTotalPrice().toFixed(2) }}</span>
-
-                                      <p class="m-t">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipisicing elit, sed do
-                                        eiusmod tempor incididunt ut labore
-                                        et dolore magna aliqua.
-
-                                      </p>
-                                    </div>
-                                    <div class="col-md-8">
-                                      <form role="form" id="payment-form">
-                                        <div class="row">
-                                          <div class="col-xs-12">
-                                            <div class="form-group">
-                                              <label>CARD
-                                                NUMBER</label>
-                                              <div class="input-group">
-                                                <input type="text" class="form-control" name="Number"
-                                                  placeholder="Valid Card Number" required="">
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-xs-7 col-md-7">
-                                            <div class="form-group">
-                                              <label>EXPIRATION
-                                                DATE</label>
-                                              <input type="text" class="form-control" name="Expiry"
-                                                placeholder="MM / YY" required="">
-                                            </div>
-                                          </div>
-                                          <div class="col-xs-5 col-md-5 pull-right">
-                                            <div class="form-group">
-                                              <label>CV CODE</label>
-                                              <input type="text" class="form-control" name="CVC" placeholder="CVC"
-                                                required="">
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-xs-12">
-                                            <div class="form-group">
-                                              <label>NAME OF
-                                                CARD</label>
-                                              <input type="text" class="form-control" name="nameCard"
-                                                placeholder="NAME AND SURNAME">
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="row">
-                                          <div class="col-xs-12">
-                                            <button class="btn btn-primary" type="submit">Make a
-                                              payment!</button>
-                                          </div>
-                                        </div>
-                                      </form>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <h5 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsethree">Cash On
-                                    Delivery</a>
-                                </h5>
-                              </div>
-                              <div id="collapsethree" class="panel-collapse collapse">
-                                <div class="panel-body ms-3">
-
-                                  <div class="row">
-                                    <div class="col-md-10">
-                                      <h5>Summary</h5>
-                                      <strong>Product:</strong>{{ getItemNames() }}<br>
-                                      <strong>Price:</strong>: <span class="text-navy">{{ getTotalPrice().toFixed(2) }}</span>
-
-                                      <p class="m-t">
-                                        Lorem ipsum dolor sit amet,
-                                        consectetur adipisicing elit.
-                                      </p>
-                                      <div class="form-check">
-                                        <input type="radio" id="cashOnDelivery" name="paymentMethod"
-                                          class="form-check-input">
-                                        <label for="cashOnDelivery" class="form-check-label">Cash on
-                                          Delivery</label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 text-center">
-                      <button class="paynow" (click)="showAdditionalFieldsOnClick()">Pay
-                        Now</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 border-left" *ngIf="!showPaymentFields">
+          <div class="col-md-6 border-left" *ngIf="showOrderHistory">
             <h5 class="text-center mt-3 mb-3"><b><i>Order Summary</i></b></h5>
             <div class="row">
               <div class="col-md-12">
-                <strong>Product:</strong>: {{ getItemNames() }} <br>
-                <strong>Price:</strong>: <span class="text-navy">&#x20B9; {{ getTotalPrice().toFixed(2) }}</span>
-
+                <strong>Product:</strong>: {{ productName }} <br>
+                <strong>Price:</strong>: <span class="text-navy">&#x20B9; {{ totalPrice}}</span>
                 <p class="m-t">
                   Lorem ipsum dolor sit amet,
                   consectetur adipisicing elit.
@@ -445,7 +252,7 @@
                 <div class="borderTopBottom">
                   <div class="total-amount  text-muted">
                     <span class="label">Total Price (incl. taxes)</span>
-                    <a class="amount">&#x20B9; {{ getTotalPrice().toFixed(2) }}</a>
+                    <a class="amount">&#x20B9; {{ totalPrice }}</a>
                   </div>
 
                   <div class="total-amount text-muted mt-2">
@@ -455,11 +262,63 @@
                 </div>
                 <div class="total-amount mt-3">
                   <span class="label">Total Amount</span>
-                  <a class="amount">&#x20B9; {{ getTotalPrice().toFixed(2) }}</a>
+                  <a class="amount">&#x20B9; {{ totalPrice}}</a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="col-md-12" *ngIf="showPaymentFields">
+          <span class="back-arrow ms-3" (click)="showAdditionalFieldsOnClick()"><img src="assets/img/backarrow.png"
+              alt="HTML tutorial" width="20px" height="20px">&nbsp;&nbsp;</span><b>Back</b>
+          <h5 class="text-center"><b><i>Payment</i></b></h5>
+          <div class="col-md-12">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+            <div class="container">
+              <div class="wrapper wrapper-content animated fadeInRight">
+                <h5 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsethree">Cash On
+                    Delivery</a>
+                </h5>
+                <div class="row">
+                  <div class="col-md-10">
+                    <h5>Summary</h5>
+                    <strong>Product:</strong>{{ productName || '----'}}<br>
+                    <!-- <strong>Quantity:</strong>{{ quantity || '----' }}<br> -->
+                    <strong>Price:</strong>: <span class="text-navy">{{
+                      totalPrice || '----' }}</span>
+
+                    <p class="m-t">
+                      Lorem ipsum dolor sit amet,
+                      consectetur adipisicing elit.
+                    </p>
+                    <div class="form-check">
+                      <input type="radio" id="cashOnDelivery" name="paymentMethod" class="form-check-input"
+                        (change)="selectRadioButton()">
+                      <label for="cashOnDelivery" class="form-check-label">Cash on
+                        Delivery</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 text-center mt-3">
+                    <button class="btn text-white bg-dark text-center mt-3" (click)="placeOrder()"
+                      [disabled]="!radioButtonSelected">Place
+                      Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12" *ngIf="paymentSuccess" class="text-center">
+          <div class="success-icon">
+            <i class="fas fa-check-circle fa-5x mt-3 mb-4"></i>
+          </div>
+          <h6>Hey {{userName}}</h6>
+          <h5><b>Orders has been placed successfully!</b></h5>
+          <h6>We'll send you a shipping confirmation email<br> as soon as your order ships.</h6>
+          <button class="btn text-white bg-dark text-center mt-3">Track your order</button>
         </div>
       </div>
     </div>
