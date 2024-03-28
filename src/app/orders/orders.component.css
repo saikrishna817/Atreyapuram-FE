@@ -57,11 +57,24 @@
 .custom-button-group {
   display: flex;
   justify-content: space-between; 
+  padding-top: 20px;
 }
 
 .custom-button {
-  width: 48%;
+  width: 18%;
 }
+
+
+.info-title {
+  font-weight: bold; 
+  color: #000; 
+}
+
+.custom-button {
+  background-color: #000 !important; 
+}
+
+
 
 
 
