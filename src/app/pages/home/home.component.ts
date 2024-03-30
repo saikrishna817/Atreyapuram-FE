@@ -13,7 +13,7 @@ export class HomeComponent {
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
       }
     });
   }
