@@ -30,6 +30,7 @@ import { DryfruitsComponent } from './dryfruits/dryfruits.component';
 import { CombosavingComponent } from './combosaving/combosaving.component';
 import { AdminComponent } from './admin/admin.component';
 import { OrdersComponent } from './orders/orders.component';
+import { TrackOrderComponent } from './track-order/track-order.component';
 
 
 
@@ -58,6 +59,7 @@ import { OrdersComponent } from './orders/orders.component';
     CombosavingComponent,
     AdminComponent,
     OrdersComponent,
+    TrackOrderComponent,
     
     
   ],
