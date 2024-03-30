@@ -87,8 +87,8 @@ div.desc {
   flex-wrap: wrap;
   margin: 20px auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  background-image: url('/assets/design6.jpg'); 
+  /* background-color: rgba(255, 255, 255, 0.8);
+  background-image: url('/assets/design6.jpg');  */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -118,7 +118,7 @@ div.desc {
 .icon-item p {
   margin-top: 15px;
   font-size: 16px;
-  color: white;
+  color: black;
 }
 
 

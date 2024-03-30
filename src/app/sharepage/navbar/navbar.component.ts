@@ -34,6 +34,7 @@ export class NavbarComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
   forgotPsdForm: FormGroup;
+  passwordVisible: boolean = false;
   items: any[] = [];
 
   constructor(
@@ -79,6 +80,16 @@ export class NavbarComponent implements OnInit {
     // Fetch logged-in user details when component initializes
     this.userName = this.userService.getLoggedInUserName();
   }
+
+  // Function to toggle password visibility
+  togglePasswordVisibility(event: MouseEvent) {
+    if (event) {
+      event.preventDefault();
+    }
+    this.passwordVisible = !this.passwordVisible;
+  }
+  
+
   //LOGIN
   onLoginSubmit() {
     this.loginForm.markAllAsTouched();
@@ -146,7 +157,7 @@ export class NavbarComponent implements OnInit {
                   modalBackdrop.parentNode?.removeChild(modalBackdrop);
                 }
               }
-            }, 2000);
+            }, 3000);
             this.registerForm.reset();
           } else {
             this.errorMessage = 'User already exists with this email';
@@ -200,7 +211,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
- 
+
   //  hideModal(modalId: string) {
   //   const modal = document.getElementById(modalId);
   //   if (modal) {
@@ -223,10 +234,10 @@ export class NavbarComponent implements OnInit {
       modal.setAttribute('aria-modal', 'false');
       modal.setAttribute('style', 'display: none');
     }
-  
+
     // Remove the modal-open class from body
     document.body.classList.remove('modal-open');
-  
+
     // Remove the modal backdrop if exists
     const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
     if (modalBackdrop) {
@@ -235,17 +246,17 @@ export class NavbarComponent implements OnInit {
         modalBackdrop.parentNode?.removeChild(modalBackdrop);
       }, 300); // Adjust the delay as needed to match your modal transition
     }
-  
+
     // Reset body padding-right
     document.body.style.paddingRight = '0';
-  
+
     // Restore body scroll behavior
     document.body.style.overflow = 'auto';
   }
-  
+
 
 }
 
 
 
-  // Helper method to hide modal
+// Helper method to hide modal

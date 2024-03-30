@@ -172,9 +172,12 @@ marquee, nav {
 
 @media (max-width: 768px) {
   .navbar img {
-    width: 80% !important; /* Adjusted to not be 100%, allowing some space for icons */
+    width: 100% !important;
     height: auto !important;
-    margin-right: auto; /* Ensures logo is left-aligned */
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .d-flex, .search, .navbar-nav {
@@ -184,11 +187,10 @@ marquee, nav {
   }
 
   .navbar-nav {
-    flex-direction: row !important; /* Ensures icons are side by side */
+    flex-direction: row !important; 
     justify-content: flex-end; /* Aligns icons to the right */
-    padding-right: 15px; /* Adds some padding on the right */
-    margin-top: 0; /* Adjusts margin to align icons better */
-    width: auto; /* Allows navbar-nav to size according to its content */
+    /* padding-right: 15px; */
+    margin-top: 0;
   }
 
   .search input[type="text"] {
