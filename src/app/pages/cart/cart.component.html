@@ -36,7 +36,8 @@
       </tr>
     </tbody>
   </table>
-  <button class="btn float-end text-white bg-dark align-self-end me-4" data-toggle="modal" data-target="#checkOutModal">CHECK
+  <button class="btn float-end text-white bg-dark align-self-end me-4" data-toggle="modal"
+    data-target="#checkOutModal">CHECK
     OUT</button>
 </div>
 <div *ngIf="!cartProducts || cartProducts.length === 0" class="empty-cart-message">
@@ -318,7 +319,7 @@
           <h6>Hey {{userName}}</h6>
           <h5><b>Orders has been placed successfully!</b></h5>
           <h6>We'll send you a shipping confirmation email<br> as soon as your order ships.</h6>
-          <button class="btn text-white bg-dark text-center mt-3">Track your order</button>
+          <button class="btn text-white bg-dark text-center mt-3" routerLink="/orders">Show Orders</button>
         </div>
       </div>
     </div>
