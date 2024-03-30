@@ -1,19 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+@Injectable({
+  providedIn: 'root'
 })
-export class AppComponent implements OnInit {
-  title = 'puthareku';
+export class ExampleService {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
-  ngOnInit(): void {
+  doSomething(): void {
     if (isPlatformBrowser(this.platformId)) {
       // Access window object here
       console.log(window);
@@ -21,4 +17,3 @@ export class AppComponent implements OnInit {
   }
 
 }
-
