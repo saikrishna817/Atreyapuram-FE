@@ -33,8 +33,6 @@ export class OrdersComponent implements OnInit {
   //Get order data for a particular user[logged-in user]
   getOrderDetails() {
     this.userId = this.userService.getLoggedInUserId();
-    console.log('hii  orderss',this.userId)
-    console.log('hii  length',this.orderIds.length)
     if (this.userId) {
       const userId = this.userId;
       const postData = {
@@ -83,9 +81,6 @@ export class OrdersComponent implements OnInit {
       }
     );
   }
-
-
-
 }
 
 

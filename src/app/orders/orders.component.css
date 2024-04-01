@@ -1,40 +1,6 @@
-
-  
-  .empty-cart-message h4 {
-    text-align: center;
-    font-size: 1.5rem; 
-    color: #333; 
-  }
-  .btn {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    /* display: inline-block; */
-    font-size: 16px;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.button-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .container-fluid {
   padding: 0;
   max-width: 100%;
-}
-
-.order-header {
-  text-align: center;
-  background-color: #343a40; 
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  color: white;
 }
 
 .custom-card {
@@ -57,12 +23,12 @@
 .custom-button-group {
   display: flex;
   justify-content: space-between; 
-  padding-top: 20px;
+  /* padding-top: 20px; */
 }
-
+/* 
 .custom-button {
   width: 18%;
-}
+} */
 
 
 .info-title {

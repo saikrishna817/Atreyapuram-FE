@@ -1,5 +1,7 @@
 
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +28,7 @@ export class OrderService {
     private saveOrderIds() {
         localStorage.setItem('orderIds', JSON.stringify(this.orderIds));
     }
+
 
     setOrderId(id: any) {
         this.productOrderId = id;
