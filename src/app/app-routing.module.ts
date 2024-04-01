@@ -18,6 +18,7 @@ import { DryfruitsComponent } from './dryfruits/dryfruits.component';
 import { CombosavingComponent } from './combosaving/combosaving.component';
 import { AdminComponent } from './admin/admin.component';
 import { OrdersComponent } from './orders/orders.component';
+import { TrackOrderComponent } from './track-order/track-order.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,7 +40,8 @@ const routes: Routes = [
   { path: 'dryfruits', component: DryfruitsComponent },
   { path: 'combosaving', component: CombosavingComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'orders', component: OrdersComponent }
+  { path: 'orders', component: OrdersComponent },
+  { path: 'TrackOrder', component: TrackOrderComponent}
 ];
 
 @NgModule({
