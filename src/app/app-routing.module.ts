@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'combosaving', component: CombosavingComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'orders', component: OrdersComponent },
-  { path: 'TrackOrder', component: TrackOrderComponent}
+  { path: 'trackOrder/:orderId', component: TrackOrderComponent}
 ];
 
 @NgModule({
