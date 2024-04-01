@@ -80,24 +80,18 @@ div.desc {
 
 
 
-.icon-container {
+/* .icon-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
   margin: 20px auto;
   padding: 20px;
-  /* background-color: rgba(255, 255, 255, 0.8);
-  background-image: url('/assets/design6.jpg');  */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
   max-width: 100%;
 }
-
-
 
 .icon-item {
   text-align: center;
@@ -106,19 +100,46 @@ div.desc {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-
 .icon-item img {
-  width: 100px; /* Set your desired width */
-  height: 100px; /* Set your desired height */
-  object-fit: contain; /* Ensures the entire image fits within the specified dimensions */
-}
+  width: 100px; 
+  height: 100px; 
+  object-fit: contain; 
+} */
 
 
-.icon-item p {
+/* .icon-item p {
   margin-top: 15px;
   font-size: 16px;
   color: black;
+} */
+
+.icon-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.icon-item {
+  flex-grow: 1; /* Allows each item to grow to fill the container */
+  text-align: center;
+  padding: 0 5px; /* Adds some padding between items */
+}
+
+.icon-item img {
+  width: 100%; /* Makes the image responsive */
+  max-width: 60px; /* Sets a maximum width to ensure icons don't get too large */
+  height: auto; /* Maintains the aspect ratio of the image */
+}
+
+@media (max-width: 778px) {
+  .icon-item img {
+    max-width: 50px; /* Smaller icons on smaller screens */
+  }
+
+  .icon-item p {
+    font-size: 12px; /* Smaller text on smaller screens */
+  }
 }
 
 
@@ -126,9 +147,36 @@ div.desc {
 
 
 
+.carousel-inner img {
+  height: 200px; /* Reduced height for better appearance on mobile */
+  object-fit: cover; /* Maintain aspect ratio without stretching images */
+  width: 100%; /* Ensure full width is covered */
+}
 
-/* Media Query for smaller screens */
-@media (max-width: 600px) {
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .carousel-inner img {
+      height: 350px; /* Slightly larger for tablets */
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .carousel-inner img {
+      height: 450px; /* Increased height for desktops */
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .carousel-inner img {
+      height: 550px; /* Larger height for large desktops, adjust as necessary */
+  }
+}
+
+
+
+/* @media (max-width: 600px) {
   .icon-container {
       max-width: 90%;
       margin: 30px auto;
@@ -140,9 +188,7 @@ div.desc {
   .icon-item p {
       font-size: 14px;
   }
-}
-
-
+} */
 
 
 
