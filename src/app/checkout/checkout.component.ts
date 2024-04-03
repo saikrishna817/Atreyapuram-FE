@@ -14,7 +14,7 @@ export class CheckoutComponent {
 
   checkoutForm: FormGroup;
   showCouponField = false;
-  cartItems: any[];
+  // cartItems: any[];
   showContactFields: boolean = true;
   showAddressFields: boolean = false;
   showPaymentFields: boolean = false;
@@ -27,7 +27,7 @@ export class CheckoutComponent {
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
     });
-    this.cartItems = this.cartService.getCartItems();
+    // this.cartItems = this.cartService.getCartItems();
   }
 
   //coupon field

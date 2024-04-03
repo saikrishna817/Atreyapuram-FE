@@ -1,74 +1,44 @@
-// cart.service.ts
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { UserService } from '../../sharepage/navbar/navbar.service';
-import { environment } from '../../../environments/environment.prod';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private cartItemsCountSubject = new BehaviorSubject<number>(0);
+  cartItemsCount$ = this.cartItemsCountSubject.asObservable();
+  private cartItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  public cartItems$: Observable<any[]> = this.cartItemsSubject.asObservable();
 
-  private cartItems: any[] = [];
-  private cartProducts: any[] = [];
+  constructor(@Inject(DOCUMENT) private document: Document) {
 
-  items: any[] = [];
-  private cartCountSubject = new Subject<number>();
-  cartCount$ = this.cartCountSubject.asObservable();
-
-  constructor(private userService: UserService,
-    private http: HttpClient,) {
-    this.loadCartItems();
-  }
-
-  private loadCartItems() {
-    console.log(this.cartProducts,'load cart products')
-    if (typeof localStorage !== 'undefined') {
-      const storedItems = localStorage.getItem('cartProducts');
-      this.cartProducts = storedItems ? JSON.parse(storedItems) : [];
+    // Retrieve cart items count from local storage when the service is initialized
+    if (this.document.defaultView && this.document.defaultView.localStorage) {
+      const count = Number(localStorage.getItem('cartItemsCount'));
+      if (!isNaN(count)) {
+        this.cartItemsCountSubject.next(count);
+      }
     }
   }
 
-
-  saveCartItems(items: any[] = this.cartItems) {
-    console.log(this.cartItems,'saved cart productsss')
-    if (!Array.isArray(items)) {
-      console.error('Items must be an array.');
-      return;
+  updateCartItemsCount(count: number) {
+    // Update cart items count in local storage
+    if (this.document.defaultView && this.document.defaultView.localStorage) {
+      localStorage.setItem('cartItemsCount', count.toString());
     }
-    const itemsWithQuantity = items.map(item => ({ ...item, quantity: item.quantity || 1 }));
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('cartItems', JSON.stringify(itemsWithQuantity));
-    }
+    this.cartItemsCountSubject.next(count);
+  }
+  public updateCartItems(cartItems: any[]): void {
+    this.cartItemsSubject.next(cartItems);
+  }
+  // Method to check if an item is already in the cart
+  isItemInCart(productId: string): boolean {
+    console.log(this.cartItems$,'present items in ca')
+    const currentCartItems = this.cartItemsSubject.value;
+    console.log(currentCartItems, 'currenttt itemsuuu in cartttt')
+    return currentCartItems.some(item => item.ProductID === productId);
   }
 
-
-  getCartItems() {
-    console.log(this.cartItems, 'cppp')
-    return this.cartItems;
-  }
-
-  //Products count
-  getCartItemCount(): number {
-    return this.cartItems.length;
-  }
-
-  //Added to cart
-  addToCart(item: any) {
-    const previousCount = this.getCartItemCount();
-    this.cartItems.push(item);
-    this.saveCartItems();
-    console.log(this.cartItems, 'itemssss')
-    const currentCount = this.getCartItemCount();
-    if (previousCount === 0 && currentCount > 0) {
-      this.updateCartCount();
-    }
-  }
-
-  //update count
-  private updateCartCount() {
-    this.cartCountSubject.next(this.getCartItemCount());
-  }
-
+  
 }

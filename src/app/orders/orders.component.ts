@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../sharepage/navbar/navbar.service';
 import { OrderService } from './orders.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-orders',
@@ -16,11 +17,13 @@ export class OrdersComponent implements OnInit {
   orderedProducts: any;
   deliveryAddress: any[] = [];
   imageUrl: any;
+  loading: boolean = true;
 
   constructor(
     private userService: UserService,
     private orderservice: OrderService,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastr: ToastrService
   ) {
     this.orderIds = this.orderservice.getOrderId();// Get order ids from Order service
   }
@@ -47,6 +50,7 @@ export class OrdersComponent implements OnInit {
               products: JSON.parse(order.product)
             };
           });
+          this.loading = false;
           for (const order of this.orderedProducts) {
             this.getOrderAddress(order.orderId);
           }
@@ -81,7 +85,39 @@ export class OrdersComponent implements OnInit {
       }
     );
   }
+
+  confirmCancelOrder(item: any) {  
+    const orderID = item.orderId;
+    const userId = this.userService.getLoggedInUserId();
+    console.log(orderID, userId, item, 'Cancel Orderrr')
+    const postData = {
+      filter: {
+        userid: userId,
+        orderId: orderID
+      }
+    };
+    const apiUrl = environment.deleteCartItem;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: postData // Include payload as the body
+    };
+    // Make the HTTP request to delete the item
+    this.http.request('delete', apiUrl, httpOptions).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.toastr.success('Order has been canceled successfully');
+        // this.cartProducts = []
+        // this.getCartItems()
+      },
+      (err: any) => {
+        console.error(err);
+      }
+    );
+  }
 }
+
 
 
 

@@ -16,8 +16,10 @@ import { OrderService } from '../../orders/orders.service';
 export class CartComponent implements OnInit {
 
   cartItems: any[] = [];
+  loading: boolean = true;
   cartProducts: any[] = [];
-  duplicateItemIds: any
+  duplicateItemIds: any;
+  cartItemsCount:any;
   userId: any;
   loggedInUserId: any;
   productId: any;
@@ -84,6 +86,7 @@ export class CartComponent implements OnInit {
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           this.cartItems = res.products;
+          this.loading = false;
           this.duplicateItemIds = res.items;
           let productNames: string[] = [];
           for (let product of this.cartItems) {
@@ -95,6 +98,7 @@ export class CartComponent implements OnInit {
             this.cartProducts.push(obj);
             productNames.push(product.ProductName);
           }
+          this.updateCartItemsCount();
           this.productName = productNames.join(', ');
         },
         (err: any) => {
@@ -104,26 +108,69 @@ export class CartComponent implements OnInit {
     }
   }
 
+  //Update cart items 
+  updateCartItemsCount() {
+    this.cartItemsCount = this.cartProducts.length;
+    console.log(this.cartItemsCount,'wo serrvice')
+    this.cartService.updateCartItemsCount(this.cartItemsCount);
+    console.log(this.cartItemsCount,'cart items count')
+  }
+
   //Increase product quantity
   incrementQuantity(item: any) {
     item.quantity++;
-    this.updateTotal(item);
-    this.cartService.saveCartItems(this.cartItems);
+    item.total = parseFloat(item.Price) * item.quantity;
+    this.updateTotal();
+    this.productId = item.ProductID;
+    this.userName = this.userService.getLoggedInUserName();
+    this.userId = this.userService.getLoggedInUserId();
+    if (this.userName) {
+      const userId = this.userId;
+      const postData = {
+        userid: userId,
+        product: this.productId
+      };
+      const apiUrl = environment.addCart;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          console.error(err, 'errorrr');
+        }
+      );
+    }
   }
 
   //Decrease product quantityy
   decrementQuantity(item: any) {
     if (item.quantity > 1) {
       item.quantity--;
-      this.updateTotal(item);
-      this.cartService.saveCartItems(this.cartItems);
-
+      item.total = parseFloat(item.Price) * item.quantity;
+      this.updateTotal();
+      // this.cartService.saveCartItems(this.cartItems);
+      const quantity = item.quantity
+      const postData = {
+        quantity: quantity,
+      };
+      const apiUrl = environment.placeOrder;
+      this.http.post(apiUrl, postData).subscribe(
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          console.error(err);
+        }
+      );
     }
   }
 
-  //Update Total Price
-  updateTotal(item: any) {
-    item.total = item.quantity * item.Price;
+  updateTotal() {
+    this.totalPrice = 0; // Reset total price
+    for (let product of this.cartProducts) {
+      this.totalPrice += product.total;
+      console.log(this.totalPrice,'updated total priceeeeee')
+    }
   }
 
   // Delete API Call to delete single item from cart
@@ -148,7 +195,9 @@ export class CartComponent implements OnInit {
       (res: any) => {
         console.log(res);
         this.cartProducts = []
-        this.getCartItems()
+        this.loading = true
+        this.getCartItems();
+        this.updateTotal()
       },
       (err: any) => {
         console.error(err);
@@ -264,14 +313,14 @@ export class CartComponent implements OnInit {
           );
           setTimeout(() => {
             this.paymentSuccess = false;
-            this.hideModal('checkOutModal');
+            // this.hideModal('checkOutModal');
             this.showContactFields = true;
             this.showAddressFields = false;
             this.showPaymentFields = false;
             this.showOrderHistory = true;
             this.radioButtonSelected = false;
             this.quantity = 1;
-          }, 7000);
+          }, 5000);
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -293,7 +342,7 @@ export class CartComponent implements OnInit {
       }
     }
   }
-  
+
   // Helper method to hide modal
   hideModal(modalId: string) {
     const modal = document.getElementById(modalId);

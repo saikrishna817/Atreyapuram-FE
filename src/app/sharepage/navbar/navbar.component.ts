@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
   forgotPsdForm: FormGroup;
   passwordVisible: boolean = false;
   items: any[] = [];
+  cartItemsCount: any;
 
   constructor(
     public cartService: CartService,
@@ -59,14 +60,17 @@ export class NavbarComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
-    this.cartService.cartCount$.subscribe((count: number) => {
-      if (count > 0) {
-        this.cartItemCount = count;
-      }
-    });
+    // this.cartService.cartCount$.subscribe((count: number) => {
+    //   if (count > 0) {
+    //     this.cartItemCount = count;
+    //   }
+    // });
 
   }
   ngOnInit(): void {
+    this.cartService.cartItemsCount$.subscribe(count => {
+      this.cartItemsCount = count;
+    });
     // Subscribe to router events to detect navigation end
     this.router.events
       .pipe(
@@ -88,7 +92,7 @@ export class NavbarComponent implements OnInit {
     }
     this.passwordVisible = !this.passwordVisible;
   }
-  
+
 
   //LOGIN
   onLoginSubmit() {
@@ -254,9 +258,14 @@ export class NavbarComponent implements OnInit {
     document.body.style.overflow = 'auto';
   }
 
+  logout() {
+    // this.userService.setLoggedInUserDetails('', '');
+    // this.router.navigate(['/home']);
+    this.userService.clearLoggedInUserDetails();
+    this.userName = '';
+    this.router.navigate(['/home']);
+  }
 
 }
 
 
-
-// Helper method to hide modal

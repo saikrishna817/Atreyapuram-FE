@@ -8,6 +8,7 @@ import { UserService } from '../../sharepage/navbar/navbar.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { OrderService } from '../../orders/orders.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
@@ -17,8 +18,9 @@ import { OrderService } from '../../orders/orders.service';
 export class MenuComponent {
 
   showMessage: boolean = false;
+  loading: boolean = true;
   message: string = '';
-  cartItems: any[];
+  // cartItems: any[];
   products: any;
   addressForm: FormGroup;
   contactForm: FormGroup;
@@ -88,7 +90,7 @@ export class MenuComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
     });
-    this.cartItems = this.cartService.getCartItems();
+    // this.cartItems = this.cartService.getCartItems();
   }
 
   ngOnInit(): void {
@@ -103,12 +105,14 @@ export class MenuComponent {
     this.userName = this.userService.getLoggedInUserName();
   }
 
+
   //Get Call for products
   getProducts() {
     const apiUrl = environment.products;
     this.http.get(apiUrl).subscribe(
       (res: any) => {
-        this.products = res.products
+        this.products = res.products;
+        this.loading = false;
       },
       (err: any) => {
         console.log(err)
@@ -118,22 +122,29 @@ export class MenuComponent {
 
   //Add to Cart
   addToCart(item: any) {
-    this.productId = item.ProductID
+    console.log(item,'itemmmmmmmmm')
+    this.productId = item.ProductID;
     this.userName = this.userService.getLoggedInUserName();
     this.userId = this.userService.getLoggedInUserId();
     if (this.userName) {
-      const userId = this.userId
+      const userId = this.userId;
       const postData = {
         userid: userId,
         product: this.productId
       };
-      this.cartService.addToCart(item)
+  
       const apiUrl = environment.addCart;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          console.log(res);
+          console.log(res, 'response from backend');
+          if (!res.duplicate) { // Check if res.duplicate is false
+            // Increment cart count by 1 and update it
+            this.cartService.cartItemsCount$.pipe(take(1)).subscribe(count => {
+              this.cartService.updateCartItemsCount(count + 1);
+            });
+          }
           this.showMessage = true;
-          this.message = "Product added to cart successfully";
+          this.message = res.duplicate ? "Product already exists in cart" : "Product added to cart successfully";
           setTimeout(() => {
             this.showMessage = false;
           }, 3000);
@@ -141,10 +152,12 @@ export class MenuComponent {
         (err: any) => {
           console.error(err, 'errorrr');
         }
-      )
+      );
+      
     }
-
   }
+  
+  
 
   //Add to order
   addToOrder(item: any) {
@@ -196,14 +209,14 @@ export class MenuComponent {
           this.paymentSuccess = true;
           setTimeout(() => {
             this.paymentSuccess = false;
-            this.hideModal('checkOutModal');
+            // this.hideModal('checkOutModal');
             this.showContactFields = true;
             this.showAddressFields = false;
             this.showPaymentFields = false;
             this.showOrderHistory = true;
             this.radioButtonSelected = false;
             this.quantity = 1;
-          }, 7000);
+          }, 5000);
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -226,6 +239,7 @@ export class MenuComponent {
   updateTotal() {
     this.productPrice = this.selectedProduct.Price * this.quantity;
   }
+
 
 
   selectRadioButton() {

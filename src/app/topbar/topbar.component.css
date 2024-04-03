@@ -1,5 +1,4 @@
-
- .navbar {
+.navbar {
   background-color: #2ecc71;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -27,18 +26,21 @@
   content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 0; /* Changed from right: 0; */
+  width: 0; /* Changed from right: 0; */
   height: 2px;
   background-color: #3498db;
+  transform-origin: left; /* Added */
   transform: scaleX(0);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Changed transition property */
 }
 
 .navbar-nav .nav-link:hover::before,
 .navbar-nav .nav-link.active-link::before {
-  transform: scaleX(1);
+  width: 100%; /* Changed from transform: scaleX(1); */
+  transform: scaleX(1); /* Added */
 }
+
 
 .navbar-nav .active-link {
   background-color: #3498db !important;
@@ -46,7 +48,7 @@
   border-radius: 5px;
 }
 
-/* St the text color for the Home link  */
+/* Set the text color for the Home link  */
 .navbar-nav .active-link .nav-link,
 .navbar-nav .nav-item:first-child .nav-link {
   color: #050101 !important;
@@ -64,10 +66,3 @@
 .nav-link, .nav-link.active-link {
   transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
 }
-
-
-
-
-
-
-

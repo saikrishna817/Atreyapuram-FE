@@ -120,9 +120,9 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.cartService.cartCount$.subscribe((count: number) => {
-      this.cartItemCount = count;
-    });
+    // this.cartService.cartCount$.subscribe((count: number) => {
+    //   this.cartItemCount = count;
+    // });
     this.openModal(); // Open modal on component initialization
   }
 

@@ -33,10 +33,8 @@ export class ContactComponent {
 
 
   onSubmit() {
-    console.log('invalid')
     this.contactUsForm.markAllAsTouched();
     if (this.contactUsForm.valid) {
-      console.log('Validdd 1');
       const postData = {
         document: {
           fname: this.contactUsForm.get('fname')!.value,
