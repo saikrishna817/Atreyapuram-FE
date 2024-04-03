@@ -31,6 +31,7 @@ import { CombosavingComponent } from './combosaving/combosaving.component';
 import { AdminComponent } from './admin/admin.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 
 
@@ -60,6 +61,7 @@ import { TrackOrderComponent } from './track-order/track-order.component';
     AdminComponent,
     OrdersComponent,
     TrackOrderComponent,
+    AdminPanelComponent,
     
     
   ],

@@ -19,6 +19,7 @@ import { CombosavingComponent } from './combosaving/combosaving.component';
 import { AdminComponent } from './admin/admin.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,7 +42,8 @@ const routes: Routes = [
   { path: 'combosaving', component: CombosavingComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'orders', component: OrdersComponent },
-  { path: 'trackOrder/:orderId', component: TrackOrderComponent}
+  { path: 'trackOrder/:orderId', component: TrackOrderComponent},
+  { path: 'adminpanel', component: AdminPanelComponent}
 ];
 
 @NgModule({
