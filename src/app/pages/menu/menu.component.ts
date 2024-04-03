@@ -147,7 +147,7 @@ export class MenuComponent {
           this.message = res.duplicate ? "Product already exists in cart" : "Product added to cart successfully";
           setTimeout(() => {
             this.showMessage = false;
-          }, 3000);
+          }, 1000);
         },
         (err: any) => {
           console.error(err, 'errorrr');

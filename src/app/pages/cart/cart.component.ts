@@ -111,9 +111,7 @@ export class CartComponent implements OnInit {
   //Update cart items 
   updateCartItemsCount() {
     this.cartItemsCount = this.cartProducts.length;
-    console.log(this.cartItemsCount,'wo serrvice')
     this.cartService.updateCartItemsCount(this.cartItemsCount);
-    console.log(this.cartItemsCount,'cart items count')
   }
 
   //Increase product quantity
@@ -169,7 +167,6 @@ export class CartComponent implements OnInit {
     this.totalPrice = 0; // Reset total price
     for (let product of this.cartProducts) {
       this.totalPrice += product.total;
-      console.log(this.totalPrice,'updated total priceeeeee')
     }
   }
 
