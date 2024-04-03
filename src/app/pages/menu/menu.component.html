@@ -1,6 +1,9 @@
 <h3 class="mt-5 text-center"><b>Our Varieties of Putharekulu</b></h3>
 <div class="container mt-5">
   <div class="row">
+    <div *ngIf="loading" class="col-md-12 text-center mt-5 mb-5">
+      <i class="fa fa-spinner fa-spin fa-3x"></i>
+    </div>
     <div *ngFor="let item of products" class="col-md-3 mb-4">
       <div class="card box h-100">
         <img class="box-image" [src]="item.Image" alt="{{item.name}}">
@@ -306,7 +309,7 @@
           <h6>Hey {{userName}}</h6>
           <h5><b>Order has been placed successfully!</b></h5>
           <h6>We'll send you a shipping confirmation email<br> as soon as your order ships.</h6>
-          <button class="btn text-white bg-dark text-center mt-3" routerLink="/orders">Show Orders</button>
+          <!-- <button class="btn text-white bg-dark text-center mt-3" routerLink="/orders">Show Orders</button> -->
         </div>
       </div>
     </div>
