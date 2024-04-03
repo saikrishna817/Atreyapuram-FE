@@ -253,3 +253,15 @@
     font-size: 1.5rem; /* Adjust the font size as needed */
     color: #333; /* Adjust the color as needed */
   }
+
+
+  /* @media (max-width: 576px) {
+    .quantity-control button {
+      margin-right: 5px; 
+    }
+  
+    .quantity-control input {
+      min-width: 60px; 
+    }
+  } */
+  
