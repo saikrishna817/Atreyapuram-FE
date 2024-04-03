@@ -1,5 +1,9 @@
 <h2 class="text-center mt-5"><b>Shopping Cart</b></h2>
-<div class="mt-5 mb-5" style="display: flex; flex-direction: column;" *ngIf="cartProducts && cartProducts.length > 0">
+<div *ngIf="loading" class="col-md-12 text-center mt-5 mb-5">
+  <i class="fa fa-spinner fa-spin fa-3x"></i>
+</div>
+<div class="mt-5 mb-5" style="display: flex; flex-direction: column;" *ngIf="!loading && cartProducts && cartProducts.length > 0">
+  <!-- Display cart products -->
   <table class="table table-responsive" style="margin-left: 2rem;">
     <thead>
       <tr>
@@ -40,9 +44,10 @@
     data-target="#checkOutModal">CHECK
     OUT</button>
 </div>
-<div *ngIf="!cartProducts || cartProducts.length === 0" class="empty-cart-message">
+<div *ngIf="!loading && (!cartProducts || cartProducts.length === 0)" class="empty-cart-message">
   <h4>Your Cart is empty</h4>
 </div>
+
 
 
 <!-- Checkout component code -->

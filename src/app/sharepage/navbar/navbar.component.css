@@ -64,18 +64,21 @@
   padding: 2px 6px;
   font-size: 12px; */
 }
-.cartAccount{
+
+.cartAccount {
   display: flex;
   margin-left: auto;
 }
-.cart{
+
+.cart {
   margin-right: 1.5rem;
   /* position: relative; */
 }
 
-marquee, nav {
+marquee,
+nav {
   margin: 0;
-  
+
 }
 
 /* @media (max-width: 768px) {
@@ -180,15 +183,18 @@ marquee, nav {
     align-items: center;
   }
 
-  .d-flex, .search, .navbar-nav {
+  .d-flex,
+  .search,
+  .navbar-nav {
     margin-left: 0 !important;
     width: 100%;
     text-align: center;
   }
 
   .navbar-nav {
-    flex-direction: row !important; 
-    justify-content: flex-end; /* Aligns icons to the right */
+    flex-direction: row !important;
+    justify-content: flex-end;
+    /* Aligns icons to the right */
     /* padding-right: 15px; */
     margin-top: 0;
   }
@@ -198,10 +204,12 @@ marquee, nav {
   }
 
   .search {
-    order: -1; /* Makes search bar come first above the icons on small screens */
+    order: -1;
+    /* Makes search bar come first above the icons on small screens */
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Ensures search bar takes full width */
+    width: 100%;
+    /* Ensures search bar takes full width */
   }
 
   .search button {
@@ -226,24 +234,64 @@ marquee, nav {
 
   /* Ensuring cart and account icons are aligned to the left */
   .navbar .d-flex {
-    justify-content: flex-start !important; /* Overrides previous alignment for small screens */
+    justify-content: flex-start !important;
+    /* Overrides previous alignment for small screens */
     flex-wrap: wrap;
   }
 
   /* Adjust navbar padding or margins as needed for small screens */
   .navbar {
-    padding: 10px 15px; /* Example padding adjustment for smaller screens */
+    padding: 10px 15px;
+    /* Example padding adjustment for smaller screens */
+  }
+
+  .dropdown-menu {
+    min-width: auto;
+    margin: 4.125rem 0;
   }
 }
 
-.signup{
+.signup {
   cursor: pointer;
 }
 
-.forgetPsd{
-  cursor:pointer;
+.forgetPsd {
+  cursor: pointer;
 }
 
 
+/* Dropdown */
 
+.dropdown-menu {
+  min-width: auto;
+  left: -1.5rem;
+}
+
+.dropdown-item {
+  margin: 4px 0px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; /* Change the background color on hover */
+  color:#3498db
+}
+
+.dropdown-item:focus,
+.dropdown-item.active {
+  background-color: #3498db; /* Change the background color when clicked */
+  color: #ffffff; /* Change the text color when clicked */
+}
+
+.dropdown-menu.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+.cart-icon {
+  font-size: 1.2rem; /* Adjust as needed */
+}
+.small-badge {
+  font-size: 0.7rem; /* Adjust as needed */
+  padding: 0.2rem 0.4rem; /* Adjust padding for smaller badge */
+}
 
