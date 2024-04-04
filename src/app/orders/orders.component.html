@@ -46,10 +46,13 @@
 
             </div>
             <div class="custom-button-group mt-3">
-              <button class="btn bg-dark text-white" data-toggle="modal" data-target="#cancelOrderModal">Cancel Order</button>
+              <button class="btn bg-dark text-white" data-toggle="modal"
+                [attr.data-target]="'#cancelOrderModal_' + i">Cancel Order</button>
               <button class="btn bg-dark text-white" [routerLink]="['/trackOrder', order.orderId]">Track Order</button>
             </div>
-            <div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+            <!-- confirm modall -->
+            <div class="modal fade" [id]="'cancelOrderModal_' + i" tabindex="-1" role="dialog"
+              aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -63,17 +66,21 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" (click)="confirmCancelOrder(order)" data-dismiss="modal">Confirm Cancel</button>
+                    <button type="button" class="btn btn-danger" (click)="confirmCancelOrder(order)"
+                      data-dismiss="modal">Confirm Cancel</button>
                   </div>
                 </div>
               </div>
             </div>
+            <!--  -->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div  *ngIf="!loading && (!orderedProducts || orderedProducts.length === 0)">
+<div *ngIf="!loading && (!orderedProducts || orderedProducts.length === 0)">
   <h5>Your haven't places any orders</h5>
 </div>
+<div *ngIf="showMessage" class="cart-message">
+  Order has been cancelled</div>

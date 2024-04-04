@@ -6,27 +6,31 @@
             <!-- <h6>Order ID: {{this.orderId}}</h6> -->
             <article class="card tracking-steps"> <!-- Add custom class for tracking steps -->
                 <div class="card-body row">
-                    <div class="col"><strong>#Order ID </strong><br>{{this.orderId}}</div>
-                    <div class="col"><strong>Expected Arrival:</strong><br>29 nov 2019</div>
+                    <div class="col"><strong>#Order ID: </strong> {{this.orderId}}</div>
+                    <div class="col"><strong>Status:</strong> {{this.orderStatus}}</div>
+                    <div class="col"><strong>Expected Arrival:</strong> {{this.expectedArrivalDate}}</div>
                     <!-- <div class="col"><strong>Shipping By:</strong><br>BLUEDART, | <i class="fa fa-phone"></i>
                         +1598675986</div> -->
-                    <div class="col"><strong>Status:</strong><br>Order Shipped</div>
-                    <div class="col"><strong>Tracking #:</strong><br>BD045903594059</div>
+                    <!-- <div class="col"><strong>Tracking #:</strong><br>BD045903594059</div> -->
                 </div>
                 <div class="track">
-                    <div class="step active"><span class="icon"><i class="fa fa-check"></i></span><span class="text">Order
-                            confirmed</span></div>
+                    <div class="step active" [ngClass]="{'placed': this.orderStatus === 'placed', 'shipped': this.orderStatus === 'shipped', 'enroute': this.orderStatus === 'enroute', 'delivered': this.orderStatus === 'delivered'}">
+                        <span class="icon"><i class="fa fa-check"></i></span><span class="text">Order confirmed</span>
+                    </div>
                     <div class="tracking-line"></div>
-                    <div class="step active"><span class="icon"><i class="fa fa-user"></i></span><span class="text">Order
-                            Shipped</span></div>
+                    <div class="step active" [ngClass]="{'shipped': this.orderStatus === 'shipped', 'enroute': this.orderStatus === 'enroute', 'delivered': this.orderStatus === 'delivered'}">
+                        <span class="icon"><i class="fa fa-user"></i></span><span class="text">Order Shipped</span>
+                    </div>
                     <div class="tracking-line"></div>
-                    <div class="step"><span class="icon"><i class="fa fa-truck"></i></span><span class="text">Order Enroute</span></div>
+                    <div class="step" [ngClass]="{'enroute': this.orderStatus === 'enroute', 'delivered': this.orderStatus === 'delivered'}">
+                        <span class="icon"><i class="fa fa-truck"></i></span><span class="text">Order Enroute</span>
+                    </div>
                     <div class="tracking-line"></div>
-                    <!-- <div class="step"><span class="icon"><i class="fa fa-box"></i></span><span class="text">Ready for
-                            pickup</span></div> -->
-                    <!-- <div class="tracking-line"></div> -->
-                    <div class="step"><span class="icon"><i class="fa fa-thumbs-up"></i></span><span class="text">Order Delivered</span></div>
+                    <div class="step" [ngClass]="{'delivered': this.orderStatus === 'delivered'}">
+                        <span class="icon"><i class="fa fa-thumbs-up"></i></span><span class="text">Order Delivered</span>
+                    </div>
                 </div>
+                
             </article>
         </div>
     </article>

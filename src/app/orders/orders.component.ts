@@ -14,10 +14,13 @@ export class OrdersComponent implements OnInit {
 
   userId: any;
   orderIds: any;
+  orderedStatus:any;
   orderedProducts: any;
+  orderedDate: any;
   deliveryAddress: any[] = [];
   imageUrl: any;
   loading: boolean = true;
+  showMessage: boolean =false
 
   constructor(
     private userService: UserService,
@@ -44,24 +47,30 @@ export class OrdersComponent implements OnInit {
       const apiUrl = environment.getOrder;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          this.orderedProducts = res.order.map((order: any) => {
-            return {
-              orderId: order.orderid,
-              products: JSON.parse(order.product)
-            };
-          });
+          // Filter out cancelled orders and map the remaining orders
+          this.orderedProducts = res.order
+            .filter((order: any) => order.orderstatus !== 'Cancelled')
+            .map((order: any) => {
+              return {
+                orderId: order.orderid,
+                orderedDate: order.date,
+                orderedStatus: order.orderstatus,
+                products: JSON.parse(order.product)
+              };
+            });
           this.loading = false;
           for (const order of this.orderedProducts) {
             this.getOrderAddress(order.orderId);
           }
+          console.log(this.orderedProducts, 'productttsuuuu');
         },
         error => {
           console.error('Error retrieving ordered products:', error);
         }
       );
     }
-
   }
+
 
   //Get address for that particular order based on order Id
   getOrderAddress(orderId: string) {
@@ -86,33 +95,35 @@ export class OrdersComponent implements OnInit {
     );
   }
 
-  confirmCancelOrder(item: any) {  
+  confirmCancelOrder(item: any) {
+    this.orderedStatus = item.orderedStatus
+    // console.log(item, 'itemmmmm all cancel')
+    // console.log(this.orderedStatus,'deletinggg itemmm')
     const orderID = item.orderId;
     const userId = this.userService.getLoggedInUserId();
     console.log(orderID, userId, item, 'Cancel Orderrr')
     const postData = {
-      filter: {
-        userid: userId,
-        orderId: orderID
-      }
-    };
-    const apiUrl = environment.deleteCartItem;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-      body: postData // Include payload as the body
-    };
-    // Make the HTTP request to delete the item
-    this.http.request('delete', apiUrl, httpOptions).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.toastr.success('Order has been canceled successfully');
-        // this.cartProducts = []
-        // this.getCartItems()
+      updatedData: {
+        orderstatus: 'Cancelled',
       },
-      (err: any) => {
-        console.error(err);
+      orderid: orderID,
+      userid:userId
+    };
+    const apiUrl = environment.cancelOrder;
+    this.http.post(apiUrl, postData).subscribe(
+      (res: any) => {
+        console.log(res)
+        // this.toastr.success('Order has been cancelled successfully.');
+        // this.loading = true;
+        this.showMessage = true;
+        setTimeout(() => {
+          this.showMessage = false;
+        }, 5000);
+        // this.orderedProducts =[]
+        this.getOrderDetails()
+      },
+      error => {
+        console.error('Error retrieving ordered products:', error);
       }
     );
   }
