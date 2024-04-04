@@ -32,6 +32,7 @@ import { AdminComponent } from './admin/admin.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 
@@ -61,9 +62,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     AdminComponent,
     OrdersComponent,
     TrackOrderComponent,
-    AdminPanelComponent,
-    
-    
+    AdminDashboardComponent,
+      
   ],
   imports: [
     BrowserModule,
