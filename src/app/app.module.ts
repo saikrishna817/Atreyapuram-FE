@@ -33,6 +33,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { VerifyComponent } from './verify/verify.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
@@ -65,6 +66,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     OrdersComponent,
     TrackOrderComponent,
     AdminDashboardComponent,
+    VerifyComponent,
     TermsConditionsComponent,
     PrivacyPolicyComponent,
       

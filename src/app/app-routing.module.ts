@@ -20,6 +20,7 @@ import { AdminComponent } from './admin/admin.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { VerifyComponent } from './verify/verify.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'orders', component: OrdersComponent },
   { path: 'trackOrder/:orderId', component: TrackOrderComponent},
   {path: 'admindashboard', component: AdminDashboardComponent},
+  {path:'verify',component:VerifyComponent}
   {path:'terms-conditions', component : TermsConditionsComponent},
   {path:'privacy-policy', component : PrivacyPolicyComponent}
 

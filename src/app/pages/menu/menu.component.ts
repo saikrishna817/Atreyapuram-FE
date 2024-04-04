@@ -312,7 +312,7 @@ export class MenuComponent {
           this.userName = res.user.name;
           this.userEmail = res.user.email;
           this.userId = res.user.id;
-          this.userService.setLoggedInUserDetails(this.userName, this.userEmail, this.userId);
+          // this.userService.setLoggedInUserDetails(this.userName, this.userEmail, this.userId);
           this.loginForm.reset();
           this.hideModal('loginModal');
         },
@@ -402,12 +402,15 @@ export class MenuComponent {
         (err: any) => {
           console.error(err);
           if (err.error && err.error.error === "User not found.") {
-            this.errorMessage = "User doesn't exist with this email";
+            this.errorMessage = "User doesn't exist";
             this.errorTimeout = setTimeout(() => {
               this.errorMessage = undefined;
             }, 5000);
           } else {
-            this.errorMessage = "An error occurred. Please try again later.";
+            this.errorMessage = "An error occurred";
+            this.errorTimeout = setTimeout(() => {
+              this.errorMessage = undefined;
+            }, 3000);
           }
         }
       );

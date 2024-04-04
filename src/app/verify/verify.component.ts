@@ -8,17 +8,15 @@ import { filter } from 'rxjs/operators';
 import { UserService } from '../sharepage/navbar/navbar.service';
 
 @Component({
-  selector: 'app-psdchange',
-  templateUrl: './psdchange.component.html',
-  styleUrl: './psdchange.component.css'
+  selector: 'app-verify',
+  templateUrl: './verify.component.html',
+  styleUrl: './verify.component.css'
 })
-export class PsdchangeComponent {
+export class VerifyComponent {
   @ViewChild('passwordUpdated') passwordUpdated: any;
 
   resetForm!: FormGroup;
-  old_password:any;
-  userId:any;
-  userName:any
+  userName:any;
   backendError: any
   errorMessages: any = { password: [], confirmPassword: [] };
   passwordVisible: boolean = false;
@@ -29,6 +27,7 @@ export class PsdchangeComponent {
     private modalService: NgbModal,
     private router: Router,
     private http: HttpClient,
+    private route: ActivatedRoute,
     private userService: UserService,) { }
 
   ngOnInit(): void {
@@ -36,6 +35,14 @@ export class PsdchangeComponent {
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)]],
       confirmPassword: ['', [Validators.required]],
       oldPassword: ['', [Validators.required]]
+    });
+    this.router.events
+    .pipe(
+      filter((event) => event instanceof NavigationEnd)
+    )
+    .subscribe(() => {
+      // Fetch logged-in user details when navigation ends
+      this.userName= this.userService.getLoggedInUserName();
     });
   }
 
@@ -59,44 +66,36 @@ export class PsdchangeComponent {
 
   reset() {
     this.resetForm.markAllAsTouched();
-    this.userId = this.userService.getLoggedInUserId();
-    this.userName = this.userService.getLoggedInUserName();
-    this.old_password = this.userService.getLoggedInUserPassword();
-    console.log(this.old_password,'passwordd')
-    if (this.resetForm.valid) {
-      if (this.passwordsMatch()) {
+    if (this.passwordsMatch()) {
         const password = this.resetForm.get('password')!.value;
-        const oldPassword = this.resetForm.get('oldPassword')!.value;
-        console.log(password, oldPassword, 'passwordssss')
+        const confirmPassword = this.resetForm.get('confirmPassword')!.value;
+        console.log(password, confirmPassword, 'passwordssss');
+        const token = this.route.snapshot.queryParams['token'];
         const postData = {
-          oldPassword: oldPassword,
-          password: password,
-          user_id:this.userId
+            password: password,
+            token: token,
         };
+
         const apiUrl = environment.changePsd;
         this.http.post(apiUrl, postData).subscribe(
-          (res: any) => {
-            console.log(res);
-            this.showSuccessPopup = true;
-            setTimeout(() => {
-              this.showSuccessPopup = false;
-              // this.router.navigate(['/home']);
-          }, 5000);
-          },
-          (err: any) => {
-            console.error(err, 'errorrr');
-          }
+            (res: any) => {
+                console.log(res,'hiii');
+                this.resetForm.reset();
+                this.showSuccessPopup = true;
+                setTimeout(() => {
+                    // this.showSuccessPopup = false;
+                    this.router.navigate(['/home']);
+                }, 5000);
+            },
+            (err: any) => {
+                console.error(err, 'errorrr');
+            }
         );
-      }
-      else {
+    } else {
         this.passwordsMatchError = true;
         setTimeout(() => {
-          this.passwordsMatchError = false;
+            this.passwordsMatchError = false;
         }, 2000);
-      }
     }
-
-  }
+}  
 }
-
-
