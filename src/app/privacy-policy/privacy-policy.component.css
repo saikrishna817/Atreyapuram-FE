@@ -1,0 +1,47 @@
+.privacy{
+text-align: center;
+padding-top: 40px;
+}
+
+
+
+header, nav, main, section, footer {
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+    color: #333;
+}
+
+nav {
+    background: #eee;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    display: inline-block;
+}
+
+footer {
+    background: #eee;
+    text-align: center;
+    padding: 10px;
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    header, nav, main, section, footer {
+        padding: 10px;
+    }
+
+    nav, footer {
+        text-align: center;
+    }
+}

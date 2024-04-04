@@ -268,6 +268,27 @@
 
 
 
+
+/* Ensure proper responsiveness for the footer */
+@media (max-width: 768px) {
+  .footer-content .footer-social-icon {
+      margin-top: 20px;
+      margin-bottom: 20px;
+  }
+}
+
+/* Additional styling for small screens if needed */
+@media (max-width: 576px) {
+  .footer-cta .single-cta {
+      margin-bottom: 20px;
+  }
+}
+
+
+
+
+
+
  
 
 
