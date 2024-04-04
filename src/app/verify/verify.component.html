@@ -1,27 +1,10 @@
 <div class="d-flex align-items-center justify-content-center">
-    <div class="!showSuccessPopup">
-        <form [formGroup]="resetForm" autocomplete="off">
+    <div *ngIf="!showSuccessPopup">
+        <form [formGroup]="resetForm" autocomplete="off" class="resetform">
             <div class="mt-5 mb-5">
-                <h5 class="text-center"><b>Change your password</b></h5>
-                <p class="text mt-2">Enter your new Password and you're all set.</p>
+                <h5 class="text-center"><b>Reset Your Password</b></h5>
+                <p class="text mt-2">Create a new password to regain access to your account.</p>
                 <div class="mb-4 mt-5">
-                    <div class="input-group ">
-                        <input type="{{ passwordVisible ? 'text' : 'password' }}" formControlName="oldPassword"
-                            id="formoldpassword" class="form-control thick" placeholder="Enter current password"
-                            [ngClass]="{'is-invalid': resetForm.get('oldPassword')?.invalid && resetForm.get('oldPassword')?.touched}">
-                        <button class="btn btn-outline " type="button" (click)="togglePasswordVisibility($event)"
-                            style="z-index: 999;border:1px solid #ced4da;"
-                            [ngClass]="{'is-invalid': resetForm.get('oldPassword')?.invalid && resetForm.get('oldPassword')?.touched}">
-                            <i class="bi bi-eye{{ passwordVisible ? '-slash' : '' }}"></i>
-                        </button>
-                    </div>
-                    <div *ngIf="resetForm.get('oldPassword')?.hasError('required') && resetForm.get('oldPassword')?.touched"
-                        class="text-danger">
-                        Old Password is required
-                    </div>
-                </div>
-                <div class="mt-1">
-                    <h6 class="mb-3"><b>Enter New Password:</b></h6>
                     <div class="input-group ">
                         <input type="{{ passwordVisible ? 'text' : 'password' }}" formControlName="password"
                             id="formpassword" class="form-control thick" placeholder="password"
@@ -58,30 +41,27 @@
                     </div>
                     <div *ngIf="resetForm.get('confirmPassword')?.hasError('pattern') && resetForm.get('confirmPassword')?.touched"
                         class="text-danger">
-                        Invalid Password. Password must have at least 8 characters, including one alphabetical character,
+                        Invalid Password. Password must have at least 8 characters, including one alphabetical
+                        character,
                         one
                         special character and one digit.
                     </div>
                 </div>
-    
                 <!-- <p class="text-success" *ngIf="passwordsMatch()">Passwords Matched</p> -->
-                <p class="text-danger" *ngIf="passwordsMatchError">Passwords should be the same.</p>
-                <!-- <p class="pwdtext" *ngIf="f.password?.value === f.confirmPassword?.value && 
-                                  f.password?.value !== ''">Passwords Matched</p> -->
+                <p class="text-danger" *ngIf="passwordsMatchError">Password and confirm password should be the same.</p>
                 <div class="mt-4">
-                    <button class="btn text-white bg-dark me-3"  type="submit" (click)="reset()">Reset Password</button>
+                    <button class="btn text-white bg-dark me-3" type="submit" (click)="reset()">Reset Password</button>
                 </div>
             </div>
         </form>
     </div>
-  
     <div *ngIf="showSuccessPopup">
         <!-- Reset Password success -->
         <div class="card mt-5 mb-5 showSuccess" >
             <div class="success-icon text-center">
                 <i class="fas fa-check-circle fa-5x mt-3 mb-4"></i>
             </div>
-            <h6>Hey {{userName}}</h6>
+            <!-- <h6>Hey {{userName}}</h6> -->
             <h5><b>Your password has been changed successfully!</b></h5>
             <h6>You can now use your updated password to log in to your
                 account. Thank you.</h6>

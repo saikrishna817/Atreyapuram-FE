@@ -20,6 +20,7 @@ import { AdminComponent } from './admin/admin.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { VerifyComponent } from './verify/verify.component';
 
 
 const routes: Routes = [
@@ -44,7 +45,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'trackOrder/:orderId', component: TrackOrderComponent},
-  {path: 'admindashboard', component: AdminDashboardComponent}
+  {path: 'admindashboard', component: AdminDashboardComponent},
+  {path:'verify',component:VerifyComponent}
 ];
 
 @NgModule({

@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit {
   userName: string = '';
   userId: any
   userEmail: any;
+  userPassword:any;
   loggedInUserId: number | undefined;
   modalVisible: boolean = true;
   loginForm: FormGroup;
@@ -107,12 +108,13 @@ export class NavbarComponent implements OnInit {
       const apiUrl = environment.login;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          console.log(res);
+          console.log(res,'resultuuuuuuuhhhh');
           this.showLoginMessage = true;
           this.userName = res.user.name;
           this.userEmail = res.user.email;
           this.userId = res.user.id;
-          this.userService.setLoggedInUserDetails(this.userName, this.userEmail, this.userId);
+          this.userPassword = res.user.password;
+          this.userService.setLoggedInUserDetails(this.userName, this.userEmail, this.userId, this.userPassword);
           this.loginForm.reset();
           this.hideModal('loginModal');
         },

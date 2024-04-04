@@ -7,7 +7,8 @@ import { LocalstorageService } from '../localstorage.service';
 export class UserService {
   userName: string | undefined;
   userEmail: string | undefined;
-  userId: any
+  userId: any;
+  userPassword:any;
   private NavigationEnd!: string;
   private readonly storageKey = 'loggedInUser';
 
@@ -17,10 +18,11 @@ export class UserService {
     // Check if user details are stored in localStorage
     const userDetails = this.localStorage.getItem('userDetails');
     if (userDetails) {
-      const { name, email, id } = JSON.parse(userDetails);
+      const { name, email, id, password } = JSON.parse(userDetails);
       this.userName = name;
       this.userEmail = email;
-      this.userId = id
+      this.userId = id;
+      this.userPassword = password
     }
   }
 
@@ -30,9 +32,9 @@ export class UserService {
   // getLoggedInUserId() {
   //   return this.loggedInUserId;
   // }
-  setLoggedInUserDetails(userName: string, userEmail: string, userId: number) {
+  setLoggedInUserDetails(userName: string, userEmail: string, userId: number, userPassword: any) {
     if (this.isLocalStorageAvailable()) {
-      const userDetails = { userName, userEmail, userId };
+      const userDetails = { userName, userEmail, userId, userPassword };
       localStorage.setItem(this.storageKey, JSON.stringify(userDetails));
     }
   }
@@ -68,6 +70,18 @@ export class UserService {
     }
     return '';
   }
+
+  getLoggedInUserPassword() {
+    if (this.isLocalStorageAvailable()) {
+      const userDetailsString = localStorage.getItem(this.storageKey);
+      if (userDetailsString) {
+        const userDetails = JSON.parse(userDetailsString);
+        return userDetails.userPassword;
+      }
+    }
+    return '';
+  }
+
   clearLoggedInUserDetails() {
     if (this.isLocalStorageAvailable()) {
       localStorage.removeItem(this.storageKey);
