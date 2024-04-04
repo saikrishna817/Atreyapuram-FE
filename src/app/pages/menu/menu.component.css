@@ -310,6 +310,26 @@ body {
     font-size: 1.2rem;
     margin-bottom: 0 !important;
   }
+  /* .modal-dialog {
+    width: 90%;
+    max-width: 90%;
+    margin: auto;
+  } */
+
+  .modal-content {
+    /* height: 65vh; */
+    margin-top: 10%;
+    margin-left: 1rem;
+    width: 50vh;
+  }
+
+  .modal-header {
+    padding: 1rem 1.0rem;
+
+    .image {
+      width: 60%
+    }
+  }
 }
 
 

@@ -171,6 +171,9 @@ nav {
   }
 } */
 
+.errorMsg {
+  text-align: center;
+}
 
 
 @media (max-width: 768px) {
@@ -199,25 +202,6 @@ nav {
     margin-top: 0;
   }
 
-  .search input[type="text"] {
-    width: 100% !important;
-  }
-
-  .search {
-    order: -1;
-    /* Makes search bar come first above the icons on small screens */
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    /* Ensures search bar takes full width */
-  }
-
-  .search button {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-
   /* Ensuring cart and account icons are aligned to the left */
   .navbar .d-flex {
     justify-content: flex-start !important;
@@ -236,7 +220,53 @@ nav {
     left: -3.0rem !important;
     position: absolute;
     top: calc(100% + 10px);
-    z-index: 1000; 
+    z-index: 1000;
+  }
+
+  .modal-dialog {
+    width: 90%;
+    max-width: 90%;
+    margin: auto;
+  }
+
+  .modal-content {
+    height: 65vh;
+    margin-top: 25%;
+    width: 50vh;
+  }
+
+  .modalContentSignup {
+    height: 70vh;
+    margin-top: 25%;
+    width: 50vh;
+  }
+
+  .modalContentForgot {
+    height: 40vh;
+    margin-top: 25%;
+    width: 50vh;
+  }
+
+  .modal-header {
+    padding: 0.4rem 1.0rem;
+
+    .image {
+      width: 90%
+    }
+  }
+
+  .modal-body {
+    h4 {
+      font-size: 1.3rem;
+    }
+
+    label {
+      margin-bottom: 0rem !important;
+    }
+  }
+
+  .errorMsg {
+    text-align: center;
   }
 }
 
@@ -254,16 +284,20 @@ nav {
 .dropdown-menu {
   min-width: auto;
   position: absolute;
-  top: calc(100% + 10px); /* Position the dropdown menu below the username link */
-  z-index: 1000; /* Ensure the dropdown is above other content */
+  top: calc(100% + 10px);
+  /* Position the dropdown menu below the username link */
+  z-index: 1000;
+  /* Ensure the dropdown is above other content */
 }
 
-.long-username + .dropdown-menu {
-  left: 2.5rem; /* Adjust the position if username has more than 6 characters */
+.long-username+.dropdown-menu {
+  left: 2.5rem;
+  /* Adjust the position if username has more than 6 characters */
 }
 
 .dropdown-menu {
-  left: -0.8rem; /* Default position */
+  left: -0.8rem;
+  /* Default position */
 }
 
 .dropdown-menu.show {
@@ -276,22 +310,27 @@ nav {
 }
 
 .dropdown-item:hover {
-  background-color: #f8f9fa; /* Change the background color on hover */
+  background-color: #f8f9fa;
+  /* Change the background color on hover */
   color: #3498db;
 }
 
 .dropdown-item:focus,
 .dropdown-item.active {
-  background-color: #3498db; /* Change the background color when clicked */
-  color: #ffffff; /* Change the text color when clicked */
+  background-color: #3498db;
+  /* Change the background color when clicked */
+  color: #ffffff;
+  /* Change the text color when clicked */
 }
 
 .cart-icon {
-  font-size: 1.2rem; /* Adjust as needed */
+  font-size: 1.2rem;
+  /* Adjust as needed */
 }
 
 .small-badge {
-  font-size: 0.7rem; /* Adjust as needed */
-  padding: 0.2rem 0.4rem; /* Adjust padding for smaller badge */
+  font-size: 0.7rem;
+  /* Adjust as needed */
+  padding: 0.2rem 0.4rem;
+  /* Adjust padding for smaller badge */
 }
-

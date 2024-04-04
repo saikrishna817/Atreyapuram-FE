@@ -23,6 +23,6 @@ export const environment = {
 
     contactAddress: 'http://localhost:8008/user/contact',
     DeliveryAddress: 'http://localhost:8008/user/address',
-    contact:'http://localhost:8008/user/getcontacts'
+    contact:'http://localhost:8008/user/mail'
   };
   
