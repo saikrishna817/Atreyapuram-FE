@@ -4,6 +4,7 @@ export const environment = {
     login: 'http://localhost:8008/user/login',
     register: 'http://localhost:8008/user/register',
     forgot: 'http://localhost:8008/user/forgot',
+    changePsd: 'http://localhost:8008/user/verify',
 
     //products
     products: 'http://localhost:8008/user/products',
