@@ -14,7 +14,7 @@
                     <!-- <div class="col"><strong>Tracking #:</strong><br>BD045903594059</div> -->
                 </div>
                 <div class="track">
-                    <div class="step active" [ngClass]="{'placed': this.orderStatus === 'placed', 'shipped': this.orderStatus === 'shipped', 'enroute': this.orderStatus === 'enroute', 'delivered': this.orderStatus === 'delivered'}">
+                    <div class="step active" [ngClass]="{'placed': this.orderStatus === 'Placed', 'shipped': this.orderStatus === 'shipped', 'enroute': this.orderStatus === 'enroute', 'delivered': this.orderStatus === 'delivered'}">
                         <span class="icon"><i class="fa fa-check"></i></span><span class="text">Order confirmed</span>
                     </div>
                     <div class="tracking-line"></div>
