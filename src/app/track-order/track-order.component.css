@@ -56,11 +56,30 @@
     border: 2px solid #f2f2f2; 
 }
 
-.step.active .icon {
+.step.active.placed .icon {
     background: #4caf50;
     color: #ffffff;
     border-color: #4caf50; 
 }
+
+.step.active.shipped .icon {
+    background: #4caf50;
+    color: #ffffff;
+    border-color: #4caf50; 
+}
+
+.step.active.enroute .icon {
+    background: #4caf50;
+    color: #ffffff;
+    border-color: #4caf50; 
+}
+
+.step.active.delivered .icon {
+    background: #4caf50;
+    color: #ffffff;
+    border-color: #4caf50; 
+}
+
 
 .step .text {
     font-weight: 500;

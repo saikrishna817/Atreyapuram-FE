@@ -45,6 +45,7 @@ export class MenuComponent {
   userName: string = '';
   userEmail: string = '';
   userId: any;
+  cartId: any
   orderId: any;
   productId: any;
   productName: any;
@@ -122,7 +123,6 @@ export class MenuComponent {
 
   //Add to Cart
   addToCart(item: any) {
-    console.log(item,'itemmmmmmmmm')
     this.productId = item.ProductID;
     this.userName = this.userService.getLoggedInUserName();
     this.userId = this.userService.getLoggedInUserId();
@@ -137,27 +137,32 @@ export class MenuComponent {
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           console.log(res, 'response from backend');
-          if (!res.duplicate) { // Check if res.duplicate is false
+          if (!res.isDuplicate) { // Check if res.isDuplicate is false
             // Increment cart count by 1 and update it
             this.cartService.cartItemsCount$.pipe(take(1)).subscribe(count => {
               this.cartService.updateCartItemsCount(count + 1);
             });
           }
           this.showMessage = true;
-          this.message = res.duplicate ? "Product already exists in cart" : "Product added to cart successfully";
+          this.message = res.isDuplicate ? "Product already exists in cart" : "Product added to cart successfully";
           setTimeout(() => {
             this.showMessage = false;
           }, 1000);
+          // const cartId = res.cart.cart_id;
+          // this.cartService.addCartIdForProduct(this.productId, cartId);
+          // console.log(cartId, 'cart iddd');
         },
         (err: any) => {
           console.error(err, 'errorrr');
         }
       );
-      
+  
     }
   }
   
-  
+
+
+
 
   //Add to order
   addToOrder(item: any) {
@@ -209,7 +214,7 @@ export class MenuComponent {
           this.paymentSuccess = true;
           setTimeout(() => {
             this.paymentSuccess = false;
-            // this.hideModal('checkOutModal');
+            this.hideModal('checkOutModal');
             this.showContactFields = true;
             this.showAddressFields = false;
             this.showPaymentFields = false;
@@ -410,16 +415,23 @@ export class MenuComponent {
     }
   }
   // Helper method to hide modal
+
   hideModal(modalId: string) {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.classList.remove('show');
       modal.setAttribute('aria-modal', 'false');
       modal.setAttribute('style', 'display: none');
-      const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
-      if (modalBackdrop) {
-        modalBackdrop.parentNode?.removeChild(modalBackdrop);
-      }
     }
+    document.body.classList.remove('modal-open');
+    const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+    if (modalBackdrop) {
+      modalBackdrop.classList.remove('show');
+      setTimeout(() => {
+        modalBackdrop.parentNode?.removeChild(modalBackdrop);
+      }, 300); // Adjust the delay as needed to match your modal transition
+    }
+    document.body.style.paddingRight = '0';
+    document.body.style.overflow = 'auto';
   }
 }

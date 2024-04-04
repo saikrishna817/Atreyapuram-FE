@@ -1,55 +1,5 @@
-<!-- <h2 class="text-center mt-5"><b>Shopping Cart</b></h2>
-<div *ngIf="loading" class="col-md-12 text-center mt-5 mb-5">
-  <i class="fa fa-spinner fa-spin fa-3x"></i>
-</div>
-<div class="mt-5 mb-5" style="display: flex; flex-direction: column;" *ngIf="!loading && cartProducts && cartProducts.length > 0">
-  <table class="table table-responsive" style="margin-left: 2rem;">
-    <thead>
-      <tr>
-        <th style="width: 10%;">s.no</th>
-        <th style="width: 20%;">Product Name</th>
-        <th style="width: 20%;">Price</th>
-        <th style="width: 20%;">Quantity</th>
-        <th style="width: 20%;">Total</th>
-        <th style="width: 10%;">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of cartProducts; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ item.ProductName }}</td>
-        <td>&#x20B9;{{ item.Price }}</td>
-        <td style="position: relative;">
-          <div class="quantity-control d-flex align-items-center">
-            <button class="btn btn-secondary" (click)="decrementQuantity(item)">
-              <i class="bi bi-dash"></i>
-            </button>
-            <input type="number" [(ngModel)]="item.quantity" class="form-control text-center" min="1" />
-            <button class="btn btn-secondary" (click)="incrementQuantity(item)">
-              <i class="bi bi-plus"></i>
-            </button>
-          </div>
-        </td>
-        <td>&#x20B9;{{ item.total }}</td>
-        <td>
-          <button class="btn btn-danger" (click)="removeFromCart(item)">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button class="btn float-end text-white bg-dark align-self-end me-4" data-toggle="modal"
-    data-target="#checkOutModal">CHECK
-    OUT</button>
-</div>
-<div *ngIf="!loading && (!cartProducts || cartProducts.length === 0)" class="empty-cart-message">
-  <h4>Your Cart is empty</h4>
-</div> -->
-
-
 <div class="container mt-5 mb-5">
-  <h3 class="text-center mb-4"><b>Shopping Cart</b></h3>
+  <h4 class="text-center mb-5"><b>Shopping Cart</b></h4>
   <div *ngIf="loading" class="col-md-12 text-center mt-5 mb-5">
     <i class="fa fa-spinner fa-spin fa-3x"></i>
   </div>
@@ -63,7 +13,7 @@
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Total</th>
-            <th scope="col">Action</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -80,8 +30,8 @@
             </td>
             <td>&#x20B9;{{ item.total }}</td>
             <td>
-              <button class="btn btn-danger btn-sm" (click)="removeFromCart(item)">
-                <i class="bi bi-trash"></i>
+              <button class="btn btn" (click)="removeFromCart(item)">
+                <i class="bi bi-trash text-danger"></i>
               </button>
             </td>
           </tr>
@@ -91,7 +41,7 @@
     </div>
   </div>
   <div *ngIf="!loading && (!cartProducts || cartProducts.length === 0)" class="empty-cart-message">
-    <h4>Your Cart is empty</h4>
+    <h5>Your Cart is empty</h5>
   </div>
 </div>
 

@@ -217,20 +217,6 @@ nav {
     margin-top: 0.5rem;
   }
 
-  .cart-count {
-    display: block;
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: red;
-    color: white;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    font-size: 12px;
-    line-height: 20px;
-    text-align: center;
-  }
 
   /* Ensuring cart and account icons are aligned to the left */
   .navbar .d-flex {
@@ -247,7 +233,10 @@ nav {
 
   .dropdown-menu {
     min-width: auto;
-    margin: 4.125rem 0;
+    left: -3.0rem !important;
+    position: absolute;
+    top: calc(100% + 10px);
+    z-index: 1000; 
   }
 }
 
@@ -264,7 +253,21 @@ nav {
 
 .dropdown-menu {
   min-width: auto;
-  left: -1.5rem;
+  position: absolute;
+  top: calc(100% + 10px); /* Position the dropdown menu below the username link */
+  z-index: 1000; /* Ensure the dropdown is above other content */
+}
+
+.long-username + .dropdown-menu {
+  left: 2.5rem; /* Adjust the position if username has more than 6 characters */
+}
+
+.dropdown-menu {
+  left: -0.8rem; /* Default position */
+}
+
+.dropdown-menu.show {
+  display: block;
 }
 
 .dropdown-item {
@@ -274,7 +277,7 @@ nav {
 
 .dropdown-item:hover {
   background-color: #f8f9fa; /* Change the background color on hover */
-  color:#3498db
+  color: #3498db;
 }
 
 .dropdown-item:focus,
@@ -283,13 +286,10 @@ nav {
   color: #ffffff; /* Change the text color when clicked */
 }
 
-.dropdown-menu.dropdown-menu-right {
-  right: 0;
-  left: auto;
-}
 .cart-icon {
   font-size: 1.2rem; /* Adjust as needed */
 }
+
 .small-badge {
   font-size: 0.7rem; /* Adjust as needed */
   padding: 0.2rem 0.4rem; /* Adjust padding for smaller badge */
