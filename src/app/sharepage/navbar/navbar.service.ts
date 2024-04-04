@@ -7,18 +7,20 @@ import { LocalstorageService } from '../localstorage.service';
 export class UserService {
   userName: string | undefined;
   userEmail: string | undefined;
-  private loggedInUserId!: string;
+  userId: any
+  private NavigationEnd!: string;
   private readonly storageKey = 'loggedInUser';
 
   constructor(
     private localStorage: LocalstorageService
-  ) { 
+  ) {
     // Check if user details are stored in localStorage
     const userDetails = this.localStorage.getItem('userDetails');
     if (userDetails) {
-      const { name, email } = JSON.parse(userDetails);
+      const { name, email, id } = JSON.parse(userDetails);
       this.userName = name;
       this.userEmail = email;
+      this.userId = id
     }
   }
 
@@ -45,7 +47,7 @@ export class UserService {
     }
     return '';
   }
-  getLoggedInUserEmail(){
+  getLoggedInUserEmail() {
     if (this.isLocalStorageAvailable()) {
       const userDetailsString = localStorage.getItem(this.storageKey);
       if (userDetailsString) {
@@ -82,5 +84,5 @@ export class UserService {
       return false;
     }
   }
-  
+
 }

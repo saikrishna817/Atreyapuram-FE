@@ -2,11 +2,18 @@
     <form [formGroup]="resetForm" autocomplete="off">
         <div class="mt-5 mb-5">
             <h5 class="text-center"><b>Reset account password</b></h5>
-            <p class="text">Enter your new Password and you're all set.</p>
-            <div class="mb-4 mt-4">
-                <input type="password" formControlName="password" id="formpassword" class="form-control  thick"
-                    placeholder="Password"
-                    [ngClass]="{'is-invalid': resetForm.get('password')?.invalid && resetForm.get('password')?.touched}">
+            <p class="text mt-2">Enter your new Password and you're all set.</p>
+            <div class="mb-4 mt-5">
+                <div class="input-group ">
+                    <input type="{{ passwordVisible ? 'text' : 'password' }}" formControlName="password"
+                        id="formpassword" class="form-control thick" placeholder="Password"
+                        [ngClass]="{'is-invalid': resetForm.get('password')?.invalid && resetForm.get('password')?.touched}">
+                    <button class="btn btn-outline " type="button" (click)="togglePasswordVisibility($event)"
+                        style="z-index: 999;border:1px solid #ced4da;"
+                        [ngClass]="{'is-invalid': resetForm.get('password')?.invalid && resetForm.get('password')?.touched}">
+                        <i class="bi bi-eye{{ passwordVisible ? '-slash' : '' }}"></i>
+                    </button>
+                </div>
                 <div *ngIf="resetForm.get('password')?.hasError('required') && resetForm.get('password')?.touched"
                     class="text-danger">
                     Password is required
@@ -16,10 +23,17 @@
                     Invalid Password.
                 </div>
             </div>
-            <div class="">
-                <input type="password" formControlName="confirmPassword" id="confirmPassword"
-                    class="form-control  thick" placeholder="Confirm Password"
-                    [ngClass]="{'is-invalid': resetForm.get('confirmPassword')?.invalid && resetForm.get('confirmPassword')?.touched}">
+            <div class="mb-4 mt-4">
+                <div class="input-group">
+                    <input type="{{ passwordVisible ? 'text' : 'password' }}" formControlName="confirmPassword"
+                        id="formpassword" class="form-control thick" placeholder="Confirm Password"
+                        [ngClass]="{'is-invalid': resetForm.get('confirmPassword')?.invalid && resetForm.get('confirmPassword')?.touched}">
+                    <button class="btn btn-outline " type="button" (click)="togglePasswordVisibility($event)"
+                        style="z-index: 999;border:1px solid #ced4da;"
+                        [ngClass]="{'is-invalid': resetForm.get('confirmPassword')?.invalid && resetForm.get('confirmPassword')?.touched}">
+                        <i class="bi bi-eye{{ passwordVisible ? '-slash' : '' }}"></i>
+                    </button>
+                </div>
                 <div *ngIf="resetForm.get('confirmPassword')?.hasError('required') && resetForm.get('confirmPassword')?.touched"
                     class="text-danger">
                     Confirm password is required
@@ -31,13 +45,15 @@
                     special character and one digit.
                 </div>
             </div>
+
+            <p class="text-success" *ngIf="passwordsMatch()">Passwords Matched</p>
+            <p class="text-danger" *ngIf="passwordsMatchError">Passwords should be the same.</p>
             <!-- <p class="pwdtext" *ngIf="f.password?.value === f.confirmPassword?.value && 
                               f.password?.value !== ''">Passwords Matched</p> -->
             <div class="mt-4">
-                <button class="btn submitButton" type="submit">Reset Password</button>
+                <button class="btn text-white bg-dark me-3"  type="submit" (click)="reset()">Reset Password</button>
             </div>
         </div>
-
     </form>
 </div>
 
