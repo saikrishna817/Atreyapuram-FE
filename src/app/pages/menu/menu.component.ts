@@ -221,7 +221,7 @@ export class MenuComponent {
             this.showOrderHistory = true;
             this.radioButtonSelected = false;
             this.quantity = 1;
-          }, 5000);
+          }, 2000);
         },
         (err: any) => {
           console.error(err, 'errorrr');

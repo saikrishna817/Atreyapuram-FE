@@ -97,17 +97,23 @@
     padding: 20px 10px 40px;
   }
   
-  #page-wrapper {
-    padding: 0 15px;
-    min-height: 568px;
-    position: relative !important;
-  }
+  @media (max-width: 768px) {
+    .checkOut{
+      margin-right: 0rem !important;
+    }
+    .modal-content {
+      /* height: 65vh; */
+      margin-top: 10%;
+      margin-left: 1rem;
+      width: 50vh;
+    }
   
-  @media (min-width: 768px) {
-    #page-wrapper {
-      position: inherit;
-      margin: 0 0 0 240px;
-      min-height: 2002px;
+    .modal-header {
+      padding: 1rem 1.0rem;
+  
+      .image {
+        width: 60%
+      }
     }
   }
   
@@ -313,7 +319,7 @@
   } 
   .quantity__minus:visited,
   .quantity__plus:visited {
-    color: #fff;
+    color: #000;
   }
 
   .checkOut{

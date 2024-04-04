@@ -47,9 +47,9 @@ export class OrdersComponent implements OnInit {
       const apiUrl = environment.getOrder;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          // Filter out cancelled orders and map the remaining orders
+          // Filter out orders with status other than 'Placed' and map the remaining orders
           this.orderedProducts = res.order
-            .filter((order: any) => order.orderstatus !== 'Cancelled')
+            .filter((order: any) => order.orderstatus === 'Placed')
             .map((order: any) => {
               return {
                 orderId: order.orderid,
@@ -70,7 +70,7 @@ export class OrdersComponent implements OnInit {
       );
     }
   }
-
+  
 
   //Get address for that particular order based on order Id
   getOrderAddress(orderId: string) {
@@ -96,7 +96,7 @@ export class OrdersComponent implements OnInit {
   }
 
   confirmCancelOrder(item: any) {
-    this.orderedStatus = item.orderedStatus
+    // this.orderedStatus = item.orderedStatus
     // console.log(item, 'itemmmmm all cancel')
     // console.log(this.orderedStatus,'deletinggg itemmm')
     const orderID = item.orderId;
