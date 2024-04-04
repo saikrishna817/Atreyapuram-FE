@@ -7,6 +7,7 @@ import { UserService } from '../../sharepage/navbar/navbar.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { OrderService } from '../../orders/orders.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,7 @@ import { OrderService } from '../../orders/orders.service';
 export class CartComponent implements OnInit {
 
   cartItems: any[] = [];
+  cartId:any;
   loading: boolean = true;
   cartProducts: any[] = [];
   duplicateItemIds: any;
@@ -132,6 +134,11 @@ export class CartComponent implements OnInit {
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           console.log(res);
+          // const cartId = res.cart.cart_id;
+          // this.cartService.cartIds$.pipe(take(1)).subscribe(cartIds => {
+          //   const updatedCartIds = [...cartIds, cartId];
+          //   this.cartService.updateCartIds(updatedCartIds);
+          // });
         },
         (err: any) => {
           console.error(err, 'errorrr');
@@ -146,22 +153,51 @@ export class CartComponent implements OnInit {
       item.quantity--;
       item.total = parseFloat(item.Price) * item.quantity;
       this.updateTotal();
-      // this.cartService.saveCartItems(this.cartItems);
-      const quantity = item.quantity
-      const postData = {
-        quantity: quantity,
-      };
-      const apiUrl = environment.placeOrder;
-      this.http.post(apiUrl, postData).subscribe(
-        (res: any) => {
-          console.log(res);
-        },
-        (err: any) => {
-          console.error(err);
+      const productId = item.ProductID;
+      console.log(productId, 'product id');
+      if (productId) { // Check if productId is not undefined
+        const cartIds = this.cartService.getCartIdsForProduct(productId); // Retrieve cart IDs for the product
+        console.log(cartIds, 'cart ids for a product');
+  
+        // If there are cart IDs for the product, send one to the backend
+        if (cartIds.length > 0) {
+          const cartId = cartIds.pop(); // Take and remove the last cart ID
+          if (cartId) { // Check if cartId is not undefined
+            const postData = {
+              filter: {
+                cart_id: cartId
+              }
+            };
+            const apiUrl = environment.deleteCartItem;
+            const httpOptions = {
+              headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+              }),
+              body: postData // Include payload as the body
+            };
+            // Make the HTTP request to delete the item
+            this.http.request('delete', apiUrl, httpOptions).subscribe(
+              (res: any) => {
+                console.log(res);
+                this.cartService.removeCartIdForProduct(productId, cartId);
+                this.updateTotal();
+              },
+              (err: any) => {
+                console.error(err);
+              }
+            );
+          } else {
+            console.error('Cart ID is undefined');
+          }
         }
-      );
+      } else {
+        console.error('Product ID is undefined');
+      }
     }
   }
+  
+  
+  
 
   updateTotal() {
     this.totalPrice = 0; // Reset total price
@@ -252,11 +288,12 @@ export class CartComponent implements OnInit {
     if (this.radioButtonSelected && this.cartProducts.length > 0) {
       let productsArray = [];
       for (let product of this.cartProducts) {
+        let totalPrice = product.quantity * product.Price;
         productsArray.push({
           product_id: product.ProductID,
           name: product.ProductName,
           quantity: product.quantity,
-          price: product.totalPrice
+          price: totalPrice
         });
       }
       const postData = {
@@ -276,6 +313,7 @@ export class CartComponent implements OnInit {
           user_id: this.userId
         }
       };
+      // const postDataString = JSON.stringify(postData);
       const apiUrl = environment.placeOrder;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
@@ -310,7 +348,7 @@ export class CartComponent implements OnInit {
           );
           setTimeout(() => {
             this.paymentSuccess = false;
-            // this.hideModal('checkOutModal');
+            this.hideModal('checkOutModal');
             this.showContactFields = true;
             this.showAddressFields = false;
             this.showPaymentFields = false;
@@ -341,16 +379,31 @@ export class CartComponent implements OnInit {
   }
 
   // Helper method to hide modal
+ 
   hideModal(modalId: string) {
     const modal = document.getElementById(modalId);
     if (modal) {
       modal.classList.remove('show');
       modal.setAttribute('aria-modal', 'false');
       modal.setAttribute('style', 'display: none');
-      const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
-      if (modalBackdrop) {
-        modalBackdrop.parentNode?.removeChild(modalBackdrop);
-      }
     }
+
+    // Remove the modal-open class from body
+    document.body.classList.remove('modal-open');
+
+    // Remove the modal backdrop if exists
+    const modalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+    if (modalBackdrop) {
+      modalBackdrop.classList.remove('show');
+      setTimeout(() => {
+        modalBackdrop.parentNode?.removeChild(modalBackdrop);
+      }, 300); // Adjust the delay as needed to match your modal transition
+    }
+
+    // Reset body padding-right
+    document.body.style.paddingRight = '0';
+
+    // Restore body scroll behavior
+    document.body.style.overflow = 'auto';
   }
 }

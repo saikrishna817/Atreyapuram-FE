@@ -36,9 +36,9 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="bi bi-person-circle"></i>
-            <span class="ms-1">{{ userName }}</span>
+            <span class="ms-1" [class.long-username]="userName.length > 6">{{ userName }}</span>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" [style.left]="userName.length > 6 ? '1.3rem' : '-2.0rem'">
             <a class="dropdown-item" routerLink="/account">
               <i class="bi bi-person"></i>&nbsp; My Profile
             </a>
