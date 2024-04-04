@@ -79,8 +79,9 @@
     </div>
   </div>
 </div>
-<div *ngIf="!loading && (!orderedProducts || orderedProducts.length === 0)">
+<div *ngIf="!loading && (!orderedProducts || orderedProducts.length === 0)" class="empty-cart-message">
   <h5>Your haven't places any orders</h5>
 </div>
 <div *ngIf="showMessage" class="cart-message">
-  Order has been cancelled</div>
+  Order has been cancelled
+</div>
