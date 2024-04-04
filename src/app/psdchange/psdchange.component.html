@@ -5,8 +5,25 @@
             <p class="text mt-2">Enter your new Password and you're all set.</p>
             <div class="mb-4 mt-5">
                 <div class="input-group ">
+                    <input type="{{ passwordVisible ? 'text' : 'password' }}" formControlName="oldPassword"
+                        id="formoldpassword" class="form-control thick" placeholder="Enter current password"
+                        [ngClass]="{'is-invalid': resetForm.get('oldPassword')?.invalid && resetForm.get('oldPassword')?.touched}">
+                    <button class="btn btn-outline " type="button" (click)="togglePasswordVisibility($event)"
+                        style="z-index: 999;border:1px solid #ced4da;"
+                        [ngClass]="{'is-invalid': resetForm.get('oldPassword')?.invalid && resetForm.get('oldPassword')?.touched}">
+                        <i class="bi bi-eye{{ passwordVisible ? '-slash' : '' }}"></i>
+                    </button>
+                </div>
+                <div *ngIf="resetForm.get('oldPassword')?.hasError('required') && resetForm.get('oldPassword')?.touched"
+                    class="text-danger">
+                    Old Password is required
+                </div>
+            </div>
+            <div class="mt-1">
+                <h6 class="mb-3"><b>Enter New Password:</b></h6>
+                <div class="input-group ">
                     <input type="{{ passwordVisible ? 'text' : 'password' }}" formControlName="password"
-                        id="formpassword" class="form-control thick" placeholder="Password"
+                        id="formpassword" class="form-control thick" placeholder="password"
                         [ngClass]="{'is-invalid': resetForm.get('password')?.invalid && resetForm.get('password')?.touched}">
                     <button class="btn btn-outline " type="button" (click)="togglePasswordVisibility($event)"
                         style="z-index: 999;border:1px solid #ced4da;"
@@ -26,7 +43,7 @@
             <div class="mb-4 mt-4">
                 <div class="input-group">
                     <input type="{{ passwordVisible ? 'text' : 'password' }}" formControlName="confirmPassword"
-                        id="formpassword" class="form-control thick" placeholder="Confirm Password"
+                        id="formpassword" class="form-control thick" placeholder="confirm password"
                         [ngClass]="{'is-invalid': resetForm.get('confirmPassword')?.invalid && resetForm.get('confirmPassword')?.touched}">
                     <button class="btn btn-outline " type="button" (click)="togglePasswordVisibility($event)"
                         style="z-index: 999;border:1px solid #ced4da;"

@@ -202,12 +202,15 @@ export class NavbarComponent implements OnInit {
         (err: any) => {
           console.error(err);
           if (err.error && err.error.error === "User not found.") {
-            this.errorMessage = "User doesn't exist with this email";
+            this.errorMessage = "User doesn't exist";
             this.errorTimeout = setTimeout(() => {
               this.errorMessage = undefined;
             }, 5000);
           } else {
-            this.errorMessage = "An error occurred. Please try again later.";
+            this.errorMessage = "An error occurred";
+            this.errorTimeout = setTimeout(() => {
+              this.errorMessage = undefined;
+            }, 3000);
           }
         }
       );

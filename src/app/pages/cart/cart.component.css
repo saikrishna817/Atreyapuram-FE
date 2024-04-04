@@ -101,6 +101,20 @@
     .checkOut{
       margin-right: 0rem !important;
     }
+    .modal-content {
+      /* height: 65vh; */
+      margin-top: 10%;
+      margin-left: 1rem;
+      width: 50vh;
+    }
+  
+    .modal-header {
+      padding: 1rem 1.0rem;
+  
+      .image {
+        width: 60%
+      }
+    }
   }
   
   /* Payments */

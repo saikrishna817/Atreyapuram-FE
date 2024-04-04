@@ -31,7 +31,8 @@ export class PsdchangeComponent {
   ngOnInit(): void {
     this.resetForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+      oldPassword: ['', [Validators.required]]
     });
     this.router.events
     .pipe(
