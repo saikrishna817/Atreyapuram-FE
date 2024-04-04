@@ -48,7 +48,7 @@ const routes: Routes = [
   { path: 'orders', component: OrdersComponent },
   { path: 'trackOrder/:orderId', component: TrackOrderComponent},
   {path: 'admindashboard', component: AdminDashboardComponent},
-  {path:'verify',component:VerifyComponent}
+  {path:'verify',component:VerifyComponent},
   {path:'terms-conditions', component : TermsConditionsComponent},
   {path:'privacy-policy', component : PrivacyPolicyComponent}
 
