@@ -17,6 +17,9 @@
     position: relative;
     padding: 2rem 0; /* Provides space for the tracking line */
     display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+    justify-content: space-between; /* Distribute items evenly */
+    flex-wrap: nowrap; /* Prevent items from wrapping */
 }
 
 .tracking-line {
@@ -98,7 +101,11 @@ img{
     cursor: pointer;
 }
 
-
+@media (max-width: 768px) {
+    .step {
+        margin-right: 3rem; /* Reduce margin for smaller screens */
+    }
+}
 
 
 

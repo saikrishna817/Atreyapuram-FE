@@ -319,8 +319,8 @@ body {
   .modal-content {
     /* height: 65vh; */
     margin-top: 10%;
-    margin-left: 1rem;
-    width: 50vh;
+    /* margin-left: 1rem;
+    width: 50vh; */
   }
 
   .modal-header {

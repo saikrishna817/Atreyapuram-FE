@@ -11,12 +11,12 @@
 }
 .single-cta i {
   color: #ff5e14;
-  font-size: 30px;
-  float: left;
-  margin-top: 8px;
+  font-size: 25px;
+  /* float: left; */
+  /* margin-top: 8px; */
 }
 .cta-text {
-  padding-left: 15px;
+  padding-left: 1rem;
   display: inline-block;
 }
 .cta-text h4 {
@@ -40,6 +40,10 @@
   height: 330px;
   background-size: cover;
   background-position: 100% 100%;
+}
+
+.about{
+  max-width: 80%;
 }
 
 .footer-text p {
@@ -171,7 +175,7 @@
   text-align: left;
 }
 .footer-social-icon .social_icon li {
-  float: inherit !important;
+  /* float: inherit !important; */
   display: inline-block !important;
   width: inherit;
 }
@@ -185,7 +189,7 @@
 }
 
 .social_icon {
-  text-align: right;
+  /* text-align: right; */
   margin: 0;
   margin-top: 3px;
 }
@@ -274,6 +278,25 @@
   .footer-content .footer-social-icon {
       margin-top: 20px;
       margin-bottom: 20px;
+  }
+  .copyright-text{
+    text-align: center;
+    margin-top: 0rem;
+  }
+  .footer-menu{
+    text-align: left;
+  }
+  .footer-menu li {
+    display: block; /* Change from inline-block to block for stacking vertically */
+    margin-bottom: 10px; /* Add margin between each menu item */
+    margin-left: 0; /* Reset left margin to remove any spacing */
+  }
+  .footer-menu li:hover a {
+    color: #ff5e14;
+  }
+  .footer-menu li a {
+    font-size: 14px;
+    color: #878787;
   }
 }
 
