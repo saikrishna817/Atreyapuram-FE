@@ -104,8 +104,8 @@
     .modal-content {
       /* height: 65vh; */
       margin-top: 10%;
-      margin-left: 1rem;
-      width: 50vh;
+      /* margin-left: 1rem;
+      width: 50vh; */
     }
   
     .modal-header {
@@ -324,4 +324,8 @@
 
   .checkOut{
     margin-right: 5rem;
+  }
+  .success-icon {
+    color: #155724;
+    /* Dark green text color */
   }

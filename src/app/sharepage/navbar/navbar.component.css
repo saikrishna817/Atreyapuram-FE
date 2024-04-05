@@ -231,21 +231,21 @@ nav {
   }
 
   .modal-content {
-    height: 65vh;
-    margin-top: 25%;
-    width: 50vh;
+    /* height: 65vh; */
+    margin-top: 15%;
+    /* width: 50vh; */
   }
 
   .modalContentSignup {
-    height: 70vh;
-    margin-top: 25%;
-    width: 50vh;
+    /* height: 70vh; */
+    margin-top: 10%;
+    /* width: 50vh; */
   }
 
   .modalContentForgot {
-    height: 40vh;
+    /* height: 40vh; */
     margin-top: 25%;
-    width: 50vh;
+    /* width: 50vh; */
   }
 
   .modal-header {
@@ -264,10 +264,6 @@ nav {
     label {
       margin-bottom: 0rem !important;
     }
-  }
-
-  .errorMsg {
-    text-align: center;
   }
 }
 
