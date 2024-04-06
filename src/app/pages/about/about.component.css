@@ -8,12 +8,17 @@
     flex-wrap: wrap;
 }
 
+.image{
+    width: 100%;
+    height: 100%;
+}
+
 .header {
     color: green;
     margin: 6rem 0rem 3rem 0rem;
 }
 
-.atpu{
+.atpu {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,8 +106,23 @@ p {
         justify-content: center;
     }
 
-    p {
-        margin: 0px 1rem;
+    .flip-card {
+        background-color: transparent;
+        width: 40rem;
+        height: 250px;
+        perspective: 1000px;
+
+    }
+    .atpuPara{
+        margin-top: -7rem !important;
+    }
+
+    .responsivePara{
+        padding: 0rem 3rem;
+    }
+    .image{
+        width: 150%;
+        height: 110%;
     }
 }
 
