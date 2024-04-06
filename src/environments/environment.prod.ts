@@ -1,28 +1,28 @@
 // src/environments/environment.prod.ts
 export const environment = {
     production: true,
-    login: 'http://localhost:8008/user/login',
-    register: 'http://localhost:8008/user/register',
-    forgot: 'http://localhost:8008/user/forgot',
-    changePsd: 'http://localhost:8008/user/verify',
+    login: 'https://gunturukaaram.com:3002/user/login',
+    register: 'https://gunturukaaram.com:3002/user/register',
+    forgot: 'https://gunturukaaram.com:3002/user/forgot',
+    changePsd: 'https://gunturukaaram.com:3002/user/verify',
 
     //products
-    products: 'http://localhost:8008/user/products',
-    addCart:'http://localhost:8008/user/cart',
-    getCart:'http://localhost:8008/user/getcart',
-    deleteCartItem:'http://localhost:8008/user/cart',
-    decrementItemCount:'http://localhost:8008/user/cart',
-    deleteAllCartItems:'http://localhost:8008/user/cart',
-    cancelOrder:'http://localhost:8008/user/order',
-    placeOrder:'http://localhost:8008/user/createorder',
+    products: 'https://gunturukaaram.com:3002/user/products',
+    addCart:'https://gunturukaaram.com:3002/user/cart',
+    getCart:'https://gunturukaaram.com:3002/user/getcart',
+    deleteCartItem:'https://gunturukaaram.com:3002/user/cart',
+    decrementItemCount:'https://gunturukaaram.com:3002/user/cart',
+    deleteAllCartItems:'https://gunturukaaram.com:3002/user/cart',
+    cancelOrder:'https://gunturukaaram.com:3002/user/order',
+    placeOrder:'https://gunturukaaram.com:3002/user/createorder',
 
     //Order Details
-    getOrder:'http://localhost:8008/user/getorder',
-    getAddress:'http://localhost:8008/user/getaddress',
+    getOrder:'https://gunturukaaram.com:3002/user/getorder',
+    getAddress:'https://gunturukaaram.com:3002/user/getaddress',
 
 
-    contactAddress: 'http://localhost:8008/user/contact',
-    DeliveryAddress: 'http://localhost:8008/user/address',
-    contact:'http://localhost:8008/user/mail'
+    contactAddress: 'https://gunturukaaram.com:3002/user/contact',
+    DeliveryAddress: 'https://gunturukaaram.com:3002/user/address',
+    contact:'https://gunturukaaram.com:3002/user/mail'
   };
   

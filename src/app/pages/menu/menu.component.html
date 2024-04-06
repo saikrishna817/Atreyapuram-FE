@@ -18,13 +18,16 @@
           <a class="button" *ngIf="!userName" data-toggle="modal" data-target="#loginModal"
             (click)="addToOrder(item)">Buy Now</a>
         </div>
+        <div *ngIf="showMessage">
+          {{ message }}
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="showMessage" class="cart-message">
+<!-- <div *ngIf="showMessage" class="cart-message">
   {{ message }}
-</div>
+</div> -->
 
 <!-- checkout component code -->
 <div class="modal fade" id="checkOutModal" tabindex="-1" role="dialog" aria-labelledby="checkOuteModalLabel"
@@ -357,7 +360,7 @@
             </div>
             <div *ngIf="loginForm.get('password')?.hasError('pattern') && loginForm.get('password')?.touched"
               class="text-danger">
-              wrong Password
+              Invalid Password
             </div>
           </div>
           <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
@@ -411,7 +414,7 @@
               </div>
               <div *ngIf="registerForm.get('name')?.hasError('pattern') && registerForm.get('name')?.touched"
                 class="text-danger ms-1">
-                Invalid name.
+                Invalid name
               </div>
             </div>
             <div class="form-group col-sm-12">
@@ -439,8 +442,9 @@
               </div>
               <div *ngIf="registerForm.get('password')?.hasError('pattern') && registerForm.get('password')?.touched"
                 class="text-danger">
-                Invalid Password. Password must have at least 8 characters, including one alphabetical character, one
-                special character and one digit.
+                Invalid Password. 
+                <!-- Password must have at least 8 characters, including one alphabetical character, one
+                special character and one digit. -->
               </div>
             </div>
             <div *ngIf="errorMessage" class="alert alert-danger" role="alert">

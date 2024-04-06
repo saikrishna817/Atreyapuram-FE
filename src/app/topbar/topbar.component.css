@@ -66,3 +66,43 @@
 .nav-link, .nav-link.active-link {
   transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
 }
+.navbar-nav {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  width: 100%; /* Ensure the navbar takes full width */
+}
+
+.navbar-nav .nav-item {
+  margin-right: 10px; /* Adjust spacing between items */
+}
+
+
+/* Styles for mobile screens (below 768px) */
+@media (max-width: 768px) {
+  .navbar-expand .navbar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    margin-left: 0; 
+  }
+  .navbar-nav .nav-item {
+    margin-right: 0 !important;
+  }
+  .navbar-nav {
+    flex-direction: row; /* Ensure items are in a row */
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    display: flex;
+    justify-content: center; /* Center the items */
+  }
+
+  .navbar-nav .nav-item {
+    margin-right: 10px; /* Adjust spacing between items */
+  }
+}
