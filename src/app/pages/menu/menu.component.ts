@@ -323,7 +323,7 @@ export class MenuComponent {
             // Show error message for 5 seconds
             this.errorTimeout = setTimeout(() => {
               this.errorMessage = undefined;
-            }, 5000);
+            }, 3000);
           } else {
             this.errorMessage = 'An unexpected error occurred.';
           }
@@ -367,7 +367,7 @@ export class MenuComponent {
             this.errorMessage = 'User already exists with this email';
             setTimeout(() => {
               this.errorMessage = undefined;
-            }, 5000);
+            }, 3000);
           }
         },
         (err: any) => {
@@ -397,7 +397,7 @@ export class MenuComponent {
           this.forgotPsdForm.reset();
           setTimeout(() => {
             this.showForgotMessage = false;
-          }, 5000);
+          }, 3000);
         },
         (err: any) => {
           console.error(err);
@@ -405,7 +405,7 @@ export class MenuComponent {
             this.errorMessage = "User doesn't exist";
             this.errorTimeout = setTimeout(() => {
               this.errorMessage = undefined;
-            }, 5000);
+            }, 3000);
           } else {
             this.errorMessage = "An error occurred";
             this.errorTimeout = setTimeout(() => {

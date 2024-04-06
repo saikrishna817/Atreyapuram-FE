@@ -24,10 +24,10 @@
                       <td>
                           <div class="quantity">
                               <!-- <button class="btn btn-secondary btn-sm" (click)="decrementQuantity(item)">-</button> -->
-                              <a href="#" class="quantity__minus"  (click)="decrementQuantity(item)"><span>-</span></a>
+                              <a class="quantity__minus"  (click)="decrementQuantity(item)"><span>-</span></a>
                               <input type="text" [(ngModel)]="item.quantity" class="quantity__input">
                               <!-- <button class="btn btn-secondary btn-sm" (click)="incrementQuantity(item)">+</button> -->
-                              <a href="#" class="quantity__plus" (click)="incrementQuantity(item)"><span>+</span></a>
+                              <a class="quantity__plus" (click)="incrementQuantity(item)"><span>+</span></a>
                           </div>
                       </td>
                       <td>&#x20B9;{{ item.total }}</td>
