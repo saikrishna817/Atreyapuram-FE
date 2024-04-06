@@ -18,16 +18,16 @@
           <a class="button" *ngIf="!userName" data-toggle="modal" data-target="#loginModal"
             (click)="addToOrder(item)">Buy Now</a>
         </div>
-        <div *ngIf="showMessage">
+        <!-- <div *ngIf="showMessage">
           {{ message }}
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </div>
-<!-- <div *ngIf="showMessage" class="cart-message">
+<div *ngIf="showMessage" class="cart-message">
   {{ message }}
-</div> -->
+</div>
 
 <!-- checkout component code -->
 <div class="modal fade" id="checkOutModal" tabindex="-1" role="dialog" aria-labelledby="checkOuteModalLabel"
