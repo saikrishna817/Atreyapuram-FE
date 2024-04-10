@@ -17,7 +17,7 @@ export const environment = {
     placeOrder:'https://gunturukaaram.com:3002/user/createorder',
 
     //Order Details
-    getOrder:'  user/getorder',
+    getOrder:'  https://gunturukaaram.com:3002/user/getorder',
     getAddress:'https://gunturukaaram.com:3002/user/getaddress',
 
 
