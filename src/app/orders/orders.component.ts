@@ -14,13 +14,13 @@ export class OrdersComponent implements OnInit {
 
   userId: any;
   orderIds: any;
-  orderedStatus:any;
+  orderedStatus: any;
   orderedProducts: any;
   orderedDate: any;
   deliveryAddress: any[] = [];
   imageUrl: any;
   loading: boolean = true;
-  showMessage: boolean =false
+  showMessage: boolean = false
 
   constructor(
     private userService: UserService,
@@ -48,16 +48,14 @@ export class OrdersComponent implements OnInit {
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           // Filter out orders with status other than 'Placed' and map the remaining orders
-          this.orderedProducts = res.order
-            .filter((order: any) => order.orderstatus === 'Placed')
-            .map((order: any) => {
-              return {
-                orderId: order.orderid,
-                orderedDate: order.date,
-                orderedStatus: order.orderstatus,
-                products: JSON.parse(order.product)
-              };
-            });
+          this.orderedProducts = res.order.map((order: any) => {
+            return {
+              orderId: order.orderid,
+              orderedDate: order.date,
+              orderedStatus: order.orderstatus,
+              products: JSON.parse(order.product)
+            };
+          });
           this.loading = false;
           for (const order of this.orderedProducts) {
             this.getOrderAddress(order.orderId);
@@ -70,7 +68,7 @@ export class OrdersComponent implements OnInit {
       );
     }
   }
-  
+
 
   //Get address for that particular order based on order Id
   getOrderAddress(orderId: string) {
@@ -107,7 +105,7 @@ export class OrdersComponent implements OnInit {
         orderstatus: 'Cancelled',
       },
       orderid: orderID,
-      userid:userId
+      userid: userId
     };
     const apiUrl = environment.cancelOrder;
     this.http.post(apiUrl, postData).subscribe(

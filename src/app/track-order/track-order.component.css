@@ -83,6 +83,18 @@
     border-color: #4caf50; 
 }
 
+.step.active.cancelledReq .icon {
+    background: #b90e05;
+    color: #ffffff;
+    border-color: #b90e05; 
+}
+
+.step.active.cancelled .icon {
+    background: #b90e05;
+    color: #ffffff;
+    border-color: #b90e05; 
+}
+
 
 .step .text {
     font-weight: 500;

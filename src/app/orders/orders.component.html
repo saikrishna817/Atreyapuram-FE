@@ -46,7 +46,19 @@
 
             </div>
             <div class="custom-button-group mt-3">
-              <button class="btn bg-dark text-white" data-toggle="modal"
+              <ng-container *ngIf="order.orderedStatus === 'Cancelled'">
+                <p style="color: red;"><b>Cancelled</b></p>
+              </ng-container>
+              <ng-container *ngIf="order.orderedStatus === 'Completed'">
+                <p style="color: green;"><b>Delivered</b></p>
+              </ng-container>
+              <ng-container *ngIf="order.orderedStatus === 'Shipped'">
+                <p></p>
+              </ng-container>
+              <ng-container *ngIf="order.orderedStatus === 'Enroute'">
+                <p></p>
+              </ng-container>
+              <button class="btn bg-dark text-white" *ngIf="order.orderedStatus === 'Placed'" data-toggle="modal"
                 [attr.data-target]="'#cancelOrderModal_' + i">Cancel Order</button>
               <button class="btn bg-dark text-white" [routerLink]="['/trackOrder', order.orderId]">Track Order</button>
             </div>

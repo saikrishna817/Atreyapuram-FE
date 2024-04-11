@@ -28,6 +28,12 @@ export class TrackOrderComponent implements OnInit {
     this.getTrackOrderDetails()
   }
 
+   isStatusReached(status: string): boolean {
+        // Assuming this.orderStatus holds the current status
+        return ['Placed', 'Shipped', 'Enroute', 'Completed'].indexOf(status) <=
+            ['Placed', 'Shipped', 'Enroute', 'Completed'].indexOf(this.orderStatus);
+    }
+
   getTrackOrderDetails() {
     this.userId = this.userService.getLoggedInUserId();
     if (this.userId) {
@@ -39,7 +45,7 @@ export class TrackOrderComponent implements OnInit {
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
           // Filter out cancelled orders and find the matched order
-          const matchedOrder = res.order.find((order: any) => order.orderid === this.orderId && order.orderstatus !== 'Cancelled');
+          const matchedOrder = res.order.find((order: any) => order.orderid === this.orderId);
           if (matchedOrder) {
             // Calculate expected arrival date after 7 days
             const actualDate = new Date(matchedOrder.date);
