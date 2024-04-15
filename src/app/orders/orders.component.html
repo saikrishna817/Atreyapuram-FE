@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="custom-container">
   <h3 class="text-center mt-5 mb-3"><b>My Orders</b></h3>
   <div class="row justify-content-center">
     <div class="col-md-7 mt-5 mb-5" *ngIf="loading">
@@ -41,9 +41,7 @@
                       address?.city }}, {{ address?.state }} - {{ address?.pincode }}</span>
                   </p>
                 </div>
-
               </div>
-
             </div>
             <div class="custom-button-group mt-3">
               <ng-container *ngIf="order.orderedStatus === 'Cancelled'">
@@ -91,6 +89,8 @@
     </div>
   </div>
 </div>
+
+
 <div *ngIf="!loading && (!orderedProducts || orderedProducts.length === 0)" class="empty-cart-message">
   <h5>Your haven't places any orders</h5>
 </div>
