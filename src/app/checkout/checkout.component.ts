@@ -45,10 +45,8 @@ export class CheckoutComponent {
   }
   //on form submit(email,phone number)
   onSubmit() {
-    console.log('invalid')
     this.checkoutForm.markAllAsTouched();
     if (this.checkoutForm.valid) {
-      console.log('Validdd 1');
       const postData = {
         document: {
           email: this.checkoutForm.get('email')!.value,
@@ -56,25 +54,10 @@ export class CheckoutComponent {
         }
       };
 
-      // this.submitContactForm(postData)
-      //   .subscribe(
-      //     (res: any) => {
-      //       console.log('Validdd 2');
-      //       console.log(res);
-      //     },
-      //     (err: any) => {
-      //       // Handle error response
-      //       console.error(err);
-      //     }
-      //   );
+
 
     }
   }
-  // private submitContactForm(data: any): Observable<any> {
-  //   const apiUrl = environment.apiUrl;
-  //   console.log('ramyaaaa')
-  //   return this.http.post(apiUrl, data);
-  // }
 
   // Add this method in your component
   showAdditionalFieldsOnClick() {
