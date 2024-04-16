@@ -27,9 +27,10 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "allowedCommonJsDependencies": [
-              "raf",
-              "@babel/runtime-corejs3"
+              "jspdf",
+              "canvg"
             ],
+            
             "polyfills": [
               "zone.js"
             ],
