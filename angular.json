@@ -26,6 +26,10 @@
             "outputPath": "dist/puthareku",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "raf",
+              "@babel/runtime-corejs3"
+            ],
             "polyfills": [
               "zone.js"
             ],
