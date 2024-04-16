@@ -25,12 +25,7 @@
           "options": {
             "outputPath": "dist/puthareku",
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "allowedCommonJsDependencies": [
-              "jspdf",
-              "canvg"
-            ],
-            
+            "browser": "src/main.ts",  
             "polyfills": [
               "zone.js"
             ],
