@@ -14,6 +14,7 @@ export class OrdersComponent implements OnInit {
 
   userId: any;
   orderIds: any;
+  totalProducts:any
   orderedStatus: any;
   orderedProducts: any;
   orderedDate: any;
@@ -55,18 +56,47 @@ export class OrdersComponent implements OnInit {
               orderedStatus: order.orderstatus,
               products: JSON.parse(order.product)
             };
-          });
+          }); 
           this.loading = false;
+          this.getProducts();
           for (const order of this.orderedProducts) {
             this.getOrderAddress(order.orderId);
           }
-          console.log(this.orderedProducts, 'productttsuuuu');
         },
         error => {
           console.error('Error retrieving ordered products:', error);
         }
       );
     }
+  }
+
+  showProductImages() {
+    for (const order of this.orderedProducts) {
+      for (const product of order.products) {
+        // Compare product IDs with products obtained from API call
+        const matchedProduct = this.totalProducts.find((item:any) => item.ProductID === product.product_id);
+        if (matchedProduct) {
+          // Assuming you have a property called 'image' in the matched product
+          const imageURL = matchedProduct.Image;
+          // Assign the image URL to the product object
+          product.imageURL = imageURL;
+        }
+      }
+    }
+  }
+
+  getProducts() {
+    const apiUrl = environment.products;
+    this.http.get(apiUrl).subscribe(
+      (res: any) => {
+        this.totalProducts = res.products;
+        // After getting products, call showProductImages() to compare and assign images
+        this.showProductImages();
+      },
+      error => {
+        console.error('Error retrieving products:', error);
+      }
+    );
   }
 
 
@@ -94,12 +124,8 @@ export class OrdersComponent implements OnInit {
   }
 
   confirmCancelOrder(item: any) {
-    // this.orderedStatus = item.orderedStatus
-    // console.log(item, 'itemmmmm all cancel')
-    // console.log(this.orderedStatus,'deletinggg itemmm')
     const orderID = item.orderId;
     const userId = this.userService.getLoggedInUserId();
-    console.log(orderID, userId, item, 'Cancel Orderrr')
     const postData = {
       updatedData: {
         orderstatus: 'Cancelled',

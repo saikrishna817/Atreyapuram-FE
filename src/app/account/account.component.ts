@@ -13,6 +13,7 @@ import { OrderService } from '../orders/orders.service';
   styleUrl: './account.component.css'
 })
 export class AccountComponent {
+
   name: string | undefined;
   email: string | undefined;
   userName: string | undefined;
@@ -26,8 +27,8 @@ export class AccountComponent {
     private localStorage: LocalstorageService,
     private orderservice: OrderService
   ) {
-    console.log(this.orderservice.orderedProducts.length, 'heyyy ramyaaaa')
   }
+
   ngOnInit(): void {
     // this.ordersLength = this.orderservice.orderedProducts.length
     this.name = this.userService.getLoggedInUserName();
