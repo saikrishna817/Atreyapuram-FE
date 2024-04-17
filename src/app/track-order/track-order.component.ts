@@ -66,11 +66,14 @@ export class TrackOrderComponent implements OnInit {
               orderedDate: matchedOrder.date,
               orderedStatus: matchedOrder.orderstatus,
               products: JSON.parse(matchedOrder.product).map((product: any) => {
-                product.taxRate = 12;
-                product.taxAmount = (product.price * product.taxRate) / 100; // Calculate tax amount
+                product.taxratePercent = 5;
+                product.taxRate = 5/100;
+                product.taxAmount = product.price * product.taxRate // Calculate tax amount
                 product.cost = (product.price / product.quantity) - (product.taxAmount / product.quantity); //cost
                 product.subTotal = (product.cost * product.quantity); //Total cost
+                product.subTotal = parseFloat(product.subTotal.toFixed(2));
                 product.totalPrice = product.subTotal + product.taxAmount; //Total Price
+                product.totalPrice = parseFloat(product.totalPrice.toFixed(2)); 
                 return product;
               })
             }];

@@ -1,9 +1,6 @@
 <div class="container">
     <article class="card">
-        <header class="card-header" style="background-color: green;" routerLink="/orders"> <span
-                class="back-arrow ms-3"><img src="assets/img/backarrow.png" alt="" width="20px"
-                    height="20px">&nbsp;&nbsp;</span><b>My Orders / Tracking</b></header>
-
+        <span class="card-header"><span style='font-size:1.5rem;cursor: pointer;'  routerLink="/orders">&#8592;</span>&nbsp;&nbsp;&nbsp;<b>My Orders / Tracking</b></span>
         <div class="card-body">
             <!-- <h6>Order ID: {{this.orderId}}</h6> -->
             <article class="card tracking-steps"> <!-- Add custom class for tracking steps -->
@@ -59,7 +56,7 @@
 <article class="card invoice-class" id="hiddenInvoiceContainer">
     <div class="container">
         <div class="logo">
-            <img src="assets/img/logoATP.jpg" alt="">
+            <img src="assets/atpu-logo.jpg" alt="">
             <h5><b>Tax Invoice/Bill of Supply/Cash Memo</b></h5>
         </div>
         <div class="invoice-info">
@@ -85,11 +82,11 @@
             </div>
             <div class="row">
                 <div class="address">
-                    <p>PAN No: AAJCC9783E</p>
-                    <p>GST Registration No: 36AAJCC9783E1Z8</p>
+                    <p>PAN No: AATFJ1037D</p>
+                    <p>GST Registration No: 37AATFJ1037D1ZE</p>
                     <p>Place of supply: Andhrapradesh</p>
                     <p>Order Date: {{ this.orderPlacedDate | date: 'dd-MM-yyyy' }}</p>
-                    <p>Invoice/order Id: {{this.orderId}}</p>
+                    <p>order Id: {{this.orderId}}</p>
                 </div>
                 <div class="shipping-address">
                     <h6><b>Shipping Address:</b></h6>
@@ -126,7 +123,7 @@
                             <td>{{ product.cost || '---'}}</td>
                             <td>{{ product.quantity }}</td>
                             <td>{{ product.subTotal || '---' }}</td>
-                            <td>{{ product.taxRate || '---' }}%</td>
+                            <td>{{ product.taxratePercent || '---' }}%</td>
                             <td>{{ product.taxAmount || '---' }}</td>
                             <td>{{ product.price || '---' }}</td>
                         </tr>
@@ -142,14 +139,14 @@
                         <td colspan="6" class="text-center">Subtotal</td>
                         <td colspan="2">{{ totalSubTotal }}</td>
                     </tr>
-                    <!-- <tr>
+                    <tr>
                         <td colspan="6" class="text-center">CGST</td>
-                        <td colspan="2">10.61</td>
+                        <td colspan="2">2.5%</td>
                     </tr>
                     <tr>
                         <td colspan="6" class="text-center">SGST</td>
-                        <td colspan="2">10.61</td>
-                    </tr> -->
+                        <td colspan="2">2.5%</td>
+                    </tr>
                     <tr>
                         <td colspan="6" class="text-center">Discount</td>
                         <td colspan="2">0.00</td>
@@ -163,10 +160,11 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="footer">
+                <p>JITHENDRIYAM ENTERPRISES</p>
+                <p>* This is a Computer-generated invoice and does not require a signature.</p>
+            </div>
         </div>
-        <div class="footer">
-            <p>JITHENDRIYAM ENTERPRISES</p>
-            <p>* This is a Computer-generated invoice and does not require a signature.</p>
-        </div>
+     
     </div>
 </article>
