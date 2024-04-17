@@ -1,8 +1,6 @@
 <div class="container">
     <article class="card">
-        <span class="card-header" routerLink="/orders"><img src="assets/img/backarrow.png" alt="" width="20px"
-                    height="20px">&nbsp;&nbsp;<b>My Orders / Tracking</b></span>
-
+        <span class="card-header"><span style='font-size:1.5rem;cursor: pointer;'  routerLink="/orders">&#8592;</span>&nbsp;&nbsp;&nbsp;<b>My Orders / Tracking</b></span>
         <div class="card-body">
             <!-- <h6>Order ID: {{this.orderId}}</h6> -->
             <article class="card tracking-steps"> <!-- Add custom class for tracking steps -->
@@ -84,11 +82,11 @@
             </div>
             <div class="row">
                 <div class="address">
-                    <p>PAN No: AAJCC9783E</p>
-                    <p>GST Registration No: 36AAJCC9783E1Z8</p>
+                    <p>PAN No: AATFJ1037D</p>
+                    <p>GST Registration No: 37AATFJ1037D1ZE</p>
                     <p>Place of supply: Andhrapradesh</p>
                     <p>Order Date: {{ this.orderPlacedDate | date: 'dd-MM-yyyy' }}</p>
-                    <p>Invoice/order Id: {{this.orderId}}</p>
+                    <p>order Id: {{this.orderId}}</p>
                 </div>
                 <div class="shipping-address">
                     <h6><b>Shipping Address:</b></h6>
