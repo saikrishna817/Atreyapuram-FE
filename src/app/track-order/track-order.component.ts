@@ -66,11 +66,14 @@ export class TrackOrderComponent implements OnInit {
               orderedDate: matchedOrder.date,
               orderedStatus: matchedOrder.orderstatus,
               products: JSON.parse(matchedOrder.product).map((product: any) => {
-                product.taxRate = 12;
-                product.taxAmount = (product.price * product.taxRate) / 100; // Calculate tax amount
+                product.taxratePercent = 5;
+                product.taxRate = 5/100;
+                product.taxAmount = product.price * product.taxRate // Calculate tax amount
                 product.cost = (product.price / product.quantity) - (product.taxAmount / product.quantity); //cost
                 product.subTotal = (product.cost * product.quantity); //Total cost
+                product.subTotal = parseFloat(product.subTotal.toFixed(2));
                 product.totalPrice = product.subTotal + product.taxAmount; //Total Price
+                product.totalPrice = parseFloat(product.totalPrice.toFixed(2)); 
                 return product;
               })
             }];
@@ -121,19 +124,19 @@ export class TrackOrderComponent implements OnInit {
 
 
   generatePDF(orderId: string) {
-    // // Get the hidden container for the invoice content
-    // const hiddenInvoiceContainer = document.getElementById('hiddenInvoiceContainer') as HTMLElement;
+    // Get the hidden container for the invoice content
+    const hiddenInvoiceContainer = document.getElementById('hiddenInvoiceContainer') as HTMLElement;
     
-    // // Convert hidden container content to PDF
-    // html2canvas(hiddenInvoiceContainer).then((canvas) => {
-    //     // Convert canvas to PDF
-    //     const pdf = new jsPDF('p', 'mm', 'a4');
-    //     const imgData = canvas.toDataURL('image/png');
-    //     const imgWidth = 210;
-    //     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    //     pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-    //     pdf.save(`Invoice-atpu.pdf`);
-    // });
+    // Convert hidden container content to PDF
+    html2canvas(hiddenInvoiceContainer).then((canvas) => {
+        // Convert canvas to PDF
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgData = canvas.toDataURL('image/png');
+        const imgWidth = 210;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        pdf.save(`Invoice-atpu.pdf`);
+    });
 }
 
 
