@@ -4,7 +4,7 @@ export const environment = {
     login: 'https://gunturukaaram.com:3002/user/login',
     register: 'https://gunturukaaram.com:3002/user/register',
     forgot: 'https://gunturukaaram.com:3002/user/forgot',
-    changePsd: 'https://gunturukaaram.com:3002/user/verify',
+    changePsd: 'https://gunturukaaram.com:3002/user/update',
 
     //products
     products: 'https://gunturukaaram.com:3002/user/products',

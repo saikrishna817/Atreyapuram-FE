@@ -11,6 +11,8 @@
     padding: 0.75rem;
     margin-bottom: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: green;
+    
 }
 
 .track {
@@ -83,6 +85,18 @@
     border-color: #4caf50; 
 }
 
+.step.active.cancelledReq .icon {
+    background: #b90e05;
+    color: #ffffff;
+    border-color: #b90e05; 
+}
+
+.step.active.cancelled .icon {
+    background: #b90e05;
+    color: #ffffff;
+    border-color: #b90e05; 
+}
+
 
 .step .text {
     font-weight: 500;
@@ -106,6 +120,133 @@ img{
         margin-right: 3rem; /* Reduce margin for smaller screens */
     }
 }
+
+
+
+/* INVOICE */
+
+.invoice{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.invoice-class{
+    position: absolute;
+    left: -9999px;
+    
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 30px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .logo img {
+        max-width: 35%;
+        height: auto;
+        margin-right: 10px;
+    }
+    
+    h2 {
+        margin: 0;
+    }
+    
+    .invoice-info {
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+    }
+    
+    .row {
+        display: flex;
+        gap: 6rem;
+        margin-bottom: 2rem; 
+    }
+    
+    .seller-info,
+    .billing-address,
+    .shipping-address,
+    .address {
+        flex: 1;
+    }
+    
+    .address {
+        margin: 0;
+    }
+    
+    .address p {
+        margin: 5px 0;
+        color: #555;
+    }
+    
+    .address h2 {
+        margin: 5px 0;
+        font-size: 1.2rem;
+        color: #333;
+    }
+    
+    .items-table-container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    
+    .items-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    
+    .items-table th, .items-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    .items-table th {
+        background-color: #f2f2f2;
+        font-weight: normal;
+    }
+    
+    .footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #777;
+    }
+    
+    .total {
+        font-weight: bold;
+    }
+    
+    /* Media Query for Responsive Layout */
+    @media only screen and (max-width: 800px) {
+        .container {
+            padding: 15px;
+        }
+        .invoice-info h2 {
+            font-size: 1rem;
+        }
+        .address p {
+            font-size: 0.9rem;
+        }
+        .items-table th, .items-table td {
+            font-size: 0.9rem;
+        }
+        .footer {
+            font-size: 0.9rem;
+        }
+    }
+
+}
+
+
+
 
 
 

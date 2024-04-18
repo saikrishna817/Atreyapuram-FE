@@ -19,6 +19,10 @@
                         class="text-danger">
                         Old Password is required
                     </div>
+                    <div *ngIf="errorMessage"
+                        class="text-danger">
+                        Incorrect Old Password
+                    </div>
                 </div>
                 <div class="mt-1">
                     <h6 class="mb-3"><b>Enter New Password:</b></h6>
@@ -58,26 +62,27 @@
                     </div>
                     <div *ngIf="resetForm.get('confirmPassword')?.hasError('pattern') && resetForm.get('confirmPassword')?.touched"
                         class="text-danger">
-                        Invalid Password. Password must have at least 8 characters, including one alphabetical character,
+                        Invalid Password. Password must have at least 8 characters, including one alphabetical
+                        character,
                         one
                         special character and one digit.
                     </div>
                 </div>
-    
+
                 <!-- <p class="text-success" *ngIf="passwordsMatch()">Passwords Matched</p> -->
                 <p class="text-danger" *ngIf="passwordsMatchError">Passwords should be the same.</p>
                 <!-- <p class="pwdtext" *ngIf="f.password?.value === f.confirmPassword?.value && 
                                   f.password?.value !== ''">Passwords Matched</p> -->
                 <div class="mt-4">
-                    <button class="btn text-white bg-dark me-3"  type="submit" (click)="reset()">Reset Password</button>
+                    <button class="btn text-white bg-dark me-3" type="submit" (click)="reset()">Reset Password</button>
                 </div>
             </div>
         </form>
     </div>
-  
+
     <div *ngIf="showSuccessPopup">
         <!-- Reset Password success -->
-        <div class="card mt-5 mb-5 showSuccess" >
+        <div class="card mt-5 mb-5 showSuccess">
             <div class="success-icon text-center">
                 <i class="fas fa-check-circle fa-5x mt-3 mb-4"></i>
             </div>

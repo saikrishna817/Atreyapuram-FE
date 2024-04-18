@@ -128,7 +128,7 @@ nav {
 
   .dropdown-menu {
     min-width: auto;
-    left: -3.0rem !important;
+    left: -3.4rem !important;
     position: absolute;
     top: calc(100% + 10px);
     z-index: 1000;

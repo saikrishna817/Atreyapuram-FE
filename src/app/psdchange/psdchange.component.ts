@@ -18,12 +18,14 @@ export class PsdchangeComponent {
   resetForm!: FormGroup;
   old_password:any;
   userId:any;
-  userName:any
+  userName:any;
+  userEmail:any;
   backendError: any
   errorMessages: any = { password: [], confirmPassword: [] };
   passwordVisible: boolean = false;
   passwordsMatchError: boolean = false;
   showSuccessPopup: boolean = false;
+  errorMessage: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbModal,
@@ -59,19 +61,17 @@ export class PsdchangeComponent {
 
   reset() {
     this.resetForm.markAllAsTouched();
-    this.userId = this.userService.getLoggedInUserId();
+    this.userEmail = this.userService.getLoggedInUserEmail();
     this.userName = this.userService.getLoggedInUserName();
     this.old_password = this.userService.getLoggedInUserPassword();
-    console.log(this.old_password,'passwordd')
+    console.log(this.userEmail,this.old_password,'passwordd')
     if (this.resetForm.valid) {
       if (this.passwordsMatch()) {
         const password = this.resetForm.get('password')!.value;
-        const oldPassword = this.resetForm.get('oldPassword')!.value;
-        console.log(password, oldPassword, 'passwordssss')
         const postData = {
-          oldPassword: oldPassword,
-          password: password,
-          user_id:this.userId
+          oldpassword: this.old_password,
+          newpassword: password,
+          email:this.userEmail
         };
         const apiUrl = environment.changePsd;
         this.http.post(apiUrl, postData).subscribe(
@@ -85,6 +85,11 @@ export class PsdchangeComponent {
           },
           (err: any) => {
             console.error(err, 'errorrr');
+            this.errorMessage = true
+            setTimeout(() => {
+              this.errorMessage = false;
+              // this.router.navigate(['/home']);
+          }, 5000);
           }
         );
       }
