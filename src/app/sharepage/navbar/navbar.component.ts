@@ -68,22 +68,17 @@ export class NavbarComponent implements OnInit {
     // });
 
   }
+  
   ngOnInit(): void {
-    this.cartService.cartItemsCount$.subscribe(count => {
-      this.cartItemsCount = count;
-    });
-    // Subscribe to router events to detect navigation end
     this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd)
-      )
+      .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
-        // Fetch logged-in user details when navigation ends
         this.userName = this.userService.getLoggedInUserName();
       });
 
-    // Fetch logged-in user details when component initializes
-    this.userName = this.userService.getLoggedInUserName();
+    this.cartService.cartItemsCount$.subscribe(count => {
+      this.cartItemsCount = count;
+    });
   }
 
   // Function to toggle password visibility

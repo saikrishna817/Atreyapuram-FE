@@ -103,6 +103,7 @@
   /* float: left; */
   width: 50%;
   margin-bottom: 12px;
+  margin-left: -30px;
 }
 .footer-widget ul li a:hover {
   color: #ff5e14;
@@ -192,6 +193,7 @@
   /* text-align: right; */
   margin: 0;
   margin-top: 3px;
+  margin-left: 20px;
 }
 .social_icon li {
   display: inline-block;

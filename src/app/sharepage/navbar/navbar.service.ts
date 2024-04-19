@@ -32,12 +32,21 @@ export class UserService {
   // getLoggedInUserId() {
   //   return this.loggedInUserId;
   // }
+
+  // setLoggedInUserDetails(userName: string, userEmail: string, userId: number, userPassword: any) {
+  //   if (this.isLocalStorageAvailable()) {
+  //     const userDetails = { userName, userEmail, userId, userPassword };
+  //     localStorage.setItem(this.storageKey, JSON.stringify(userDetails));
+  //   }
+  // }
+
   setLoggedInUserDetails(userName: string, userEmail: string, userId: number, userPassword: any) {
     if (this.isLocalStorageAvailable()) {
-      const userDetails = { userName, userEmail, userId, userPassword };
+      const userDetails = { name: userName, email: userEmail, id: userId, password: userPassword };
       localStorage.setItem(this.storageKey, JSON.stringify(userDetails));
     }
   }
+  
 
   getLoggedInUserName() {
     if (this.isLocalStorageAvailable()) {
