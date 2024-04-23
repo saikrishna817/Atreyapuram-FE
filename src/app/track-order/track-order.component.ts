@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../sharepage/navbar/navbar.service';
-import { jsPDF } from 'jspdf';
+// import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
 
@@ -125,18 +125,18 @@ export class TrackOrderComponent implements OnInit {
 
   generatePDF(orderId: string) {
     // Get the hidden container for the invoice content
-    const hiddenInvoiceContainer = document.getElementById('hiddenInvoiceContainer') as HTMLElement;
+    // const hiddenInvoiceContainer = document.getElementById('hiddenInvoiceContainer') as HTMLElement;
     
-    // Convert hidden container content to PDF
-    html2canvas(hiddenInvoiceContainer).then((canvas) => {
-        // Convert canvas to PDF
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const imgData = canvas.toDataURL('image/png');
-        const imgWidth = 210;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-        pdf.save(`Invoice-atpu.pdf`);
-    });
+    // // Convert hidden container content to PDF
+    // html2canvas(hiddenInvoiceContainer).then((canvas) => {
+    //     // Convert canvas to PDF
+    //     const pdf = new jsPDF('p', 'mm', 'a4');
+    //     const imgData = canvas.toDataURL('image/png');
+    //     const imgWidth = 210;
+    //     const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    //     pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    //     pdf.save(`Invoice-atpu.pdf`);
+    // });
 }
 
 
