@@ -1,7 +1,6 @@
 <div class="container">
     <article class="card">
-        <header class="card-header" style="background-color: green;" routerLink="/orders"><img src="assets/img/backarrow.png"
-            alt="HTML tutorial" width="20px" height="20px" class="me-3">My Orders / Tracking</header>
+        <span class="card-header"><span style='font-size:1.5rem;cursor: pointer;'  routerLink="/orders">&#8592;</span>&nbsp;&nbsp;&nbsp;<b>My Orders / Tracking</b></span>
         <div class="card-body">
             <!-- <h6>Order ID: {{this.orderId}}</h6> -->
             <article class="card tracking-steps"> <!-- Add custom class for tracking steps -->
@@ -14,24 +13,158 @@
                     <!-- <div class="col"><strong>Tracking #:</strong><br>BD045903594059</div> -->
                 </div>
                 <div class="track">
-                    <div class="step active" [ngClass]="{'placed': this.orderStatus === 'Placed', 'shipped': this.orderStatus === 'shipped', 'enroute': this.orderStatus === 'enroute', 'delivered': this.orderStatus === 'delivered'}">
+                    <div class="step active" [ngClass]="{'placed': isStatusReached('Placed')}">
                         <span class="icon"><i class="fa fa-check"></i></span><span class="text">Order confirmed</span>
                     </div>
                     <div class="tracking-line"></div>
-                    <div class="step active" [ngClass]="{'shipped': this.orderStatus === 'shipped', 'enroute': this.orderStatus === 'enroute', 'delivered': this.orderStatus === 'delivered'}">
+                    <div class="step active" [ngClass]="{'shipped': isStatusReached('Shipped')}"
+                        *ngIf="orderStatus !== 'Cancelled'">
                         <span class="icon"><i class="fa fa-user"></i></span><span class="text">Order Shipped</span>
                     </div>
                     <div class="tracking-line"></div>
-                    <div class="step" [ngClass]="{'enroute': this.orderStatus === 'enroute', 'delivered': this.orderStatus === 'delivered'}">
+                    <div class="step active" [ngClass]="{'enroute': isStatusReached('Enroute')}"
+                        *ngIf="orderStatus !== 'Cancelled'">
                         <span class="icon"><i class="fa fa-truck"></i></span><span class="text">Order Enroute</span>
                     </div>
                     <div class="tracking-line"></div>
-                    <div class="step" [ngClass]="{'delivered': this.orderStatus === 'delivered'}">
-                        <span class="icon"><i class="fa fa-thumbs-up"></i></span><span class="text">Order Delivered</span>
+                    <div class="step active" [ngClass]="{'delivered': isStatusReached('Completed')}"
+                        *ngIf="orderStatus !== 'Cancelled'">
+                        <span class="icon"><i class="fa fa-thumbs-up"></i></span><span class="text">Order
+                            Delivered</span>
+                    </div>
+                    <div class="tracking-line"></div>
+                    <div class="step active" [ngClass]="{'cancelledReq': isStatusReached('Cancelled')}"
+                        *ngIf="orderStatus === 'Cancelled'">
+                        <span class="icon"><i class="fa fa-clock-o"></i></span><span class="text">Cancelation
+                            Requested</span>
+                    </div>
+                    <div class="step active" [ngClass]="{'cancelled': isStatusReached('Cancelled')}"
+                        *ngIf="orderStatus === 'Cancelled'">
+                        <span class="icon"><i class="fa fa-times"></i></span><span class="text">Order Cancelled</span>
                     </div>
                 </div>
-                
+                <div class="invoice mb-3">
+                    <button class="btn btn-success" *ngIf="orderStatus === 'Completed'"
+                        (click)="generatePDF(orderId)">Download Invoice</button>
+                </div>
+
             </article>
         </div>
     </article>
 </div>
+
+<article class="card invoice-class" id="hiddenInvoiceContainer">
+    <div class="container">
+        <div class="logo">
+            <img src="assets/atpu-logo.jpg" alt="">
+            <h5><b>Tax Invoice/Bill of Supply/Cash Memo</b></h5>
+        </div>
+        <div class="invoice-info mt-4">
+            <div class="row">
+                <div class="seller-info">
+                    <h6><b>Sold By:</b></h6>
+                    <div class="address">
+                        <p>JITENDRIYAM ENTERPRISES,</p>
+                        <p>6-357/7, Suryaraopeta, Rajanagaram, East Godavari,</p>
+                        <p>Andhrapradesh, 533294</p>
+                    </div>
+                </div>
+                <div class="billing-address">
+                    <h6><b>Billing Address:</b></h6>
+                    <div class="address">
+                        <p class="card-text" *ngFor="let addresses of deliveryAddress">
+                            <ng-container *ngFor="let address of addresses">
+                                <span class="text-secondary">{{ address?.houseNumber }}, {{ address?.area }}, {{ address?.city }}, {{ address?.state }} - {{ address?.pincode }}</span>
+                            </ng-container>
+                        </p>                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="address">
+                    <p>PAN No: AATFJ1037D</p>
+                    <p>GST Registration No: 37AATFJ1037D1ZE</p>
+                    <p>Place of supply: Andhrapradesh</p>
+                    <p>Order Date: {{ this.orderPlacedDate | date: 'dd-MM-yyyy' }}</p>
+                    <p>order Id: {{this.orderId}}</p>
+                </div>
+                <div class="shipping-address">
+                    <h6><b>Shipping Address:</b></h6>
+                    <div class="address">
+                        <p class="card-text" *ngFor="let addresses of deliveryAddress">
+                            <ng-container *ngFor="let address of addresses">
+                                <span class="text-secondary">{{ address?.houseNumber }}, {{ address?.area }}, {{ address?.city }}, {{ address?.state }} - {{ address?.pincode }}</span>
+                            </ng-container>
+                        </p>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="items-table-container">
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>S/n</th>
+                        <th>Description</th>
+                        <th>Item Price</th>
+                        <th>Pieces</th>
+                        <!-- <th>Weight</th> -->
+                        <th>Subtotal</th>
+                        <th>Tax</th>
+                        <th>Tax Amount</th>
+                        <th>Total price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let order of orderedProducts">
+                        <tr *ngFor="let product of order.products; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ product.name || '---'}}</td>
+                            <td>{{ product.cost || '---'}}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.subTotal || '---' }}</td>
+                            <td>{{ product.taxratePercent || '---' }}%</td>
+                            <td>{{ product.taxAmount || '---' }}</td>
+                            <td>{{ product.price || '---' }}</td>
+                        </tr>
+                    </ng-container>
+                    <tr>
+                        <td colspan="7" class="text-center">Shipping Charges</td>
+                        <td>&#8377;{{shippingCharges}}</td>
+                    </tr>
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="6" class="text-center">Subtotal</td>
+                        <td colspan="2">{{ totalSubTotal }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="text-center">CGST</td>
+                        <td colspan="2">2.5%</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="text-center">SGST</td>
+                        <td colspan="2">2.5%</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="text-center">Discount</td>
+                        <td colspan="2">0.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="text-center"><b>Grand Total</b></td>
+                        <td colspan="2"><b>&#8377;{{grandTotal}}</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="8"  class="text-center"><b>Amount in words: {{ grandTotalInWords }}</b></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="footer">
+                <p>JITHENDRIYAM ENTERPRISES</p>
+                <p>* This is a Computer-generated invoice and does not require a signature.</p>
+            </div>
+        </div>
+     
+    </div>
+</article>

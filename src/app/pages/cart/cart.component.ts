@@ -154,10 +154,8 @@ export class CartComponent implements OnInit {
       item.total = parseFloat(item.Price) * item.quantity;
       this.updateTotal();
       const productId = item.ProductID;
-      console.log(productId, 'product id');
       if (productId) { // Check if productId is not undefined
         const cartIds = this.cartService.getCartIdsForProduct(productId); // Retrieve cart IDs for the product
-        console.log(cartIds, 'cart ids for a product');
   
         // If there are cart IDs for the product, send one to the backend
         if (cartIds.length > 0) {

@@ -136,7 +136,6 @@ export class MenuComponent {
       const apiUrl = environment.addCart;
       this.http.post(apiUrl, postData).subscribe(
         (res: any) => {
-          console.log(res, 'response from backend');
           if (!res.isDuplicate) { // Check if res.isDuplicate is false
             // Increment cart count by 1 and update it
             this.cartService.cartItemsCount$.pipe(take(1)).subscribe(count => {
@@ -167,7 +166,6 @@ export class MenuComponent {
   //Add to order
   addToOrder(item: any) {
     this.selectedProduct = item;
-    console.log(this.selectedProduct, 'selected product')
     this.productPrice = item.Price
     this.productName = item.ProductName
     this.productId = item.ProductID,

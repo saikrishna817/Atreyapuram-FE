@@ -41,11 +41,11 @@
     </div>
 </div>
 <div class="row mb-3 mt-5">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-5">
-        <img src="assets/img/prep2.webp" height="100%" width="100%">
+    <div class="col-sm-1 d-none d-sm-block"></div>
+    <div class="col-sm-5 d-none d-sm-block">
+        <img src="assets/img/prep2.webp" class="prep-image">
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-5 d-none d-sm-block">
         <div class="custom-para">
             Visitors
             often purchase these sweets as a part of their cultural exploration of the region or as gifts for friends
@@ -57,16 +57,16 @@
             enjoyed during festivals, special occasions, and as souvenirs for those visiting the town.
         </div>
     </div>
-    <div class="col-sm-1"></div>
+    <div class="col-sm-1 d-none d-sm-block"></div>
 </div>
-<h2 class="header text-center"><b>Atreyapuram Putharekulu</b></h2>
+<h2 class="header text-center d-none d-sm-block"><b>Atreyapuram Putharekulu</b></h2>
 <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-6">
+    <div class="col-sm-1 d-none d-sm-block"></div>
+    <div class="col-sm-6 d-none d-sm-block">
         <img *ngFor="let image of images; let i = index" [src]="image"
             [style.display]="i === currentIndex ? 'block' : 'none'" height="60%" width="100%">
     </div>
-    <div class="col-sm-4 responsivePara">
+    <div class="col-sm-4 responsivePara d-none d-sm-block">
         <p class="atpuPara">
             Atreyapuram is a small village located in East Godavari district of Andhra Pradesh, India. It's well
             known for its breadth taking

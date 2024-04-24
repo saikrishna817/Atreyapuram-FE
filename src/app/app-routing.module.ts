@@ -7,19 +7,15 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { FaqsComponent } from './faqs/faqs.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { PsdchangeComponent } from './psdchange/psdchange.component';
 import { AccountComponent } from './account/account.component';
-import { RegisterComponent } from './register/register.component';
 import { SugarmadeComponent } from './sugarmade/sugarmade.component';
 import { JaggerymadeComponent } from './jaggerymade/jaggerymade.component';
 import { DryfruitsComponent } from './dryfruits/dryfruits.component';
 import { CombosavingComponent } from './combosaving/combosaving.component';
-import { AdminComponent } from './admin/admin.component';
 import { OrdersComponent } from './orders/orders.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { VerifyComponent } from './verify/verify.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
@@ -32,10 +28,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   { path: 'cart', component: CartComponent },
   { path: 'faqs', component: FaqsComponent },
-  { path: 'check-out', component: CheckoutComponent },
   { path: '', redirectTo: 'menu', pathMatch: 'full' },
   { path: 'gallery', component: GalleryComponent },
   { path: 'reset-psd', component: PsdchangeComponent },
@@ -44,10 +38,8 @@ const routes: Routes = [
   { path: 'jaggerymade', component: JaggerymadeComponent },
   { path: 'dryfruits', component: DryfruitsComponent },
   { path: 'combosaving', component: CombosavingComponent },
-  { path: 'admin', component: AdminComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'trackOrder/:orderId', component: TrackOrderComponent},
-  {path: 'admindashboard', component: AdminDashboardComponent},
   {path:'verify',component:VerifyComponent},
   {path:'terms-conditions', component : TermsConditionsComponent},
   {path:'privacy-policy', component : PrivacyPolicyComponent}
