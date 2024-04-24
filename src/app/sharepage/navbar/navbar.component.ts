@@ -97,7 +97,6 @@ export class NavbarComponent implements OnInit {
 
   //LOGIN
   onLoginSubmit() {
-    console.log('')
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')!.value;
