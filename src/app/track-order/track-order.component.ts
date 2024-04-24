@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../sharepage/navbar/navbar.service';
 // import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
 
 
 @Component({
