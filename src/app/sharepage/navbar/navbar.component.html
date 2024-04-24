@@ -1,14 +1,13 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<!-- <marquee class="marq">Atreyapuram Putharekulu</marquee> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%" routerLink="/home" style="cursor: pointer;">
-  <div class="container d-flex justify-content-between align-items-center"> -->
-
+  <div class="container d-flex justify-content-between align-items-center">
     <!-- <h6 class="navbar-brand text-white">ATREYAPURAM&nbsp;<br>PUTHAREKULU</h6> -->
     <!-- <div class="d-flex search">
       <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="mr-2" style="width: 350px;">
       <button class="btn btn-light" (click)="search()">Search</button>
     </div> -->
-
-    <!-- <div class="d-flex" style="margin-left: auto;">
+    <div class="d-flex" style="margin-left: auto;">
       <ul class="navbar-nav" *ngIf="!userName">
         <li class="nav-item ml-3">
           <a class="nav-link" data-toggle="modal" data-target="#loginModal">
@@ -45,16 +44,11 @@
             </a>
             <a class="dropdown-item" routerLink="/orders">
               <i class="bi bi-list-check"></i>&nbsp; My Orders
-            </a> -->
-
-
-
+            </a>
             <!-- <a class="dropdown-item" routerLink="/reset-psd">
               <i class="bi bi-gear"></i>&nbsp; Settings
             </a> -->
-
-
-            <!-- <div class="dropdown-divider"></div>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="logout()">
               <i class="bi bi-box-arrow-right"></i>&nbsp; Logout
             </a>
@@ -63,59 +57,7 @@
       </ul>
     </div>
   </div>
-</nav> -->
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <img src="assets/img/logoATP.jpg" alt="" width="25%" height="60%" routerLink="/home" style="cursor: pointer;">
-  <div class="container d-flex justify-content-between align-items-center">
-    <div class="d-flex" style="margin-left: auto;">
-      <ul class="navbar-nav">
-        <li class="nav-item ml-3" *ngIf="!userName; else loggedIn">
-          <a class="nav-link" data-toggle="modal" data-target="#loginModal">
-            <i class="bi bi-cart3"></i>
-          </a>
-        </li>
-        <ng-template #loggedIn>
-          <li class="nav-item ml-3">
-            <a class="nav-link" routerLink="/cart">
-              <div class="position-relative">
-                <i class="bi bi-cart3 cart-icon"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge badge-pill badge-primary small-badge">
-                  {{cartItemsCount}}
-                  <span class="visually-hidden">cart items</span>
-                </span>
-              </div>
-            </a>
-          </li>
-          <li class="nav-item ml-5 dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              <i class="bi bi-person-circle"></i>
-              <span class="ms-1" [class.long-username]="userName.length > 6">{{ userName }}</span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" [style.left.rem]="userName.length > 9 ? '1.3' : '-0.8'">
-              <a class="dropdown-item" routerLink="/account">
-                <i class="bi bi-person"></i>&nbsp; My Profile
-              </a>
-              <a class="dropdown-item" routerLink="/orders">
-                <i class="bi bi-list-check"></i>&nbsp; My Orders
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="logout()">
-                <i class="bi bi-box-arrow-right"></i>&nbsp; Logout
-              </a>
-            </div>
-          </li>
-        </ng-template>
-      </ul>
-    </div>
-  </div>
 </nav>
-
-
-
-
 
 <!-- Login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
