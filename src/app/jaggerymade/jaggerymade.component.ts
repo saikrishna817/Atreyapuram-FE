@@ -11,7 +11,7 @@ export class JaggerymadeComponent implements OnInit {
   selectedImageUrl: string = '';
 
   ngOnInit(): void {
-    this.selectedImageUrl = 'assets/GudPutharekulu-01.jpg';
+    this.selectedImageUrl = 'assets/items/jaggery.JPG';
   }
 
   showLargeImage(imageUrl: string): void {

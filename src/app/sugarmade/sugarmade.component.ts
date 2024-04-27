@@ -11,7 +11,7 @@ export class SugarmadeComponent implements OnInit {
   selectedImageUrl: string = '';
 
   ngOnInit(): void {
-    this.selectedImageUrl = 'assets/GudPutharekulu-01.jpg';
+    this.selectedImageUrl = 'assets/items/sugar2.JPG';
   }
 
   showLargeImage(imageUrl: string): void {

@@ -1,62 +1,64 @@
 <div class="gallery-container">
-    <div class="gallery">
-        <div class="thumbnails">
-            <div class="image-item" (click)="showLargeImage('assets/GudPutharekulu-01.jpg')">
-                <img class="thumbnail" src="assets/GudPutharekulu-01.jpg" alt="Image 1">
-            </div>
-            <div class="image-item" (click)="showLargeImage('assets/jaggery made.jpg')">
-                <img class="thumbnail" src="assets/jaggery made.jpg" alt="Image 2">
-            </div>
-            <div class="image-item" (click)="showLargeImage('assets/img/cover2.jpg')">
-                <img class="thumbnail" src="assets/img/cover2.jpg" alt="Image 3">
-            </div>
-        </div>
-        <div class="large-image-container" *ngIf="selectedImageUrl">
-            <img [src]="selectedImageUrl" class="large-image" alt="Large image">
-        </div>
+  <div class="gallery">
+    <div class="large-image-container" *ngIf="selectedImageUrl">
+      <img [src]="selectedImageUrl" class="large-image" alt="Large image">
     </div>
-    <div class="product-info">
-        <div class="container">
-          <h2>Product Description</h2>
-  <div class="product-description">
-      We at Godavari Vantillu will let you immerse yourself into the world of sweetness by letting you dive into the finest flavors. Our Pootharekulu is produced by following the traditional cookery techniques followed by our elegant ancestors.
-  </div>
-  <div class="product-description">The Pootharekulu sweet is available in different quantities of 250 gms, 500 gms, and 1 kg.</div>
-  <h2>Product Information</h2>
-  <div class="product-description">
-    Dry fruit Pootharekulu, also called Paper sweet, is the most popular sweet of South India, which is indigenous to a village named Atreyapuram. They are referred to as coated sheets based on their name and are recommended for festivals and auspicious occasions. 
-    These sweet paper sheets are made from a rice batter named Jaya biyyam, which is mixed with sugar or jaggery and ghee. This Putharekulu sweet is loaded with various dry fruits, such as almond, cashew, and pistachio. The thin paper sheets of Pootharekulu sweet or paper sweets, being infused with the richness of dry fruits and nuts, will positively melt in your mouth and let you enjoy the moment.
-  </div>
-  <h2>Ingredients</h2>
-<ul style="list-style-type: none;">
-  <li>Rice starch</li>
-  <li>Sugar/jaggery</li>
-  <li>Ghee</li>
-  <li>Dry Fruits</li>
-</ul>
-<div class="nutrition-fact">
-  <h2>Nutritional Facts</h2>
-  <ul style="list-style-type: none;">
-      <li><strong>Carbohydrates:</strong> 94 g</li>
-      <li><strong>Protein:</strong> 10 g</li>
-      <li><strong>Potassium:</strong> 241 mg, 60 mg</li>
-      <li><strong>Calcium:</strong> 5 mg</li>
-      <li><strong>Iron:</strong> 5 mg</li>
-      <li><strong>Fiber:</strong></li>
-  </ul>
-</div>
-<h2>Health Benefits</h2>
-  <div class="product-description">
-    The dry fruits are not only mouth watering but also fill you with vitamins, 
-    minerals, protein, and fiber. In particular, they boost immunity and enhance your digestion 
-    besides maintaining a healthy heart. 
-    Moreover, Dry fruits played a vital role in post recovery and fighting covid disease.        
-  </div>
+    <div class="thumbnails">
+      <div class="image-item" (click)="showLargeImage('assets/items/jaggerydryfruit.JPG')">
+        <img class="thumbnail" src="assets/items/jaggerydryfruit.JPG" alt="Image 3">
+      </div>
+      <div class="image-item" (click)="showLargeImage('assets/items/sugardryfruit.JPG')">
+        <img class="thumbnail" src="assets/items/sugardryfruit.JPG" alt="Image 2">
+      </div>
+      <div class="image-item" (click)="showLargeImage('assets/items/jaggerydates.JPG')">
+        <img class="thumbnail" src="assets/items/jaggerydates.JPG" alt="Image 2">
+      </div>
+      <div class="image-item" (click)="showLargeImage('assets/items/carosal2.JPG')">
+        <img class="thumbnail" src="assets/items/carosal2.JPG" alt="Image 1">
+      </div>
 
-  <h2>Product storage</h2>
-  <div class="product-description">
-    Godavari district’s Authentic Sweet Dry fruit Pootharekulu must be stored in a sealed container immediately after opening the package. 
-    They are best before 30 days from the date of opening or date of manufacture, although, taste better when consumed within a week.      
-  </div>
     </div>
+
+  </div>
+  <div class="product-info mt-3">
+    <div class="container">
+      <h5>Product Description</h5>
+      <div class="product-description mt-3">
+        Experience the exquisite taste and wholesome goodness of our Dry Fruit Pootharekulu, available in both Sugar and
+        Jaggery variations. These delightful Andhra sweets are meticulously crafted to offer a perfect blend of crunchy
+        texture and rich flavors, making them a cherished indulgence for any occasion.</div>
+      <!-- <div class="product-description">This Bellam / Jaggery poothareukulu is offered in different quantities of
+            250 gms, 500 gms, and 1 kg</div> -->
+      <h5>Ingredients: <span class="ingredients">Rice flour, Sugar or Jaggery, Ghee, Assorted dry fruits (such as
+          almonds, cashews, pistachios, raisins, etc.)</span></h5>
+      <div class="nutrition-fact">
+        <h5>Nutritional Facts:</h5>
+        <ul>
+          <li><strong>Calories:</strong> 150-200 kcal</li>
+          <li><strong>Total Fat:</strong> 5-8 grams</li>
+          <!-- <li><strong>Saturated Fat:</strong> 2-4 grams</li> -->
+          <!-- <li><strong>Cholesterol:</strong> 0 mg</li> -->
+          <!-- <li><strong>Sodium:</strong> 5-10 mg</li> -->
+          <li><strong>Total Carbohydrates:</strong> 25-30 grams</li>
+          <!-- <li><strong>Dietary Fiber:</strong> 1-2 grams</li> -->
+          <li><strong>Sugars:</strong> 15-20 grams</li>
+          <li><strong>Protein:</strong> 1-2 grams</li>
+        </ul>
+      </div>
+      <h5>Health Benefits:</h5>
+      <div class="product-description">
+        Our Dry Fruit Pootharekulu, whether sweetened with sugar or jaggery, provide not only a delicious treat but also
+        a dose of essential nutrients. The inclusion of assorted dry fruits adds a nutritional boost, providing
+        vitamins, minerals, and healthy fats. While offering a source of carbohydrates for energy, these treats are
+        relatively low in cholesterol and sodium. Additionally, they contain a modest amount of dietary fiber, promoting
+        digestive health and satiety.
+      </div>
+
+      <h5>Product storage:</h5>
+      <div class="product-description">
+        To preserve the freshness and flavor of our Dry Fruit Pootharekulu, store them in an airtight container in a
+        cool, dry place. Avoid exposure to moisture or direct sunlight to maintain their delicate texture and taste.
+      </div>
+    </div>
+  </div>
 </div>

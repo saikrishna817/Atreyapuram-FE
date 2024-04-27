@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AboutComponent {
 
-  images: string[] = ["assets/img/ptr1.jpg", "assets/img/sugarfreedry.avif", "assets/img/kajupista.webp", "assets/img/ptr1.jpg", "assets/img/ptr2.jpeg"];
+  images: string[] = ["assets/items/sugar2.JPG", "assets/items/combos2.JPG", "assets/items/jaggerydryfruit.JPG", "assets/items/carosal2.JPG", "assets/items/sugardryfruit.JPG"];
   currentIndex: number = 0;
 
   ngOnInit() {

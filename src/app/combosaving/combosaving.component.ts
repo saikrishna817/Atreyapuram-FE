@@ -11,7 +11,7 @@ export class CombosavingComponent implements OnInit {
   selectedImageUrl: string = '';
 
   ngOnInit(): void {
-    this.selectedImageUrl = 'assets/GudPutharekulu-01.jpg';
+    this.selectedImageUrl = 'assets/items/combos1.JPG';
   }
 
   showLargeImage(imageUrl: string): void {

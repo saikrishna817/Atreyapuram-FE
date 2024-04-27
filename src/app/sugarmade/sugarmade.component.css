@@ -19,6 +19,11 @@
     cursor: pointer;
    
   }
+  .ingredients {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+  }
   
   .thumbnail {
     width: 100px; 
@@ -51,6 +56,10 @@
 
   .thumbnails .image-item {
     margin-right: 20px; 
+  }
+  
+  h5{
+    color: #669;
   }
   
 
@@ -90,7 +99,7 @@
 }
 .product-info {
     font-size: 16px;
-    color: #669;
+    /* color: #669; */
     padding-top: 50px;
 }
 

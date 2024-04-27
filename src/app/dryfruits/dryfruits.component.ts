@@ -10,7 +10,7 @@ export class DryfruitsComponent implements OnInit {
   selectedImageUrl: string = '';
 
   ngOnInit(): void {
-    this.selectedImageUrl = 'assets/GudPutharekulu-01.jpg';
+    this.selectedImageUrl = 'assets/items/jaggerydryfruit.JPG';
   }
 
   showLargeImage(imageUrl: string): void {

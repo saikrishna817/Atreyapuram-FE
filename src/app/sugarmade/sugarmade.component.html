@@ -1,67 +1,64 @@
 <div class="gallery-container">
-    <div class="gallery">
-        <div class="thumbnails">
-            <div class="image-item" (click)="showLargeImage('assets/GudPutharekulu-01.jpg')">
-                <img class="thumbnail" src="assets/GudPutharekulu-01.jpg" alt="Image 1">
-            </div>
-            <div class="image-item" (click)="showLargeImage('assets/jaggery made.jpg')">
-                <img class="thumbnail" src="assets/jaggery made.jpg" alt="Image 2">
-            </div>
-            <div class="image-item" (click)="showLargeImage('assets/img/cover2.jpg')">
-                <img class="thumbnail" src="assets/img/cover2.jpg" alt="Image 3">
-            </div>
-        </div>
-        <div class="large-image-container" *ngIf="selectedImageUrl">
-            <img [src]="selectedImageUrl" class="large-image" alt="Large image">
-        </div>
+  <div class="gallery">
+    <div class="large-image-container" *ngIf="selectedImageUrl">
+      <img [src]="selectedImageUrl" class="large-image" alt="Large image">
     </div>
-    <div class="product-info">
-        <div class="container">
-          <h2>Product Description</h2>
-  <div class="product-description">
-      We at Godavari Vantillu will let you immerse yourself into the world of sweetness by letting you dive into the finest flavors. Our Pootharekulu is produced by following the traditional cookery techniques followed by our elegant ancestors.
-  </div>
-  <div class="product-description">The Pootharekulu sweet is available in different quantities of 250 gms, 500 gms, and 1 kg.</div>
-  <h2>Product Information</h2>
-  <div class="product-description">
-      Paper sweets are the well-known English name of Pootharekulu, which is the most popular sweet in South India and is native to a village called Atreyapuram. Pootharekulu is described as sweet coated sheets because of their name and is consumed during festivals and auspicious occasions to relish with the family and neighbors. 
-      These sweet paper sheets or Pootharekulu are made from a rice batter named Jaya biyyam, which is mixed with sugar and ghee. The thin paper sheets of Pootharekulu sweet or paper sweets, being infused with the richness of dry fruits and nuts, will positively melt in your mouth and let you enjoy the moment.
-  </div>
-  <h2>Ingredients</h2>
-<ul style="list-style-type: none;">
-  <li>Rice starch</li>
-  <li>Sugar</li>
-  <li>Ghee</li>
-</ul>
-<div class="nutrition-fact">
-  <h2>Nutritional Facts</h2>
-  <ul style="list-style-type: none;">
-      <li><strong>Carbohydrates:</strong> 94 g</li>
-      <li><strong>Protein:</strong> 10 g</li>
-      <li><strong>Potassium:</strong> 241 mg, 60 mg</li>
-      <li><strong>Calcium:</strong> 5 mg</li>
-      <li><strong>Iron:</strong> 5 mg</li>
-      <li><strong>Fiber:</strong></li>
-  </ul>
-</div>
-<h2>Health Benefits</h2>
-  <div class="product-description">
-    The Putharekulu is not only delectable but also fills you with micronutrients such as 
-    vitamins, minerals and fiber, and protein. In particular, they enhance immunity 
-    and improve your digestion besides reducing cardiovascular diseases.        
-  </div>
+    <div class="thumbnails">
+      <div class="image-item" (click)="showLargeImage('assets/items/sugar2.JPG')">
+        <img class="thumbnail" src="assets/items/sugar2.JPG" alt="Image 1">
+      </div>
+      <div class="image-item" (click)="showLargeImage('assets/items/sugarkaju.JPG')">
+        <img class="thumbnail" src="assets/items/sugarkaju.JPG" alt="Image 2">
+      </div>
+      <div class="image-item" (click)="showLargeImage('assets/items/sugarbadam.JPG')">
+        <img class="thumbnail" src="assets/items/sugarbadam.JPG" alt="Image 3">
+      </div>
+      <div class="image-item" (click)="showLargeImage('assets/items/sugarpistha.JPG')">
+        <img class="thumbnail" src="assets/items/sugarpistha.JPG" alt="Image 4">
+      </div>
 
-  <h2>Product storage</h2>
-  <div class="product-description">
-    Godavari district’s Authentic Sweet Pootharekulu must be stored in a sealed container immediately after 
-    opening the package. Putharekulu is 
-    best before three weeks from the date of opening or date of manufacture, although, 
-    taste better when consumed within a week.        
-  </div>
-  <div class="product-description">Pootherekulu(paper sweet) has transformed a lot from it's original variant of simple sugar pootharekulu to a lot different varieties. However when ever we think of pootharekulu only 
-    the old standard sugar pootharekulu will come to our mind.</div>
-  <div class="product-description">Made from freshly made rice papers, pure ghee, sugar powder and cashew the sweet will simply melt in mouth. 
-    No one can stop by simply having one, this sweet will make you eat more and more.</div>
-        </div>
     </div>
+
+  </div>
+  <div class="product-info mt-3">
+    <div class="container">
+      <h5>Product Description</h5>
+      <div class="product-description mt-3">
+        Savor the irresistible sweetness of our Sugar Pootharekulu, a beloved delicacy hailing from Andhra Pradesh,
+        India. Crafted with care and tradition, each bite of these crispy treats offers a delightful fusion of textures
+        and flavors, making them a cherished indulgence for any occasion.</div>
+      <!-- <div class="product-description">This Bellam / Jaggery poothareukulu is offered in different quantities of
+            250 gms, 500 gms, and 1 kg</div> -->
+      <h5>Ingredients: <span class="ingredients">Rice starch, Sugar, Ghee</span></h5>
+      <div class="nutrition-fact">
+        <h5>Nutritional Facts:</h5>
+        <ul>
+          <li><strong>Calories:</strong> 150-200 kcal</li>
+          <li><strong>Total Fat:</strong> 5-8 grams</li>
+          <!-- <li><strong>Saturated Fat:</strong> 2-4 grams</li> -->
+          <!-- <li><strong>Cholesterol:</strong> 0 mg</li> -->
+          <!-- <li><strong>Sodium:</strong> 5-10 mg</li> -->
+          <li><strong>Total Carbohydrates:</strong> 25-30 grams</li>
+          <!-- <li><strong>Dietary Fiber:</strong> 1-2 grams</li> -->
+          <li><strong>Sugars:</strong> 15-20 grams</li>
+          <li><strong>Protein:</strong> 1-2 grams</li>
+        </ul>
+      </div>
+      <h5>Health Benefits:</h5>
+      <div class="product-description">
+        Indulging in our Sugar Pootharekulu offers more than just a delicious treat; it also provides several health
+        benefits. Made primarily from rice flour, these treats offer a source of carbohydrates for quick energy. With
+        minimal saturated fat and cholesterol, they make for a guilt-free indulgence. Additionally, the presence of ghee
+        provides a touch of richness while keeping the treats light and crispy. While high in sugars, they are free from
+        cholesterol and offer a modest amount of dietary fiber, promoting digestive health.
+      </div>
+
+      <h5>Product storage:</h5>
+      <div class="product-description">
+        To ensure the longevity of our Sugar Pootharekulu and preserve their delicate texture and flavor, store them in
+        an airtight container in a cool, dry place. Avoid exposure to moisture or direct sunlight, as it may affect the
+        quality of the treats.
+      </div>
+    </div>
+  </div>
 </div>

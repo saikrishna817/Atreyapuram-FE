@@ -1,59 +1,59 @@
-
-        <div class="gallery-container">
-          <div class="gallery">
-              <div class="thumbnails">
-                  <div class="image-item" (click)="showLargeImage('assets/GudPutharekulu-01.jpg')">
-                      <img class="thumbnail" src="assets/GudPutharekulu-01.jpg" alt="Image 1">
-                  </div>
-                  <div class="image-item" (click)="showLargeImage('assets/jaggery made.jpg')">
-                      <img class="thumbnail" src="assets/jaggery made.jpg" alt="Image 2">
-                  </div>
-                  <div class="image-item" (click)="showLargeImage('assets/img/cover2.jpg')">
-                      <img class="thumbnail" src="assets/img/cover2.jpg" alt="Image 3">
-                  </div>
-              </div>
-              <div class="large-image-container" *ngIf="selectedImageUrl">
-                  <img [src]="selectedImageUrl" class="large-image" alt="Large image">
-              </div>
-          </div>
-          <div class="product-info">
-              <div class="container">
-                <h2>Product Description</h2>
-        <div class="product-description">
-            Our Bellam Poothareukulu is a classic and traditional Andhra sweet, produced following the age-old conventional cooking techniques followed by our ancestors. The sweetness of this Jaggery pootharekulu makes it a delight to eat.        </div>
-        <div class="product-description">This Bellam / Jaggery poothareukulu is offered in different quantities of 250 gms, 500 gms, and 1 kg</div>
-        <h2>Product Information</h2>
-        <div class="product-description">
-            Bellam Pootharekulu also called Jaggery Paper sweet which is indigenous to a village named Atreyapuram. Consequently, they are also called Atreyapuram Bellam Pootharekulu. These jaggery-coated paper sheets are most popular during festivals and celebrations by bringing extra sweetness into your life. This Bellam pootharekulu is made from a rice batter named Jaya biyyam and is blended with sugar or jaggery and ghee. 
+<div class="gallery-container">
+    <div class="gallery">
+        <div class="large-image-container" *ngIf="selectedImageUrl">
+            <img [src]="selectedImageUrl" class="large-image" alt="Large image">
         </div>
-        <h2>Ingredients</h2>
-    <ul style="list-style-type: none;">
-        <li>Rice starch</li>
-        <li>jaggery</li>
-        <li>Ghee</li>
-    </ul>
-    <div class="nutrition-fact">
-        <h2>Nutritional Facts</h2>
-        <ul style="list-style-type: none;">
-            <li><strong>Carbohydrates:</strong> 94 g</li>
-            <li><strong>Protein:</strong> 10 g</li>
-            <li><strong>Potassium:</strong> 241 mg, 60 mg</li>
-            <li><strong>Calcium:</strong> 5 mg</li>
-            <li><strong>Iron:</strong> 5 mg</li>
-            <li><strong>Fiber:</strong></li>
-        </ul>
+        <div class="thumbnails">
+            <div class="image-item" (click)="showLargeImage('assets/items/jaggery.JPG')">
+                <img class="thumbnail" src="assets/items/jaggery.JPG" alt="Image 1">
+            </div>
+            <div class="image-item" (click)="showLargeImage('assets/items/plainjaggery.JPG')">
+                <img class="thumbnail" src="assets/items/plainjaggery.JPG" alt="Image 2">
+            </div>
+            <div class="image-item" (click)="showLargeImage('assets/items/jaggery2.JPG')">
+                <img class="thumbnail" src="assets/items/jaggery2.JPG" alt="Image 3">
+            </div>
+        </div>
     </div>
-    <h2>Health Benefits</h2>
-        <div class="product-description">
-            The rice is rich in micronutrients, especially vitamin B1 will help to improve memory power and concentration. Furthermore, the jaggery in this jaggery Pootharekulu will boost the hemoglobin content of the blood.       
-        </div>
+    <div class="product-info mt-3">
+        <div class="container">
+            <h5>Product Description</h5>
+            <div class="product-description mt-3">
+                Jaggery Pootharekulu are a traditional Andhra sweet made by layering rice flour batter with a sweet
+                filling of jaggery and ghee. These treats boast a delightful combination of crispy textures and rich,
+                caramel-like sweetness, making them a beloved indulgence during festivals and celebrations in Andhra
+                Pradesh, India.</div>
+            <!-- <div class="product-description">This Bellam / Jaggery poothareukulu is offered in different quantities of
+                250 gms, 500 gms, and 1 kg</div> -->
+            <h5>Ingredients: <span class="ingredients">Rice starch, Jaggery, Ghee</span></h5>
+            <div class="nutrition-fact">
+                <h5>Nutritional Facts:</h5>
+                <ul>
+                    <li><strong>Calories:</strong> 150-200 kcal</li>
+                    <li><strong>Total Fat:</strong> 5-8 grams</li>
+                    <!-- <li><strong>Saturated Fat:</strong> 2-4 grams</li> -->
+                    <!-- <li><strong>Cholesterol:</strong> 0 mg</li> -->
+                    <!-- <li><strong>Sodium:</strong> 5-10 mg</li> -->
+                    <li><strong>Total Carbohydrates:</strong> 25-30 grams</li>
+                    <!-- <li><strong>Dietary Fiber:</strong> 1-2 grams</li> -->
+                    <li><strong>Sugars:</strong> 15-20 grams</li>
+                    <li><strong>Protein:</strong> 1-2 grams</li>
+                </ul>
+            </div>
+            <h5>Health Benefits:</h5>
+            <div class="product-description">
+                The inherent goodness of rice, enriched with essential micronutrients, particularly vitamin B1,
+                contributes to enhancing memory power and concentration. Furthermore, the inclusion of jaggery in our
+                Bellam Pootharekulu serves as a natural boost to hemoglobin levels, promoting healthy blood circulation.
+            </div>
 
-        <h2>Product storage</h2>
-        <div class="product-description">
-            Godavari district’s Authentic Sweet Bellam Pootharekulu must be stored in a sealed container immediately after opening the package. Jaggery paper sweets are best before three weeks from the date of opening or date of manufacture, although, taste better when consumed within 6 weeks.    
+            <h5>Product storage:</h5>
+            <div class="product-description">
+                To preserve the authentic taste and freshness of our Godavari district's Authentic Sweet Bellam
+                Pootharekulu, ensure to store them in a sealed container immediately upon opening the package. While
+                these jaggery paper sweets maintain their quality for up to three weeks from the date of opening or
+                manufacture, their flavor is at its peak when consumed within six weeks.
+            </div>
         </div>
-              </div>
-          </div>
-      </div>
-      
-
+    </div>
+</div>
